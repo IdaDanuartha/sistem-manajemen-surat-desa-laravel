@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard.analytics.index');
+})->name('dashboard');
+
+Route::get('dashboard/profile', function() {
+    return true;
+})->name('profile.index');
+
+Route::get('auth/logout', function() {
+    return true;
+})->name('logout');

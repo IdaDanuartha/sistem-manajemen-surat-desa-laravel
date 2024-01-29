@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components{
+	.normal-section {
+		@apply grid grid-cols-12 gap-6 items-center
+	}
+
+
+	.section {
+		@apply container mx-auto
+	}
+
+	body {
+		@apply text-font
+	}
+
+	.desc {
+		@apply text-desc text-[15px] font-medium
+	}
+
+	.side-link {
+		@apply flex items-center gap-3 bg-[#F5F6FB] mx-4 py-3 px-4 rounded duration-200 hover:bg-second hover:text-white
+	}
+	.side-link:hover span{
+		@apply text-white
+	}
+	.side-link.active span{
+		@apply text-white
+	}
+
+
+	.side-link.active {
+		@apply bg-second text-white
+	}
+	.bg-seconds{
+		@apply bg-second
+	}
+	.icon-sidebar-wrapper {
+		@apply w-9 h-9 flex justify-center items-center bg-white rounded
+	}
+
+	.side-link.active .icon-sidebar-wrapper,
+	.side-link:hover .icon-sidebar-wrapper,
+	.accordion-btn[aria-expanded="true"] .icon-sidebar-wrapper,
+	.accordion-btn:hover .icon-sidebar-wrapper {
+		@apply bg-main
+	}
+
+	.side-link.active .icon-sidebar-wrapper svg path,
+	.side-link:hover .icon-sidebar-wrapper svg path,
+	.accordion-btn[aria-expanded="true"] .icon-sidebar-wrapper svg path,
+		.accordion-btn:hover .icon-sidebar-wrapper svg path {
+			@apply fill-white;
+			fill-opacity: 100;
+		}
+
+		svg path {
+			@apply duration-200
+		}
+
+		.icon-sidebar-wrapper {
+			@apply duration-200
+		}
+	.accordion-btn{
+		@apply duration-200
+	}
+
+		.accordion-btn[aria-expanded="true"],
+		.accordion-btn:hover{
+			@apply bg-second text-white
+		}
+	.accordion-btn[aria-expanded="true"].side-link span{
+		@apply text-white
+	}
+	.accordion-btn[aria-expanded="true"].side-link{
+		@apply rounded-b-none
+	}
+	.sub-link span{
+		@apply text-[#FFFFFF85] duration-200
+	}
+	.sub-link.active span,
+	.sub-link:hover span{
+		@apply text-white
+	}
+
+		.btn-sm {
+			@apply p-[14px] text-second  text-sm capitalize rounded-sm duration-200
+		}
+
+	.button {
+		@apply py-3 w-max px-4 rounded text-sm duration-200 hover:brightness-110
+	}
+
+	.btn-main, .btn-filter.active, .btn-filter:hover{
+		@apply bg-main text-white capitalize hover:text-white
+	}
+
+		.btn-second {
+			@apply text-white  bg-[#151515] border border-[#FFFFFF1F] hover:bg-[#191919]
+		}
+
+
+
+
+	/*dashboard style*/
+	.card-dashboard-wrapper, .table-wrapper{
+		@apply px-8 py-6 rounded-[10px] border border-[#2824211F] bg-white
+	}
+	.icon-dashboard-wrapper{
+		@apply w-9 h-9 rounded flex justify-center items-center border border-[#2824211F] bg-[#F5F6FB]
+	}
+	.card-dashboard{
+		@apply border-r
+	}
+	.card-dashboard:last-child{
+		@apply border-none
+	}
+	.btn-dropdown{
+		@apply w-fit flex items-center py-2 px-3 border border-[#2824211F] rounded text-second
+	}
+	.link-dropdown{
+		@apply block text-desc hover:text-second px-[16px] py-2
+	}
+	/*dashboard style*/
+
+
+	/*TABLE STYLE*/
+	#DataTables_Table_0_length,
+	#DataTables_Table_0_filter,
+	#DataTables_Table_0_info,
+	#DataTables_Table_1_length,
+	#DataTables_Table_1_filter,
+	#DataTables_Table_1_info{
+		display: none !important;
+	}
+	thead tr th{
+		@apply bg-[#F5F6FB] px-5 py-4
+	}
+	thead tr th:first-child{
+		@apply rounded-l-lg
+	}
+	thead tr th:last-child{
+		@apply rounded-r-lg
+	}
+	#DataTables_Table_0_paginate,
+	#DataTables_Table_1_paginate{
+		@apply flex justify-center items-center mt-8 gap-4
+	}
+	.material-symbols-outlined {
+		@apply border border-main hover:cursor-pointer p-[6px] text-main rounded duration-200;
+		font-size: 16px !important;
+	}
+	.material-symbols-outlined:hover{
+		@apply text-white bg-main
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button{
+		padding: 3px 12px;
+		transition: 0.2s;
+		border-radius: 5px;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+	.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+
+
+	}
+	#DataTables_Table_0_paginate span,
+	#DataTables_Table_1_paginate span{
+		@apply flex gap-2
+	}
+	#DataTables_Table_0_paginate span a,
+	#DataTables_Table_1_paginate span a{
+		@apply border border-main duration-200 hover:cursor-pointer hover:bg-main hover:text-white text-[16px]  w-[30px] text-main h-[30px] flex justify-center items-center rounded;
+	}
+
+	.dataTables_wrapper .dataTables_paginate{
+		gap: 12px;
+		margin-top: 16px;
+	}
+
+	.dataTables_wrapper .dataTables_paginate .paginate_button.next:hover{
+		background: transparent !important;
+
+	}
+	tbody tr td{
+		@apply px-5 py-3  text-second
+	}
+	tbody tr{
+		@apply border-b border-b-[#2824211F]
+	}
+	/*TABLE STYLE*/
+
+
+	.input-wrapper{
+		@apply bg-[#F5F6FB] w-full px-4 py-3 rounded
+	}
+	.input-wrapper input{
+		@apply bg-transparent border-none p-0
+	}
+	input:focus, textarea:focus{
+		box-shadow: none !important;
+	}
+	input[disabled]:hover, textarea[disabled]:hover{
+		cursor: pointer !important;
+	}
+	.icon-table{
+		@apply w-8 h-8 rounded flex justify-center duration-200 hover:brightness-110 items-center
+	}
+	.icon-detail{
+		@apply bg-[#547DE21F]
+	}
+	.icon-edit{
+		@apply bg-[#F6C46A1F]
+	}
+	.icon-delete{
+		@apply bg-[#D550511F]
+	}
+	.input-crud{
+		@apply p-4 w-full bg-[#F5F6FB] text-sm mt-1 rounded border border-[#2824211F] text-second focus:border-[#2824211F] outline-0
+	}
+
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type=number] {
+		-moz-appearance: textfield;
+	}
+
+	.modal-head{
+		@apply font-semibold mb-0 text-2xl text-second
+	}
+
+	.footer-modal{
+		@apply flex justify-center gap-3 mb-6 w-full px-4
+	}
+	.title-input{
+		@apply text-second flex flex-col
+	}
+
+}
