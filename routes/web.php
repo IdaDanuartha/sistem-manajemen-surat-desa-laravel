@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.analytics.index');
-})->name('dashboard');
+Route::redirect('/', '/dashboard');
 
-Route::get('dashboard/profile', function() {
-    return true;
-})->name('profile.index');
+Route::prefix('auth')->group(function() {
+    Route::middleware('guest')->group(function() {
+        Route::get('login', [LoginController::class, 'login'])->name('login');        
+        Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');        
+    });
 
-Route::get('auth/logout', function() {
-    return true;
-})->name('logout');
+    Route::middleware('auth')->group(function() {
+        Route::post('logout', LogoutController  ::class)->name('logout');
+    });
+
+});
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('dashboard', DashboardController::class)->name("dashboard");        
+    Route::resource('users', UserController::class);    
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+});
+
+Route::fallback(function() {
+    return view('errors.404');
+});

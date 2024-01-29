@@ -6,17 +6,17 @@
   @csrf
 	<h1 class="font-extrabold text-6xl text-second">Login</h1>
   <div class="mb-3 flex flex-col">
-    <label for="username" class="text-second">Username</label>
+    <label for="email" class="text-second">Email</label>
     <input
       type="text"
       class="input-crud bg-white"
-      id="username"
-      name="username"
-      placeholder="masukkan username"
+      id="email"
+      name="email"
+      placeholder="Masukkan email"
       required
-      value="{{ old('username') }}"
+      value="{{ old('email') }}"
       autofocus />
-    @error('username')
+    @error('email')
       <div class="text-danger mt-1">{{ $message }}</div>
     @enderror
   </div>
@@ -30,7 +30,7 @@
         id="password"
         class="input-crud bg-white border-r-0 rounded-r-none w-full"
         name="password"
-        placeholder="masukkan password"
+        placeholder="Masukkan password"
         aria-describedby="password" />
       <span class="pr-4 flex mt-1 justify-center items-center border-r border-t border-b cursor-pointer rounded-l-none h-[54px] rounded-[0.25rem]"><i class="bx bx-hide"></i></span>
     </div>

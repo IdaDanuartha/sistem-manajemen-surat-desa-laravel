@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>LMS System | @yield('title')</title>
+    <title>@yield('title') | Manajemen Surat Desa</title>
 
     <meta name="description" content="" />
 
@@ -159,51 +159,6 @@
         $(`.${input_img}`).change(function() {
           $(`.${preview_img}`).attr("src", URL.createObjectURL($(`.${input_img}`)[0].files[0]))
         })
-      }
-
-      const previewMultipleImages = (input_img, preview_imgs) => {
-        $(`.${input_img}`).change(function() {
-          $(`.${preview_imgs}`).html('')
-          for(let i = 0; i < this.files.length; i++) {
-            $(`.${preview_imgs}`).append(`
-              <div class="col-3 mb-4">
-                <img src="${URL.createObjectURL($(`.${input_img}`)[0].files[i])}" class="border" width="100%" alt="">
-              </div>
-            `)
-          }
-        })
-      }
-
-      const formatDate = (date, show_age = false) => {
-        const object_date = new Date(date)
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-        ];
-
-        let result = `${object_date.getDate()} ${monthNames[object_date.getMonth()]} ${object_date.getFullYear()} `
-        if(show_age) {
-          const diff_ms = Date.now() - object_date.getTime();
-          const age_dt = new Date(diff_ms);
-
-          const age = Math.abs(age_dt.getUTCFullYear() - 1970);
-          return result += `(${age} years old)`
-        }
-
-        return result
-      }
-
-      const addHours = (date, hours) => {
-        date.setHours(date.getHours() + hours);
-        return date;
-      }
-
-      const formatTime = (date, showInInput = false) => {
-        return addHours(new Date(date), 16).toLocaleTimeString([], showInInput ? {hour12: false} : {hour: "2-digit", minute: "2-digit" })
-      }
-
-      const showInputDate = (date) => {
-        const object_date  = new Date(date)
-        return `${object_date.getFullYear()}-${String(object_date.getMonth() + 1).padStart(2, '0')}-${String(object_date.getDate()).padStart(2, '0')}`
       }
 
 			$(document).ready(function() {

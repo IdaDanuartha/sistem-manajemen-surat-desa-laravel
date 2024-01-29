@@ -35,9 +35,7 @@ id="layout-navbar">
                         </div>
                         <div class="flex-grow-1">
                                 <span class="font-medium text-second block">Danuartha</span>
-                                <small class="text-sm text-desc">
-                                    Admin
-                                </small>
+                                <small class="text-sm text-desc">{{ auth()->user()->role->label() }}</small>
                             </div>
                         </div>
                     </a>
