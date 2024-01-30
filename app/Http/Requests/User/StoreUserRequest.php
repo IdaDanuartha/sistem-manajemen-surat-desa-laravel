@@ -23,8 +23,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [            
-			'name' => ['required', Rule::unique('citizent', 'name')],			
-			'national_identify_number' => ['required', Rule::unique('citizent', 'national_identify_number')],			
+			'name' => ['required', Rule::unique('citizents', 'name')],			
+			'national_identify_number' => ['required', Rule::unique('citizents', 'national_identify_number')],			
 			'family_card_number' => ['required'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['required'],			
