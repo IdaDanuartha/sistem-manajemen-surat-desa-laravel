@@ -97,13 +97,12 @@
                                         </defs>
                                     </svg>
                                 </a>  
-                                                              
                             </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">Data tidak ada</td>
+                        <td class="text-center" colspan="6">Data tidak ditemukan</td>
                     </tr>
                 @endforelse
                 </tbody>
@@ -111,9 +110,4 @@
         </div>
     </div>
 
-{{-- @include('partials.modal-student') --}}
 @endsection
-
-{{-- @push('js')
-    <script src="{{ asset('assets/js/custom/students.js') }}"></script>
-@endpush --}}

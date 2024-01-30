@@ -7,7 +7,7 @@
 			@csrf
 			{{-- <input type="hidden" id="authenticatable_type" name="authenticatable_type" value="App\Models\Citizent"/> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-				<label for="nama" class="text-second mb-1">Nama</label>
+				<label for="name" class="text-second mb-1">Nama</label>
 				<input
 					type="text"
 				 	class="input-crud"
@@ -172,7 +172,7 @@
 				<label for="role" class="text-second mb-2">Role</label>
 				<select required class="marital-status-select2 input-crud" name="user[role]">				
 				@foreach (App\Enums\Role::labels() as $key => $value)
-					<option value="{{ ++$key }}" class="capitalize" @selected(old('role') == ++$key)>{{ $value }}</option>
+					<option value="{{ $key }}" class="capitalize" @selected(old('role') == $key)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('role')

@@ -7,7 +7,7 @@
 			@csrf
 			@method('PUT')			
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-				<label for="nama" class="text-second mb-1">Nama</label>
+				<label for="name" class="text-second mb-1">Nama</label>
 				<input
 					type="text"
 				 	class="input-crud"
