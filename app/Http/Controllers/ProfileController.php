@@ -31,10 +31,10 @@ class ProfileController extends Controller
             $update = $this->profileRepository->update($request->validated());
 
             if($update) return redirect(route('profile.index'))
-                                ->with('success', $this->responseMessage->response('Profile', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Profil', true, 'update'));
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('profile.edit')->with('error', $this->responseMessage->response('profile', false, 'update'));
+            return redirect()->route('profile.edit')->with('error', $this->responseMessage->response('profil', false, 'update'));
         }
     }
 }
