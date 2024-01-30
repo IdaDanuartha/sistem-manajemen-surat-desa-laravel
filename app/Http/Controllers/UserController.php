@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Citizent;
+use App\Models\EnvironmentalHead;
+use App\Models\SectionHead;
+use App\Models\VillageHead;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Exception;
@@ -19,7 +22,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {     
-        $users = $this->userRepository->findAllPaginate();
+        $users = $this->userRepository->findAll();
         return view('dashboard.users.index', compact('users'));
     }
 
@@ -43,13 +46,18 @@ class UserController extends Controller
         try {
             $store = $this->userRepository->store($request->validated());
 
-            if($store) return redirect(route("users.index"))
-                                ->with("success", $this->responseMessage->response('Staff'));
+            if($store instanceof Citizent ||
+            $store instanceof VillageHead ||
+            $store instanceof EnvironmentalHead ||
+            $store instanceof SectionHead) {
+                return redirect(route("users.index"))
+                            ->with("success", $this->responseMessage->response('Pengguna'));
+            } 
             throw new Exception;
         } catch (\Exception $e) {  
             logger($e->getMessage());
 
-            return redirect(route("users.create"))->with("failed", $this->responseMessage->response('staff', false));
+            return redirect(route("users.create"))->with("error", $this->responseMessage->response('pengguna', false));
         }
     }
 
@@ -59,10 +67,10 @@ class UserController extends Controller
             $update = $this->userRepository->update($request->validated(), $user);
 
             if($update) return redirect(route('users.index'))
-                                ->with('success', $this->responseMessage->response('Staff', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Pengguna', true, 'update'));
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('users.edit', $user->id)->with('error', $this->responseMessage->response('staff', false, 'update'));
+            return redirect()->route('users.edit', $user->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
         }
     }
 
@@ -71,9 +79,9 @@ class UserController extends Controller
         try {
             $this->userRepository->delete($user);
 
-            return redirect()->route('users.index')->with('success', $this->responseMessage->response('Staff', true, 'delete'));
+            return redirect()->route('users.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
         } catch (\Exception $e) {            
-            return redirect()->route('users.index')->with('error', $this->responseMessage->response('staff', false, 'delete'));
+            return redirect()->route('users.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));
         }
     }
 }
