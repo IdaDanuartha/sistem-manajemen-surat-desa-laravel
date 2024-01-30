@@ -17,8 +17,8 @@
 					</defs>
 				</svg>
 			</div>
-			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Siswa Aktif</p>
-			<h1 class="m-0 text-3xl font-semibold text-second">256</h1>
+			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Warga</p>
+			<h1 class="m-0 text-3xl font-semibold text-second">{{ $total_citizents }}</h1>
 		</div>
 		<div class="card-dashboard lg:border-r border-r-0">
 			<div class="icon-dashboard-wrapper">
@@ -27,8 +27,8 @@
 					<path d="M10.1035 9.4213C10.2166 9.51808 10.3282 9.60471 10.4293 9.70227C10.9913 10.2463 11.2875 10.9097 11.305 11.6937C11.3097 11.9032 11.3062 12.1132 11.3007 12.3228C11.291 12.6869 11.0529 12.9245 10.6884 12.9249C9.22813 12.9272 7.76823 12.9269 6.30794 12.9249C5.98443 12.9245 5.73272 12.7298 5.71125 12.4207C5.67379 11.881 5.65701 11.339 5.84706 10.8156C6.04023 10.2841 6.35711 9.84432 6.80589 9.50051C6.82891 9.48295 6.85272 9.46579 6.87496 9.44666C6.88199 9.44081 6.8855 9.43066 6.89018 9.42247C5.93487 8.37817 6.17408 6.92686 7.04316 6.18188C7.92316 5.42754 9.21565 5.46032 10.0449 6.26227C10.8711 7.06149 11.0037 8.43788 10.1035 9.4213ZM6.87223 11.744C7.96374 11.744 9.04628 11.744 10.1276 11.744C10.187 10.8839 9.40608 10.1015 8.49955 10.1015C7.59379 10.1019 6.81057 10.8871 6.87223 11.744ZM9.55399 7.87476C9.55672 7.28744 9.08648 6.80939 8.50306 6.80627C7.92823 6.80315 7.45018 7.27613 7.4455 7.8533C7.44043 8.44764 7.9173 8.93271 8.50345 8.92959C9.08062 8.92608 9.55165 8.45349 9.55399 7.87476Z" fill="#282421" fill-opacity="0.52"/>
 				</svg>
 			</div>
-			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total guru Aktif</p>
-			<h1 class="m-0 text-3xl font-semibold text-second">25</h1>
+			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Surat Disetujui</p>
+			<h1 class="m-0 text-3xl font-semibold text-second">{{ $total_letters_approved }}</h1>
 		</div>
 		<div class="card-dashboard  md:border-r border-r-0">
 			<div class="icon-dashboard-wrapper">
@@ -36,8 +36,8 @@
 					<path d="M2.76489 15.7989C2.58988 15.7448 2.40444 15.7116 2.24102 15.6328C1.50699 15.2781 1.14732 14.6816 1.145 13.8696C1.14307 13.1189 1.14461 12.3683 1.14461 11.6172C1.14461 8.40334 1.14577 5.18982 1.14307 1.97592C1.14268 1.51967 1.2412 1.09895 1.52515 0.734639C1.8883 0.268722 2.36813 0.0191514 2.95806 0.00640243C3.51322 -0.00557387 4.06876 0.00292499 4.62431 0.00292499C7.64813 0.00292499 10.6723 0.00292537 13.6962 0.0033117C13.7781 0.0033117 13.8623 0.000993566 13.9419 0.0164469C14.2544 0.0771011 14.4422 0.320104 14.4426 0.679393C14.4449 3.02404 14.4433 5.3687 14.4441 7.71373C14.4441 8.00155 14.3375 8.22678 14.0632 8.34346C13.8287 8.44313 13.598 8.41068 13.4215 8.23026C13.3272 8.13406 13.2747 7.99073 13.2248 7.86015C13.197 7.78714 13.2098 7.69751 13.2098 7.61561C13.209 5.56379 13.2094 3.51237 13.2094 1.46056C13.2094 1.39411 13.2094 1.32766 13.2094 1.24885C11.45 1.24885 9.70033 1.24885 7.93325 1.24885C7.93325 1.318 7.93325 1.38329 7.93325 1.44858C7.93325 2.96532 7.93363 4.48245 7.93286 5.99919C7.93286 6.36427 7.79764 6.58912 7.52373 6.68802C7.30082 6.76838 7.09993 6.72163 6.91487 6.58139C6.5382 6.29551 6.16153 6.01001 5.77249 5.71485C5.4132 5.98799 5.05739 6.26421 4.69424 6.5304C4.59302 6.60457 4.47634 6.67102 4.35658 6.70347C4.0197 6.79504 3.67045 6.54855 3.62757 6.20201C3.61675 6.11548 3.61328 6.02778 3.61328 5.94085C3.6125 4.44459 3.6125 2.94832 3.6125 1.45206C3.6125 1.38638 3.6125 1.32032 3.6125 1.24923C3.3583 1.24923 3.11568 1.22721 2.87886 1.25503C2.60418 1.28748 2.41642 1.5158 2.38744 1.79242C2.38088 1.85346 2.37894 1.91566 2.37894 1.97708C2.37856 5.31925 2.37856 8.66179 2.37856 12.004C2.37856 12.0638 2.37856 12.1237 2.37856 12.1558C2.79773 12.128 3.19488 12.1017 3.6125 12.0739C3.6125 12.0233 3.6125 11.9634 3.6125 11.9035C3.6125 10.8133 3.61135 9.72344 3.61328 8.63321C3.61366 8.26039 3.77979 8.02666 4.08963 7.9494C4.43501 7.86324 4.78966 8.10354 4.83486 8.45742C4.84529 8.53855 4.84684 8.62161 4.84684 8.70352C4.84761 9.76786 4.84722 10.8322 4.84722 11.8966C4.84722 11.9572 4.84722 12.0179 4.84722 12.0874C7.63654 12.0874 10.4112 12.0874 13.209 12.0874C13.209 11.9638 13.2082 11.8429 13.209 11.7215C13.2117 11.4133 13.2048 11.1042 13.2214 10.7967C13.2357 10.534 13.4149 10.3389 13.6684 10.2697C13.9133 10.2029 14.1872 10.2859 14.3185 10.5034C14.3892 10.6205 14.4348 10.7708 14.4375 10.9075C14.4503 11.4936 14.448 12.0797 14.4414 12.6661C14.4364 13.0965 14.1853 13.3302 13.7452 13.3302C10.1968 13.3306 6.6483 13.3291 3.09945 13.3356C2.94338 13.336 2.76991 13.3805 2.63586 13.4585C2.41642 13.5856 2.33645 13.8634 2.40135 14.1095C2.46432 14.349 2.6799 14.5329 2.93295 14.5595C2.99901 14.5665 3.06662 14.5646 3.13345 14.5646C6.65101 14.565 10.169 14.5646 13.6865 14.565C13.7483 14.565 13.8101 14.563 13.8716 14.5684C14.1509 14.5916 14.3835 14.7991 14.429 15.0633C14.4796 15.3585 14.3406 15.6239 14.0721 15.746C14.0358 15.7622 14.001 15.7815 13.9654 15.7993C10.2323 15.7989 6.49879 15.7989 2.76489 15.7989ZM6.68578 4.85681C6.68578 3.63291 6.68578 2.43991 6.68578 1.24614C6.06881 1.24614 5.46497 1.24614 4.86113 1.24614C4.86113 2.44725 4.86113 3.63909 4.86113 4.85642C5.04 4.72043 5.19763 4.59912 5.35718 4.48052C5.64345 4.26765 5.90307 4.26765 6.18934 4.48052C6.34928 4.59912 6.50652 4.72082 6.68578 4.85681Z" fill="#282421" fill-opacity="0.52"/>
 				</svg>
 			</div>
-			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Mata Pelajaran</p>
-			<h1 class="m-0 text-3xl font-semibold text-second">19</h1>
+			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Surat Belum Disetujui</p>
+			<h1 class="m-0 text-3xl font-semibold text-second">{{ $total_letters_not_approved }}</h1>
 		</div>
 		<div class="card-dashboard">
 			<div class="icon-dashboard-wrapper">
@@ -53,14 +53,14 @@
 					</defs>
 				</svg>
 			</div>
-			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Prestasi</p>
-			<h1 class="m-0 text-3xl font-semibold text-second">654</h1>
+			<p class="mt-[16px] mb-0 uppercase text-sm font-medium desc">Total Surat Diterima</p>
+			<h1 class="m-0 text-3xl font-semibold text-second">{{ $total_letters }}</h1>
 		</div>
 	</div>
 	
 	<div class="card-dashboard-wrapper mt-[20px]">
 		<div class="flex sm:flex-row flex-col gap-3 justify-between">
-			<h6 class="text-2xl font-semibold text-second mb-0">Grafik Prestasi Siswa</h6>
+			<h6 class="text-2xl font-semibold text-second mb-0">Grafik Total Surat Diterima</h6>
 			<div class="category1 item">
 				<button id="dropdownDefaultButton" onclick="showItems('category1')" data-dropdown-toggle="dropdown" class="flex w-max btn-dropdown category-name active" type="button">
 					Tahun ini
@@ -141,6 +141,10 @@
 
 @push('js')
 	<script>
+		let letter_yearly = <?= json_encode($letter_yearly); ?>;
+		let letter_monthly = <?= json_encode($letter_monthly); ?>;
+		let letter_weekly = <?= json_encode($letter_weekly); ?>;
+
 		document.addEventListener('DOMContentLoaded', function() {
 			var showCategory = 'category1';
 			var showAllCategory = document.querySelector(`.category-name[data-category="${showCategory}"]`);
@@ -192,10 +196,10 @@
 
 			series: [{
 				name: 'prestasi',
-				data: [45,65,75,13,87,34,87,345,87,89,12,10]
+				data: letter_yearly
 			}],
 			xaxis: {
-				categories: ['jan','feb','mar','apr','mei','jun','jul', 'aug','sep', 'okt', 'nov', 'des']
+				categories: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul', 'Aug','Sep', 'Okt', 'Nov', 'Des']
 			},
 			yaxis: {
 				categories: [10, 20, 30, 40, 50]
@@ -222,7 +226,7 @@
 
 			series: [{
 				name: 'prestasi',
-				data: [76,26,35,93]
+				data: letter_monthly
 			}],
 			xaxis: {
 				categories: ['Minggu 1','Minggu 2','Minggu 3','Minggu 4']
@@ -252,7 +256,7 @@
 
 			series: [{
 				name: 'prestasi',
-				data: [6,8,8,1,4,6,10]
+				data: letter_weekly
 			}],
 			xaxis: {
 				categories: ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']
