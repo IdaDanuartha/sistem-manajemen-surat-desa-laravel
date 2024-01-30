@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function() {
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource("letters", LetterController::class);
+    Route::get("letters/{letter}/download", [LetterController::class, 'download'])->name('letters.download');
     Route::put("letters/{letter}/approve", [LetterController::class, 'approveLetter'])->name('letters.approve');
     Route::put("letters/{letter}/signed", [LetterController::class, 'addSignatureToLetter'])->name('letters.signed');
 
