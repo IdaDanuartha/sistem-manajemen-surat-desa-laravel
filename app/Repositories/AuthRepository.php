@@ -16,8 +16,8 @@ class AuthRepository
   {
     try {
       if(isset($credentials["remember"]) && !empty($credentials["remember"])) {
-        setcookie("email", $credentials["email"], time()+3600);
-        setcookie("password", $credentials["password"], time()+3600);        
+        setcookie("email", $credentials["email"], time() + (7 * 24 * 60 * 60));
+        setcookie("password", $credentials["password"], time() + (7 * 24 * 60 * 60));        
       } else {
         setcookie("email", "");
         setcookie("password", "");
