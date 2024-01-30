@@ -65,7 +65,7 @@ class DashboardController extends Controller
                                         ->count();
         $total_letters_not_approved = Letter::where('approved_by_section_head', 0)
                                             ->count();
-        $total_mails = Letter::count();
+        $total_letters = Letter::count();
 
         return view('dashboard.analytics.index', compact(
             'letter_yearly',
@@ -73,8 +73,8 @@ class DashboardController extends Controller
             'letter_weekly',
             'total_citizents',
             'total_letters_approved',
-            'total_letter_not_approved',
-            'total_mails'
+            'total_letters_not_approved',
+            'total_letters'
         ));
     }
 }
