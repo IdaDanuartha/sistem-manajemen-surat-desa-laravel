@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\UpdateLetterRequest;
 use App\Models\Letter;
 use App\Repositories\LetterRepository;
 use App\Utils\ResponseMessage;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -112,6 +113,13 @@ class LetterController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('letters.show', $letter->id)->with('error', $this->responseMessage->response('surat', false, 'update'));
         }
+    }
+
+    public function download(Letter $letter)
+    {
+        $generated = Pdf::loadView('dashboard.letters.letter-template', ['letter' => $letter]);        
+
+        return $generated->stream();
     }
 
     public function destroy(Letter $letter)
