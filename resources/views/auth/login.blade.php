@@ -14,7 +14,11 @@
       name="email"
       placeholder="Masukkan email"
       required
-      value="{{ old('email') }}"
+      @if (isset($_COOKIE["email"]))
+        value="{{ $_COOKIE['email'] }}"
+      @else
+        value="{{ old('email') }}"        
+      @endif
       autofocus />
     @error('email')
       <div class="text-danger mt-1">{{ $message }}</div>
@@ -30,6 +34,11 @@
         id="password"
         class="input-crud bg-white border-r-0 rounded-r-none w-full"
         name="password"
+        @if (isset($_COOKIE["password"]))
+          value="{{ $_COOKIE['password'] }}"
+        @else
+          value="{{ old('password') }}"        
+        @endif
         placeholder="Masukkan password"
         aria-describedby="password" />
       <span class="pr-4 flex mt-1 justify-center items-center border-r border-t border-b cursor-pointer rounded-l-none h-[54px] rounded-[0.25rem]"><i class="bx bx-hide"></i></span>
@@ -40,7 +49,7 @@
   </div>
   <div class="mb-3">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="remember_me" id="remember-me" />
+      <input class="form-check-input" type="checkbox" name="remember" id="remember-me" />
       <label class="form-check-label" for="remember-me"> Remember Me </label>
     </div>
   </div>
