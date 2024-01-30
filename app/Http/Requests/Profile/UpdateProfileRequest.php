@@ -34,9 +34,9 @@ class UpdateProfileRequest extends FormRequest
 			'religion' => ['nullable'],			
 			'marital_status' => ['nullable'],			
 			'profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
+			'user.username' => ['nullable', 'alpha_dash', Rule::unique('users', 'username')->ignore(auth()->id())],
 			'user.email' => ['nullable', 'email:dns', Rule::unique('users', 'email')->ignore(auth()->id())],
 			'user.password' => ['nullable', 'min:6'],
-			'user.status' => ['nullable'],
         ];
     }
 
@@ -49,13 +49,13 @@ class UpdateProfileRequest extends FormRequest
             'phone_number' => 'nomor hp',
             'birth_place' => 'tempat lahir',
             'birth_date' => 'tanggal lahir',
-            'blood_group' => 'golongan darah',
-            'religion' => 'agama',
-            'marital_status' => 'status pernikahan',
+            'blooigion' => 'agama',
+            'mard_group' => 'golongan darah',
+            'relital_status' => 'status pernikahan',
             'profile_image' => 'foto profil',
+            'user.username' => 'username',
             'user.email' => 'email',
-            'user.password' => 'password',
-            'user.status' => 'status',
+            'user.password' => 'password',            
         ];
     }
 }
