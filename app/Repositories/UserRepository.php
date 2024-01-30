@@ -7,13 +7,12 @@ use App\Enums\UserStatus;
 use App\Models\Citizent;
 use App\Models\EnvironmentalHead;
 use App\Models\SectionHead;
-use App\Models\Staff;
 use App\Models\VillageHead;
 use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository
@@ -36,7 +35,7 @@ class UserRepository
     };
   }
 
-  public function findAll(): Citizent
+  public function findAll(): Collection
   {
     return $this->citizent->latest()->with(['user', 'villageHead', 'environmentalHead', 'sectionHead'])->get();
   }
@@ -55,7 +54,7 @@ class UserRepository
   {
     DB::beginTransaction();
     try {  
-      if ($request["profile_image"]) {         
+      if (Arr::has($request, 'profile_image') && Arr::get($request, 'profile_image')) {         
         $filename = $this->uploadFile->uploadSingleFile($request['profile_image'], "users");
         $request['profile_image'] = $filename;
       }  

@@ -34,12 +34,13 @@ return new class extends Migration
                   ->cascadeOnUpdate()
                   ->nullOnDelete();
             $table->string('title');
+            $table->string('letter_number')->unique();
             $table->boolean('approved_by_environmental_head')->default(0);
             $table->boolean('approved_by_section_head')->default(0);
             $table->boolean('approved_by_village_head')->default(0);
-            $table->string('letter_number')->unique();
             $table->date('date');
             $table->string('signature_image')->nullable();
+            $table->text('message');
             $table->timestamps();
         });
     }
