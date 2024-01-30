@@ -107,7 +107,7 @@
 			@endif
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
 				@if (auth()->user()->isCitizent())
-					<button type="button" class="button btn-main text-white" type="reset">Download Surat</button>
+					<a href="{{ route('letters.download', $get_letter->id) }}" class="button btn-main text-white">Download Surat</a>
 				@endif
 				@if (auth()->user()->isVillageHead() && !$get_letter->approved_by_village_head)
 					<a href="{{ route('letters.edit', $get_letter->id) }}" class="button btn-main text-white">Tambah TTE</a>
