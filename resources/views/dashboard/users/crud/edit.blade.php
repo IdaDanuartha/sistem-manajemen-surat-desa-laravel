@@ -99,7 +99,7 @@
 				<label for="gender" class="text-second mb-2">Jenis Kelamin</label>
 				<select required class="gender-select2 input-crud" name="gender">
 				@foreach (App\Enums\Gender::labels() as $key => $value)
-					<option value="{{ ++$key }}" class="capitalize" @selected($user->gender->value == ++$key)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected($user->gender->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('gender')
@@ -110,7 +110,7 @@
 				<label for="blood_group" class="text-second mb-2">Golongan Darah</label>
 				<select required class="blood-group-select2 input-crud" name="blood_group">
 				@foreach (App\Enums\BloodGroup::labels() as $key => $value)
-					<option value="{{ ++$key }}" class="capitalize" @selected($user->blood_group->value == ++$key)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected($user->blood_group->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('blood_group')
@@ -121,7 +121,7 @@
 				<label for="religion" class="text-second mb-2">Agama</label>
 				<select required class="religion-select2 input-crud" name="religion">
 				@foreach (App\Enums\Religion::labels() as $key => $value)
-					<option value="{{ ++$key }}" class="capitalize" @selected($user->religion->value == ++$key)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected($user->religion->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('religion')
@@ -132,7 +132,7 @@
 				<label for="marital_status" class="text-second mb-2">Status Pernikahan</label>
 				<select required class="marital-status-select2 input-crud" name="marital_status">
 				@foreach (App\Enums\MaritalStatus::labels() as $key => $value)
-					<option value="{{ ++$key }}" class="capitalize" @selected($user->marital_status->value == ++$key)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected($user->marital_status->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('marital_status')
