@@ -10,11 +10,11 @@ id="layout-navbar">
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle d-flex items-center gap-3 hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                    {{-- @if (auth()->user()->profile_image)
-                	    <img src="{{ asset('uploads/users/profile_images/' . auth()->user()->profile_image) }}" alt class="w-px-40 h-auto rounded-[50%] aspect-square object-cover object-center" />
-                    @else --}}
+                    @if (auth()->user()->authenticatable->profile_image)
+                	    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt class="w-px-40 h-auto rounded-[50%] aspect-square object-cover object-center" />
+                    @else
                 	    <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
-                    {{-- @endif --}}
+                    @endif
                 </div>
                 <span class="d-xl-flex d-none">
                     <span class="font-medium text-second block">Danuartha</span>
@@ -26,11 +26,11 @@ id="layout-navbar">
                         <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                                {{-- @if (auth()->user()->profile_image)
-                                    <img src="{{ asset('uploads/users/profile_images/' . auth()->user()->profile_image) }}" alt class="w-px-40 h-auto rounded-[50%] aspect-square object-cover object-center" />
-                                @else --}}
+                                @if (auth()->user()->authenticatable->profile_image)
+                                    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt class="w-px-40 h-auto rounded-[50%] aspect-square object-cover object-center" />
+                                @else
                                     <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-[50%] aspect-square object-cover object-center" />
-                                {{-- @endif --}}
+                                @endif
                             </div>
                         </div>
                         <div class="flex-grow-1">
