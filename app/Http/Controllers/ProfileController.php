@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request)
     {
-        try {                     
+        try {                
             $update = $this->profileRepository->update($request->validated());
 
             if($update) return redirect(route('profile.index'))
