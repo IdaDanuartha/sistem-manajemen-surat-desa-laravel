@@ -22,7 +22,7 @@
 	}
 
 	.side-link {
-		@apply flex items-center gap-3 w-fit  mx-4 py-3 px-4 rounded duration-200 hover:text-second
+		@apply flex items-center gap-3 w-fit  mx-4 py-3 px-4 rounded duration-200 hover:text-second text-[#14141485]
 	}
 	.side-link:hover span{
 		@apply text-second
