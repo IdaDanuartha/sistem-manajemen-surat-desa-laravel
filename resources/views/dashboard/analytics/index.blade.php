@@ -9,7 +9,7 @@
 			Amend and correct letters
 			sent by citizens immediately
 		</h4>
-		<button class="btn-second button flex gap-2 items-center">
+		<button class="btn-second rounded-full button flex gap-2 items-center">
 			Manage Letter
 			<svg width="10" class="duration-200" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_5123_1295)">
@@ -247,7 +247,7 @@
 					// borderRadiusApplication: 'end',
 				},
 			},
-			colors:['#5F84E9E5'],
+			colors:['#6562E8', '#7D7AFF'],
 
 			series: [{
 				name: 'prestasi',
