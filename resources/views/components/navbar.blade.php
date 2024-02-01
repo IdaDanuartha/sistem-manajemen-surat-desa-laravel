@@ -1,4 +1,4 @@
-<nav class="layout-navbarnavbar navbar-expand-xl navbar-detached sticky-top align-items-center bg-navbar-theme"
+<nav class="layout-navbarnavbar navbar-expand-xl navbar-detached shadow-none py-1 border-b border-b-[#1414141F] sticky-top align-items-center bg-white opacity-100"
 id="layout-navbar">
 
 
@@ -49,19 +49,6 @@ id="layout-navbar">
                             Profile
                         </button>
                     </a>
-                </li>
-                <li>
-                    <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                    <form class="dropdown-item" href="javascript:void(0);" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <i class="bx bx-power-off me-2"></i>
-                        {{--<span class="align-middle">Log Out</span>--}}
-                        <button type="submit">
-                            Logout
-                        </button>
-                    </form>
                 </li>
             </ul>
             </li>
