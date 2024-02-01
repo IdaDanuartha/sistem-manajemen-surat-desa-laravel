@@ -91,7 +91,7 @@
 		}
 
 	.button {
-		@apply py-3 w-max px-4 rounded-full text-sm duration-200 hover:brightness-110
+		@apply py-3 w-max px-4 rounded text-sm duration-200 hover:brightness-110
 	}
 
 	.btn-main, .btn-filter.active, .btn-filter:hover{
@@ -124,7 +124,7 @@
 		@apply  bg-white border border-[#1414141F] rounded px-6 py-4
 	}
 	.btn-dropdown{
-		@apply w-fit flex items-center py-2 px-3 border border-[#2824211F] rounded text-second
+		@apply w-fit flex items-center rounded-full py-2 px-3 border border-[#2824211F] rounded text-second
 	}
 	.link-dropdown{
 		@apply block text-desc hover:text-second px-[16px] py-2
@@ -200,7 +200,7 @@
 
 
 	.input-wrapper{
-		@apply bg-[#F5F6FB] w-full px-4 py-3 rounded
+		@apply bg-[#F5F6FB] w-full px-4 py-3 rounded border border-[#1414141F]
 	}
 	.input-wrapper input{
 		@apply bg-transparent border-none p-0
