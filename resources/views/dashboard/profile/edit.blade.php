@@ -139,7 +139,7 @@
                         @enderror
                     </div>
                 @endif
-                <div class="col-12 flex items-center gap-2">
+                <div class="col-12 flex items-center gap-2 mt-3">
                     <button class="button btn-main" type="submit">Edit Profile</button>
                     <a href="{{ route('profile.index') }}" class="button text-white btn-second" type="reset">Batal Edit</a>
                 </div>
