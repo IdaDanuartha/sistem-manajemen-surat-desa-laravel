@@ -91,7 +91,7 @@
 		}
 
 	.button {
-		@apply py-3 w-max px-4 rounded text-sm duration-200 hover:brightness-110
+		@apply py-3 w-max px-4 rounded-full text-sm duration-200 hover:brightness-110
 	}
 
 	.btn-main, .btn-filter.active, .btn-filter:hover{
@@ -101,7 +101,9 @@
 		.btn-second {
 			@apply text-white  bg-[#151515] border border-[#FFFFFF1F] hover:bg-[#191919]
 		}
-
+	.btn-second:hover svg {
+		@apply translate-x-1.5
+	}
     .card-notification{
         @apply bg-[#F5F6FB] p-4 rounded
     }
@@ -109,6 +111,9 @@
 
 
 	/*dashboard style*/
+    .dashbaord-banner{
+        @apply bg-[url('../../public/assets/img/dashboard/bg-dashboard.svg')] w-full bg-cover bg-center rounded-lg
+    }
 	.card-dashboard-wrapper, .table-wrapper{
 		@apply px-8 py-6 rounded-[10px] border border-[#2824211F] bg-white
 	}
