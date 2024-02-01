@@ -13,7 +13,13 @@
 
         <div class="menu-inner-shadow"></div>
 
-        <ul class="menu-inner py-1 gap-y-2">
+        <ul class="menu-inner py-1 gap-y-3">
+            <!-- Dashboards -->
+            <li class="px-4 w-full">
+              <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">
+                  Overview
+              </div>
+            </li>
             <!-- Dashboards -->
             <li class="w-full">
                 <a href="{{ route('dashboard') }}" class="side-link  {{ Request::is('dashboard*') ? 'active' : '' }}">
@@ -27,7 +33,7 @@
                     </span>
                     <span data-i18n="Dashboards" class="text-[#28242185]">Dashboard</span>
                 </a>
-            </li> 
+            </li>
 
             @if (auth()->user()->isAdmin())
                 <!-- Users -->
@@ -43,8 +49,8 @@
                         </span>
                         <span data-i18n="Users" class="text-[#28242185]">Pengguna</span>
                     </a>
-                </li>  
-            @endif          
+                </li>
+            @endif
 
             @if (!auth()->user()->isAdmin())
             <!-- Letter -->
@@ -60,8 +66,8 @@
                     </span>
                     <span data-i18n="Letters" class="text-[#28242185]">Surat</span>
                 </a>
-            </li> 
-            @endif           
+            </li>
+            @endif
 
             @if (auth()->user()->isCitizent())
             <!-- Letter History -->
@@ -78,7 +84,7 @@
                     <span data-i18n="Histories" class="text-[#28242185]">Riwayat</span>
                 </a>
             </li>
-            @endif            
+            @endif
         </ul>
     </aside>
 </div>
