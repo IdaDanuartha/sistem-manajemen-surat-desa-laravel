@@ -10,7 +10,7 @@ export default {
 		extend: {
 			colors: {
 				'main':'#6562E8',
-				'second': '#282421',
+				'second': '#141414',
 				// 'third' : '#EFF3F4',
 				'desc' : '#28242185',
 				'font' : '#282421'
