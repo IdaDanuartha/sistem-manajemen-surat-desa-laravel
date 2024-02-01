@@ -22,24 +22,24 @@
 	}
 
 	.side-link {
-		@apply flex items-center gap-3 bg-[#F5F6FB] mx-4 py-3 px-4 rounded duration-200 hover:bg-second hover:text-white
+		@apply flex items-center gap-3 w-fit  mx-4 py-3 px-4 rounded duration-200 hover:text-second
 	}
 	.side-link:hover span{
-		@apply text-white
+		@apply text-second
 	}
 	.side-link.active span{
-		@apply text-white
+		@apply text-second
 	}
 
 
 	.side-link.active {
-		@apply bg-second text-white
+		@apply  text-second
 	}
 	.bg-seconds{
 		@apply bg-second
 	}
 	.icon-sidebar-wrapper {
-		@apply w-9 h-9 flex justify-center items-center bg-white rounded
+		@apply w-9 h-9 flex justify-center bg-[#F5F6FB] items-center rounded
 	}
 
 	.side-link.active .icon-sidebar-wrapper,
