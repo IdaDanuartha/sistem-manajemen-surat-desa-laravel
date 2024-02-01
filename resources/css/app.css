@@ -249,5 +249,11 @@
 	.title-input{
 		@apply text-second flex flex-col
 	}
+	.profile-wrapper:hover svg{
+		@apply scale-110
+	}
+	.profile-image:hover{
+		cursor:  pointer !important;
+	}
 
 }
