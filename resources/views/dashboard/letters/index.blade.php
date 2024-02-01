@@ -35,10 +35,10 @@
             <table class="dataTable w-full ">
                 <thead>
                 <tr>
-                    <th>#</th>                    
+                    <th>#</th>
                     <th class="md:table-cell">Nomor Surat</th>
                     <th class="md:table-cell">Judul</th>
-                    <th class="lg:table-cell">Tanggal</th>                    
+                    <th class="lg:table-cell">Tanggal</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -46,10 +46,10 @@
                 @forelse($letters as $item)
                     <tr class="table-body">
                         <input type="hidden" class="letter_id" value="{{ $item->id }}">
-                        <td>{{ $loop->iteration }}</td>                        
+                        <td>{{ $loop->iteration }}</td>
                         <td class="md:table-cell">{{ $item->letter_number }}</td>
-                        <td class="md:table-cell">{{ $item->title }}</td>                        
-                        <td class="md:table-cell">{{ $item->date->format('d M Y') }}</td>                        
+                        <td class="md:table-cell">{{ $item->title }}</td>
+                        <td class="md:table-cell">{{ $item->date->format('d M Y') }}</td>
                         <td>
                             <div class="flex gap-2 items-center">
 
@@ -67,7 +67,7 @@
                                         </defs>
                                     </svg>
                                 </a>
-                                
+
                                 @if ((auth()->user()->isCitizent() || auth()->user()->isVillageHead()) && $item->approved_by_village_head === 0)
                                     <a href="{{ route('letters.edit', $item->id) }}"
                                         class="icon-table icon-edit">
@@ -85,7 +85,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                    </a>  
+                                    </a>
                                     @if(auth()->user()->isCitizent())
                                     <button type="button"  class="icon-table icon-delete delete-letter-data" data-bs-toggle="modal" data-bs-target="#deleteLetterModal">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -96,7 +96,7 @@
                                         </svg>
                                     </button>
                                     @endif
-                                @endif                                
+                                @endif
                             </div>
                         </td>
                     </tr>
