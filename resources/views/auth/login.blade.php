@@ -13,7 +13,7 @@
       id="email"
       name="email"
       placeholder="Masukkan email"
-      required
+      required 
       @if (isset($_COOKIE["email"]))
         value="{{ $_COOKIE['email'] }}"
       @else
