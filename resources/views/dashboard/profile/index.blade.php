@@ -5,9 +5,9 @@
     <div class="square h-[240px] bg-[#5F84E9] rounded-t-[10px]"></div>
     <div class="profile-wrapper relative py-[24px] ps-[24px] md:ps-[222px]">
         @if (auth()->user()->authenticatable->profile_image)
-					<img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt="Profile Image" class="hidden md:inline-block rounded-circle w-[158px] h-[158px] absolute top-[-79px] left-[32px]"/>
+					<img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt="Profile Image" class="hidden md:inline-block object-cover object-center rounded-circle w-[158px] h-[158px] absolute top-[-79px] left-[32px]"/>
 				@else
-					<img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="hidden md:inline-block rounded-circle w-[158px] h-[158px] absolute top-[-79px] left-[32px]"/>
+					<img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="hidden md:inline-block rounded-circle w-[158px] h-[158px] object-cover object-center absolute top-[-79px] left-[32px]"/>
 				@endif
         <h2 class="text-[1.75rem] font-bold text-[#282421] mb-[6px]">{{ auth()->user()->authenticatable->name }}</h2>
         <p class="text-[0.913rem] text-[rgba(40, 36, 33, 52%)] mb-0">{{ auth()->user()->role->label() }}</p>
@@ -73,7 +73,7 @@
 			@endif
 			<div class="col-12">
 				<a href="{{ route('profile.edit') }}" class="button btn-main">Edit Profile</a>
-			</div>			
+			</div>
     </div>
 </div>
 @endsection
