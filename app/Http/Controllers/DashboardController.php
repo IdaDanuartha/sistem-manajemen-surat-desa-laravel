@@ -49,11 +49,11 @@ class DashboardController extends Controller
 
         foreach ($letter_monthly as $key => $item) {
             $getLetterCurrentWeek = Letter::select(DB::raw("COUNT(*) as count"))
-                ->whereBetween('date', [
+                ->whereBetween('created_at', [
                         Carbon::now()->startOfMonth()->addWeeks($key)->startOfWeek(),
                         Carbon::now()->startOfMonth()->addWeeks($key)->endOfWeek(),
                 ])
-                ->groupBy(DB::raw("Week(date)"))
+                ->groupBy(DB::raw("Week(created_at)"))
                 ->pluck("count")
                 ->toArray();
 
