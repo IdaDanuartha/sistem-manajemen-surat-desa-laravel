@@ -6,8 +6,8 @@
     <div class="table-wrapper relative w-full md:max-w-[300px]">
         <div class="profile-wrapper">
             <label for="profile_image" class="profile-image">
-                @if (auth()->user()->authenticatable->profile_image)
-                    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt="Profile Image" class="rounded w-full brightness-50 aspect-square object-cover object-center h-auto"/>
+                @if (auth()->user()->authenticatable->profile_image ?? auth()->user()->authenticatable->citizent->profile_image)
+                    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image ?? auth()->user()->authenticatable->citizent->profile_image) }}" alt="Profile Image" class="rounded w-full brightness-50 aspect-square object-cover object-center h-auto"/>
                 @else
                     <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="rounded w-full aspect-square object-cover object-center h-auto brightness-50"/>
                 @endif
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label for="name" class="text-second">Nama Lengkap</label>
-                    <input required type="text" name="name" class="input-crud" value="{{ auth()->user()->authenticatable->name }}" />
+                    <input required type="text" name="name" class="input-crud" value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" />
                     @error('name')
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
@@ -61,35 +61,35 @@
                 @if(!auth()->user()->isAdmin())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">NIK</label>
-                        <input required type="text" name="national_identify_number" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number }}" />
+                        <input required type="text" name="national_identify_number" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" />
                         @error('national_identify_number')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Nomor KK</label>
-                        <input required type="text" name="family_card_number" class="input-crud" value="{{ auth()->user()->authenticatable->family_card_number }}" />
+                        <input required type="text" name="family_card_number" class="input-crud" value="{{ auth()->user()->authenticatable->family_card_number ?? auth()->user()->authenticatable->citizent->family_card_number }}" />
                         @error('family_card_number')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Nomor Telepon</label>
-                        <input required type="text" name="phone_number" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number }}" />
+                        <input required type="text" name="phone_number" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number ?? auth()->user()->authenticatable->citizent->phone_number }}" />
                         @error('phone_number')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Tempat Lahir</label>
-                        <input required type="text" name="birth_place" class="input-crud" value="{{ auth()->user()->authenticatable->birth_place }}" />
+                        <input required type="text" name="birth_place" class="input-crud" value="{{ auth()->user()->authenticatable->birth_place ?? auth()->user()->authenticatable->citizent->birth_place }}" />
                         @error('birth_place')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Tanggal Lahir</label>
-                        <input required type="date" name="birth_date" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date->format('Y-m-d') }}" />
+                        <input required type="date" name="birth_date" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date ?? auth()->user()->authenticatable->citizent->birth_date->format('Y-m-d') }}" />
                         @error('birth_date')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -98,7 +98,7 @@
                         <label for="name" class="text-second">Jenis Kelamin</label>
                         <select required class="gender-select2 input-crud" name="gender">
                             @foreach (App\Enums\Gender::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->gender->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->gender ?? auth()->user()->authenticatable->citizent->gender->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('gender')
@@ -109,7 +109,7 @@
                         <label for="name" class="text-second">Golongan Darah</label>
                         <select required class="blood-group-select2 input-crud" name="blood_group">
                             @foreach (App\Enums\BloodGroup::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->blood_group->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->blood_group ?? auth()->user()->authenticatable->citizent->blood_group->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('blood_group')
@@ -120,7 +120,7 @@
                         <label for="name" class="text-second">Agama</label>
                         <select required class="religion-select2 input-crud" name="religion">
                             @foreach (App\Enums\Religion::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->religion->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->religion ?? auth()->user()->authenticatable->citizent->religion->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('religion')
@@ -131,7 +131,7 @@
                         <label for="name" class="text-second">Status Pernikahan</label>
                         <select required class="marital-status-select2 input-crud" name="marital_status">
                             @foreach (App\Enums\MaritalStatus::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->marital_status->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->marital_status ?? auth()->user()->authenticatable->citizent->marital_status->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('marital_status')

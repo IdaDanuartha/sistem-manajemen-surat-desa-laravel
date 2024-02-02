@@ -12,10 +12,6 @@ class Letter extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        "date" => "date"
-    ];
-
     public function approvedByVillageHead()
     {
         return $this->where('approved_by_village_head', 1)->first();

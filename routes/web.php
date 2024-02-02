@@ -56,3 +56,7 @@ Route::middleware(['auth'])->group(function() {
 Route::fallback(function() {
     return view('errors.404');
 });
+
+Route::get("/tes", function() {
+    return view('mail.send-letter');
+});

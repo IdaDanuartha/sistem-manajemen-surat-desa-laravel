@@ -4,6 +4,10 @@ namespace App\Repositories;
 
 use App\Enums\Role;
 use App\Jobs\SendEmailQueueJob;
+use App\Jobs\SendEmailToCitizentQueueJob;
+use App\Jobs\SendEmailToEnvironmentalHeadQueueJob;
+use App\Jobs\SendEmailToSectionHeadQueueJob;
+use App\Jobs\SendEmailToVillageHeadQueueJob;
 use App\Mail\SendLetterMail;
 use App\Models\Letter;
 use App\Models\User;
@@ -13,7 +17,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class LetterRepository
 {
@@ -36,7 +40,8 @@ class LetterRepository
   {
     return $this->letter
                 ->latest()
-                ->where('citizent_id', auth()->id())
+                ->where('citizent_id', auth()->user()->authenticatable->id)
+                ->where('approved_by_village_head', 0)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get();
   }
@@ -68,7 +73,7 @@ class LetterRepository
                 ->where('approved_by_village_head', 1)
                 ->where('approved_by_environmental_head', 1)
                 ->where('approved_by_section_head', 1)
-                ->where('citizent_id', auth()->id())
+                ->where('citizent_id', auth()->user()->authenticatable->id)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get() : 
            $this->letter
@@ -89,7 +94,7 @@ class LetterRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['villageHead', 'environmentalHead', 'sectionHead'])
+                ->with(['citizent', 'villageHead', 'environmentalHead', 'sectionHead'])
                 ->first();
   }
 
@@ -97,12 +102,17 @@ class LetterRepository
   {
     DB::beginTransaction();
     try {
+      if (Arr::has($request, 'letter_file') && Arr::get($request, 'letter_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile($request['letter_file'], "letters/files");
+        $request['letter_file'] = $filename;
+      }
+      $request["code"] = strtoupper(Str::random(8));
       $letter = $this->letter->create($request);
       $users = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->get();
-      
+
       foreach($users as $user) {
         // Mail::to($user->email)->send(new SendLetterMail($user));
-        dispatch(new SendEmailQueueJob($user->email, $user));
+        dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
     } catch (\Exception $e) {  
       logger($e->getMessage());
@@ -146,37 +156,37 @@ class LetterRepository
     }
   }
 
-  public function addSignature($signature_image, Letter $letter): bool|Exception
-  {
-    DB::beginTransaction();    
-    try {  
-      $folderPath = public_path('uploads/letters/signatures/');
-      $image_parts = explode(";base64,", $signature_image);
-      $image_type_aux = explode("image/", $image_parts[0]);
-      $image_type = $image_type_aux[1];
-      $image_base64 = base64_decode($image_parts[1]);
-      $filename = uniqid() . '.'.$image_type;
-      $file = $folderPath . $filename;
+  // public function addSignature($signature_image, Letter $letter): bool|Exception
+  // {
+  //   DB::beginTransaction();    
+  //   try {  
+  //     $folderPath = public_path('uploads/letters/signatures/');
+  //     $image_parts = explode(";base64,", $signature_image);
+  //     $image_type_aux = explode("image/", $image_parts[0]);
+  //     $image_type = $image_type_aux[1];
+  //     $image_base64 = base64_decode($image_parts[1]);
+  //     $filename = uniqid() . '.'.$image_type;
+  //     $file = $folderPath . $filename;
 
-      file_put_contents($file, $image_base64);
+  //     file_put_contents($file, $image_base64);
       
-      $letter->updateOrFail([
-        "village_head_id" => auth()->user()->authenticatable->villageHead->id,
-        "approved_by_village_head" => 1,
-        "signature_image" => $filename
-      ]);
+  //     $letter->updateOrFail([
+  //       "village_head_id" => auth()->user()->authenticatable->villageHead->id,
+  //       "approved_by_village_head" => 1,
+  //       "signature_image" => $filename
+  //     ]);
           
-      dispatch(new SendEmailQueueJob($letter->citizent->user->email, $letter->citizent->user));
+  //     dispatch(new SendEmailQueueJob($letter->citizent->user->email, $letter->citizent->user, $letter->code));
   
-      DB::commit();
-      return true;      
-    } catch (\Exception $e) {  
-      logger($e->getMessage());
-      DB::rollBack();
+  //     DB::commit();
+  //     return true;      
+  //   } catch (\Exception $e) {  
+  //     logger($e->getMessage());
+  //     DB::rollBack();
       
-      return $e;
-    }
-  }
+  //     return $e;
+  //   }
+  // }
 
   public function updateLetterStatus(Letter $letter): bool|Exception
   {
@@ -184,39 +194,34 @@ class LetterRepository
     try {  	
       if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $letter->updateOrFail([
-          "environmental_head_id" => !$letter->approved_by_environmental_head ? 
-                                     auth()->user()->authenticatable->environmentalHead->id : 
-                                     null,
-          "approved_by_environmental_head" => !$letter->approved_by_environmental_head
+          "environmental_head_id" => auth()->user()->authenticatable->id,
+          "approved_by_environmental_head" => true
         ]);	
 
         $users = $this->user->where('role', Role::SECTION_HEAD)->get();
         foreach($users as $user) {          
-          dispatch(new SendEmailQueueJob($user->email, $user));
+          dispatch(new SendEmailToSectionHeadQueueJob($user->email, $user, $letter->code));
         }
       } else if(auth()->user()->role === Role::SECTION_HEAD) {
         $letter->updateOrFail([
-          "section_head_id" => !$letter->approved_by_section_head ? 
-                               auth()->user()->authenticatable->sectionHead->id : 
-                               null,
-          "approved_by_section_head" => !$letter->approved_by_section_head
+          "section_head_id" => auth()->user()->authenticatable->id,
+          "approved_by_section_head" => true
         ]);	
         
         $users = $this->user->where('role', Role::VILLAGE_HEAD)->get();
         foreach($users as $user) {          
-          dispatch(new SendEmailQueueJob($user->email, $user));
+          dispatch(new SendEmailToVillageHeadQueueJob($user->email, $user, $letter->code));
         }
-      } 
-      // else if(auth()->user()->role === Role::VILLAGE_HEAD) {
-      //   $letter->updateOrFail([
-      //     "village_head_id" => !$letter->approved_by_village_head ? 
-      //                          auth()->user()->authenticatable->villageHead->id : 
-      //                          null,
-      //     "approved_by_village_head" => !$letter->approved_by_village_head
-      //   ]);  
-      // }                                 
+      } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
+        $letter->updateOrFail([
+          "village_head_id" => auth()->user()->authenticatable->id,
+          "approved_by_village_head" => true
+        ]); 
+        
+        dispatch(new SendEmailToCitizentQueueJob($letter->citizent->user->email, $letter->citizent->user, $letter->code));
+      }                                 
   
-      DB::commit();
+      db::commit();
       return true;      
     } catch (\Exception $e) {  
       logger($e->getMessage());

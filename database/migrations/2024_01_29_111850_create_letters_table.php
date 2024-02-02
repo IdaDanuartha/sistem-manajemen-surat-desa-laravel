@@ -33,14 +33,12 @@ return new class extends Migration
                   ->nullable()
                   ->cascadeOnUpdate()
                   ->nullOnDelete();
-            $table->string('title');
-            $table->string('letter_number')->unique();
             $table->boolean('approved_by_environmental_head')->default(0);
             $table->boolean('approved_by_section_head')->default(0);
             $table->boolean('approved_by_village_head')->default(0);
-            $table->date('date');
+            $table->string('code');
+            $table->string('letter_file');
             $table->string('signature_image')->nullable();
-            $table->text('message');
             $table->timestamps();
         });
     }

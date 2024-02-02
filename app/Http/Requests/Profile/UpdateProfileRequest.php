@@ -23,8 +23,8 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [            
-			'name' => ['nullable', Rule::unique('citizents', 'name')->ignore(auth()->id())],
-			'national_identify_number' => ['nullable', Rule::unique('citizents', 'national_identify_number')->ignore(auth()->id())],
+			'name' => ['nullable', Rule::unique('citizents', 'name')->ignore(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id)],
+			'national_identify_number' => ['nullable', Rule::unique('citizents', 'national_identify_number')->ignore(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id)],
 			'family_card_number' => ['nullable'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['nullable'],

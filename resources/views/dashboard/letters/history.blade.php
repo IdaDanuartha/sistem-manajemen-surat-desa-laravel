@@ -16,10 +16,9 @@
             <table class="dataTable w-full ">
                 <thead>
                 <tr>
-                    <th>#</th>                    
-                    <th class="md:table-cell">Nomor Surat</th>
-                    <th class="md:table-cell">Judul</th>
-                    <th class="lg:table-cell">Tanggal</th>                    
+                    <th>#</th>
+                    <th class="md:table-cell">Kode</th>
+                    <th class="md:table-cell">File Surat</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -27,10 +26,11 @@
                 @forelse($letters as $item)
                     <tr class="table-body">
                         <input type="hidden" class="letter_id" value="{{ $item->id }}">
-                        <td>{{ $loop->iteration }}</td>                        
-                        <td class="md:table-cell">{{ $item->letter_number }}</td>
-                        <td class="md:table-cell">{{ $item->title }}</td>                        
-                        <td class="md:table-cell">{{ $item->date->format('d M Y') }}</td>                        
+                        <td>{{ $loop->iteration }}</td>
+                        <td class="md:table-cell">{{ $item->code }}</td>
+                        <td class="md:table-cell">
+                            <a href="{{ asset('uploads/letters/files/' . $item->letter_file) }}">{{ $item->letter_file }}</a>
+                        </td>                       
                         <td>
                             <div class="flex gap-2 items-center">
 
