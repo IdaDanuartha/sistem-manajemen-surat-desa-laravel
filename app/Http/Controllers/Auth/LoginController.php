@@ -26,7 +26,7 @@ class LoginController extends Controller
             if($login) return redirect()->route("dashboard")->with('success', 'Login success! Welcome back ' . auth()->user()->authenticatable->name);
             throw new Exception;            
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Login failed! Check your credentials and try again');
+            return redirect()->back()->with('failed', 'Login failed! Check your credentials and try again');
         }
     }
 }
