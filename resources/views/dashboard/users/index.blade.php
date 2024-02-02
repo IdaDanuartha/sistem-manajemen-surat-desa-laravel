@@ -51,17 +51,7 @@
                         <td class="md:table-cell">{{ $item->name }}</td>
                         <td class="md:table-cell">{{ $item->gender->label() }}</td>
                         <td class="lg:table-cell">{{ $item->birth_place . ', ' . $item->birth_date->format('d M Y') }}</td>
-                        <td class="lg:table-cell">
-                            @if ($item->villageHead)
-                                Kepala Kelurahan
-                            @elseif ($item->environmentalHead)
-                                Kepala Lingkungan
-                            @elseif ($item->sectionHead)
-                                Kepala Seksi
-                            @else
-                                Warga
-                            @endif                             
-                        </td>
+                        <td class="lg:table-cell">{{ $item->user->role->label() }}</td>
                         <td>
                             <div class="flex gap-2 items-center">
 

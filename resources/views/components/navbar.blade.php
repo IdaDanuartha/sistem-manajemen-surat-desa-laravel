@@ -87,7 +87,7 @@ id="layout-navbar">
                     @endif
                 </div>
                 <span class="d-xl-flex d-none">
-                    <span class="font-medium text-second block">Danuartha</span>
+                    <span class="font-medium text-second block">{{ auth()->user()->authenticatable->name }}</span>
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -104,7 +104,7 @@ id="layout-navbar">
                             </div>
                         </div>
                         <div class="flex-grow-1">
-                                <span class="font-medium text-second block">Danuartha</span>
+                                <span class="font-medium text-second block">{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}</span>
                                 <small class="text-sm text-desc">{{ auth()->user()->role->label() }}</small>
                             </div>
                         </div>

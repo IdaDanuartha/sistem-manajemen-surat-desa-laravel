@@ -1,1 +1,0 @@
-# Hi {{ $name }}, Thank you for using our application

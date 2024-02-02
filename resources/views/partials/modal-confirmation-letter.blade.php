@@ -1,9 +1,9 @@
-{{-- Delete Letter --}}
-<div class="modal fade" id="deleteLetterModal" tabindex="-1" aria-hidden="true">
+{{-- Confirmation Letter Modal --}}
+<div class="modal fade" id="confirmationLetterModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-head" id="deleteLetterModalTitle">Hapus Surat</h5>
+        <h5 class="modal-head" id="confirmationLetterModalTitle">Konfirmasi Surat</h5>
         <button
           type="button"
           data-bs-dismiss="modal"
@@ -15,19 +15,19 @@
       </div>
       <div class="modal-body">
         <p>
-					Konfirmasi Penghapusan Surat: Apakah Anda yakin ingin menghapus
-					surat ini? Tindakan ini tidak dapat dibatalkan dan surat akan
-					dihapus secara permanen dari sistem.
-				</p>
+        Konfirmasi Menyetujui Surat: Apakah Anda yakin ingin menyetujui
+        surat ini? Tindakan ini tidak dapat dibatalkan dan konfirmasi 
+        anda akan langsung dikirimkan.
+        </p>
       </div>
-      <form action="" method="POST" id="delete_letter_form" class="d-flex justify-content-center">
+      <form action="{{ route('letters.approve', $get_letter->id) }}" method="POST" class="d-flex justify-content-center">
         @csrf
-        @method("DELETE")
-				<div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
-					<button type="submit" class="button btn-main w-100">Hapus Surat</button>
-					<button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
-						Batal Hapus
-					</button>
+        @method("PUT")
+        <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
+            <button type="submit" class="button btn-main w-100">Setujui Surat</button>
+            <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
+                Batal Setujui
+            </button>
         </div>
       </form>
     </div>
