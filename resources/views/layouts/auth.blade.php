@@ -85,6 +85,11 @@
     <!-- Content -->
 
 		<div class="grid grid-cols-12 gap-6 items-center h-full min-h-screen">
+            <div class="lg:col-span-6 lg:flex hidden items-end h-full">
+                <div class="login-img h-screen ">
+                    <img src="{{asset('assets/img/login/login-img.svg')}}" class="h-screen aspect-[5/4] object-cover" alt="">
+                </div>
+            </div>
 			<div class="lg:col-span-6 col-span-12  justify-center">
 				<div class="flex items-center justify-center h-full min-h-screen w-full">
 					<div class="w-full h-auto flex flex-column justify-center align-items-center ">
@@ -92,11 +97,6 @@
 							@yield('main')
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="lg:col-span-6 lg:flex hidden items-end h-full">
-				<div class="login-img h-screen ">
-					<img src="{{asset('assets/img/login/login-img.svg')}}" class="h-screen aspect-[5/4] object-cover" alt="">
 				</div>
 			</div>
 
