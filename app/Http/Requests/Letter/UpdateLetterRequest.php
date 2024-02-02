@@ -22,7 +22,15 @@ class UpdateLetterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "citizent_id" => ["required"],
+            "letter_file" => "required|file|max:5000|mimes:zip,pdf" // accepted_file : pdf, zip (docs, docx)
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'letter_file' => 'file surat',
         ];
     }
 }
