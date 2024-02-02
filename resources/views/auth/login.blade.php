@@ -47,10 +47,13 @@
       <div class="text-danger mt-1">{{ $message }}</div>
     @enderror
   </div>
-  <div class="mb-3">
+  <div class="mb-3 flex justify-content-between">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="remember" id="remember-me" checked />
       <label class="form-check-label" for="remember-me"> Remember Me </label>
+    </div>
+    <div class="form-check">
+      <a href="{{ route('forgot-password') }}" class="form-check-label text-xs">Forgot Password?</a>
     </div>
   </div>
   <div class="mb-3">

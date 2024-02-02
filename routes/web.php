@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
@@ -25,7 +26,14 @@ Route::redirect('/', '/dashboard');
 Route::prefix('auth')->group(function() {
     Route::middleware('guest')->group(function() {
         Route::get('login', [LoginController::class, 'login'])->name('login');        
-        Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');        
+        Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');    
+        
+        Route::controller(ForgotPasswordController::class)->group(function () {
+            Route::get('forgot-password', 'forgotPassword')->name('forgot-password');
+            Route::post('forgot-password', 'forgotPasswordForm')->name('forgot-password.post');
+            Route::get('reset-password/{token}', 'resetPassword')->name('reset-password');
+            Route::post('reset-password', 'resetPasswordForm')->name('reset-password.post');
+        });
     });
 
     Route::middleware('auth')->group(function() {
