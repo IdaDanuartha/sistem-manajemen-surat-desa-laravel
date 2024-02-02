@@ -24,10 +24,14 @@ class StoreLetterRequest extends FormRequest
     {
         return [
             "citizent_id" => ["required"],
-            "letter_number" => ["required", Rule::unique("letters", "letter_number")],
-            "title" => ["required"],
-            "date" => ["required"],
-            "message" => ["required"],
+            "letter_file" => "required|file|max:5000|mimes:pdf,doc,docs,docx" // accepted_file : pdf, doc, docs, docx
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'letter_file' => 'file surat',
         ];
     }
 }
