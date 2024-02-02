@@ -89,18 +89,18 @@ class LetterController extends Controller
         }
     }
 
-    public function addSignatureToLetter(Request $request, Letter $letter)
-    {
-        try {                     
-            $update = $this->letterRepository->addSignature($request->signature_image, $letter);
+    // public function addSignatureToLetter(Request $request, Letter $letter)
+    // {
+    //     try {                     
+    //         $update = $this->letterRepository->addSignature($request->signature_image, $letter);
 
-            if($update) return redirect(route('letters.show', $letter->id))
-                                ->with('success', $this->responseMessage->response('Surat', true, 'update'));            
-            throw new Exception;
-        } catch (\Exception $e) {
-            return redirect()->route('letters.show', $letter->id)->with('error', $this->responseMessage->response('surat', false, 'update'));
-        }
-    }
+    //         if($update) return redirect(route('letters.show', $letter->id))
+    //                             ->with('success', $this->responseMessage->response('Surat', true, 'update'));            
+    //         throw new Exception;
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('letters.show', $letter->id)->with('error', $this->responseMessage->response('surat', false, 'update'));
+    //     }
+    // }
 
     public function approveLetter(Request $request, Letter $letter)
     {
