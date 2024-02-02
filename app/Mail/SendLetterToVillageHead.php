@@ -10,17 +10,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendLetterMail extends Mailable
+class SendLetterToVillageHead extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected User $user;
+    protected $letter_code;
     /**
      * Create a new message instance.
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $letter_code)
     {
         $this->user = $user;
+        $this->letter_code = $letter_code;
     }
 
     /**
@@ -31,7 +33,7 @@ class SendLetterMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: "Welcome Back {$this->user->authenticatable->username}",
+            subject: "Surat Disetujui",
         );
     }
 
@@ -43,9 +45,10 @@ class SendLetterMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.send-letter',
+            view: 'mail.send-letter-to-village-head',
             with: [
-                'name' => $this->user->authenticatable->username
+                'name' => $this->user->authenticatable->citizent->name,
+                'code' => $this->letter_code,
             ],
         );
     }
