@@ -20,6 +20,7 @@ return new class extends Migration
                   ->comment('[1: Admin, 2: VillageHead, 3: EnvironmentalHead, 4: SectionHead, 5: Inhabitant]');
             $table->boolean('status')->default(1);
             $table->morphs('authenticatable');
+            $table->string('signature_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
