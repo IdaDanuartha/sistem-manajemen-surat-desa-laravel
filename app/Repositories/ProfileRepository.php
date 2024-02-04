@@ -21,7 +21,7 @@ class ProfileRepository
   public function update($request): bool|Exception
   {    
     DB::beginTransaction();    
-    try {              
+    try {    
       if (Arr::has($request, 'profile_image') && Arr::get($request, 'profile_image')) {
         $this->uploadFile->deleteExistFile("users/" . auth()->user()->authenticatable->profile_image);
 
@@ -41,6 +41,7 @@ class ProfileRepository
       else {
         $citizent = Citizent::find(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id);
         $citizent->updateOrFail(Arr::except($request, 'user'));
+
         if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
           $citizent->environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
         } else if(auth()->user()->role === Role::SECTION_HEAD) {
@@ -48,7 +49,7 @@ class ProfileRepository
         } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
           $citizent->villageHead->user->updateOrFail(Arr::get($request, 'user'));
         } else {
-          $citizent->environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
+          $citizent->user->updateOrFail(Arr::get($request, 'user'));
         }
       }			
 
