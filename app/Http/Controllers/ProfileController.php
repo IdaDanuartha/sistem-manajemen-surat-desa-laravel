@@ -30,7 +30,7 @@ class ProfileController extends Controller
         try {                
             $update = $this->profileRepository->update($request->validated());
 
-            if($update) return redirect(route('profile.index'))
+            if($update == true) return redirect(route('profile.index'))
                                 ->with('success', $this->responseMessage->response('Profil', true, 'update'));
             throw new Exception;
         } catch (\Exception $e) {
