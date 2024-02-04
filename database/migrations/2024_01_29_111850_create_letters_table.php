@@ -37,8 +37,9 @@ return new class extends Migration
             $table->boolean('approved_by_section_head')->default(0);
             $table->boolean('approved_by_village_head')->default(0);
             $table->string('code');
-            $table->string('letter_file');
-            $table->string('signature_image')->nullable();
+            $table->string('message');
+            // $table->string('letter_file');
+            // $table->string('signature_image')->nullable();
             $table->timestamps();
         });
     }
