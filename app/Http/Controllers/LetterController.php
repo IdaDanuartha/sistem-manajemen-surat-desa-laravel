@@ -75,13 +75,13 @@ class LetterController extends Controller
     {
         try {                     
             $update = $this->letterRepository->update($request->validated(), $letter);
-
             if($update == true) {
                 return redirect(route('letters.index'))
                                 ->with('success', $this->responseMessage->response('Surat', true, 'update'));
-            } else if(isset($update["status"])) {
-                return redirect()->route('letters.index')->with('error', $update["message"]);
             }
+            // else if(isset($update["status"])) {
+            //     return redirect()->route('letters.index')->with('error', $update["message"]);
+            // }
 
             throw new Exception;
         } catch (\Exception $e) {
@@ -108,14 +108,14 @@ class LetterController extends Controller
             $update = $this->letterRepository->updateLetterStatus($letter);
 
             if($update) return redirect(route('letters.show', $letter->id))
-                                ->with('success', $this->responseMessage->response('Surat', true, 'update'));            
+                                ->with('success', "Surat berhasil disetujui");            
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.show', $letter->id)->with('error', $this->responseMessage->response('surat', false, 'update'));
+            return redirect()->route('letters.show', $letter->id)->with('error', "Surat gagal disetujui");
         }
     }
 
-    public function download(Letter $letter)
+    public function preview(Letter $letter)
     {
         $generated = Pdf::loadView('dashboard.letters.letter-template', ['letter' => $letter]);        
 
