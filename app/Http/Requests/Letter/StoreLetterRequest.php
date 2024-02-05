@@ -23,15 +23,30 @@ class StoreLetterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "citizent_id" => ["required"],
-            "letter_file" => "required|file|max:5000|mimes:pdf,doc,docs,docx" // accepted_file : pdf, doc, docs, docx
+            "citizent_id" => "required",
+            "reference_number" => "required",
+            "attachment" => "required",
+            "regarding" => "required",
+            "dear" => "required",
+            "message" => "required",
+            "copy_submitted" => "required",
+            "invitation_attachment" => "required",
+            "is_published" => "nullable",
+            // "letter_file" => "required|file|max:5000|mimes:pdf,doc,docs,docx" // accepted_file : pdf, doc, docs, docx
         ];
     }
 
     public function attributes()
     {
         return [
-            'letter_file' => 'file surat',
+            // 'letter_file' => 'file surat',
+            "reference_number" => "nomor surat",
+            "attachment" => "lampiran",
+            "regarding" => "perihal",
+            "dear" => "yth",
+            "message" => "isi surat",
+            "copy_submitted" => "tembusan disampaikan",
+            "invitation_attachment" => "lampiran surat undangan",
         ];
     }
 }
