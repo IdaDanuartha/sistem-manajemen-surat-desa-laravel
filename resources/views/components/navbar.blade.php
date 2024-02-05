@@ -6,8 +6,8 @@ id="layout-navbar">
 				<h1 class="text-2xl opacity-100 text-second m-0">@yield('title')</h1>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto gap-3">
-            <!-- User -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <!-- Notification -->
+            {{-- <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <button class="dropdown-toggle d-flex items-center gap-3 hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <span class="w-10 h-10 rounded border border-[#2824211F] flex justify-center items-center">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@ id="layout-navbar">
                     </ul>
                 </li>
             </ul>
-            </li>
+            </li> --}}
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle d-flex items-center gap-3 hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

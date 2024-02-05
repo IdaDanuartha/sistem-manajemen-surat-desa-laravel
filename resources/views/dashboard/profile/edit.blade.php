@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Tanggal Lahir</label>
-                        <input required type="date" name="birth_date" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date->format('Y-m-d') ?? auth()->user()->authenticatable->citizent->birth_date->format('Y-m-d') }}" />
+                        <input required type="date" name="birth_date" class="input-crud" value="{{ auth()->user()->isCitizent() ? auth()->user()->authenticatable->birth_date->format('Y-m-d') : auth()->user()->authenticatable->citizent->birth_date->format('Y-m-d') }}" />
                         @error('birth_date')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -100,7 +100,7 @@
                         <label for="name" class="text-second">Jenis Kelamin</label>
                         <select required class="gender-select2 input-crud" name="gender">
                             @foreach (App\Enums\Gender::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->gender->value == $key+1 ?? auth()->user()->authenticatable->citizent->gender->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->isCitizent() ? auth()->user()->authenticatable->gender->value == $key+1 : auth()->user()->authenticatable->citizent->gender->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('gender')
@@ -111,7 +111,7 @@
                         <label for="name" class="text-second">Golongan Darah</label>
                         <select required class="blood-group-select2 input-crud" name="blood_group">
                             @foreach (App\Enums\BloodGroup::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->blood_group->value == $key+1 ?? auth()->user()->authenticatable->citizent->blood_group->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->isCitizent() ? auth()->user()->authenticatable->blood_group->value == $key+1 : auth()->user()->authenticatable->citizent->blood_group->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('blood_group')
@@ -122,7 +122,7 @@
                         <label for="name" class="text-second">Agama</label>
                         <select required class="religion-select2 input-crud" name="religion">
                             @foreach (App\Enums\Religion::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->religion->value == $key+1 ?? auth()->user()->authenticatable->citizent->religion->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->isCitizent() ? auth()->user()->authenticatable->religion->value == $key+1 : auth()->user()->authenticatable->citizent->religion->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('religion')
@@ -133,13 +133,27 @@
                         <label for="name" class="text-second">Status Pernikahan</label>
                         <select required class="marital-status-select2 input-crud" name="marital_status">
                             @foreach (App\Enums\MaritalStatus::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->marital_status->value == $key+1 ?? auth()->user()->authenticatable->citizent->marital_status->value == $key+1)>{{ $value }}</option>
+                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->isCitizent() ? auth()->user()->authenticatable->marital_status->value == $key+1 : auth()->user()->authenticatable->citizent->marital_status->value == $key+1)>{{ $value }}</option>
                             @endforeach
                         </select>
                         @error('marital_status')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
+                    @if (auth()->user()->isVillageHead())
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label class="text-second">TTE</label>
+                            @if (auth()->user()->signature_image)
+                                <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/> 
+                            @endif
+                            <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4"/>
+                            @error('user.signature_image')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif 
                 @endif
                 <div class="col-12 flex items-center gap-2 mt-3">
                     <button class="button btn-main" type="submit">Edit Profile</button>
@@ -158,5 +172,6 @@
 	$('.religion-select2').select2();
 	$('.marital-status-select2').select2();
 	previewImg("edit-profile-input", "edit-profile-preview-img")
+	previewImg("edit-tte-input", "edit-tte-preview-img")
 </script>
 @endpush

@@ -8,6 +8,7 @@ use App\Http\Controllers\LetterController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,7 +52,8 @@ Route::middleware(['auth'])->group(function() {
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource("letters", LetterController::class);
-    Route::get("letters/{letter}/download", [LetterController::class, 'download'])->name('letters.download');
+    // Route::get("letter/preview", [LetterController::class, 'download'])->name('letters.preview');
+    Route::get("letters/{letter}/preview", [LetterController::class, 'preview'])->name('letters.preview');
     Route::put("letters/{letter}/approve", [LetterController::class, 'approveLetter'])->name('letters.approve');
     Route::put("letters/{letter}/signed", [LetterController::class, 'addSignatureToLetter'])->name('letters.signed');
 
@@ -65,6 +67,8 @@ Route::fallback(function() {
     return view('errors.404');
 });
 
-Route::get("/tes", function() {
-    return view('mail.send-letter');
-});
+// Route::get("/tes", function() {
+//     $generated = Pdf::loadView('dashboard.letters.letter-template');
+
+//     return $generated->stream("tes.pdf");
+// });

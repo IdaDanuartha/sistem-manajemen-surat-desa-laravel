@@ -37,7 +37,14 @@ return new class extends Migration
             $table->boolean('approved_by_section_head')->default(0);
             $table->boolean('approved_by_village_head')->default(0);
             $table->string('code');
-            $table->string('message');
+            $table->string('reference_number')->comment('Nomor Surat');
+            $table->string('attachment')->comment('Lampiran');
+            $table->string('regarding')->comment('Perihal');
+            $table->string('dear')->comment('Yth');
+            $table->longText('message')->comment('Isi Surat');
+            $table->text('copy_submitted')->comment('Tembusan Disampaikan');
+            $table->text('invitation_attachment')->comment('Lampiran Surat Undangan');
+            $table->boolean('is_published')->default(0);
             // $table->string('letter_file');
             // $table->string('signature_image')->nullable();
             $table->timestamps();

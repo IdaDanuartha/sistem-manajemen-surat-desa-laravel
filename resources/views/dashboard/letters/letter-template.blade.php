@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Surat Desa</title>
 
     <style>
         .image-full {
@@ -12,6 +12,17 @@
             position: absolute;
             top: 0;
             left: 0;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+        
+        .content-form .header-line {
+            width: 100%;
+            height: 2px;
+            background: #222 !important;
+            border: 1px solid black;
         }
 
         .title {
@@ -30,174 +41,116 @@
             font-size: 0.913rem;
         }
 
-        .input-group label {
+        .content-form {
+            position: relative;
+            top: -100px;
+        }
+
+        .content-form .input-group label {
             width: 22% !important;
             position: absolute;
             transform: translate(-50%);
             font-size: 0.913rem !important;
         }
 
-        .input-group div {
+        .content-form .input-group div {
             width: 5% !important;
             position: absolute;
             transform: translate(-50%);
             font-size: 0.913rem !important;
         }
 
-        .input-group span {
+        .content-form .input-group span {
             width: 67% !important;
             position: absolute;
             transform: translate(-50%);
             font-size: 0.913rem !important;
         }
 
-        .input-group.one label {
+        .content-form .input-group.one label {
             top: 38%;
             left: 15.7%;
         }
 
-        .input-group.one div {
+        .content-form .input-group.one div {
             top: 38%;
-            left: 28%;
+            left: 23%;
         }
 
-        .input-group.one span {
+        .content-form .input-group.one span {
             top: 38%;
-            left: 61.3%;
+            left: 56.3%;
         }
 
-        .input-group.two label {
+        .content-form .input-group.two label {
             top: 41.5%;
             left: 15.7%;
         }
 
-        .input-group.two div {
+        .content-form .input-group.two div {
             top: 41.5%;
-            left: 28%;
+            left: 23%;
         }
 
-        .input-group.two span {
+        .content-form .input-group.two span {
             top: 41.5%;
-            left: 61.3%;
+            left: 56.3%;
         }
 
-        .input-group.three label {
+        .content-form .input-group.three label {
             top: 45%;
             left: 15.7%;
         }
 
-        .input-group.three div {
+        .content-form .input-group.three div {
             top: 45%;
-            left: 28%;
+            left: 23%;
         }
 
-        .input-group.three span {
+        .content-form .input-group.three span {
             top: 45%;
-            left: 61.3%;
+            left: 56.3%;
         }
 
-        .input-group.four label {
+        .content-form .input-group.four label {
             top: 48.5%;
             left: 15.7%;
         }
 
-        .input-group.four div {
+        .content-form .input-group.four div {
             top: 48.5%;
-            left: 28%;
+            left: 23%;
         }
 
-        .input-group.four span {
+        .content-form .input-group.four span {
             top: 48.5%;
-            left: 61.3%;
+            left: 56.3%;
         }
 
-        .input-group.five label {
-            top: 52%;
-            left: 15.7%;
+        .content-letter {
+            position: relative;
+            top: 400px;
+            padding: 30px;
         }
 
-        .input-group.five div {
-            top: 52%;
-            left: 28%;
-        }
-
-        .input-group.five span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .card-ttd:first-child p:first-child {
-            font-size: 0.913rem;
-            width: 26%;
+        .content-letter.content-ttd {
             position: absolute;
-            bottom: 11.7%;
-            left: 18%;
-            transform: translate(-50%);
+            right: 0;
+            top: 850px;
+        }
+        .content-letter.content-ttd .card-canvas {
+            position: absolute;
+            right: 40px;
         }
 
-        .card-ttd:first-child p:nth-child(2) {
-            font-size: 0.913rem;
-            width: 26%;
+        .content-letter.content-ttd .signature {
             position: absolute;
-            bottom: 9.8%;
-            left: 18%;
-            transform: translate(-50%);
+            top: 90px;
+            right: 50px;
         }
 
-        .card-ttd:first-child .card-canvas {
-            width: 26%;
-            height: 70px;
-            position: absolute;
-            bottom: 3.7%;
-            left: 18%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:first-child p:last-child {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            bottom: 0.3%;
-            left: 18%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:nth-child(2) p:first-child {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            bottom: 11.7%;
-            left: 49%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:nth-child(2) p:nth-child(2) {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            bottom: 9.8%;
-            left: 49%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:nth-child(2) .card-canvas {
-            width: 26%;
-            height: 70px;
-            position: absolute;
-            bottom: 3.7%;
-            left: 49%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:nth-child(2) p:last-child {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            bottom: 0.3%;
-            left: 49%;
-            transform: translate(-50%);
+        .content-invitation-attachment {
+            padding: 30px;
         }
 
         .card-ttd:last-child p:first-child {
@@ -241,59 +194,58 @@
 <body>
 
 <div class="container">
-    {{-- <img src="{{ public_path('assets/img/letter-header.jpg') }}" alt="Banner Top" class="image-full"> --}}
-    <h3 class="title">SURAT KETERANGAN PERMISI</h3>
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="content-form">
-        <p class="subtitle">Memang benar anak ini :</p>
+        <div class="header-line"></div>
         <div class="input-group one">
-            <label>Nama</label>
+            <label>Nomor</label>
             <div>:</div>
-            {{-- <span style="text-transform: capitalize;">{{ $permission->student->name }}</span> --}}
+            <span>{{ $letter->reference_number }}</span>
         </div>
         <div class="input-group two">
-            <label>Kelas</label>
+            <label>Lampiran</label>
             <div>:</div>
-            {{-- <span>{{ $permission->student->group->name }}</span> --}}
+            <span>{{ $letter->attachment }}</span>
         </div>
         <div class="input-group three">
-            <label>NIS</label>
+            <label>Perihal</label>
             <div>:</div>
-            {{-- <span>{{ $permission->student->identifier_number }}</span> --}}
+            <span>{{ $letter->regarding }}</span>
         </div>
         <div class="input-group four">
-            <label>Jam ke</label>
+            <label>Yth</label>
             <div>:</div>
-            {{-- <span>{{ $permission->to_lesson ? $permission->from_lesson . " - " . $permission->to_lesson : $permission->from_lesson }}</span> --}}
-        </div>
-        <div class="input-group five">
-            <label>Alasan</label>
-            <div>:</div>
-            {{-- <span style="text-transform: capitalize;">{{ $permission->reason }}</span> --}}
+            <span>{{ $letter->dear }}</span>
         </div>
     </div>
-    <div class="content-ttd">
-        <div class="card-ttd">
-            <p>Mengetahui</p>
-            <p>Guru Piket</p>
-            <div class="card-canvas"></div>
-            <p>Nip. </p>
-        </div>
-        <div class="card-ttd">
-            <p>Mengetahui</p>
-            <p>Satpam</p>
-            <div class="card-canvas">
-                {{-- {{ $permission->security->name }} --}}
+    <div class="content-letter">
+        <p>{!! $letter->message !!}</p>
+    </div>
+    <div class="content-letter content-ttd">
+        <p style="margin-bottom: 100px;">Amlapura, {{ $letter->approved_by_village_head ? $letter->updated_at->format('d M Y') : "..........." }}</p>
+        @if ($letter->approved_by_village_head)
+            <div class="signature">
+                <img src="{{ public_path("uploads/users/signatures/" . $letter->villageHead->user->signature_image) }}" width="100" alt="">
             </div>
-            {{-- <p>NIP. {{ $permission->security->code }}</p> --}}
+        @endif
+        <div class="card-canvas">
+            {{ $letter->approved_by_village_head ? $letter->villageHead->citizent->name : "Kepala Kelurahan" }}
         </div>
-        <div class="card-ttd">
-            {{-- <p>Bebandem, {{ $permission->created_at->format('d F Y') }}</p> --}}
-            <p>Hormat Saya</p>
-            <div class="card-canvas">
-                {{-- {{ $permission->student->name }} --}}
-            </div>
-            {{-- <p>NIS. {{ $permission->student->identifier_number }}</p> --}}
+    </div>
+    <div class="page-break"></div>
+    <div class="content-invitation-attachment">
+        <h4>Tembusan disampaikan :</h4>
+        <p>{!! $letter->copy_submitted   !!}</p>
+    </div>
+    <div class="content-invitation-attachment">
+        <h4>Lampiran Surat Undangan</h4>
+        <div style="margin-bottom: 10px;">
+            <label>Nomor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>:</span>&nbsp;&nbsp;&nbsp; {{ $letter->reference_number }}</label>
         </div>
+        <div style="margin-bottom: 20px;">
+            <label>Lampiran &nbsp;&nbsp;&nbsp;<span>:</span>&nbsp;&nbsp;&nbsp; {{ $letter->attachment }}<</label>
+        </div>
+        <p>{!! $letter->invitation_attachment !!}</p>
     </div>
 </div>
 

@@ -18,7 +18,8 @@
                 <tr>
                     <th>#</th>
                     <th class="md:table-cell">Kode</th>
-                    <th class="md:table-cell">File Surat</th>
+                    <th class="md:table-cell">Nomor Surat</th>
+                    <th class="md:table-cell">Status Surat</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -28,9 +29,8 @@
                         <input type="hidden" class="letter_id" value="{{ $item->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td class="md:table-cell">{{ $item->code }}</td>
-                        <td class="md:table-cell">
-                            <a href="{{ asset('uploads/letters/files/' . $item->letter_file) }}">{{ $item->letter_file }}</a>
-                        </td>                       
+                        <td class="md:table-cell">{{ $item->reference_number }}</td>
+                        <td class="md:table-cell">{{ $item->is_published ? 'Terkirim' : 'Belum dikirim' }}</td>
                         <td>
                             <div class="flex gap-2 items-center">
 

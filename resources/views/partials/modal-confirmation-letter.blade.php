@@ -20,9 +20,10 @@
         anda akan langsung dikirimkan.
         </p>
       </div>
-      <form action="{{ route('letters.approve', $get_letter->id) }}" method="POST" class="d-flex justify-content-center">
+      <form action="{{ route('letters.approve', $get_letter->id) }}" method="POST" class="d-flex justify-content-center" enctype="multipart/form-data">
         @csrf
         @method("PUT")
+        <input type="hidden" name="signature_image" class="create-tte-input" id="signature_image_real">
         <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
             <button type="submit" class="button btn-main w-100">Setujui Surat</button>
             <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
