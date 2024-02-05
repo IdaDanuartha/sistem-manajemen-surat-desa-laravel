@@ -52,6 +52,7 @@ class LetterRepository
                 ->latest()
                 ->where('approved_by_environmental_head', 1)
                 ->where('approved_by_section_head', 1)
+                ->where('is_published', 1)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get();
   }
@@ -61,6 +62,7 @@ class LetterRepository
     return $this->letter
                 ->latest()
                 ->where('approved_by_environmental_head', 1)
+                ->where('is_published', 1)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get();
   }
@@ -73,6 +75,7 @@ class LetterRepository
                 ->where('approved_by_village_head', 1)
                 ->where('approved_by_environmental_head', 1)
                 ->where('approved_by_section_head', 1)
+                ->where('is_published', 1)
                 ->where('citizent_id', auth()->user()->authenticatable->id)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get() : 
@@ -81,6 +84,7 @@ class LetterRepository
                 ->where('approved_by_village_head', 1)                
                 ->where('approved_by_environmental_head', 1)
                 ->where('approved_by_section_head', 1)
+                ->where('is_published', 1)
                 ->with(['villageHead', 'environmentalHead', 'sectionHead'])
                 ->get();
   }
@@ -102,18 +106,23 @@ class LetterRepository
   {
     DB::beginTransaction();
     try {
-      if (Arr::has($request, 'letter_file') && Arr::get($request, 'letter_file')) {         
-        $filename = $this->uploadFile->uploadSingleFile($request['letter_file'], "letters/files");
-        $request['letter_file'] = $filename;
-      }
+      // if (Arr::has($request, 'letter_file') && Arr::get($request, 'letter_file')) {         
+      //   $filename = $this->uploadFile->uploadSingleFile($request['letter_file'], "letters/files");
+      //   $request['letter_file'] = $filename;
+      // }
       $request["code"] = strtoupper(Str::random(8));
+      if(isset($request["is_published"])) $request["is_published"] = true;
       $letter = $this->letter->create($request);
-      $users = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->get();
+      
+      if($letter->is_published) {
+        $users = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->get();
 
-      foreach($users as $user) {
-        // Mail::to($user->email)->send(new SendLetterMail($user));
-        dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+        foreach($users as $user) {
+          // Mail::to($user->email)->send(new SendLetterMail($user));
+          dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+        }
       }
+      
     } catch (\Exception $e) {  
       logger($e->getMessage());
       DB::rollBack();
@@ -124,30 +133,39 @@ class LetterRepository
     return $letter;
   }
 
-  public function update($request, Letter $letter): bool|Exception
+  public function update($request, Letter $letter): bool|array|Exception
   {
     DB::beginTransaction();    
     try {                    
-      if(!$letter->approvedByVillageHead()) {
-        if (Arr::has($request, 'signature_image') && Arr::get($request, 'signature_image')) {
-          $this->uploadFile->deleteExistFile("letters/signatures/$letter->signature_image");
+      // if(!$letter->approvedByVillageHead()) {
+        // if (Arr::has($request, 'signature_image') && Arr::get($request, 'signature_image')) {
+        //   $this->uploadFile->deleteExistFile("letters/signatures/$letter->signature_image");
   
-          $image = Arr::get($request, 'signature_image');
+        //   $image = Arr::get($request, 'signature_image');
   
-          $filename = $this->uploadFile->uploadSingleFile($image, "letters/signatures");
-          $request['signature_image'] = $filename;
-        }  
-             
+        //   $filename = $this->uploadFile->uploadSingleFile($image, "letters/signatures");
+        //   $request['signature_image'] = $filename;
+        // }  
+        if(isset($request["is_published"])) $request["is_published"] = true;
         $letter->updateOrFail($request);			
   
+        if(isset($request["is_published"])) {
+          $users = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->get();
+  
+          foreach($users as $user) {
+            // Mail::to($user->email)->send(new SendLetterMail($user));
+            dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+          }
+        }
+
         DB::commit();
         return true;
-      } else {
-        return [
-          "status" => "error",
-          "message" => "Surat tidak bisa diubah karena sudah disetujui oleh kepala kelurahan"
-        ];        
-      }
+      // } else {
+      //   return [
+      //     "status" => "error",
+      //     "message" => "Surat tidak bisa diubah karena sudah disetujui oleh kepala kelurahan"
+      //   ];        
+      // }
     } catch (\Exception $e) {  
       logger($e->getMessage());
       DB::rollBack();
