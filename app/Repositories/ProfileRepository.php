@@ -30,6 +30,14 @@ class ProfileRepository
         $filename = $this->uploadFile->uploadSingleFile($image, "users");
         $request['profile_image'] = $filename;
       }		
+      if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {
+        $this->uploadFile->deleteExistFile("users/signatures/" . auth()->user()->signature_image);
+
+        $image = Arr::get($request, 'user.signature_image');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/signatures");
+        $request['user']['signature_image'] = $filename;
+      }		
       
       if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
 
