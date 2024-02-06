@@ -62,34 +62,44 @@ class DashboardController extends Controller
         }	
 
         $total_citizents = Citizent::count();
+        $total_letters = Letter::count();
+
         if(auth()->user()->role === Role::ADMIN) {
             $total_letters_approved = Letter::where('approved_by_village_head', 1)
                                             ->count();
             $total_letters_not_approved = Letter::where('approved_by_village_head', 0)
                                                 ->count();
         } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
-            $total_letters_approved = Letter::where('approved_by_environmental_head', 1)
+            $total_letters_approved = Letter::where('environmental_head_id', auth()->user()->authenticatable->id)
+                                            ->where('approved_by_environmental_head', 1)
                                             ->count();
             $total_letters_not_approved = Letter::where('approved_by_environmental_head', 0)
                                                 ->count();
+            $total_letters = Letter::where('is_published', 1)->count();
         } else if(auth()->user()->role === Role::SECTION_HEAD) {
-            $total_letters_approved = Letter::where('approved_by_section_head', 1)
+            $total_letters_approved = Letter::where('section_head_id', auth()->user()->authenticatable->id)
                                             ->count();
-            $total_letters_not_approved = Letter::where('approved_by_section_head', 0)
+            $total_letters_not_approved = Letter::where('section_head_id', auth()->user()->authenticatable->id)
+                                                ->where('approved_by_section_head', 0)
                                                 ->count();
+            $total_letters = Letter::where('section_head_id', "!=", null)->count();
         } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
-            $total_letters_approved = Letter::where('approved_by_village_head', 1)
+            $total_letters_approved = Letter::where('village_head_id', auth()->user()->authenticatable->id)
+                                            ->where('approved_by_village_head', 1)
                                             ->count();
-            $total_letters_not_approved = Letter::where('approved_by_village_head', 0)
+            $total_letters_not_approved = Letter::where('village_head_id', auth()->user()->authenticatable->id)
+                                                ->where('approved_by_village_head', 0)
                                                 ->count();
+            $total_letters = Letter::where('village_head_id', "!=", null)->count();
         } else {
             $total_letters_approved = Letter::where('citizent_id', auth()->user()->authenticatable->id)
+                                            ->where('approved_by_village_head', 1)
                                             ->count();
             $total_letters_not_approved = Letter::where('citizent_id', auth()->user()->authenticatable->id)
+                                                ->where('approved_by_village_head', 0)
                                                 ->count();
+            $total_letters = Letter::where('citizent_id', auth()->user()->authenticatable->id)->count();
         }
-
-        $total_letters = Letter::count();
 
         return view('dashboard.analytics.index', compact(
             'letter_yearly',
