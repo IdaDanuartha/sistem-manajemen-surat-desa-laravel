@@ -149,7 +149,7 @@
                             @else
                                 <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
                             @endif
-                            <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4"/>
+                            <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4 p-0"/>
                             @error('user.signature_image')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
