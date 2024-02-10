@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,12 @@ return new class extends Migration
     {
         Schema::create('sk_marry_letters', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Sk::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->smallInteger("status")->comment("[1: Belum Kawin, 2: Kawin]");
+            $table->date("date");
             $table->timestamps();
         });
     }

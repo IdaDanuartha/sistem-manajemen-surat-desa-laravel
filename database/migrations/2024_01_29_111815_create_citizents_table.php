@@ -25,7 +25,9 @@ return new class extends Migration
                   ->comment('[1: Islam, 2: Kristen Protestan, 3: Kristen Katolik, 4: Hindu, 5: Buddha, 6: Konghucu]');
             $table->smallInteger('marital_status')
                   ->comment('[1: Belum Kawin, 2: Kawin, 3: Cerai Hidup, 4: Cerai Mati]');
-            $table->string('profile_image')->nullable();
+            $table->string("citizenship")->default("Indonesia");
+            $table->string("work");
+            $table->text("address")->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('sk_residence_letters', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Sk::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->year("year");
             $table->timestamps();
         });
     }

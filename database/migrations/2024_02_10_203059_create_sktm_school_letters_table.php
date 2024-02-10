@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Sk;
+use App\Models\SktmLetter;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sk_die_letters', function (Blueprint $table) {
+        Schema::create('sktm_school_letters', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Sk::class)
-                    ->constrained()
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-            $table->year("year");
+            $table->foreignIdFor(SktmLetter::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->string("school_name");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sk_die_letters');
+        Schema::dropIfExists('sktm_school_letters');
     }
 };
