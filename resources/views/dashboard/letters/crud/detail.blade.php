@@ -128,7 +128,7 @@
 					</div>
 				@else
 					<div class="d-block">
-						<p class="text-red-400">Silahkan upload TTE di halaman <a class="text-red-400 underline duration-300" href="{{ route('profile.index') }}">profil</a> terlebih dahulu!</p>
+						<p class="text-red-400">Silahkan upload TTE di halaman <a class="text-red-400 underline duration-300" href="{{ route('profile.edit') }}">profil</a> terlebih dahulu!</p>
 					</div>
 				@endif
 			</div>
