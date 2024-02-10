@@ -11,6 +11,7 @@ use App\Enums\Religion;
 use App\Enums\Role;
 use App\Models\Admin;
 use App\Models\Citizent;
+use App\Models\SuperAdmin;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,9 +21,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        SuperAdmin::create(['name' => 'Super Admin'])->user()->create([
+            'username' => 'super_admin',
+            'email' => 'super.admin@gmail.com',
+            'password' => 'admin',
+            'role' => Role::SUPER_ADMIN
+        ]);
+
         Admin::create(['name' => 'Admin'])->user()->create([
             'username' => 'admin',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'password' => 'admin',
             'role' => Role::ADMIN
         ]);
