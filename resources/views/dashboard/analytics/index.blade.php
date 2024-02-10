@@ -3,25 +3,27 @@
 
 @section('main')
 <div class="py-14 pt-2">
-    <div class="px-9 py-8 dashbaord-banner">
-		<p class="text-sm text-white">Hi, {{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name  }} sebagai {{ auth()->user()->role->label() }}</p>
-		<h4 class="text-3xl text-white font-semibold max-w-[450px]">
-			{{ auth()->user()->isCitizent() ? "Segera kirimkan surat-surat anda kepada yang bersangkutan" : "Segera cek surat-surat yang dikirimkan warga" }}
-		</h4>
-		<a href="{{ route('letters.index') }}" class="text-white btn-second rounded-full button flex gap-2 items-center">
-			Kelola Surat
-			<svg width="10" class="duration-200" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g clip-path="url(#clip0_5123_1295)">
-					<path d="M2.75117 0.488306C2.57459 0.534445 2.41609 0.608 2.29831 0.756695C2.10092 1.00583 2.09678 1.36764 2.29573 1.6172C2.33423 1.6655 2.37678 1.71092 2.4205 1.75464C3.63789 2.97253 4.85562 4.19006 6.07362 5.40731C6.10109 5.43475 6.13228 5.45847 6.19631 5.51378C6.14737 5.54256 6.10748 5.55633 6.08059 5.58317C4.85264 6.80895 3.62636 8.03636 2.39845 9.26217C2.18198 9.47828 2.09137 9.72564 2.18414 10.0261C2.32206 10.4726 2.89192 10.6539 3.26203 10.3687C3.30326 10.3369 3.34273 10.3023 3.37953 10.2655C4.79123 8.85453 6.2027 7.44333 7.6137 6.03161C7.87739 5.76778 7.93142 5.43989 7.75612 5.14231C7.71375 5.07042 7.65456 5.0065 7.59506 4.94695C6.22151 3.57158 4.84606 2.19814 3.47353 0.821778C3.32142 0.66925 3.16448 0.533167 2.94687 0.48825C2.88164 0.488305 2.81639 0.488306 2.75117 0.488306Z" fill="white"/>
-				</g>
-				<defs>
-					<clipPath id="clip0_5123_1295">
-						<rect width="10" height="10" fill="white" transform="matrix(1 0 0 -1 0 10.5)"/>
-					</clipPath>
-				</defs>
-			</svg>
-		</a>
-	</div>
+    @if (!auth()->user()->isAdmin())
+		<div class="px-9 py-8 dashbaord-banner">
+			<p class="text-sm text-white">Hi, {{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name  }} sebagai {{ auth()->user()->role->label() }}</p>
+			<h4 class="text-3xl text-white font-semibold max-w-[450px]">
+				{{ auth()->user()->isCitizent() ? "Segera kirimkan surat-surat anda kepada yang bersangkutan" : "Segera cek surat-surat yang dikirimkan warga" }}
+			</h4>
+			<a href="{{ route('letters.index') }}" class="text-white btn-second rounded-full button flex gap-2 items-center">
+				Kelola Surat
+				<svg width="10" class="duration-200" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g clip-path="url(#clip0_5123_1295)">
+						<path d="M2.75117 0.488306C2.57459 0.534445 2.41609 0.608 2.29831 0.756695C2.10092 1.00583 2.09678 1.36764 2.29573 1.6172C2.33423 1.6655 2.37678 1.71092 2.4205 1.75464C3.63789 2.97253 4.85562 4.19006 6.07362 5.40731C6.10109 5.43475 6.13228 5.45847 6.19631 5.51378C6.14737 5.54256 6.10748 5.55633 6.08059 5.58317C4.85264 6.80895 3.62636 8.03636 2.39845 9.26217C2.18198 9.47828 2.09137 9.72564 2.18414 10.0261C2.32206 10.4726 2.89192 10.6539 3.26203 10.3687C3.30326 10.3369 3.34273 10.3023 3.37953 10.2655C4.79123 8.85453 6.2027 7.44333 7.6137 6.03161C7.87739 5.76778 7.93142 5.43989 7.75612 5.14231C7.71375 5.07042 7.65456 5.0065 7.59506 4.94695C6.22151 3.57158 4.84606 2.19814 3.47353 0.821778C3.32142 0.66925 3.16448 0.533167 2.94687 0.48825C2.88164 0.488305 2.81639 0.488306 2.75117 0.488306Z" fill="white"/>
+					</g>
+					<defs>
+						<clipPath id="clip0_5123_1295">
+							<rect width="10" height="10" fill="white" transform="matrix(1 0 0 -1 0 10.5)"/>
+						</clipPath>
+					</defs>
+				</svg>
+			</a>
+		</div>	
+	@endif
 
 	<div class="grid {{ auth()->user()->isAdmin() ? 'lg:grid-cols-4' : 'lg:grid-cols-3' }} mt-[20px] md:grid-cols-2 grid-cols-1 gap-8">
 		@if (auth()->user()->isAdmin())
