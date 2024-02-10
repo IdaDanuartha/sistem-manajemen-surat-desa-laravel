@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum Role: int
 {
+	case SUPER_ADMIN = 0;
 	case ADMIN = 1;
 	case VILLAGE_HEAD = 2;
 	case ENVIRONMENTAL_HEAD = 3;
@@ -13,6 +14,7 @@ enum Role: int
 	public function label()
 	{
 		return match ($this) {
+			self::SUPER_ADMIN => 'Super Admin',
 			self::ADMIN => 'Admin',
 			self::VILLAGE_HEAD => 'Kepala Kelurahan',
 			self::ENVIRONMENTAL_HEAD => 'Kepala Lingkungan',
