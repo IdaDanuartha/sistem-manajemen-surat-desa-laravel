@@ -20,7 +20,8 @@ class LetterController extends Controller
     ) {}
 
     public function index(Request $request)
-    {     
+    {
+        if(auth()->user()->role === Role::ADMIN) abort(404);     
         if(auth()->user()->role === Role::VILLAGE_HEAD) {
             $letters = $this->letterRepository->findLetterByVillageHead();
         } else if(auth()->user()->role === Role::SECTION_HEAD) {
@@ -34,25 +35,29 @@ class LetterController extends Controller
     }
 
     public function create()
-    {                                           
+    { 
+        if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
                view('dashboard.letters.crud.create') : 
                abort(404);
     }
 
     public function show(Letter $letter)
-    {                                                   
+    {
+        if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->letterRepository->findById($letter);
         return view('dashboard.letters.crud.detail', compact('get_letter'));
     }
 
     public function edit(Letter $letter)
-    {                                           
+    {
+        if(auth()->user()->role === Role::ADMIN) abort(404);                                           
         return view('dashboard.letters.crud.edit', compact('letter'));
     }
 
     public function store(StoreLetterRequest $request)
-    {            
+    {
+        if(auth()->user()->role === Role::ADMIN) abort(404);            
         if(auth()->user()->role === Role::CITIZENT) {
             try {            
                 $store = $this->letterRepository->store($request->validated());            
@@ -73,6 +78,7 @@ class LetterController extends Controller
 
     public function update(UpdateLetterRequest $request, Letter $letter)
     {
+        if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
             $update = $this->letterRepository->update($request->validated(), $letter);
             if($update == true) {
@@ -104,6 +110,7 @@ class LetterController extends Controller
 
     public function approveLetter(Request $request, Letter $letter)
     {
+        if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
             $update = $this->letterRepository->updateLetterStatus($letter);
 
@@ -117,6 +124,7 @@ class LetterController extends Controller
 
     public function preview(Letter $letter)
     {
+        if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.letter-template', ['letter' => $letter]);        
 
         return $generated->stream();
@@ -124,6 +132,7 @@ class LetterController extends Controller
 
     public function destroy(Letter $letter)
     {
+        if(auth()->user()->role === Role::ADMIN) abort(404);
         try {
             $delete = $this->letterRepository->delete($letter);  
 
