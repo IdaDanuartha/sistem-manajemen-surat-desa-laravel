@@ -46,6 +46,8 @@ class DatabaseSeeder extends Seeder
             "blood_group" => BloodGroup::O,
             "religion" => Religion::HINDU,
             "marital_status" => MaritalStatus::SINGLE,
+            "work" => "Pegawai Negeri Sipil",
+            "address" => "Jln Gunung Agung"
         ])->villageHead()->create()->user()->create([
             'username' => '51013834734434',
             'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
@@ -64,6 +66,8 @@ class DatabaseSeeder extends Seeder
             "blood_group" => BloodGroup::O,
             "religion" => Religion::HINDU,
             "marital_status" => MaritalStatus::SINGLE,
+            "work" => "Pegawai Negeri Swasta",
+            "address" => "Monang Maning"
         ])->environmentalHead()->create()->user()->create([
             'username' => '51034734734434',
             'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
@@ -82,6 +86,8 @@ class DatabaseSeeder extends Seeder
             "blood_group" => BloodGroup::O,
             "religion" => Religion::ISLAM,
             "marital_status" => MaritalStatus::SINGLE,
+            "work" => "Guru",
+            "address" => "Dalung Permai"
         ])->sectionHead()->create()->user()->create([
             'username' => '51053857343434',
             'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
@@ -100,6 +106,8 @@ class DatabaseSeeder extends Seeder
             "blood_group" => BloodGroup::A,
             "religion" => Religion::BUDHA,
             "marital_status" => MaritalStatus::MARRY,
+            "work" => "Mahasiswa",
+            "address" => "Ubung Kaja"
         ])->user()->create([
             'username' => '5205394853435',
             'email' => 'dandevofficial@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
