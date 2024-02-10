@@ -44,6 +44,11 @@ class User extends Authenticatable
         'status' => UserStatus::class
     ];
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === Role::SUPER_ADMIN;
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === Role::ADMIN;
