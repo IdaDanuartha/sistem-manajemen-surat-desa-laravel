@@ -114,5 +114,24 @@ class DatabaseSeeder extends Seeder
             'password' => '123456',
             'role' => Role::CITIZENT,
         ]);
+        Citizent::create([
+            "name" => "Aditya Prayatna",
+            "national_identify_number" => "5007456564456",
+            "phone_number" => "081234567890",
+            "family_card_number" => "5350259385334",
+            "gender" => Gender::MAN,
+            "birth_place" => "Denpasar",
+            "birth_date" => "2004-12-14",
+            "blood_group" => BloodGroup::O,
+            "religion" => Religion::HINDU,
+            "marital_status" => MaritalStatus::MARRY,
+            "work" => "Mahasiswa",
+            "address" => "Ubung Kaja"
+        ])->user()->create([
+            'username' => '5007456564456',
+            'email' => 'sampleakun87@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'password' => '123456',
+            'role' => Role::CITIZENT,
+        ]);
     }
 }

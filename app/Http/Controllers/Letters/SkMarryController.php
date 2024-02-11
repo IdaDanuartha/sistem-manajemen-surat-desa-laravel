@@ -130,7 +130,7 @@ class SkMarryController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-marry.letter-template', ['letter' => $sk_marry, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Lahir " . $sk_marry->sk->citizent->name . ".pdf");
+        return $generated->stream("SK Kawin " . $sk_marry->sk->citizent->name . ".pdf");
     }
     
     public function download(SkMarryLetter $sk_marry, $type = "pdf")
@@ -138,7 +138,7 @@ class SkMarryController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-marry.letter-template', ['letter' => $sk_marry]);        
 
-        return $generated->download("SK Lahir " . $sk_marry->sk->citizent->name . ".$type");
+        return $generated->download("SK Kawin " . $sk_marry->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkMarryLetter $sk_marry)

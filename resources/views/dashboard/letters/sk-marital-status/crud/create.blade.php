@@ -6,7 +6,7 @@
 		<form action="{{ route('letters.sk-marital-status.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
 			@csrf
 			<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
-			<div class="col-span-12 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -22,6 +22,18 @@
 					<option value="3">Cerai</option>
 				</select>
                 @error('status')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="citizent_id" class="text-second mb-2">Nama Pasangan</label>
+                <select name="citizent_id" id="citizent_id" class="citizent-select2">
+					<option value="">Cari Pasangan</option>
+					@foreach ($citizents as $item)
+						<option value="{{ $item->id }}">{{ $item->name }}</option>
+					@endforeach
+				</select>
+                @error('citizent_id')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -53,5 +65,6 @@
 @push('js')
 	<script>
 		let status = $(".status-select2").select2()
+		let citizent = $(".citizent-select2").select2()
 	</script>
 @endpush

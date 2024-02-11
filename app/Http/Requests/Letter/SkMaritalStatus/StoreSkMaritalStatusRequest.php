@@ -25,6 +25,7 @@ class StoreSkMaritalStatusRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "citizent_id" => "required",
             "status" => "required",
             "date" => "required",
         ];
@@ -34,6 +35,7 @@ class StoreSkMaritalStatusRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "citizent_id" => "pasangan",
             "date" => "tanggal"
         ];
     }

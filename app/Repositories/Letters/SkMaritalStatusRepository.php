@@ -109,6 +109,7 @@ class SkMaritalStatusRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       $this->letter->create([
         "sk_id" => $sk_letter->id, 
+        "citizent_id" => Arr::get($request, "citizent_id"),
         "status" => Arr::get($request, "status"),
         "date" => Arr::get($request, "date"),
       ]);
@@ -142,6 +143,7 @@ class SkMaritalStatusRepository
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail([          
+          "citizent_id" => Arr::get($request, "citizent_id"),
           "status" => Arr::get($request, "status"),
           "date" => Arr::get($request, "date"),
         ]);

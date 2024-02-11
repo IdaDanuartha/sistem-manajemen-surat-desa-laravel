@@ -6,7 +6,7 @@
 		<form action="{{ route('letters.sk-marital-status.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			<div class="col-span-12 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -26,8 +26,20 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="citizent_id" class="text-second mb-2">Nama Pasangan</label>
+                <select name="citizent_id" id="citizent_id" class="citizent-select2">
+					<option value="">Cari Pasangan</option>
+					@foreach ($citizents as $item)
+						<option value="{{ $item->id }}" @selected($get_letter->citizent_id)>{{ $item->name }}</option>
+					@endforeach
+				</select>
+                @error('citizent_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="date" class="text-second mb-2">Tanggal</label>
-				<input type="date" class="input-crud" name="date" id="date" value="{{ $get_letter->date }}"
+				<input type="date" class="input-crud" name="date" id="date" value="{{ $get_letter->date->format("Y-m-d") }}"
 				placeholder="Masukkan Tanggal..." required />
                 @error('date')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -53,5 +65,6 @@
 @push('js')
 <script>
 	let status = $(".status-select2").select2()
+	let citizent = $(".citizent-select2").select2()
 </script>
 @endpush
