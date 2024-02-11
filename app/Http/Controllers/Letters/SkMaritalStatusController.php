@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Letter\MaritalStatus\StoreSkMaritalStatusRequest;
-use App\Http\Requests\Letter\MaritalStatus\UpdateSkMaritalStatusRequest;
+use App\Http\Requests\Letter\SkMaritalStatus\StoreSkMaritalStatusRequest;
+use App\Http\Requests\Letter\SkMaritalStatus\UpdateSkMaritalStatusRequest;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
 use App\Repositories\Letters\SkMaritalStatusRepository;
@@ -33,14 +33,14 @@ class SkMaritalStatusController extends Controller
         } else {
             $letters = $this->skMaritalStatus->findLetterByStatus(0);
         }
-        return view('dashboard.letters.sk-birth.index', compact('letters'));
+        return view('dashboard.letters.sk-marital-status.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-birth.crud.create') : 
+               view('dashboard.letters.sk-marital-status.crud.create') : 
                abort(404);
     }
 
@@ -48,14 +48,14 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status);
-        return view('dashboard.letters.sk-birth.crud.detail', compact('get_letter'));
+        return view('dashboard.letters.sk-marital-status.crud.detail', compact('get_letter'));
     }
 
     public function edit(SkMaritalStatusLetter $sk_marital_status)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status);                                         
-        return view('dashboard.letters.sk-birth.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-marital-status.crud.edit', compact('get_letter'));
     }
 
     public function store(StoreSkMaritalStatusRequest $request)
@@ -65,14 +65,14 @@ class SkMaritalStatusController extends Controller
             try {            
                 $store = $this->skMaritalStatus->store($request->validated());            
     
-                if($store instanceof Sk) return redirect(route("letters.sk-birth.index"))
+                if($store instanceof Sk) return redirect(route("letters.sk-marital-status.index"))
                                     ->with("success", $this->responseMessage->response('Surat keterangan status nikah'));
     
                 throw new Exception;
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.sk-birth.create"))->with("error", $this->responseMessage->response('surat keterangan status nikah', false));
+                return redirect(route("letters.sk-marital-status.create"))->with("error", $this->responseMessage->response('surat keterangan status nikah', false));
             }
         } else {
             abort(404);
@@ -85,12 +85,12 @@ class SkMaritalStatusController extends Controller
         try {                     
             $update = $this->skMaritalStatus->update($request->validated(), $sk_marital_status);
             if($update == true) {
-                return redirect(route('letters.sk-birth.index'))
+                return redirect(route('letters.sk-marital-status.index'))
                                 ->with('success', $this->responseMessage->response('Surat keterangan status nikah', true, 'update'));
             }
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-birth.edit', $sk_marital_status->id)->with('error', $this->responseMessage->response('surat keterangan status nikah', false, 'update'));
+            return redirect()->route('letters.sk-marital-status.edit', $sk_marital_status->id)->with('error', $this->responseMessage->response('surat keterangan status nikah', false, 'update'));
         }
     }
 
@@ -100,11 +100,11 @@ class SkMaritalStatusController extends Controller
         try {                     
             $update = $this->skMaritalStatus->confirmationLetter($sk_marital_status, true);
 
-            if($update) return redirect(route('letters.sk-birth.show', $sk_marital_status->id))
+            if($update) return redirect(route('letters.sk-marital-status.show', $sk_marital_status->id))
                                 ->with('success', "Surat berhasil disetujui");            
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-birth.show', $sk_marital_status->id)->with('error', "Surat gagal disetujui");
+            return redirect()->route('letters.sk-marital-status.show', $sk_marital_status->id)->with('error', "Surat gagal disetujui");
         }
     }
 
@@ -114,11 +114,11 @@ class SkMaritalStatusController extends Controller
         try {                     
             $update = $this->skMaritalStatus->confirmationLetter($sk_marital_status, false);
 
-            if($update) return redirect(route('letters.sk-birth.show', $sk_marital_status->id))
+            if($update) return redirect(route('letters.sk-marital-status.show', $sk_marital_status->id))
                                 ->with('success', "Surat berhasil ditolak");            
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-birth.show', $sk_marital_status->id)->with('error', "Surat gagal ditolak");
+            return redirect()->route('letters.sk-marital-status.show', $sk_marital_status->id)->with('error', "Surat gagal ditolak");
         }
     }
 
@@ -127,7 +127,7 @@ class SkMaritalStatusController extends Controller
         $sk_marital_status = $this->skMaritalStatus->findById($sk_marital_status);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-birth.letter-template', ['letter' => $sk_marital_status, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status, "user" => auth()->user()]);        
 
         return $generated->stream("SK Lahir " . $sk_marital_status->sk->citizent->name . ".pdf");
     }
@@ -135,7 +135,7 @@ class SkMaritalStatusController extends Controller
     public function download(SkMaritalStatusLetter $sk_marital_status, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-birth.letter-template', ['letter' => $sk_marital_status]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status]);        
 
         return $generated->download("SK Lahir " . $sk_marital_status->sk->citizent->name . ".$type");
     }
@@ -147,14 +147,14 @@ class SkMaritalStatusController extends Controller
             $delete = $this->skMaritalStatus->delete($sk_marital_status);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.sk-birth.index')->with('success', $this->responseMessage->response('Surat keterangan status nikah', true, 'delete'));
+                return redirect()->route('letters.sk-marital-status.index')->with('success', $this->responseMessage->response('Surat keterangan status nikah', true, 'delete'));
             } else if(isset($delete["status"])) {
-                return redirect()->route('letters.sk-birth.index')->with('error', $delete["message"]);
+                return redirect()->route('letters.sk-marital-status.index')->with('error', $delete["message"]);
             }
 
             throw new Exception;
         } catch (\Exception $e) {            
-            return redirect()->route('letters.sk-birth.index')->with('error', $this->responseMessage->response('surat keterangan status nikah', false, 'delete'));
+            return redirect()->route('letters.sk-marital-status.index')->with('error', $this->responseMessage->response('surat keterangan status nikah', false, 'delete'));
         }
     }
 }

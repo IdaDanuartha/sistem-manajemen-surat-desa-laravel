@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Letter\MaritalStatus;
+namespace App\Http\Requests\Letter\SkMaritalStatus;
 
 use Illuminate\Foundation\Http\FormRequest;
 

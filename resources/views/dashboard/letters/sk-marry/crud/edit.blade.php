@@ -17,8 +17,8 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="status" class="text-second mb-2">Status</label>
                 <select name="status" id="status" class="status-select2">
-					<option value="1">Belum Menikah</option>
-					<option value="2">Kawin</option>
+					<option value="1" @selected($get_letter->status == 1)>Belum Menikah</option>
+					<option value="2" @selected($get_letter->status == 2)>Kawin</option>
 				</select>
                 @error('status')
                     <div class="text-danger mt-1">{{ $message }}</div>

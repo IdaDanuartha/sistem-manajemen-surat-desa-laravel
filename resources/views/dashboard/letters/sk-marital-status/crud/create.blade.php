@@ -27,7 +27,7 @@
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="date" class="text-second mb-1">Tanggal</label>
-                <input type="text" class="input-crud" name="date" id="date" value="{{ old('date') }}"
+                <input type="date" class="input-crud" name="date" id="date" value="{{ old('date') }}"
                     placeholder="Masukkan Tanggal..." required />
                 @error('date')
                     <div class="text-danger mt-1">{{ $message }}</div>

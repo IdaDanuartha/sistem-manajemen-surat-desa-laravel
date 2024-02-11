@@ -6,7 +6,7 @@
 		<form action="{{ route('letters.sk-marital-status.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -17,10 +17,19 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="status" class="text-second mb-2">Status</label>
                 <select name="status" id="status" class="status-select2">
-					<option value="1">Belum Menikah</option>
-					<option value="2">Kawin</option>
+					<option value="1" @selected($get_letter->status == 1)>Duda</option>
+					<option value="2" @selected($get_letter->status == 2)>Janda</option>
+					<option value="3" @selected($get_letter->status == 3)>Cerai</option>
 				</select>
                 @error('status')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="date" class="text-second mb-2">Tanggal</label>
+				<input type="date" class="input-crud" name="date" id="date" value="{{ $get_letter->date }}"
+				placeholder="Masukkan Tanggal..." required />
+                @error('date')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

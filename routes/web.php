@@ -87,23 +87,102 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-marry/{sk_marry}/reject", [SkMarryController::class, 'rejectLetter'])->name('letters.sk-marry.reject');
 
     Route::resource("letters/sk-marital-status", SkMaritalStatusController::class, ['as' => 'letters']);
+    Route::get("letters/sk-marital-status/{sk_marital_status}/preview", [SkMaritalStatusController::class, 'preview'])->name('letters.sk-marital-status.preview');
+    Route::get("letters/sk-marital-status/{sk_marital_status}/download/{type?}", [SkMaritalStatusController::class, 'download'])->name('letters.sk-marital-status.download');
+    Route::put("letters/sk-marital-status/{sk_marital_status}/approve", [SkMaritalStatusController::class, 'approveLetter'])->name('letters.sk-marital-status.approve');
+    Route::put("letters/sk-marital-status/{sk_marital_status}/reject", [SkMaritalStatusController::class, 'rejectLetter'])->name('letters.sk-marital-status.reject');
+
     Route::resource("letters/sktu", SktuController::class, ['as' => 'letters']);
+    Route::get("letters/sktu/{sktu}/preview", [SktuController::class, 'preview'])->name('letters.sktu.preview');
+    Route::get("letters/sktu/{sktu}/download/{type?}", [SktuController::class, 'download'])->name('letters.sktu.download');
+    Route::put("letters/sktu/{sktu}/approve", [SktuController::class, 'approveLetter'])->name('letters.sktu.approve');
+    Route::put("letters/sktu/{sktu}/reject", [SktuController::class, 'rejectLetter'])->name('letters.sktu.reject');
+
     Route::resource("letters/sktm", SktmController::class, ['as' => 'letters']);
+    Route::get("letters/sktm/{sktm}/preview", [SktmController::class, 'preview'])->name('letters.sktm.preview');
+    Route::get("letters/sktm/{sktm}/download/{type?}", [SktmController::class, 'download'])->name('letters.sktm.download');
+    Route::put("letters/sktm/{sktm}/approve", [SktmController::class, 'approveLetter'])->name('letters.sktm.approve');
+    Route::put("letters/sktm/{sktm}/reject", [SktmController::class, 'rejectLetter'])->name('letters.sktm.reject');
+
     Route::resource("letters/sk-name", SkNameController::class, ['as' => 'letters']);
+    Route::get("letters/sk-name/{sk_name}/preview", [SkNameController::class, 'preview'])->name('letters.sk-name.preview');
+    Route::get("letters/sk-name/{sk_name}/download/{type?}", [SkNameController::class, 'download'])->name('letters.sk-name.download');
+    Route::put("letters/sk-name/{sk_name}/approve", [SkNameController::class, 'approveLetter'])->name('letters.sk-name.approve');
+    Route::put("letters/sk-name/{sk_name}/reject", [SkNameController::class, 'rejectLetter'])->name('letters.sk-name.reject');
+
     Route::resource("letters/sk-subsidized-housing", SkSubsidizedHousingController::class, ['as' => 'letters']);
+    Route::get("letters/sk-subsidized-housing/{sk_subsidized_housing}/preview", [SkSubsidizedHousingController::class, 'preview'])->name('letters.sk-subsidized-housing.preview');
+    Route::get("letters/sk-subsidized-housing/{sk_subsidized_housing}/download/{type?}", [SkSubsidizedHousingController::class, 'download'])->name('letters.sk-subsidized-housing.download');
+    Route::put("letters/sk-subsidized-housing/{sk_subsidized_housing}/approve", [SkSubsidizedHousingController::class, 'approveLetter'])->name('letters.sk-subsidized-housing.approve');
+    Route::put("letters/sk-subsidized-housing/{sk_subsidized_housing}/reject", [SkSubsidizedHousingController::class, 'rejectLetter'])->name('letters.sk-subsidized-housing.reject');
+
     Route::resource("letters/sk-move", SkMoveController::class, ['as' => 'letters']);
+    Route::get("letters/sk-move/{sk_move}/preview", [SkMoveController::class, 'preview'])->name('letters.sk-move.preview');
+    Route::get("letters/sk-move/{sk_move}/download/{type?}", [SkMoveController::class, 'download'])->name('letters.sk-move.download');
+    Route::put("letters/sk-move/{sk_move}/approve", [SkMoveController::class, 'approveLetter'])->name('letters.sk-move.approve');
+    Route::put("letters/sk-move/{sk_move}/reject", [SkMoveController::class, 'rejectLetter'])->name('letters.sk-move.reject');
+
     Route::resource("letters/sk-travelling", SkTravellingController::class, ['as' => 'letters']);
+    Route::get("letters/sk-travelling/{sk_travelling}/preview", [SkTravellingController::class, 'preview'])->name('letters.sk-travelling.preview');
+    Route::get("letters/sk-travelling/{sk_travelling}/download/{type?}", [SkTravellingController::class, 'download'])->name('letters.sk-travelling.download');
+    Route::put("letters/sk-travelling/{sk_travelling}/approve", [SkTravellingController::class, 'approveLetter'])->name('letters.sk-travelling.approve');
+    Route::put("letters/sk-travelling/{sk_travelling}/reject", [SkTravellingController::class, 'rejectLetter'])->name('letters.sk-travelling.reject');
+
     Route::resource("letters/sk-residence", SkResidenceController::class, ['as' => 'letters']);
+    Route::get("letters/sk-residence/{sk_residence}/preview", [SkResidenceController::class, 'preview'])->name('letters.sk-residence.preview');
+    Route::get("letters/sk-residence/{sk_residence}/download/{type?}", [SkResidenceController::class, 'download'])->name('letters.sk-residence.download');
+    Route::put("letters/sk-residence/{sk_residence}/approve", [SkResidenceController::class, 'approveLetter'])->name('letters.sk-residence.approve');
+    Route::put("letters/sk-residence/{sk_residence}/reject", [SkResidenceController::class, 'rejectLetter'])->name('letters.sk-residence.reject');
+
     Route::resource("letters/sk-land-price", SkLandPriceController::class, ['as' => 'letters']);
+    Route::get("letters/sk-land-price/{sk_land-price}/preview", [SkLandPriceController::class, 'preview'])->name('letters.sk-land-price.preview');
+    Route::get("letters/sk-land-price/{sk_land-price}/download/{type?}", [SkLandPriceController::class, 'download'])->name('letters.sk-land-price.download');
+    Route::put("letters/sk-land-price/{sk_land-price}/approve", [SkLandPriceController::class, 'approveLetter'])->name('letters.sk-land-price.approve');
+    Route::put("letters/sk-land-price/{sk_land-price}/reject", [SkLandPriceController::class, 'rejectLetter'])->name('letters.sk-land-price.reject');
+
     Route::resource("letters/sk-parent-income", SkParentIncomeController::class, ['as' => 'letters']);
+    Route::get("letters/sk-parent-income/{sk_parent-income}/preview", [SkParentIncomeController::class, 'preview'])->name('letters.sk-parent-income.preview');
+    Route::get("letters/sk-parent-income/{sk_parent-income}/download/{type?}", [SkParentIncomeController::class, 'download'])->name('letters.sk-parent-income.download');
+    Route::put("letters/sk-parent-income/{sk_parent-income}/approve", [SkParentIncomeController::class, 'approveLetter'])->name('letters.sk-parent-income.approve');
+    Route::put("letters/sk-parent-income/{sk_parent-income}/reject", [SkParentIncomeController::class, 'rejectLetter'])->name('letters.sk-parent-income.reject');
+
     // Route::resource("letters/sk-bi", Sk::class, ['as' => 'letters']); // sk silsilah dan kuasa
     Route::resource("letters/sk-die", SkDieController::class, ['as' => 'letters']);
+    Route::get("letters/sk-die/{sk_die}/preview", [SkDieController::class, 'preview'])->name('letters.sk-die.preview');
+    Route::get("letters/sk-die/{sk_die}/download/{type?}", [SkDieController::class, 'download'])->name('letters.sk-die.download');
+    Route::put("letters/sk-die/{sk_die}/approve", [SkDieController::class, 'approveLetter'])->name('letters.sk-die.approve');
+    Route::put("letters/sk-die/{sk_die}/reject", [SkDieController::class, 'rejectLetter'])->name('letters.sk-marital-status.reject');
+
     Route::resource("letters/parental-permission", ParentalPermissionLetterController::class, ['as' => 'letters']);
+    Route::get("letters/parental-permission/{sk_parental_permission}/preview", [ParentalPermissionLetterController::class, 'preview'])->name('letters.parental-permission.preview');
+    Route::get("letters/parental-permission/{sk_parental_permission}/download/{type?}", [ParentalPermissionLetterController::class, 'download'])->name('letters.parental-permission.download');
+    Route::put("letters/parental-permission/{sk_parental_permission}/approve", [ParentalPermissionLetterController::class, 'approveLetter'])->name('letters.parental-permission.approve');
+    Route::put("letters/parental-permission/{sk_parental_permission}/reject", [ParentalPermissionLetterController::class, 'rejectLetter'])->name('letters.parental-permission.reject');
+
     Route::resource("letters/sk-grant", SkGrantController::class, ['as' => 'letters']);
+    Route::get("letters/sk-grant/{sk_grant}/preview", [SkGrantController::class, 'preview'])->name('letters.sk-grant.preview');
+    Route::get("letters/sk-grant/{sk_grant}/download/{type?}", [SkGrantController::class, 'download'])->name('letters.sk-grant.download');
+    Route::put("letters/sk-grant/{sk_grant}/approve", [SkGrantController::class, 'approveLetter'])->name('letters.sk-grant.approve');
+    Route::put("letters/sk-grant/{sk_grant}/reject", [SkGrantController::class, 'rejectLetter'])->name('letters.sk-grant.reject');
+
     Route::resource("letters/diesel-purchase", DieselPurchaseLetterController::class, ['as' => 'letters']);
+    Route::get("letters/diesel-purchase/{diesel_purchase}/preview", [DieselPurchaseLetterController::class, 'preview'])->name('letters.diesel-purchase.preview');
+    Route::get("letters/diesel-purchase/{diesel_purchase}/download/{type?}", [DieselPurchaseLetterController::class, 'download'])->name('letters.diesel-purchase.download');
+    Route::put("letters/diesel-purchase/{diesel_purchase}/approve", [DieselPurchaseLetterController::class, 'approveLetter'])->name('letters.diesel-purchase.approve');
+    Route::put("letters/diesel-purchase/{diesel_purchase}/reject", [DieselPurchaseLetterController::class, 'rejectLetter'])->name('letters.diesel-purchase.reject');
+
     Route::resource("letters/sk-domicile", SkDomicileController::class, ['as' => 'letters']);
+    Route::get("letters/sk-domicile/{sk_domicile}/preview", [SkDomicileController::class, 'preview'])->name('letters.sk-domicile.preview');
+    Route::get("letters/sk-domicile/{sk_domicile}/download/{type?}", [SkDomicileController::class, 'download'])->name('letters.sk-domicile.download');
+    Route::put("letters/sk-domicile/{sk_domicile}/approve", [SkDomicileController::class, 'approveLetter'])->name('letters.sk-domicile.approve');
+    Route::put("letters/sk-domicile/{sk_domicile}/reject", [SkDomicileController::class, 'rejectLetter'])->name('letters.sk-domicile.reject');
+
     // Route::resource("letters/sk-birth", Sk::class, ['as' => 'letters']); // surat pendaftaran
     Route::resource("letters/tree-felling", TreeFellingLetterController::class, ['as' => 'letters']);
+    Route::get("letters/tree-felling/{tree_felling}/preview", [TreeFellingLetterController::class, 'preview'])->name('letters.tree-felling.preview');
+    Route::get("letters/tree-felling/{tree_felling}/download/{type?}", [TreeFellingLetterController::class, 'download'])->name('letters.tree-felling.download');
+    Route::put("letters/tree-felling/{tree_felling}/approve", [TreeFellingLetterController::class, 'approveLetter'])->name('letters.tree-felling.approve');
+    Route::put("letters/tree-felling/{tree_felling}/reject", [TreeFellingLetterController::class, 'rejectLetter'])->name('letters.tree-felling.reject');
 
     Route::middleware('is_citizent')->group(function() {
         Route::get("histories", [LetterHistoryController::class, 'index'])->name('histories.index');
