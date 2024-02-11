@@ -31,7 +31,7 @@ class SkBirthController extends Controller
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skBirth->findLetterByCitizent();
         } else {
-            $letters = $this->skBirth->findAll();
+            $letters = $this->skBirth->findLetterByStatus(0);
         }
         return view('dashboard.letters.sk-birth.index', compact('letters'));
     }

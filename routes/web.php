@@ -73,12 +73,6 @@ Route::middleware(['auth'])->group(function() {
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    // Route::resource("letters", LetterController::class);
-    // Route::get("letter/preview", [LetterController::class, 'download'])->name('letters.preview');
-    // Route::get("letters/{letter}/preview", [LetterController::class, 'preview'])->name('letters.preview');
-    // Route::put("letters/{letter}/approve", [LetterController::class, 'approveLetter'])->name('letters.approve');
-    // Route::put("letters/{letter}/signed", [LetterController::class, 'addSignatureToLetter'])->name('letters.signed');
-
     // Letters
     Route::resource("letters/sk-birth", SkBirthController::class, ['as' => 'letters']);
     Route::get("letters/sk-birth/{sk_birth}/preview", [SkBirthController::class, 'preview'])->name('letters.sk-birth.preview');
@@ -87,6 +81,11 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-birth/{sk_birth}/reject", [SkBirthController::class, 'rejectLetter'])->name('letters.sk-birth.reject');
 
     Route::resource("letters/sk-marry", SkMarryController::class, ['as' => 'letters']);
+    Route::get("letters/sk-marry/{sk_marry}/preview", [SkMarryController::class, 'preview'])->name('letters.sk-marry.preview');
+    Route::get("letters/sk-marry/{sk_marry}/download/{type?}", [SkMarryController::class, 'download'])->name('letters.sk-marry.download');
+    Route::put("letters/sk-marry/{sk_marry}/approve", [SkMarryController::class, 'approveLetter'])->name('letters.sk-marry.approve');
+    Route::put("letters/sk-marry/{sk_marry}/reject", [SkMarryController::class, 'rejectLetter'])->name('letters.sk-marry.reject');
+
     Route::resource("letters/sk-marital-status", SkMaritalStatusController::class, ['as' => 'letters']);
     Route::resource("letters/sktu", SktuController::class, ['as' => 'letters']);
     Route::resource("letters/sktm", SktmController::class, ['as' => 'letters']);

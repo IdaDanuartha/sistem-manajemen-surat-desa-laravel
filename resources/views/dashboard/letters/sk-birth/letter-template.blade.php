@@ -557,7 +557,7 @@
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->created_at->format("d M Y") }}</p>
+                <p>Subagan, {{ $letter->sk->updated_at->format("d M Y") }}</p>
                 <p>A.n, Lurah Subagan</p>
                 <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">

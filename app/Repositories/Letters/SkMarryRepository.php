@@ -9,7 +9,7 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Letter;
 use App\Models\Sk;
-use App\Models\SkBirthLetter;
+use App\Models\SkMarryLetter;
 use App\Models\User;
 use App\Utils\UploadFile;
 use Exception;
@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SkBirthRepository
+class SkMarryRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkBirthLetter $letter,    
+    protected readonly SkMarryLetter $letter,    
     protected readonly User $user,
     protected readonly UploadFile $uploadFile
   ) {}
@@ -35,7 +35,6 @@ class SkBirthRepository
             ->latest()
             ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
             ->get();
-
   }
 
   public function findLetterByCitizent(): Collection
@@ -92,7 +91,7 @@ class SkBirthRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkBirthLetter $letter): SkBirthLetter
+  public function findById(SkMarryLetter $letter): SkMarryLetter
   {
     return $this->letter
                 ->where('id', $letter->id)
@@ -125,7 +124,7 @@ class SkBirthRepository
     return $sk_letter;
   }
 
-  public function update($request, SkBirthLetter $letter): bool|array|Exception
+  public function update($request, SkMarryLetter $letter): bool|array|Exception
   {
     DB::beginTransaction();    
 
@@ -149,7 +148,7 @@ class SkBirthRepository
     }
   }
 
-  public function confirmationLetter(SkBirthLetter $letter, $status): bool|Exception
+  public function confirmationLetter(SkMarryLetter $letter, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
@@ -201,7 +200,7 @@ class SkBirthRepository
     }
   }
 
-  public function delete(SkBirthLetter $letter): bool|Array|Exception
+  public function delete(SkMarryLetter $letter): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           

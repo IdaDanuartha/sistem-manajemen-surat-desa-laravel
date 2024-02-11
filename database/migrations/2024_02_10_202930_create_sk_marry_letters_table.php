@@ -19,7 +19,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->smallInteger("status")->comment("[1: Belum Kawin, 2: Kawin]");
-            $table->date("date");
             $table->timestamps();
         });
     }
