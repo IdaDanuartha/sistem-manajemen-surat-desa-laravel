@@ -22,7 +22,6 @@ class UpdateSkMarryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "status" => "required",

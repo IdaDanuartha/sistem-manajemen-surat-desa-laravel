@@ -104,9 +104,10 @@ class SkMarryRepository
     DB::beginTransaction();
     try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
+
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id]);
+      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
@@ -137,6 +138,7 @@ class SkMarryRepository
           }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
+        $letter->updateOrFail(["status" => Arr::get($request, "status")]);
 
         DB::commit();
         return true;
@@ -205,7 +207,7 @@ class SkMarryRepository
     DB::beginTransaction();
     try {           
       if(!$letter->status_by_environmental_head) {    
-        $delete_letter = $letter->deleteOrFail();
+        $delete_letter = $letter->sk->deleteOrFail();
         
         DB::commit();
         return $delete_letter;

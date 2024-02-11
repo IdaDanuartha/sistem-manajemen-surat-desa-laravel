@@ -80,23 +80,20 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-4 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-4 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
+			<div class="col-span-12 md:col-span-4 flex flex-col">
+                <label for="" class="text-second mb-1">Status</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? 'Belum Menikah' : 'Kawin' }}" disabled />
+            </div>
             @if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex flex-col">
-					<p class="text-second mb-1">Kirim Surat</p>
-					<label class="switch">
-						<input type="checkbox" name="sk[is_published]" disabled @checked($get_letter->sk->is_published ? 'on' : '')>
-						<span class="slider round"></span>
-					</label>
-				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
 						type="text"
@@ -107,7 +104,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Seksi</label>
 					<input
 						type="text"
@@ -118,7 +115,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Kelurahan</label>
 					<input
 						type="text"
@@ -128,6 +125,13 @@
 						@else Belum Dikonfirmasi @endif"
 						disabled
 					>
+				</div>
+				<div class="col-span-12 flex flex-col">
+					<p class="text-second mb-1">Kirim Surat</p>
+					<label class="switch">
+						<input type="checkbox" name="sk[is_published]" disabled @checked($get_letter->sk->is_published ? 'on' : '')>
+						<span class="slider round"></span>
+					</label>
 				</div>
 			@endif	
 			@if (auth()->user()->isVillageHead())
@@ -139,25 +143,29 @@
 					</div>
 				@else
 					<div class="d-block">
-						<p class="text-red-400">Silahkan upload TTE di halaman <a class="text-red-400 underline duration-300" href="{{ route('profile.edit') }}">profil</a> terlebih dahulu!</p>
+						<p class="text-red-400">Silahkan tambahkan TTE di halaman <a class="text-red-400 underline duration-300" href="{{ route('profile.edit') }}">profil</a> terlebih dahulu!</p>
 					</div>
 				@endif
 			</div>
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-birth.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
-					<a href="{{ route('letters.sk-birth.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('letters.sk-marry.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
+					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 				</div>
 				<div class="flex items-center">
-					<a href="{{ route('letters.sk-birth.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
+					<a href="{{ route('letters.sk-marry.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
 				</div>
 			</div>
 		</form>
 	</div>
-
-@include('partials.modal-approve-letter')
-@include('partials.modal-reject-letter')
+	
+<x-modal-approve-letter>
+	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/approve</x-slot>
+</x-modal-approve-letter>
+<x-modal-reject-letter>
+	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/reject</x-slot>
+</x-modal-reject-letter>
 @endsection
 
 @push('js')

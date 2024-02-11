@@ -66,13 +66,13 @@ class SkMarryController extends Controller
                 $store = $this->skMarry->store($request->validated());            
     
                 if($store instanceof Sk) return redirect(route("letters.sk-marry.index"))
-                                    ->with("success", $this->responseMessage->response('Surat keterangan lahir'));
+                                    ->with("success", $this->responseMessage->response('Surat keterangan kawin'));
     
                 throw new Exception;
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.sk-marry.create"))->with("error", $this->responseMessage->response('surat keterangan lahir', false));
+                return redirect(route("letters.sk-marry.create"))->with("error", $this->responseMessage->response('surat keterangan kawin', false));
             }
         } else {
             abort(404);
@@ -86,12 +86,12 @@ class SkMarryController extends Controller
             $update = $this->skMarry->update($request->validated(), $sk_marry);
             if($update == true) {
                 return redirect(route('letters.sk-marry.index'))
-                                ->with('success', $this->responseMessage->response('Surat keterangan lahir', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Surat keterangan kawin', true, 'update'));
             }
 
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-marry.edit', $sk_marry->id)->with('error', $this->responseMessage->response('surat keterangan lahir', false, 'update'));
+            return redirect()->route('letters.sk-marry.edit', $sk_marry->id)->with('error', $this->responseMessage->response('surat keterangan kawin', false, 'update'));
         }
     }
 
@@ -148,14 +148,14 @@ class SkMarryController extends Controller
             $delete = $this->skMarry->delete($sk_marry);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.sk-marry.index')->with('success', $this->responseMessage->response('Surat keterangan lahir', true, 'delete'));
+                return redirect()->route('letters.sk-marry.index')->with('success', $this->responseMessage->response('Surat keterangan kawin', true, 'delete'));
             } else if(isset($delete["status"])) {
                 return redirect()->route('letters.sk-marry.index')->with('error', $delete["message"]);
             }
 
             throw new Exception;
         } catch (\Exception $e) {            
-            return redirect()->route('letters.sk-marry.index')->with('error', $this->responseMessage->response('surat keterangan lahir', false, 'delete'));
+            return redirect()->route('letters.sk-marry.index')->with('error', $this->responseMessage->response('surat keterangan kawin', false, 'delete'));
         }
     }
 }

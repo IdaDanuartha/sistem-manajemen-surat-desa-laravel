@@ -89,14 +89,7 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
             @if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex flex-col">
-					<p class="text-second mb-1">Kirim Surat</p>
-					<label class="switch">
-						<input type="checkbox" name="sk[is_published]" disabled @checked($get_letter->sk->is_published ? 'on' : '')>
-						<span class="slider round"></span>
-					</label>
-				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
 						type="text"
@@ -107,7 +100,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Seksi</label>
 					<input
 						type="text"
@@ -118,7 +111,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Kelurahan</label>
 					<input
 						type="text"
@@ -128,6 +121,13 @@
 						@else Belum Dikonfirmasi @endif"
 						disabled
 					>
+				</div>
+				<div class="col-span-12 flex flex-col">
+					<p class="text-second mb-1">Kirim Surat</p>
+					<label class="switch">
+						<input type="checkbox" name="sk[is_published]" disabled @checked($get_letter->sk->is_published ? 'on' : '')>
+						<span class="slider round"></span>
+					</label>
 				</div>
 			@endif	
 			@if (auth()->user()->isVillageHead())
@@ -156,8 +156,12 @@
 		</form>
 	</div>
 
-@include('partials.modal-approve-letter')
-@include('partials.modal-reject-letter')
+<x-modal-approve-letter>
+	<x-slot name="route">/letters/sk-birth/{{ $get_letter->id }}/approve</x-slot>
+</x-modal-approve-letter>
+<x-modal-reject-letter>
+	<x-slot name="route">/letters/sk-birth/{{ $get_letter->id }}/reject</x-slot>
+</x-modal-reject-letter>
 @endsection
 
 @push('js')

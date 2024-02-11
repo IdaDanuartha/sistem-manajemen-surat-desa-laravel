@@ -1,9 +1,9 @@
 {{-- Delete Letter --}}
-<div class="modal fade" id="deleteSkBirthModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="deleteSkMarryModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-head" id="deleteSkBirthModalTitle">Hapus Surat</h5>
+          <h5 class="modal-head" id="deleteSkMarryModalTitle">Hapus Surat</h5>
           <button
             type="button"
             data-bs-dismiss="modal"
@@ -23,11 +23,11 @@
         <form action="" method="POST" id="delete_letter_form" class="d-flex justify-content-center">
           @csrf
           @method("DELETE")
-                  <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
-                      <button type="submit" class="button btn-main w-100">Hapus Surat</button>
-                      <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
-                          Batal Hapus
-                      </button>
+            <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
+              <button type="submit" class="button btn-main w-100 btn-delete-modal">Hapus Surat</button>
+              <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
+                  Batal Hapus
+            </button>
           </div>
         </form>
       </div>
