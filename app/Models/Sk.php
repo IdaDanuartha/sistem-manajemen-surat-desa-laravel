@@ -12,12 +12,7 @@ class Sk extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
-    public function SkBirthLetter(): HasOne
-    {
-        return $this->hasOne(SkBirthLetter::class);
-    }
-
+    
     public function citizent(): BelongsTo
     {
         return $this->belongsTo(Citizent::class);

@@ -88,10 +88,6 @@ class SkBirthController extends Controller
                 return redirect(route('letters.sk-birth.index'))
                                 ->with('success', $this->responseMessage->response('Surat keterangan lahir', true, 'update'));
             }
-            // else if(isset($update["status"])) {
-            //     return redirect()->route('letters.sk-birth.index')->with('error', $update["message"]);
-            // }
-
             throw new Exception;
         } catch (\Exception $e) {
             return redirect()->route('letters.sk-birth.edit', $sk_birth->id)->with('error', $this->responseMessage->response('surat keterangan lahir', false, 'update'));
