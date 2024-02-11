@@ -3,10 +3,8 @@
 @section('main')
 <div class="mt-[20px] p-0 flex gap-5 lg:flex-row flex-col">
     <div class="table-wrapper p-[18px] w-full h-fit md:max-w-[300px]">
-        @if (isset(auth()->user()->authenticatable->profile_image))
-            <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt="Profile Image" class="rounded w-full edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
-        @elseif(isset(auth()->user()->authenticatable->citizent->profile_image))
-            <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->citizent->profile_image) }}" alt="Profile Image" class="rounded w-full edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
+        @if (isset(auth()->user()->profile_image))
+            <img src="{{ asset('uploads/users/' . auth()->user()->profile_image) }}" alt="Profile Image" class="rounded w-full edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
         @else
             <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="edit-profile-preview-img rounded w-full aspect-square object-cover object-center h-auto"/>
         @endif
@@ -17,7 +15,7 @@
                 <label class="text-second">Nama Lengkap</label>
                 <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" readonly />
             </div>
-            @if(auth()->user()->isAdmin())
+            @if(auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Username</label>
                     <input type="text" class="input-crud" value="{{ auth()->user()->username }}" readonly />
@@ -31,7 +29,7 @@
                 <label class="text-second">Role</label>
                 <input type="text" class="input-crud" value="{{ auth()->user()->role->label() }}" readonly />
             </div>
-            @if(!auth()->user()->isAdmin())
+            @if(auth()->user()->isVillageHead() || auth()->user()->isEnvironmentalHead() || auth()->user()->isSectionHead() || auth()->user()->isCitizent())
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">NIK</label>
                     <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" readonly />
