@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Enums\Role;
 use App\Models\Admin;
 use App\Models\Citizent;
+use App\Models\SuperAdmin;
 use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Support\Arr;
@@ -22,13 +23,13 @@ class ProfileRepository
   {    
     DB::beginTransaction();    
     try {    
-      if (Arr::has($request, 'profile_image') && Arr::get($request, 'profile_image')) {
+      if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {
         $this->uploadFile->deleteExistFile("users/" . auth()->user()->authenticatable->profile_image);
 
-        $image = Arr::get($request, 'profile_image');
+        $image = Arr::get($request, 'user.profile_image');
 
         $filename = $this->uploadFile->uploadSingleFile($image, "users");
-        $request['profile_image'] = $filename;
+        $request['user']['profile_image'] = $filename;
       }		
       if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {
         $this->uploadFile->deleteExistFile("users/signatures/" . auth()->user()->signature_image);
@@ -41,7 +42,11 @@ class ProfileRepository
       
       if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
 
-      if(auth()->user()->role === Role::ADMIN) {
+      if(auth()->user()->role === Role::SUPER_ADMIN) {
+        $admin = SuperAdmin::find(auth()->id());
+        $admin->updateOrFail(['name' => Arr::get($request, 'name')]);
+        $admin->user->updateOrFail(Arr::get($request, 'user'));
+      } else if(auth()->user()->role === Role::ADMIN) {
         $admin = Admin::find(auth()->id());
         $admin->updateOrFail(['name' => Arr::get($request, 'name')]);
         $admin->user->updateOrFail(Arr::get($request, 'user'));
