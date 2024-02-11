@@ -30,7 +30,7 @@ class ForgotPasswordController extends Controller
                 'token' => $token,
             ]);
 
-            dispatch(new SendResetPasswordLinkQueueJob($request->email, $token));
+            Mail::to($request->email)->send(new ForgotPasswordMail($token));
 
             return back()->with('success', 'We have e-mailed your password reset link!');
         } catch (\Exception $e) {

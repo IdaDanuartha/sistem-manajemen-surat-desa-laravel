@@ -33,9 +33,9 @@ return new class extends Migration
                     ->nullable()
                     ->cascadeOnUpdate()
                     ->nullOnDelete();
-            $table->smallInteger('status_by_environmental_head')->default(0);
-            $table->smallInteger('status_by_section_head')->default(0);
-            $table->smallInteger('status_by_village_head')->default(0);
+            $table->smallInteger('status_by_environmental_head')->comment(['[1: BelumDikonfirmasi, 2: Disetujui, 3: Ditolak]'])->default(0);
+            $table->smallInteger('status_by_section_head')->comment(['[1: BelumDikonfirmasi, 2: Disetujui, 3: Ditolak]'])->default(0);
+            $table->smallInteger('status_by_village_head')->comment(['[1: BelumDikonfirmasi, 2: Disetujui, 3: Ditolak]'])->default(0);
             $table->string('code');
             $table->string('reference_number');
             $table->boolean('is_published')->default(0);
