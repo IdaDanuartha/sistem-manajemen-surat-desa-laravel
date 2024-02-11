@@ -6,10 +6,8 @@
     <div class="table-wrapper relative w-full md:max-w-[300px]">
         <div class="profile-wrapper w-full">
             <label for="profile_image" class="profile-image w-full">
-                @if (isset(auth()->user()->authenticatable->profile_image))
-                    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->profile_image) }}" alt="Profile Image" class="rounded w-full brightness-50 edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
-                @elseif(isset(auth()->user()->authenticatable->citizent->profile_image))
-                    <img src="{{ asset('uploads/users/' . auth()->user()->authenticatable->citizent->profile_image) }}" alt="Profile Image" class="rounded w-full brightness-50 edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
+                @if (isset(auth()->user()->profile_image))
+                    <img src="{{ asset('uploads/users/' . auth()->user()->profile_image) }}" alt="Profile Image" class="rounded w-full brightness-50 edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
                 @else
                     <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="edit-profile-preview-img rounded w-full aspect-square object-cover object-center h-auto brightness-50"/>
                 @endif
@@ -27,7 +25,7 @@
         <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <input type="file" class="hidden edit-profile-input" name="profile_image" id="profile_image">
+            <input type="file" class="hidden edit-profile-input" name="user[profile_image]" id="profile_image">
             <div class="row">
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label for="name" class="text-second">Nama Lengkap</label>
@@ -36,7 +34,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
-                @if(auth()->user()->isAdmin())
+                @if(auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Username</label>
                         <input required type="text" name="user[username]" class="input-crud" value="{{ auth()->user()->username }}" />
@@ -61,7 +59,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
-                @if(!auth()->user()->isAdmin())
+                @if(auth()->user()->isVillageHead() || auth()->user()->isEnvironmentalHead() || auth()->user()->isSectionHead() || auth()->user()->isCitizent())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">NIK</label>
                         <input required type="text" name="national_identify_number" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" />
