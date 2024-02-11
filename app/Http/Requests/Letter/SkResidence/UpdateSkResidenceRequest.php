@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Letter\Residence;
+namespace App\Http\Requests\Letter\SkResidence;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateResidenceRequest extends FormRequest
+class UpdateSkResidenceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
