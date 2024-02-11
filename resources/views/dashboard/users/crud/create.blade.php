@@ -3,7 +3,7 @@
 @section('main')
 
     <div class="table-wrapper mt-[20px] input-teacher">
-        <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
+        <form action="{{ route('citizents.store') }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
             @csrf
             {{-- <input type="hidden" id="authenticatable_type" name="authenticatable_type" value="App\Models\Citizent"/> --}}
             <div class="col-span-12 md:col-span-6 flex flex-col">
@@ -52,6 +52,30 @@
                 <input type="date" class="input-crud" required id="birth_date" name="birth_date"
                     value="{{ old('birth_date') }}">
                 @error('birth_date')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="citizenship" class="text-second mb-1">Kewarganegaraan</label>
+                <input type="text" class="input-crud" id="citizenship" name="citizenshi"
+                    placeholder="Masukkan kewarganegaraan..." value="{{ old('citizenship') ?? "Indonesia" }}">
+                @error('citizenship')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="work" class="text-second mb-1">Pekerjaan</label>
+                <input type="text" class="input-crud" id="work" name="work"
+                    placeholder="Masukkan pekerjaan..." value="{{ old('work') }}">
+                @error('work')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="address" class="text-second mb-1">Alamat</label>
+                <input type="text" class="input-crud" id="address" name="address"
+                    placeholder="Masukkan alamat tinggal..." value="{{ old('address') }}">
+                @error('address')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -148,10 +172,10 @@
                     <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-citizent-preview-img border"
                         width="300" alt="">
                 </label>
-                <input type="file" id="profile_image" name="profile_image"
+                <input type="file" id="profile_image" name="user[profile_image]"
                     class="input-crud py-0 create-citizent-input hidden" />
                 <label for="profile_image" class="button btn-second text-center w-[300px]">Upload File</label>
-                @error('profile_image')
+                @error('user.profile_image')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

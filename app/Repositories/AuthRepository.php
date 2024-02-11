@@ -22,7 +22,17 @@ class AuthRepository
         setcookie("email", "");
         setcookie("password", "");
       }
-      return auth()->attempt(Arr::except($credentials, "remember"), Arr::only($credentials, "remember"));
+      $user = $this->user->where("email", $credentials["email"])->first();
+
+      if($user->status->value) {
+        return auth()->attempt(Arr::except($credentials, "remember"), Arr::only($credentials, "remember"));
+      } else {
+        return [
+          "status" => false,
+          "message" => "Akun anda sudah tidak aktif. Hubungi admin untuk mengaktifkan akun anda!"
+        ];
+      }
+
     } catch (\Exception $e) {
       logger($e->getMessage());
       throw $e;

@@ -7,6 +7,7 @@ use App\Enums\UserStatus;
 use App\Models\Citizent;
 use App\Models\EnvironmentalHead;
 use App\Models\SectionHead;
+use App\Models\User;
 use App\Models\VillageHead;
 use App\Utils\UploadFile;
 use Exception;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 class UserRepository
 {
   public function __construct(
+    protected readonly User $user,
     protected readonly Citizent $citizent,
     protected readonly VillageHead $villageHead,
     protected readonly EnvironmentalHead $environmentalHead,
@@ -33,6 +35,11 @@ class UserRepository
       '4' => Role::SECTION_HEAD,
       '5' => Role::CITIZENT,
     };
+  }
+
+  public function findAllAdmin(): Collection
+  {
+    return $this->user->latest()->with(['authenticatable'])->where("role", Role::ADMIN)->get();
   }
 
   public function findAll(): Collection
@@ -54,9 +61,9 @@ class UserRepository
   {
     DB::beginTransaction();
     try {  
-      if (Arr::has($request, 'profile_image') && Arr::get($request, 'profile_image')) {         
-        $filename = $this->uploadFile->uploadSingleFile($request['profile_image'], "users");
-        $request['profile_image'] = $filename;
+      if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'user.profile_image'), "users");
+        $request['user']['profile_image'] = $filename;
       }  
 
       $citizent = $this->citizent->create(Arr::except($request, ['user']));
@@ -73,7 +80,8 @@ class UserRepository
         'email' => Arr::get($request, 'user.email'),
         'password' => Arr::get($request, 'user.password'),
         'status' => Arr::has($request, 'user.status') ? UserStatus::ACTIVE : UserStatus::NONACTIVE,
-        'role' => $this->getRole(Arr::get($request, 'user.role'))
+        'role' => $this->getRole(Arr::get($request, 'user.role')),
+        'profile_image' => Arr::get($request, 'user.profile_image'),
       ]);
     } catch (\Exception $e) {  
       logger($e->getMessage());
@@ -89,13 +97,13 @@ class UserRepository
   {
     DB::beginTransaction();    
     try {              
-      if (Arr::has($request, 'profile_image') && Arr::get($request, 'profile_image')) {
+      if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {
         $this->uploadFile->deleteExistFile("users/$citizent->profile_image");
 
-        $image = Arr::get($request, 'profile_image');
+        $image = Arr::get($request, 'user.profile_image');
 
         $filename = $this->uploadFile->uploadSingleFile($image, "users");
-        $request['profile_image'] = $filename;
+        $request['user']['profile_image'] = $filename;
       }  
       
       if(Arr::get($request, 'user.status')) $request['user']['status'] = UserStatus::ACTIVE;			

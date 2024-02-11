@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -45,7 +46,9 @@ Route::prefix('auth')->group(function() {
 
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', DashboardController::class)->name("dashboard");        
-    Route::resource('users', UserController::class)->middleware('is_admin');    
+    Route::get('users', [UserController::class, 'index'])->middleware('is_admin')->name("users.index");    
+    Route::resource('citizents', UserController::class)->except('index')->middleware('is_admin');    
+    Route::resource('admins', AdminController::class)->middleware('is_admin');    
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -23,7 +23,8 @@ class LoginController extends Controller
         try {
             $login = $this->authRepository->login($request->validated());
 
-            if($login) return redirect()->route("dashboard")->with('success', 'Login success! Welcome back ' . auth()->user()->authenticatable->name);
+            if(isset($login["status"])) return back()->with('error', $login["message"]);
+            else if($login) return redirect()->route("dashboard")->with('success', 'Login success! Welcome back ' . auth()->user()->authenticatable->name);
             throw new Exception;            
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Login failed! Check your credentials and try again');

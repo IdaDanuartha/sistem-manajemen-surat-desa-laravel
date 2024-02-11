@@ -33,11 +33,14 @@ class StoreUserRequest extends FormRequest
 			'blood_group' => ['required'],			
 			'religion' => ['required'],			
 			'marital_status' => ['required'],			
-			'profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
+			'citizenship' => ['nullable'],			
+			'work' => ['nullable'],			
+			'address' => ['nullable'],			
 			'user.email' => ['required', 'email:dns', Rule::unique('users', 'email')],
 			'user.password' => ['required', 'min:6'],
 			'user.status' => ['nullable'],
-            'user.role' => 'required'
+            'user.role' => 'required',
+			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
         ];
     }
 
@@ -53,11 +56,14 @@ class StoreUserRequest extends FormRequest
             'blood_group' => 'golongan darah',
             'religion' => 'agama',
             'marital_status' => 'status pernikahan',
-            'profile_image' => 'foto profil',            
+            'citizenship' => 'kewarganegaraan',
+            'work' => 'pekerjaan',
+            'address' => 'alamat',
             'user.email' => 'email',
             'user.password' => 'password',
             'user.status' => 'status',
             'user.role' => 'role',
+            'user.profile_image' => 'foto profil',            
         ];
     }
 }

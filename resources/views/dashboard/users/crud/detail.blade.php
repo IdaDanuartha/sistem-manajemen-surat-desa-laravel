@@ -9,7 +9,7 @@
 				<input
 					type="text"
 				 	class="input-crud"
-					value="{{ $user->name }}"
+					value="{{ $citizent->name }}"
 					disabled
 				/>
 			</div>
@@ -18,7 +18,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->national_identify_number }}"
+					value="{{ $citizent->national_identify_number }}"
 					disabled
 				>
 			</div>
@@ -27,7 +27,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->family_card_number }}"
+					value="{{ $citizent->family_card_number }}"
 					disabled
 				>
 			</div>
@@ -36,7 +36,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->phone_number }}"
+					value="{{ $citizent->phone_number }}"
 					disabled
 				>
 			</div>
@@ -45,7 +45,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->birth_place }}"
+					value="{{ $citizent->birth_place }}"
 					disabled
 				>
 			</div>
@@ -54,7 +54,34 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->birth_date->format('d M Y') }}"
+					value="{{ $citizent->birth_date->format('d M Y') }}"
+					disabled
+				>
+			</div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+				<label for="birth_date" class="text-second mb-1">Kewarganegaraan</label>
+				<input
+					type="text"
+					class="input-crud"
+					value="{{ $citizent->citizenship }}"
+					disabled
+				>
+			</div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+				<label for="birth_date" class="text-second mb-1">Pekerjaan</label>
+				<input
+					type="text"
+					class="input-crud"
+					value="{{ $citizent->work }}"
+					disabled
+				>
+			</div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+				<label for="birth_date" class="text-second mb-1">Alamat</label>
+				<input
+					type="text"
+					class="input-crud"
+					value="{{ $citizent->address }}"
 					disabled
 				>
 			</div>
@@ -63,7 +90,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->gender->label() }}"
+					value="{{ $citizent->gender->label() }}"
 					disabled
 				>
 			</div>
@@ -72,7 +99,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->blood_group->label() }}"
+					value="{{ $citizent->blood_group->label() }}"
 					disabled
 				>
 			</div>
@@ -81,7 +108,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->religion->label() }}"
+					value="{{ $citizent->religion->label() }}"
 					disabled
 				>
 			</div>
@@ -90,7 +117,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->marital_status->label() }}"
+					value="{{ $citizent->marital_status->label() }}"
 					disabled
 				>
 			</div>
@@ -99,7 +126,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->user->email }}"
+					value="{{ $citizent->user->email }}"
 					disabled
 				>
 			</div>
@@ -108,22 +135,22 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $user->user->role->label() }}"
+					value="{{ $citizent->user->role->label() }}"
 					disabled
 				>
 			</div>
 			<div class="col-span-12 flex flex-col">
 				<p class="text-second mb-1">Status Akun</p>
 				<label class="switch">
-					<input type="checkbox" disabled @checked($user->user->status->value == 1 ? 'on' : '')>
+					<input type="checkbox" disabled @checked($citizent->user->status->value == 1 ? 'on' : '')>
 					<span class="slider round"></span>
 				</label>
 			</div>
 			<div class="col-span-12 flex flex-col">
 				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
 				<label for="profile_image" class="d-block mb-3">
-					@if ($user->profile_image)
-						<img src="{{ asset('uploads/users/' . $user->profile_image) }}" class="border" width="300" alt="">
+					@if ($citizent->user->profile_image)
+						<img src="{{ asset('uploads/users/' . $citizent->user->profile_image) }}" class="border" width="300" alt="">
 					@else
 						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="border" width="300" alt="">
 					@endif

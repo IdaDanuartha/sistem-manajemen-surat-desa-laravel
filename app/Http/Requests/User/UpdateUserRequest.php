@@ -23,8 +23,8 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [            
-			'name' => ['required'],
-			'national_identify_number' => ['required'],
+			'name' => ['required', Rule::unique('citizents', 'name')->ignore($this->citizent->id)],
+			'national_identify_number' => ['required', Rule::unique('citizents', 'national_identify_number')->ignore($this->citizent->id)],
 			'family_card_number' => ['required'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['required'],			
@@ -32,11 +32,14 @@ class UpdateUserRequest extends FormRequest
 			'birth_date' => ['required'],			
 			'blood_group' => ['required'],			
 			'religion' => ['required'],			
-			'marital_status' => ['required'],			
-			'profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
-			'user.email' => ['required', 'email:dns'],
+			'marital_status' => ['required'],
+            'citizenship' => ['nullable'],			
+			'work' => ['nullable'],			
+			'address' => ['nullable'],			
+			'user.email' => ['required', 'email:dns', Rule::unique('users', 'email')->ignore($this->citizent->user->id)],
 			'user.password' => ['nullable', 'min:6'],
 			'user.status' => ['nullable'],
+			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
         ];
     }
 
@@ -52,10 +55,13 @@ class UpdateUserRequest extends FormRequest
             'blood_group' => 'golongan darah',
             'religion' => 'agama',
             'marital_status' => 'status pernikahan',
-            'profile_image' => 'foto profil',
+            'citizenship' => 'kewarganegaraan',
+            'work' => 'pekerjaan',
+            'address' => 'alamat',
             'user.email' => 'email',
             'user.password' => 'password',
             'user.status' => 'status',
+            'user.profile_image' => 'foto profil',
         ];
     }
 }

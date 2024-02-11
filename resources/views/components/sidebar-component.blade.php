@@ -35,7 +35,7 @@
                 </a>
             </li>
 
-            @if (auth()->user()->isAdmin())
+            @if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                 <!-- Users -->
                 <li class="w-full">
                     <a href="{{ route('users.index') }}" class="side-link  {{ Request::is('users*') ? 'active' : '' }}">
@@ -75,7 +75,7 @@
             </li>
             @endif
 
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
             <!-- Letter History -->
             <li class="w-full">
                 <a href="{{ route('histories.index') }}" class="side-link  {{ Request::is('histories*') ? 'active' : '' }}">
