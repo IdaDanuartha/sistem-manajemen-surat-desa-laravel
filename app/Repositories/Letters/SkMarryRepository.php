@@ -11,7 +11,6 @@ use App\Models\Letter;
 use App\Models\Sk;
 use App\Models\SkMarryLetter;
 use App\Models\User;
-use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,7 +25,6 @@ class SkMarryRepository
     protected readonly Sk $sk,    
     protected readonly SkMarryLetter $letter,    
     protected readonly User $user,
-    protected readonly UploadFile $uploadFile
   ) {}
 
   public function findAll(): Collection

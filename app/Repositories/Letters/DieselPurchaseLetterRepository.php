@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SkMarryRepository
+class DieselPurchaseLetterRepository
 {
   public function __construct(
     protected readonly Sk $sk,    

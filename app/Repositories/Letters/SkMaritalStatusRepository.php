@@ -7,11 +7,9 @@ use App\Mail\SendLetterToCitizent;
 use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
-use App\Models\Letter;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
 use App\Models\User;
-use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,7 +24,6 @@ class SkMaritalStatusRepository
     protected readonly Sk $sk,    
     protected readonly SkMaritalStatusLetter $letter,    
     protected readonly User $user,
-    protected readonly UploadFile $uploadFile
   ) {}
 
   public function findAll(): Collection

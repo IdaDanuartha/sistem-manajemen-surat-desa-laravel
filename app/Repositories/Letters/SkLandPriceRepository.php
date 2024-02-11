@@ -7,11 +7,9 @@ use App\Mail\SendLetterToCitizent;
 use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
-use App\Models\Letter;
 use App\Models\Sk;
-use App\Models\SkMarryLetter;
+use App\Models\SkLandPriceLetter;
 use App\Models\User;
-use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,13 +18,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SkMarryRepository
+class SkLandPriceRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkMarryLetter $letter,    
+    protected readonly SkLandPriceLetter $letter,    
     protected readonly User $user,
-    protected readonly UploadFile $uploadFile
   ) {}
 
   public function findAll(): Collection
@@ -91,7 +88,7 @@ class SkMarryRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkMarryLetter $letter): SkMarryLetter
+  public function findById(SkLandPriceLetter $letter): SkLandPriceLetter
   {
     return $this->letter
                 ->where('id', $letter->id)
@@ -107,7 +104,9 @@ class SkMarryRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
+      
+      $request["sk"]["sk_id"] = $sk_letter->id;
+      $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
@@ -125,7 +124,7 @@ class SkMarryRepository
     return $sk_letter;
   }
 
-  public function update($request, SkMarryLetter $letter): bool|array|Exception
+  public function update($request, SkLandPriceLetter $letter): bool|array|Exception
   {
     DB::beginTransaction();    
 
@@ -138,7 +137,7 @@ class SkMarryRepository
           }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
-        $letter->updateOrFail(["status" => Arr::get($request, "status")]);
+        $letter->updateOrFail(Arr::except($request, "sk"));
 
         DB::commit();
         return true;
@@ -150,7 +149,7 @@ class SkMarryRepository
     }
   }
 
-  public function confirmationLetter(SkMarryLetter $letter, $status): bool|Exception
+  public function confirmationLetter(SkLandPriceLetter $letter, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
@@ -202,7 +201,7 @@ class SkMarryRepository
     }
   }
 
-  public function delete(SkMarryLetter $letter): bool|Array|Exception
+  public function delete(SkLandPriceLetter $letter): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           

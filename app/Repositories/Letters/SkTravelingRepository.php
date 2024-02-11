@@ -9,7 +9,7 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Letter;
 use App\Models\Sk;
-use App\Models\SkMarryLetter;
+use App\Models\SkTravelingLetter;
 use App\Models\User;
 use App\Utils\UploadFile;
 use Exception;
@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SkMarryRepository
+class SkTravelingRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkMarryLetter $letter,    
+    protected readonly SkTravelingLetter $letter,    
     protected readonly User $user,
     protected readonly UploadFile $uploadFile
   ) {}
@@ -91,7 +91,7 @@ class SkMarryRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkMarryLetter $letter): SkMarryLetter
+  public function findById(SkTravelingLetter $letter): SkTravelingLetter
   {
     return $this->letter
                 ->where('id', $letter->id)
@@ -107,12 +107,11 @@ class SkMarryRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
+      $this->letter->create(["sk_id" => $sk_letter->id]);
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));        
       }
       
     } catch (\Exception $e) {  
@@ -125,7 +124,7 @@ class SkMarryRepository
     return $sk_letter;
   }
 
-  public function update($request, SkMarryLetter $letter): bool|array|Exception
+  public function update($request, SkTravelingLetter $letter): bool|array|Exception
   {
     DB::beginTransaction();    
 
@@ -137,8 +136,7 @@ class SkMarryRepository
             $request["sk"]["is_published"] = true;
           }
 
-        $letter->sk->updateOrFail(Arr::get($request, "sk"));
-        $letter->updateOrFail(["status" => Arr::get($request, "status")]);
+        $letter->sk->updateOrFail(Arr::get($request, "sk"));        
 
         DB::commit();
         return true;
@@ -150,7 +148,7 @@ class SkMarryRepository
     }
   }
 
-  public function confirmationLetter(SkMarryLetter $letter, $status): bool|Exception
+  public function confirmationLetter(SkTravelingLetter $letter, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
@@ -202,7 +200,7 @@ class SkMarryRepository
     }
   }
 
-  public function delete(SkMarryLetter $letter): bool|Array|Exception
+  public function delete(SkTravelingLetter $letter): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           
