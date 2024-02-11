@@ -1,9 +1,9 @@
-{{-- Confirmation Letter Modal --}}
-<div class="modal fade" id="confirmationLetterModal" tabindex="-1" aria-hidden="true">
+{{-- Reject Letter Modal --}}
+<div class="modal fade" id="rejectLetterModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-head" id="confirmationLetterModalTitle">Konfirmasi Surat</h5>
+        <h5 class="modal-head" id="rejectLetterModalTitle">Konfirmasi Surat</h5>
         <button
           type="button"
           data-bs-dismiss="modal"
@@ -15,19 +15,19 @@
       </div>
       <div class="modal-body">
         <p>
-        Konfirmasi Menyetujui Surat: Apakah Anda yakin ingin menyetujui
+        Konfirmasi Menolak Surat: Apakah Anda yakin ingin menolak
         surat ini? Tindakan ini tidak dapat dibatalkan dan konfirmasi 
         anda akan langsung dikirimkan.
         </p>
       </div>
-      <form action="{{ route('letters.approve', $get_letter->id) }}" method="POST" class="d-flex justify-content-center" enctype="multipart/form-data">
+      <form action="{{ route('letters.sk-birth.reject', $get_letter->id) }}" method="POST" class="d-flex justify-content-center" enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <input type="hidden" name="signature_image" class="create-tte-input" id="signature_image_real">
         <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
-            <button type="submit" class="button btn-main w-100">Setujui Surat</button>
+            <button type="submit" class="button btn-danger w-100">Tolak Surat</button>
             <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
-                Batal Setujui
+                Batal Tolak
             </button>
         </div>
       </form>

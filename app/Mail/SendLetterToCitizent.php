@@ -16,13 +16,15 @@ class SendLetterToCitizent extends Mailable
 
     protected User $user;
     protected $letter_code;
+    protected $status;
     /**
      * Create a new message instance.
      */
-    public function __construct(User $user, $letter_code)
+    public function __construct(User $user, $letter_code, $status)
     {
         $this->user = $user;
         $this->letter_code = $letter_code;
+        $this->status = $status;
     }
 
     /**
@@ -49,6 +51,7 @@ class SendLetterToCitizent extends Mailable
             with: [
                 'name' => $this->user->authenticatable->name,
                 'code' => $this->letter_code,
+                'status' => $this->status
             ],
         );
     }

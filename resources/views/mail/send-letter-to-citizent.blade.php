@@ -1,1 +1,1 @@
-Halo pak/bu {{ $name }}, surat dengan kode #{{ $code }} sudah disetujui oleh Kepala Kelurahan, Kepala Seksi dan Kepala Lingkungan
+Halo pak/bu {{ $name }}, surat dengan kode #{{ $code }} telah {{ $status }}

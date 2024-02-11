@@ -81,8 +81,10 @@ Route::middleware(['auth'])->group(function() {
 
     // Letters
     Route::resource("letters/sk-birth", SkBirthController::class, ['as' => 'letters']);
-    Route::get("letters/sk-birth/{letter}/preview", [SkBirthController::class, 'preview'])->name('letters.preview');
-    Route::put("letters/sk-birth/{letter}/approve", [SkBirthController::class, 'approveLetter'])->name('letters.approve');
+    Route::get("letters/sk-birth/{sk_birth}/preview", [SkBirthController::class, 'preview'])->name('letters.sk-birth.preview');
+    Route::get("letters/sk-birth/{sk_birth}/download/{type?}", [SkBirthController::class, 'download'])->name('letters.sk-birth.download');
+    Route::put("letters/sk-birth/{sk_birth}/approve", [SkBirthController::class, 'approveLetter'])->name('letters.sk-birth.approve');
+    Route::put("letters/sk-birth/{sk_birth}/reject", [SkBirthController::class, 'rejectLetter'])->name('letters.sk-birth.reject');
 
     Route::resource("letters/sk-marry", SkMarryController::class, ['as' => 'letters']);
     Route::resource("letters/sk-marital-status", SkMaritalStatusController::class, ['as' => 'letters']);

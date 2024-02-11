@@ -9,7 +9,7 @@
 			<h4 class="text-3xl text-white font-semibold max-w-[450px]">
 				{{ auth()->user()->isCitizent() ? "Segera kirimkan surat-surat anda kepada yang bersangkutan" : "Segera cek surat-surat yang dikirimkan warga" }}
 			</h4>
-			<a href="{{ route('letters.index') }}" class="text-white btn-second rounded-full button flex gap-2 items-center">
+			<a href="{{ route('letters.sk-birth.index') }}" class="text-white btn-second rounded-full button flex gap-2 items-center">
 				Kelola Surat
 				<svg width="10" class="duration-200" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_5123_1295)">
