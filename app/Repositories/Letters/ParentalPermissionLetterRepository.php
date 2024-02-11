@@ -7,11 +7,9 @@ use App\Mail\SendLetterToCitizent;
 use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
-use App\Models\Letter;
+use App\Models\ParentalPermissionLetter;
 use App\Models\Sk;
-use App\Models\SkMarryLetter;
 use App\Models\User;
-use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,9 +22,8 @@ class SkMarryRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkMarryLetter $letter,    
+    protected readonly ParentalPermissionLetter $letter,    
     protected readonly User $user,
-    protected readonly UploadFile $uploadFile
   ) {}
 
   public function findAll(): Collection
@@ -91,10 +88,10 @@ class SkMarryRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkMarryLetter $letter): SkMarryLetter
+  public function findById(ParentalPermissionLetter $parentalPermission): ParentalPermissionLetter
   {
     return $this->letter
-                ->where('id', $letter->id)
+                ->where('id', $parentalPermission->id)
                 ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
@@ -107,12 +104,14 @@ class SkMarryRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
+
+      $request["sk"]["sk_id"] = $sk_letter->id;
+      $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $parentalPermission->code));
       }
       
     } catch (\Exception $e) {  
@@ -125,20 +124,20 @@ class SkMarryRepository
     return $sk_letter;
   }
 
-  public function update($request, SkMarryLetter $letter): bool|array|Exception
+  public function update($request, ParentalPermissionLetter $parentalPermission): bool|array|Exception
   {
     DB::beginTransaction();    
 
     try {
         if(isset($request["sk"]["is_published"])) {
             $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $parentalPermission->sk->code));
 
             $request["sk"]["is_published"] = true;
           }
 
-        $letter->sk->updateOrFail(Arr::get($request, "sk"));
-        $letter->updateOrFail(["status" => Arr::get($request, "status")]);
+        $parentalPermission->sk->updateOrFail(Arr::get($request, "sk"));
+        $parentalPermission->updateOrFail(Arr::except($request, "sk"));
 
         DB::commit();
         return true;
@@ -150,11 +149,11 @@ class SkMarryRepository
     }
   }
 
-  public function confirmationLetter(SkMarryLetter $letter, $status): bool|Exception
+  public function confirmationLetter(ParentalPermissionLetter $parentalPermission, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
-      $letter = $this->findById($letter);
+      $letter = $this->findById($parentalPermission);
 
       if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $letter->sk->updateOrFail([
@@ -202,12 +201,12 @@ class SkMarryRepository
     }
   }
 
-  public function delete(SkMarryLetter $letter): bool|Array|Exception
+  public function delete(ParentalPermissionLetter $parentalPermission): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           
-      if(!$letter->status_by_environmental_head) {    
-        $delete_letter = $letter->sk->deleteOrFail();
+      if(!$parentalPermission->status_by_environmental_head) {    
+        $delete_letter = $parentalPermission->sk->deleteOrFail();
         
         DB::commit();
         return $delete_letter;
