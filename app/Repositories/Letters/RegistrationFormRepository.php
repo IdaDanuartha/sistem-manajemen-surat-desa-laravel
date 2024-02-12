@@ -112,7 +112,6 @@ class RegistrationFormRepository
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
       
     } catch (\Exception $e) {  

@@ -105,7 +105,7 @@ class SktuRepository
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
     
-      $request["sk"]["sk_id"] = $sk_letter->id;
+      $request["sk_id"] = $sk_letter->id;
       $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {

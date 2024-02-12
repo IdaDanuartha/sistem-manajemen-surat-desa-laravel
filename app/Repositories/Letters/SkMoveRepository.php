@@ -107,7 +107,7 @@ class SkMoveRepository
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       
-      $request["sk"]["sk_id"] = $sk_letter->id;
+      $request["sk_id"] = $sk_letter->id;
       $sk_move = $this->letter->create(Arr::except($request, "sk"));
 
       foreach(Arr::get($request, "sk_move_family") as $item) {

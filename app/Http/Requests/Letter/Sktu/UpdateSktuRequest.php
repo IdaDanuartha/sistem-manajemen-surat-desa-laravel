@@ -24,7 +24,6 @@ class UpdateSktuRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
-            "status" => "required",
             "business_name" => "required",
         ];
     }

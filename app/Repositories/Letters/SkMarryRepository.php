@@ -105,12 +105,13 @@ class SkMarryRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
+      
+      $request["sk_id"] = $sk_letter->id;
+      $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
       
     } catch (\Exception $e) {  

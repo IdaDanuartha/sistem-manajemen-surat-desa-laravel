@@ -104,12 +104,9 @@ class SkMaritalStatusRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create([
-        "sk_id" => $sk_letter->id, 
-        "citizent_id" => Arr::get($request, "citizent_id"),
-        "status" => Arr::get($request, "status"),
-        "date" => Arr::get($request, "date"),
-      ]);
+      
+      $request["sk_id"] = $sk_letter->id;
+      $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
