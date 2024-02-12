@@ -3,7 +3,7 @@
 @section('main')
 
 	<div class="table-wrapper mt-[20px] input-teacher">
-		<form action="{{ route('letters.sk-marry.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
+		<form action="{{ route('letters.parental-permission.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
 			@csrf
 			<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			<div class="col-span-12 md:col-span-6 flex flex-col">
@@ -15,12 +15,34 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="status" class="text-second mb-2">Status</label>
-                <select name="status" id="status" class="status-select2">
-					<option value="1">Belum Menikah</option>
-					<option value="2">Kawin</option>
+                <label for="citizent_id" class="text-second mb-2">Nama Keluarga</label>
+                <select name="citizent_id" id="citizent_id" class="citizent-select2">
+					<option value="">Cari Nama Keluarga</option>
+					@foreach ($citizents as $item)
+						<option value="{{ $item->id }}">{{ $item->name }}</option>
+					@endforeach
 				</select>
-                @error('status')
+                @error('citizent_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="relationship_status" class="text-second mb-2">Status Hubungan</label>
+                <select name="relationship_status" id="relationship_status" class="relationship-status-select2">
+					<option value="">Pilih Status</option>
+					@foreach (\App\Enums\RelationshipStatus::labels() as $key => $item)
+						<option value="{{ $key+1 }}">{{ $item }}</option>
+					@endforeach
+				</select>
+                @error('relationship_status')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="description" class="text-second mb-1">Tujuan Izin</label>
+                <input type="text" class="input-crud" name="description" id="description" value="{{ old('description') }}"
+                    placeholder="Masukkan Tujuan Izin..." required />
+                @error('description')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -34,7 +56,7 @@
 			<div class="flex col-span-12 justify-between mt-2">
 				<div class="flex items-center gap-3">
 					<button class="button btn-main" type="submit">Tambah Surat</button>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Batal Tambah</a>
+					<a href="{{ route('letters.parental-permission.index') }}" class="button btn-second text-white" type="reset">Batal Tambah</a>
 				</div>
 			</div>
 		</form>
@@ -43,6 +65,7 @@
 
 @push('js')
 	<script>
-		let status = $(".status-select2").select2()
+		let citizent = $(".citizent-select2").select2()
+		let relationship_status = $(".relationship-status-select2").select2()
 	</script>
 @endpush

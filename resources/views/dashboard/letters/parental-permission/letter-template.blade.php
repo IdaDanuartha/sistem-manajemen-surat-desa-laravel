@@ -364,56 +364,56 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Umur</label>
                 <div>:</div>
-                <span>50 Tahun</span>
+                <span>{{ $letter->sk->citizent->birth_date->diffInYears(now()->endOfYear()) }} Tahun</span>
             </div>
             <div class="input-group three">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>Wiraswasta</span>
+                <span>{{ $letter->sk->citizent->work }}</span>
             </div>
             <div class="input-group four">
                 <label>No. HP</label>
                 <div>:</div>
-                <span>087762930716</span>
+                <span>{{ $letter->sk->citizent->phone_number }}</span>
             </div>
             <div class="input-group six">
                 <label>Nama</label>
                 <div>:</div>
-                <span>I NENGAH PASEK SUWENDRA</span>
+                <span>{{ $letter->citizent->name }}</span>
             </div>
             <div class="input-group seven">
                 <label>Umur</label>
                 <div>:</div>
-                <span>22 Tahun</span>
+                <span>{{ $letter->citizent->birth_date->diffInYears(now()->endOfYear()) }} Tahun</span>
             </div>
             <div class="input-group eight">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>Wiraswasta</span>
+                <span>{{ $letter->citizent->work }}</span>
             </div>
             <div class="input-group nine">
                 <label>Status</label>
                 <div>:</div>
-                <span>Belum Kawin</span>
+                <span>{{ $letter->citizent->marital_status->label() }}</span>
             </div>
             <div class="input-group ten">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->citizent->address }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->sk->citizent->address }}</span>
             </div>
-            <p class="description-caption">Selaku Orang Tua/Wali/Suami/Istri dari yang dibawah ini :</p>
+            <p class="description-caption">Selaku {{ $letter->relationship_status->label() }} dari yang dibawah ini :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan Jasri Kaler No: 489 / JSK / XII/2021, tanggal 22 Desember 2021 menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada Anaknya Atas Nama : I PUTU JULIANA untuk bekerja di luar negeri (Kuwait) selama Kontrak Kerja 2 tahun melalui <strong>PPPMI/Agen PT.DUTA PUTRA KAHURIPAN.</strong></p>
+                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan Jasri Kaler No: 489 / JSK / XII/2021, tanggal 22 Desember 2021 menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada @if($letter->relationship_status->value === 1 || $letter->relationship_status->value === 2) Anaknya @elseif($letter->relationship_status->value === 3) Istrinya @else Suaminya @endif  Atas Nama : {{ $letter->citizent->name }} {{ $letter->description }}
                 <p class="paragraph-two">Demikian surat Pernyataan ini, saya buat dengan penuh tanggung jawab dan benar.</p>
             </div>
         </div>
@@ -422,26 +422,32 @@
                 {{-- <p>Find out</p> --}}
                 <p> Calon PMI memohon Ijin</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p style="text-transform: uppercase;">I PUTU JULIANA</p>
+                <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
             </div>
             <div class="card-ttd">
                 <p>Mengetahui</p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif(isset($letter->sk->villageHead))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
                 {{-- <p>Satpam Code.</p> --}}
             </div>
             <div class="card-ttd">
-                <p>Denpasar, 14 January 2024</p>
+                <p>Denpasar, {{ $letter->sk->created_at->format("d M Y") }}</p>
                 <p>Yang Membuat Pernyataan /yang
                     memberikan Ijin</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p style="text-transform: uppercase;">I KETUT KERTI</p>
+                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
             </div>
         </div>
     </div>

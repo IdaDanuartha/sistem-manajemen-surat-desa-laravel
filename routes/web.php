@@ -154,10 +154,10 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-die/{sk_die}/reject", [SkDieController::class, 'rejectLetter'])->name('letters.sk-marital-status.reject');
 
     Route::resource("letters/parental-permission", ParentalPermissionLetterController::class, ['as' => 'letters']);
-    Route::get("letters/parental-permission/{sk_parental_permission}/preview", [ParentalPermissionLetterController::class, 'preview'])->name('letters.parental-permission.preview');
-    Route::get("letters/parental-permission/{sk_parental_permission}/download/{type?}", [ParentalPermissionLetterController::class, 'download'])->name('letters.parental-permission.download');
-    Route::put("letters/parental-permission/{sk_parental_permission}/approve", [ParentalPermissionLetterController::class, 'approveLetter'])->name('letters.parental-permission.approve');
-    Route::put("letters/parental-permission/{sk_parental_permission}/reject", [ParentalPermissionLetterController::class, 'rejectLetter'])->name('letters.parental-permission.reject');
+    Route::get("letters/parental-permission/{parental_permission}/preview", [ParentalPermissionLetterController::class, 'preview'])->name('letters.parental-permission.preview');
+    Route::get("letters/parental-permission/{parental_permission}/download/{type?}", [ParentalPermissionLetterController::class, 'download'])->name('letters.parental-permission.download');
+    Route::put("letters/parental-permission/{parental_permission}/approve", [ParentalPermissionLetterController::class, 'approveLetter'])->name('letters.parental-permission.approve');
+    Route::put("letters/parental-permission/{parental_permission}/reject", [ParentalPermissionLetterController::class, 'rejectLetter'])->name('letters.parental-permission.reject');
 
     Route::resource("letters/sk-grant", SkGrantController::class, ['as' => 'letters']);
     Route::get("letters/sk-grant/{sk_grant}/preview", [SkGrantController::class, 'preview'])->name('letters.sk-grant.preview');
