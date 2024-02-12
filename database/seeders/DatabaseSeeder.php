@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
             "address" => "Ubung Kaja"
         ])->user()->create([
             'username' => '5007456564456',
-            'email' => 'sampleakun87@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'widyarusmananda15@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => '123456',
             'role' => Role::CITIZENT,
         ]);
