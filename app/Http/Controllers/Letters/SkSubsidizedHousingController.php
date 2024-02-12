@@ -130,7 +130,7 @@ class SkSubsidizedHousingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-subsidized-housing.letter-template', ['letter' => $skSubsidizedHousing, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Subsidi Rumah " . $skSubsidizedHousing->sk->citizent->name . ".pdf");
+        return $generated->stream("SK Rumah Bersubsidi " . $skSubsidizedHousing->sk->citizent->name . ".pdf");
     }
     
     public function download(SkSubsidizedHousingLetter $skSubsidizedHousing, $type = "pdf")
@@ -138,7 +138,7 @@ class SkSubsidizedHousingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-subsidized-housing.letter-template', ['letter' => $skSubsidizedHousing]);        
 
-        return $generated->download("SK Subsidi Rumah " . $skSubsidizedHousing->sk->citizent->name . ".$type");
+        return $generated->download("SK Rumah Bersubsidi " . $skSubsidizedHousing->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkSubsidizedHousingLetter $skSubsidizedHousing)
