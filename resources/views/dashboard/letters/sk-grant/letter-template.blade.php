@@ -7,19 +7,9 @@
     <title>Document</title>
 
     <style>
-        .image-full {
-            width: 100%;
+        .title {
             position: absolute;
             top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
-        }
-
-        .title {
-            width: 55%;
-            text-align: center;
-            position: absolute;
-            top: 24%;
             left: 50%;
             transform: translate(-50%);
             text-transform: uppercase;
@@ -27,23 +17,15 @@
             border-bottom: 2px solid black;
         }
 
-        .subtitle {
-            position: absolute;
-            top: 28.5%;
-            left: 50%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
         .description {
             position: absolute;
-            top: 31.5%;
+            top: 6%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
             font-size: 0.913rem;
             line-height: 150%;
-            text-indent: 42px;
+            text-indent: 15px;
         }
 
         .input-group label {
@@ -68,185 +50,505 @@
         }
 
         .input-group.one label {
-            top: 40%;
+            top: 11%;
             left: 17.5%;
         }
 
         .input-group.one div {
-            top: 40%;
+            top: 11%;
             left: 28%;
         }
 
         .input-group.one span {
-            top: 40%;
+            top: 11%;
             left: 61.3%;
             text-transform: uppercase;
             font-weight: bold;
         }
 
         .input-group.two label {
-            top: 43%;
+            top: 13.5%;
             left: 17.5%;
         }
 
         .input-group.two div {
-            top: 43%;
+            top: 13.5%;
             left: 28%;
         }
 
         .input-group.two span {
-            top: 43%;
+            top: 13.5%;
             left: 61.3%;
         }
 
         .input-group.three label {
-            top: 46%;
+            top: 16%;
             left: 17.5%;
         }
 
         .input-group.three div {
-            top: 46%;
+            top: 16%;
             left: 28%;
         }
 
         .input-group.three span {
-            top: 46%;
+            top: 16%;
             left: 61.3%;
         }
 
         .input-group.four label {
-            top: 49%;
+            top: 22.5%;
             left: 17.5%;
         }
 
         .input-group.four div {
-            top: 49%;
+            top: 22.5%;
             left: 28%;
         }
 
         .input-group.four span {
-            top: 49%;
+            top: 22.5%;
             left: 61.3%;
         }
 
         .input-group.six label {
-            top: 52%;
+            top: 25%;
             left: 17.5%;
         }
 
         .input-group.six div {
-            top: 52%;
+            top: 25%;
             left: 28%;
         }
 
         .input-group.six span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 55%;
+            top: 25%;
             left: 61.3%;
         }
 
         .input-group.seven label {
-            top: 58%;
+            top: 31%;
             left: 17.5%;
         }
 
         .input-group.seven div {
-            top: 58%;
+            top: 31%;
             left: 28%;
         }
 
         .input-group.seven span {
-            top: 58%;
+            top: 31%;
             left: 61.3%;
         }
 
         .input-group.eight label {
-            top: 61%;
+            top: 33.5%;
             left: 17.5%;
         }
 
         .input-group.eight div {
-            top: 61%;
+            top: 33.5%;
             left: 28%;
         }
 
         .input-group.eight span {
-            top: 61%;
+            top: 33.5%;
+            left: 61.3%;
+        }
+
+        .input-group.nine label {
+            top: 36%;
+            left: 17.5%;
+        }
+
+        .input-group.nine div {
+            top: 36%;
+            left: 28%;
+        }
+
+        .input-group.nine span {
+            top: 36%;
+            left: 61.3%;
+        }
+
+        .input-group.ten label {
+            top: 40%;
+            left: 17.5%;
+        }
+
+        .input-group.ten div {
+            top: 40%;
+            left: 28%;
+        }
+
+        .input-group.ten span {
+            top: 40%;
+            left: 61.3%;
+        }
+
+        .input-group.eleven label {
+            top: 42.5%;
+            left: 17.5%;
+        }
+
+        .input-group.eleven div {
+            top: 42.5%;
+            left: 28%;
+        }
+
+        .input-group.eleven span {
+            top: 42.5%;
+            left: 61.3%;
+        }
+
+        .input-group.twelve label {
+            top: 45%;
+            left: 17.5%;
+        }
+
+        .input-group.twelve div {
+            top: 45%;
+            left: 28%;
+        }
+
+        .input-group.twelve span {
+            top: 45%;
+            left: 61.3%;
+        }
+
+        .input-group.thirteen label {
+            top: 47.5%;
+            left: 17.5%;
+        }
+
+        .input-group.thirteen div {
+            top: 47.5%;
+            left: 28%;
+        }
+
+        .input-group.thirteen span {
+            top: 47.5%;
+            left: 61.3%;
+        }
+
+        .input-group.fourteen label {
+            top: 50%;
+            left: 17.5%;
+        }
+
+        .input-group.fourteen div {
+            top: 50%;
+            left: 28%;
+        }
+
+        .input-group.fourteen span {
+            top: 50%;
+            left: 61.3%;
+        }
+
+        .input-group.fifteen label {
+            top: 52.5%;
+            left: 17.5%;
+        }
+
+        .input-group.fifteen div {
+            top: 52.5%;
+            left: 28%;
+        }
+
+        .input-group.fifteen span {
+            top: 52.5%;
+            left: 61.3%;
+        }
+
+        .input-group.sixteen label {
+            top: 55%;
+            left: 17.5%;
+        }
+
+        .input-group.sixteen div {
+            top: 55%;
+            left: 28%;
+        }
+
+        .input-group.sixteen span {
+            top: 55%;
+            left: 61.3%;
+        }
+
+        .input-group.seventeen label {
+            top: 57.5%;
+            left: 17.5%;
+        }
+
+        .input-group.seventeen div {
+            top: 57.5%;
+            left: 28%;
+        }
+
+        .input-group.seventeen span {
+            top: 57.5%;
+            left: 61.3%;
+        }
+
+        .input-group.eightteen label {
+            top: 63%;
+            left: 17.5%;
+        }
+
+        .input-group.eightteen div {
+            top: 63%;
+            left: 28%;
+        }
+
+        .input-group.eightteen span {
+            top: 63%;
+            left: 61.3%;
+        }
+
+        .input-group.nineteen label {
+            top: 65.5%;
+            left: 17.5%;
+        }
+
+        .input-group.nineteen div {
+            top: 65.5%;
+            left: 28%;
+        }
+
+        .input-group.nineteen span {
+            top: 65.5%;
+            left: 61.3%;
+        }
+
+        .input-group.twenty label {
+            top: 68%;
+            left: 17.5%;
+        }
+
+        .input-group.twenty div {
+            top: 68%;
+            left: 28%;
+        }
+
+        .input-group.twenty span {
+            top: 68%;
+            left: 61.3%;
+        }
+
+        .input-group.twentyone label {
+            top: 70.5%;
+            left: 17.5%;
+        }
+
+        .input-group.twentyone div {
+            top: 70.5%;
+            left: 28%;
+        }
+
+        .input-group.twentyone span {
+            top: 70.5%;
+            left: 61.3%;
+        }
+
+        .input-group.twentytwo label {
+            top: 73%;
+            left: 17.5%;
+        }
+
+        .input-group.twentytwo div {
+            top: 73%;
+            left: 28%;
+        }
+
+        .input-group.twentytwo span {
+            top: 73%;
+            left: 61.3%;
+        }
+
+        .input-group.twentythree label {
+            top: 76.5%;
+            left: 17.5%;
+        }
+
+        .input-group.twentythree div {
+            top: 76.5%;
+            left: 28%;
+        }
+
+        .input-group.twentythree span {
+            top: 76.5%;
             left: 61.3%;
         }
 
         .input-group.five label {
-            top: 64%;
+            top: 18.5%;
             left: 17.5%;
         }
 
         .input-group.five div {
-            top: 64%;
+            top: 18.5%;
             left: 28%;
         }
 
         .input-group.five span {
-            top: 64%;
+            top: 18.5%;
             left: 61.3%;
         }
 
-        .card-ttd p:first-child {
-            text-align: center;
+        .card-ttd:first-child p:first-child {
             font-size: 0.913rem;
-            width: 40%;
+            width: 26%;
             position: absolute;
             bottom: 11.7%;
-            left: 80%;
+            left: 18%;
             transform: translate(-50%);
+            text-align: center;
         }
 
-        .card-ttd p:nth-child(2) {
-            text-align: center;
+        .card-ttd:first-child p:nth-child(2) {
             font-size: 0.913rem;
-            width: 40%;
+            width: 26%;
+            position: absolute;
+            bottom: 9.8%;
+            left: 18%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:first-child .card-canvas {
+            width: 26%;
+            height: 70px;
+            position: absolute;
+            bottom: 3.7%;
+            left: 18%;
+            transform: translate(-50%);
+            text-align: center;
+            border-bottom: 1px dashed black;
+        }
+
+        .card-ttd:first-child p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 0.3%;
+            left: 18%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) p:first-child {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 11.7%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) p:nth-child(2) {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 9.8%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) .card-canvas {
+            width: 26%;
+            height: 70px;
+            position: absolute;
+            bottom: 3.7%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+            border-bottom: 1px dashed black;
+        }
+
+        .card-ttd:nth-child(2) p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 0.3%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        /* .card-ttd:nth-child(2) span.other {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: -1%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        } */
+
+        .card-ttd:last-child p:first-child {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 13.7%;
+            left: 80%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:last-child p:nth-child(2) {
+            font-size: 0.913rem;
+            width: 26%;
             position: absolute;
             bottom: 9.8%;
             left: 80%;
             transform: translate(-50%);
-        }
-
-        .card-ttd p.other {
             text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.9%;
-            left: 80%;
-            transform: translate(-50%);
         }
 
-        .card-ttd .card-canvas {
-            width: 30%;
+        .card-ttd:last-child .card-canvas {
+            width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 1%;
+            bottom: 3.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
         }
 
+        .card-ttd:last-child p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 0.3%;
+            left: 80%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .description-caption {
+            position: relative;
+            top: 27%;
+            left: 56.5%;
+            width: 100%;
+            transform: translate(-50%);
+            font-size: 0.913rem;
+        }
+
+        .description-caption-two {
+            position: relative;
+            top: 56%;
+            left: 56.5%;
+            width: 100%;
+            transform: translate(-50%);
+            font-size: 0.913rem;
+        }
+
         .description-other {
             position: relative;
-            top: 68%;
+            top: 70%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -268,75 +570,154 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan {{ $letter->status === 1 ? "Belum Menikah" : "Sudah Menikah" }}</h3>
+        <h3 class="title">Surat Keterangan Hibah</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
+            <p class="description">Yang bertanda tangan di bawah ini:</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->name }}</span>
+                <span>Putu Aditya Prayatna</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                <span>Jembrana, 06-09-1965</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->gender->label() }}</span>
+                <span>Perempuan</span>
             </div>
             <div class="input-group four">
-                <label>Agama</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->religion->label() }}</span>
-            </div>
-            <div class="input-group six">
-                <label>Kewarganegaraan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->citizenship }}</span>
-            </div>
-            <div class="input-group nine">
-                <label>Status</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
-            </div>
-            <div class="input-group seven">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->work }}</span>
+                <span>Pegawai Negeri Sipil (PNS)</span>
+            </div>
+            <div class="input-group six">
+                <label>No.KTP</label>
+                <div>:</div>
+                <span>5107041801190004</span>
+            </div>
+            <div class="input-group seven">
+                <label>No. polisi</label>
+                <div>:</div>
+                <span>-</span>
             </div>
             <div class="input-group eight">
-                <label>No KK/ KTP</label>
+                <label>Nama Pemilik</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->family_card_number }}</span>
+                <span>-</span>
+            </div>
+            <div class="input-group nine">
+                <label>Alamat</label>
+                <div>:</div>
+                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+            </div>
+            <div class="input-group ten">
+                <label>Merk/Type</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group eleven">
+                <label>Jenis</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group twelve">
+                <label>Model</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group thirteen">
+                <label>Tahun Pembuatan</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group fourteen">
+                <label>Isi Selinder</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group fifteen">
+                <label>No. Rangka</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group sixteen">
+                <label>No. Mesin</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group seventeen">
+                <label>No. BPKB</label>
+                <div>:</div>
+                <span>-</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->address }}</span>
+                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
             </div>
+            <div class="input-group eightteen">
+                <label>Nama</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group nineteen">
+                <label>Tampat Tanggal Lahir</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group twenty">
+                <label>Jenis Kelamin</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group twentyone">
+                <label>Pekerjaan</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group twentytwo">
+                <label>Alamat</label>
+                <div>:</div>
+                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+            </div>
+            <div class="input-group twentythree">
+                <label>No. KTP</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <p class="description-caption">Dengan ini saya mengibahkan kendaraan dengan data sebagai berikut :</p>
+            <p class="description-caption-two">Dihibahkan kepada Anak Saya dengan Identitas sebagai berikut :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan Desa, No: {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, Sepanjang pengetahuan kami bahwa memang benar orang tersebut di atas <strong>{{ $letter->status === 1 ? "Belum Menikah" : "Kawin" }} Sebelum Tanggal {{ $letter->sk->created_at->format("d M Y") }}.</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+                <p class="paragraph-one">Demikian surat pernyataan ini saya buat dengan sebenarnya untuk dapat dipergunakan sebagai mana mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                {{-- <p>Find out</p> --}}
+                <p>Yang menerima Hibah</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
                 </div>
+                <p style="text-transform: uppercase;">I GUSTI AYU SARINI FEBRIYANI</p>
+            </div>
+            <div class="card-ttd">
+                <p>Mengetahui</p>
+                <p>Lurah Subagan</p>
+                <div class="card-canvas">
+                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                </div>
+                <p><span style="text-transform: uppercase; text-decoration: underline;">IDA KETUT PUTRA SP</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP. 19650404 200604 1 011</span></p>
+            </div>
+            <div class="card-ttd">
+                <p>Subagan, 03 Maret 2021</p>
+                <p>Yang membuat pernyataan memberi hibah</p>
+                <div class="card-canvas">
+                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                </div>
+                <p style="text-transform: uppercase;">NI WAYAN NASKARIYANI,drg.</p>
             </div>
         </div>
     </div>

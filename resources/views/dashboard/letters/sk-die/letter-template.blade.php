@@ -16,8 +16,6 @@
         }
 
         .title {
-            width: 55%;
-            text-align: center;
             position: absolute;
             top: 24%;
             left: 50%;
@@ -144,63 +142,48 @@
             left: 61.3%;
         }
 
-        .input-group.nine label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 55%;
-            left: 61.3%;
-        }
-
         .input-group.seven label {
-            top: 58%;
+            top: 55%;
             left: 17.5%;
         }
 
         .input-group.seven div {
-            top: 58%;
+            top: 55%;
             left: 28%;
         }
 
         .input-group.seven span {
-            top: 58%;
+            top: 55%;
             left: 61.3%;
         }
 
         .input-group.eight label {
-            top: 61%;
+            top: 58%;
             left: 17.5%;
         }
 
         .input-group.eight div {
-            top: 61%;
+            top: 58%;
             left: 28%;
         }
 
         .input-group.eight span {
-            top: 61%;
+            top: 58%;
             left: 61.3%;
         }
 
         .input-group.five label {
-            top: 64%;
+            top: 61%;
             left: 17.5%;
         }
 
         .input-group.five div {
-            top: 64%;
+            top: 61%;
             left: 28%;
         }
 
         .input-group.five span {
-            top: 64%;
+            top: 61%;
             left: 61.3%;
         }
 
@@ -246,7 +229,7 @@
 
         .description-other {
             position: relative;
-            top: 68%;
+            top: 65%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -268,74 +251,64 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan {{ $letter->status === 1 ? "Belum Menikah" : "Sudah Menikah" }}</h3>
+        <img src="{{ public_path('assets/banner-top.png') }}" alt="Banner Top" class="image-full">
+        <img src="{{ public_path('assets/border-top.png') }}" alt="Border Top" class="border-full">
+        <h3 class="title">Surat Keterangan Meninggal</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
+            <p class="subtitle">Nomor : 13 / I / Kppdk / Kel. Sub / 2022</p>
             <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->name }}</span>
+                <span>Putu Aditya Prayatna</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                <span>Subagan, 04-06-1976</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->gender->label() }}</span>
+                <span>Laki-Laki</span>
             </div>
             <div class="input-group four">
                 <label>Agama</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->religion->label() }}</span>
+                <span>Hindu</span>
             </div>
             <div class="input-group six">
                 <label>Kewarganegaraan</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->citizenship }}</span>
-            </div>
-            <div class="input-group nine">
-                <label>Status</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
+                <span>Indonesia</span>
             </div>
             <div class="input-group seven">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->work }}</span>
+                <span>Wiraswasta</span>
             </div>
             <div class="input-group eight">
                 <label>No KK/ KTP</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->family_card_number }}</span>
+                <span>5107040406760007</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->address }}</span>
+                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan Desa, No: {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, Sepanjang pengetahuan kami bahwa memang benar orang tersebut di atas <strong>{{ $letter->status === 1 ? "Belum Menikah" : "Kawin" }} Sebelum Tanggal {{ $letter->sk->created_at->format("d M Y") }}.</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 19 /LD / I /2021, Tanggal 27 Januari 2022, sepanjang pengetahuan kami bahwa memang benar orang tersebut diatas telah <strong style="font-style: italic;">Meninggal Dunia</strong> pada tahun <strong style="font-style: italic;">2011</strong></p>
+                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya. </p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p>Subagan, 22 Pebruari 2023</p>
+                <p>A.n, Lurah Subagan</p>
+                <p class="other">kasi Pelum</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
                 </div>
             </div>
         </div>
