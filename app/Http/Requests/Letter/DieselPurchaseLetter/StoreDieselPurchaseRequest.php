@@ -4,7 +4,7 @@ namespace App\Http\Requests\Letter\DieselPurchaseLetter;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDieselPurchaseLetterRequest extends FormRequest
+class StoreDieselPurchaseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,7 @@ class StoreDieselPurchaseLetterRequest extends FormRequest
             "purchase_place" => "required",
             "start_expired_date" => "required",
             "end_expired_date" => "required",
-            "description" => "required",
+            // "description" => "required",
         ];
     }
 

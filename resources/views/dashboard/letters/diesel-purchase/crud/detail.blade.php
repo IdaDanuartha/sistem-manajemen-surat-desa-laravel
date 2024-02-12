@@ -80,17 +80,37 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
-                <label for="" class="text-second mb-1">Status</label>
-                <input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? 'Belum Menikah' : 'Kawin' }}" disabled />
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Alamat Usaha</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->business_address }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Keperluan BBM</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Kebutuhan BBM</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->requirement }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Tempat Pembelian BBM</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->purchase_place }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Masa Berlaku Mulai</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->start_expired_date->format("d M Y") }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Masa Berlaku Selesai</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->end_expired_date->format("d M Y") }}" disabled />
             </div>
             @if (auth()->user()->isCitizent())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
@@ -150,28 +170,20 @@
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-marry.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('letters.diesel-purchase.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
+					<a href="{{ route('letters.diesel-purchase.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 				</div>
 				<div class="flex items-center">
-					<a href="{{ route('letters.sk-marry.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
+					<a href="{{ route('letters.diesel-purchase.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	
 <x-modal-approve-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/approve</x-slot>
+	<x-slot name="route">/letters/diesel-purchase/{{ $get_letter->id }}/approve</x-slot>
 </x-modal-approve-letter>
 <x-modal-reject-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/reject</x-slot>
+	<x-slot name="route">/letters/diesel-purchase/{{ $get_letter->id }}/reject</x-slot>
 </x-modal-reject-letter>
 @endsection
-
-@push('js')
-	<script>
-		// previewImg("create-tte-input", "create-tte-preview-img")
-		// $("#signature_image").change(function() {
-		// 	$("#signature_image_real").val($(".create-tte-input").val())
-	</script>
-@endpush

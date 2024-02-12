@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Letter\DieselPurchase\UpdateDieselPurchaseRequest;
-use App\Http\Requests\Letter\DieselPurchaseLetter\StoreDieselPurchaseLetterRequest;
+use App\Http\Requests\Letter\DieselPurchaseLetter\UpdateDieselPurchaseRequest;
+use App\Http\Requests\Letter\DieselPurchaseLetter\StoreDieselPurchaseRequest;
 use App\Models\DieselPurchaseLetter;
 use App\Models\Sk;
 use App\Repositories\Letters\DieselPurchaseLetterRepository;
@@ -58,7 +58,7 @@ class DieselPurchaseLetterController extends Controller
         return view('dashboard.letters.diesel-purchase.crud.edit', compact('get_letter'));
     }
 
-    public function store(StoreDieselPurchaseLetterRequest $request)
+    public function store(StoreDieselPurchaseRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
         if(auth()->user()->role === Role::CITIZENT) {

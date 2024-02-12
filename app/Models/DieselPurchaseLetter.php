@@ -12,6 +12,11 @@ class DieselPurchaseLetter extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        "start_expired_date" => "date",
+        "end_expired_date" => "date",
+    ];
+
     public function sk(): BelongsTo
     {
         return $this->belongsTo(Sk::class);

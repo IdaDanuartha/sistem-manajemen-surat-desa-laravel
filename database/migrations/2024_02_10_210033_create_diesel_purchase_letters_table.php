@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text("purchase_place");
             $table->date("start_expired_date");
             $table->date("end_expired_date");
-            $table->text("description");
+            $table->text("description")->nullable();
             $table->timestamps();
         });
     }

@@ -283,75 +283,79 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/banner-top.png') }}" alt="Banner Top" class="image-full">
-        <img src="{{ public_path('assets/border-top.png') }}" alt="Border Top" class="border-full">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Rekomendasi Pembelian Solar</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : 517 / 18 / I / Ket / Kel. Subagan / 2023</p>
+            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan dibawah ini  Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem dengan ini memberikan Rekomendasi Pembelian BBM di SPBU Kesesi kepada:</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>Subagan, 04-06-1976</span>
+                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
             </div>
             <div class="input-group three">
                 <label>Agama</label>
                 <div>:</div>
-                <span>hindu</span>
+                <span>{{ $letter->sk->citizent->religion->label() }}</span>
             </div>
             <div class="input-group four">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat Usaha</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->business_address }}</span>
             </div>
             <div class="input-group six">
                 <label>Keperluan BBM</label>
                 <div>:</div>
-                <span>Pertanian/ Menjalankan Mesin Traktor Sawah</span>
+                <span>{{ $letter->purpose }}</span>
             </div>
             <div class="input-group seven">
                 <label>Kebutuhan BBM</label>
                 <div>:</div>
-                <span>Solar 5 Liter/ Hari</span>
+                <span>{{ $letter->requirement }}</span>
             </div>
             <div class="input-group eight">
                 <label>Tempat Beli BBM</label>
                 <div>:</div>
-                <span>SPBU Subagan</span>
+                <span>{{ $letter->purchase_place }}</span>
             </div>
             <div class="input-group nine">
                 <label>Masa Berlaku</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->start_expired_date->format("d M Y") . " s/d " . $letter->end_expired_date->format("d M Y") }}</span>
             </div>
             <div class="input-group ten">
                 <label>Keterangan</label>
                 <div>:</div>
-                <span>Menerangkan bahwa orang tersebut diatas memang benar beralamat di Lingkungan Br. Desa Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem, dan memiliki mesin traktor.</span>
+                <span>Menerangkan bahwa orang tersebut diatas memang benar beralamat di {{ $letter->sk->citizent->address }}, dan memiliki {{ $letter->purpose }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan Desa, Nomor: 07 / LD / I /2023, tanggal 17 Januari 2023, memang benar yang bersangkutan memiliki <strong>Usaha Pertanian/ Menjalankan Mesin Traktor Sawah.</strong></p>
+                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan Desa, Nomor: 07 / LD / I /2023, tanggal 17 Januari 2023, memang benar yang bersangkutan memiliki <strong>Usaha {{ $letter->purpose }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, 22 Pebruari 2023</p>
-                <p>A.n, Lurah Subagan</p>
-                {{-- <p class="other">Sekretaris</p> --}}
+                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
-                </div>
+                @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
+                @elseif(isset($letter->sk->villageHead))
+                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                @endif
             </div>
         </div>
     </div>
