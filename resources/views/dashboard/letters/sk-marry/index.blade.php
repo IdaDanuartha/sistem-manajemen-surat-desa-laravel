@@ -114,7 +114,10 @@
         </div>
     </div>
 
-@include('partials.letters.modal-sk-marry')
+<x-modal-delete-letter>
+    <x-slot name="name">surat keterangan kawin</x-slot>
+    <x-slot name="modalId">SkMarry</x-slot>
+</x-modal-delete-letter>
 @endsection
 
 @push('js')

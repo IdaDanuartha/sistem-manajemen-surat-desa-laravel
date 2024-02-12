@@ -114,7 +114,10 @@
         </div>
     </div>
 
-@include('partials.letters.modal-sk-marital-status')
+<x-modal-delete-letter>
+    <x-slot name="name">surat keterangan status nikah</x-slot>
+    <x-slot name="modalId">SkMaritalStatus</x-slot>
+</x-modal-delete-letter>
 @endsection
 
 @push('js')
