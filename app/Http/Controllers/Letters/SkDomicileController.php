@@ -8,7 +8,9 @@ use App\Http\Requests\Letter\SkDomicile\StoreSkDomicileRequest;
 use App\Http\Requests\Letter\SkDomicile\UpdateSkDomicileRequest;
 use App\Models\Sk;
 use App\Models\SkDomicileLetter;
+use App\Models\User;
 use App\Repositories\Letters\SkDomicileRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +20,8 @@ class SkDomicileController extends Controller
 {
     public function __construct(
         protected readonly SkDomicileRepository $skDomicile,
+        protected readonly User $user,
+        protected readonly UserRepository $userRepository,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -40,7 +44,9 @@ class SkDomicileController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-domicile.crud.create') : 
+               view('dashboard.letters.sk-domicile.crud.create', [
+                    "citizents" => $this->userRepository->findAll(auth()->user()->authenticatable->id)
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +61,10 @@ class SkDomicileController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skDomicile->findById($skDomicile);                                         
-        return view('dashboard.letters.sk-domicile.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-domicile.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->userRepository->findAll(auth()->user()->authenticatable->id)
+        ]);
     }
 
     public function store(StoreSkDomicileRequest $request)
@@ -128,7 +137,11 @@ class SkDomicileController extends Controller
         $skDomicile = $this->skDomicile->findById($skDomicile);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-domicile.letter-template', ['letter' => $skDomicile, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-domicile.letter-template', [
+            'letter' => $skDomicile,
+            "user" => auth()->user(),
+            "village_head" => $this->user->where("role", Role::VILLAGE_HEAD)->first()
+        ]);        
 
         return $generated->stream("SK Domisili " . $skDomicile->sk->citizent->name . ".pdf");
     }

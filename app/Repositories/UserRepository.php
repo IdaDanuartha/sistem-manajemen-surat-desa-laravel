@@ -42,9 +42,15 @@ class UserRepository
     return $this->user->latest()->with(['authenticatable'])->where("role", Role::ADMIN)->get();
   }
 
-  public function findAll(): Collection
+  public function findAll($except_id = null): Collection
   {
-    return $this->citizent->latest()->with(['user', 'villageHead', 'environmentalHead', 'sectionHead'])->get();
+    $query = $this->citizent->latest()->with(['user', 'villageHead', 'environmentalHead', 'sectionHead']);
+
+    if($except_id) {
+      $query->whereNot("id", $except_id);
+    }
+
+    return $query->get();
   }
 
   public function findByFamilyNumber($family_card_number, $except_id): Collection

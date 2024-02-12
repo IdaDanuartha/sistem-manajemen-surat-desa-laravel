@@ -112,7 +112,7 @@
                 <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
                 <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
-                @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                @if (Request::is("letters/sk-name/$letter->id/preview*"))
                     @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                         <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif

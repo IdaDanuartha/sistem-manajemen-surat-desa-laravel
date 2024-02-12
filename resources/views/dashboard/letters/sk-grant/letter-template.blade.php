@@ -707,7 +707,7 @@
                 <p>Mengetahui</p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                    @if (Request::is("letters/sk-grant/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif

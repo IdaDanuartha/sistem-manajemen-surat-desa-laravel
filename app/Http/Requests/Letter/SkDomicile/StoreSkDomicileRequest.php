@@ -25,7 +25,9 @@ class StoreSkDomicileRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "citizent_id" => "required",
             "community_group" => "required",
+            "position" => "required",
         ];
     }
 
@@ -33,6 +35,8 @@ class StoreSkDomicileRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "citizent_id" => "nama warga",
+            "position" => "jabatan",
             "community_group" => "kelompok masyarakat",
         ];
     }

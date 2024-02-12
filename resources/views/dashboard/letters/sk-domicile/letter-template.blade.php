@@ -273,12 +273,12 @@
         <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Domisili</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor: 374 / VI / Ket / Kel.Sub / 2023</p>
+            <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan di bawah ini,</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $village_head->authenticatable->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Jabatan</label>
@@ -288,27 +288,27 @@
             <div class="input-group three">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $village_head->authenticatable->citizent->address }}.</span>
             </div>
 
             <div class="input-group four">
                 <label>Pokmas</label>
                 <div>:</div>
-                <span style="text-transform: uppercase; font-weight: bold;">KETUA BR. ADAT DESA SUBAGAN</span>
+                <span style="text-transform: uppercase; font-weight: bold;">{{ $letter->position . " " . $letter->community_group }}</span>
             </div>
             <div class="input-group five">
-                <label>Nama Ketua</label>
+                <label>Nama {{ $letter->position }}</label>
                 <div>:</div>
-                <span style="text-transform: uppercase; font-weight: bold;">I KETUT MERTA</span>
+                <span style="text-transform: uppercase; font-weight: bold;">{{ $letter->citizent->name }}</span>
             </div>
             <div class="input-group six">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->citizent->address }}</span>
             </div>
             <p class="description-caption">Dengan ini menerangkan bahwa :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 167 / LD / VI / 2023, tanggal 21 Juni 2023 menyatakan bahwa  memang benar Banjar Adat Desa Subagan tersebut di atas beralamat/ berlokasi di Lingkungan Desa, Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 167 / LD / VI / 2023, tanggal 21 Juni 2023 menyatakan bahwa  memang benar Banjar Adat Desa Subagan tersebut di atas beralamat/ berlokasi di {{ $letter->citizent->address }}.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat untuk  dapat  dipergunakan sebagaimana mestinya</p>
             </div>
         </div>
@@ -317,17 +317,22 @@
                 <p>Mengetahui</p>
                 <p>Kepala Lingkungan Desa</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
                 <p class="other">I Gede Suasta Ardika</p>
             </div>
             <div class="card-ttd">
-                <p>Subagan, 22 Pebruari 2023</p>
-                <p>A.n, Lurah Subagan</p>
-                {{-- <p class="other">Sekretaris</p> --}}
+                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
-                </div>
+                @if (Request::is("letters/sk-domicile/$letter->id/preview*"))
+                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
+                @elseif(isset($letter->sk->villageHead))
+                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                @endif
             </div>
         </div>
     </div>
