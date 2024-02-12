@@ -141,10 +141,10 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-land-price/{sk_land_price}/reject", [SkLandPriceController::class, 'rejectLetter'])->name('letters.sk-land-price.reject');
 
     Route::resource("letters/sk-parent-income", SkParentIncomeController::class, ['as' => 'letters']);
-    Route::get("letters/sk-parent-income/{sk_parent-income}/preview", [SkParentIncomeController::class, 'preview'])->name('letters.sk-parent-income.preview');
-    Route::get("letters/sk-parent-income/{sk_parent-income}/download/{type?}", [SkParentIncomeController::class, 'download'])->name('letters.sk-parent-income.download');
-    Route::put("letters/sk-parent-income/{sk_parent-income}/approve", [SkParentIncomeController::class, 'approveLetter'])->name('letters.sk-parent-income.approve');
-    Route::put("letters/sk-parent-income/{sk_parent-income}/reject", [SkParentIncomeController::class, 'rejectLetter'])->name('letters.sk-parent-income.reject');
+    Route::get("letters/sk-parent-income/{sk_parent_income}/preview", [SkParentIncomeController::class, 'preview'])->name('letters.sk-parent-income.preview');
+    Route::get("letters/sk-parent-income/{sk_parent_income}/download/{type?}", [SkParentIncomeController::class, 'download'])->name('letters.sk-parent-income.download');
+    Route::put("letters/sk-parent-income/{sk_parent_income}/approve", [SkParentIncomeController::class, 'approveLetter'])->name('letters.sk-parent-income.approve');
+    Route::put("letters/sk-parent-income/{sk_parent_income}/reject", [SkParentIncomeController::class, 'rejectLetter'])->name('letters.sk-parent-income.reject');
 
     // Route::resource("letters/sk-bi", Sk::class, ['as' => 'letters']); // sk silsilah dan kuasa
     Route::resource("letters/sk-die", SkDieController::class, ['as' => 'letters']);
