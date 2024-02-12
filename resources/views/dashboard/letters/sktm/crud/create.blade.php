@@ -26,11 +26,19 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 flex-col hidden input-school-name">
+			<div class="col-span-12 md:col-span-6 flex-col hidden input-school-name">
                 <label for="school_name" class="text-second mb-1">Nama Sekolah</label>
                 <input type="text" class="input-crud" name="school_name" id="school_name" value="{{ old('school_name') }}"
                     placeholder="Masukkan nama sekolah..." />
                 @error('school_name')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 input-purpose flex-col flex">
+                <label for="purpose" class="text-second mb-1">Tujuan Surat</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ old('purpose') }}"
+                    placeholder="Masukkan nama sekolah..." />
+                @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -59,10 +67,15 @@
 				$(".input-school-name").removeClass("hidden")
 				$(".input-school-name").addClass("flex")
 				$(".input-school-name input").attr("required", true)
+				$(".input-purpose").addClass("md:col-span-6")
+				$(".input-purpose").removeClass("col-span-12")
 			} else {
 				$(".input-school-name").removeClass("flex")
 				$(".input-school-name").addClass("hidden")
 				$(".input-school-name input").attr("required", false)
+
+				$(".input-purpose").addClass("col-span-12")
+				$(".input-purpose").removeClass("md:col-span-6")
 			}
 		})
 

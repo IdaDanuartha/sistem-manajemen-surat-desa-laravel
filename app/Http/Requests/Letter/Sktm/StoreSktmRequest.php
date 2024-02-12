@@ -27,6 +27,7 @@ class StoreSktmRequest extends FormRequest
             "sk.is_published" => "nullable",
             "sktm_type" => "required",
             "school_name" => "nullable",
+            "purpose" => "required"
         ];
     }
 
@@ -36,6 +37,7 @@ class StoreSktmRequest extends FormRequest
             "sk.reference_number" => "nomor surat",
             "sktm_type" => "tipe sktm",
             "school_name" => "nama sekolah",
+            "purpose" => "tujuan"
         ];
     }
 }

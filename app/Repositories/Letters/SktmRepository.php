@@ -148,6 +148,12 @@ class SktmRepository
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
 
+        if($request["sktm_type"] == 2) {
+          $letter->sktmSchool->updateOrFail([
+            "school_name" => Arr::get($request, "school_name")
+          ]);
+        }
+
         DB::commit();
         return true;
     } catch (\Exception $e) {  
