@@ -152,7 +152,7 @@
                         </svg>
 
                     </span>
-                    <span data-i18n="Letters" class="text-[#28242185]">SK Beda Nama</span>
+                    <span data-i18n="Letters" class="text-[#28242185]">SK Beda NIK</span>
                 </a>
             </li>
             <li class="w-full">

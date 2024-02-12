@@ -104,7 +104,9 @@ class SkNameRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id]);
+      
+      $request["sk_id"] = $sk_letter->id;
+      $sk_move = $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
@@ -134,6 +136,7 @@ class SkNameRepository
           }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
+        $letter->updateOrFail(Arr::except($request, "sk"));
 
         DB::commit();
         return true;

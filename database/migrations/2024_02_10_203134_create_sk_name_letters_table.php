@@ -18,6 +18,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string("national_identify_number_other");
+            $table->string("national_identify_number_listed");
             $table->timestamps();
         });
     }

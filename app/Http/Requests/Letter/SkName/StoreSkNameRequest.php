@@ -25,6 +25,8 @@ class StoreSkNameRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "national_identify_number_other" => "required",
+            "national_identify_number_listed" => "required",
         ];
     }
 
@@ -32,6 +34,8 @@ class StoreSkNameRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "national_identify_number_other" => "NIK yang berbeda",
+            "national_identify_number_listed" => "NIK tercantum",
         ];
     }
 }

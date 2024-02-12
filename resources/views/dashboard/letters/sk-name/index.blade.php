@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Halaman Surat Keterangan Beda Nama')
+@section('title', 'Halaman Surat Keterangan Beda NIK')
 
 @section('main')
     <div class="table-wrapper mt-[20px]">
