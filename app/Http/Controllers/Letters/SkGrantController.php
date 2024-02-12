@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkGrant\UpdateSkGrantRequest;
 use App\Models\Sk;
 use App\Models\SkGrantLetter;
 use App\Repositories\Letters\SkGrantRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkGrantController extends Controller
 {
     public function __construct(
         protected readonly SkGrantRepository $skGrant,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -40,7 +42,9 @@ class SkGrantController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-grant.crud.create') : 
+               view('dashboard.letters.sk-grant.crud.create', [
+                    "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +59,10 @@ class SkGrantController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skGrant->findById($skGrant);                                         
-        return view('dashboard.letters.sk-grant.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-grant.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+        ]);
     }
 
     public function store(StoreSkGrantRequest $request)

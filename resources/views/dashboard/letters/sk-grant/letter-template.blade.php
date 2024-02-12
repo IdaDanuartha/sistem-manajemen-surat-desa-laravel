@@ -576,117 +576,117 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>Jembrana, 06-09-1965</span>
+                <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>Perempuan</span>
+                <span>{{ $letter->sk->citizent->gender->label() }}</span>
             </div>
             <div class="input-group four">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>Pegawai Negeri Sipil (PNS)</span>
+                <span>{{ $letter->sk->citizent->work }}</span>
             </div>
             <div class="input-group six">
                 <label>No.KTP</label>
                 <div>:</div>
-                <span>5107041801190004</span>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="input-group seven">
                 <label>No. polisi</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->police_number }}</span>
             </div>
             <div class="input-group eight">
                 <label>Nama Pemilik</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->owner_name }}</span>
             </div>
             <div class="input-group nine">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->address }}</span>
             </div>
             <div class="input-group ten">
                 <label>Merk/Type</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->brand }}</span>
             </div>
             <div class="input-group eleven">
                 <label>Jenis</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->type }}</span>
             </div>
             <div class="input-group twelve">
                 <label>Model</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->model }}</span>
             </div>
             <div class="input-group thirteen">
                 <label>Tahun Pembuatan</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->production_year }}</span>
             </div>
             <div class="input-group fourteen">
                 <label>Isi Selinder</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->cylinder_filling }}</span>
             </div>
             <div class="input-group fifteen">
                 <label>No. Rangka</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->frame_number }}</span>
             </div>
             <div class="input-group sixteen">
                 <label>No. Mesin</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->machine_number }}</span>
             </div>
             <div class="input-group seventeen">
                 <label>No. BPKB</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->bpkb_number }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->address }}</span>
             </div>
             <div class="input-group eightteen">
                 <label>Nama</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->citizent->name }}</span>
             </div>
             <div class="input-group nineteen">
-                <label>Tampat Tanggal Lahir</label>
+                <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->citizent->birth_place . ", " . $letter->citizent->birth_date->format("d-m-Y") }}</span>
             </div>
             <div class="input-group twenty">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->citizent->gender->label() }}</span>
             </div>
             <div class="input-group twentyone">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->citizent->work }}</span>
             </div>
             <div class="input-group twentytwo">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->citizent->address }}</span>
             </div>
             <div class="input-group twentythree">
                 <label>No. KTP</label>
                 <div>:</div>
-                <span>-</span>
+                <span>{{ $letter->citizent->national_identify_number }}</span>
             </div>
             <p class="description-caption">Dengan ini saya mengibahkan kendaraan dengan data sebagai berikut :</p>
             <p class="description-caption-two">Dihibahkan kepada Anak Saya dengan Identitas sebagai berikut :</p>
@@ -699,25 +699,31 @@
                 {{-- <p>Find out</p> --}}
                 <p>Yang menerima Hibah</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p style="text-transform: uppercase;">I GUSTI AYU SARINI FEBRIYANI</p>
+                <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
             </div>
             <div class="card-ttd">
                 <p>Mengetahui</p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif(isset($letter->sk->villageHead))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
-                <p><span style="text-transform: uppercase; text-decoration: underline;">IDA KETUT PUTRA SP</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP. 19650404 200604 1 011</span></p>
+                <p><span style="text-transform: uppercase; text-decoration: underline;">{{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : "" }}</span></p>
             </div>
             <div class="card-ttd">
-                <p>Subagan, 03 Maret 2021</p>
+                <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Yang membuat pernyataan memberi hibah</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p style="text-transform: uppercase;">NI WAYAN NASKARIYANI,drg.</p>
+                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
             </div>
         </div>
     </div>
