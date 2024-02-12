@@ -80,18 +80,24 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
-                <label for="" class="text-second mb-1">Status</label>
-                <input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? 'Belum Menikah' : 'Kawin' }}" disabled />
+			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
+                <label for="" class="text-second mb-1">SKTM Type</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->sktm_type->label() }}" disabled />
             </div>
+			@if ($get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH)
+				<div class="col-span-12 md:col-span-6 flex flex-col">
+					<label for="" class="text-second mb-1">Nama Sekolah</label>
+					<input type="text" class="input-crud" value="{{ $get_letter->sktmSchool?->school_name }}" disabled />
+				</div>
+			@endif
             @if (auth()->user()->isCitizent())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
@@ -150,21 +156,21 @@
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-marry.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('letters.sktm.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
+					<a href="{{ route('letters.sktm.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 				</div>
 				<div class="flex items-center">
-					<a href="{{ route('letters.sk-marry.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
+					<a href="{{ route('letters.sktm.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	
 <x-modal-approve-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/approve</x-slot>
+	<x-slot name="route">/letters/sktm/{{ $get_letter->id }}/approve</x-slot>
 </x-modal-approve-letter>
 <x-modal-reject-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/reject</x-slot>
+	<x-slot name="route">/letters/sktm/{{ $get_letter->id }}/reject</x-slot>
 </x-modal-reject-letter>
 @endsection
 

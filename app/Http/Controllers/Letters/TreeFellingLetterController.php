@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Letter\TreeFelling\StoreTreeFellingRequest;
-use App\Http\Requests\Letter\TreeFelling\UpdateTreeFellingRequest;
+use App\Http\Requests\Letter\TreeFellingLetter\StoreTreeFellingRequest;
+use App\Http\Requests\Letter\TreeFellingLetter\UpdateTreeFellingRequest;
 use App\Models\Sk;
 use App\Models\TreeFellingLetter;
 use App\Repositories\Letters\TreeFellingLetterRepository;

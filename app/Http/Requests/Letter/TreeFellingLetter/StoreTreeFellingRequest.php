@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Letter\TreeFelling;
+namespace App\Http\Requests\Letter\TreeFellingLetter;
 
 use Illuminate\Foundation\Http\FormRequest;
 

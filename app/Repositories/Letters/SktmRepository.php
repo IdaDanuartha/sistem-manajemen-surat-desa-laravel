@@ -3,12 +3,14 @@
 namespace App\Repositories\Letters;
 
 use App\Enums\Role;
+use App\Enums\SktmType;
 use App\Mail\SendLetterToCitizent;
 use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Sk;
 use App\Models\SktmLetter;
+use App\Models\SktmSchoolLetter;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -23,6 +25,7 @@ class SktmRepository
   public function __construct(
     protected readonly Sk $sk,    
     protected readonly SktmLetter $letter,    
+    protected readonly SktmSchoolLetter $sktmSchool,    
     protected readonly User $user,
   ) {}
 
@@ -92,7 +95,7 @@ class SktmRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['sktmSchool', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 
@@ -106,7 +109,14 @@ class SktmRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       
       $request["sk_id"] = $sk_letter->id;
-      $this->letter->create(Arr::except($request, "sk"));
+      $sktm = $this->letter->create(Arr::except($request, "sk"));
+
+      if($request["sktm_type"] == 2) {
+        $this->sktmSchool->create([
+          "sktm_letter_id" => $sktm->id,
+          "school_name" => Arr::get($request, "school_name")
+        ]);
+      }
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();

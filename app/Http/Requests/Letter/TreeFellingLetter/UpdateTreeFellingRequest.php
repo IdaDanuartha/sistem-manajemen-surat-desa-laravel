@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Letter\TreeFelling;
+namespace App\Http\Requests\Letter\TreeFellingLetter;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,6 @@ class UpdateTreeFellingRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
-            "status" => "required",
             "regarding" => "required",
             "description" => "required",
         ];
