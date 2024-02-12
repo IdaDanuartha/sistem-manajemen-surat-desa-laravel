@@ -58,3 +58,9 @@
 		</form>
 	</div>
 @endsection
+
+@push('js')
+	<script>
+		let citizent = $(".citizent-select2").select2()
+	</script>
+@endpush
