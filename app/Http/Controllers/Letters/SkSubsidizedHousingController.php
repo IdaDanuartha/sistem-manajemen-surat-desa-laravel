@@ -66,13 +66,13 @@ class SkSubsidizedHousingController extends Controller
                 $store = $this->skSubsidizedHousing->store($request->validated());            
     
                 if($store instanceof Sk) return redirect(route("letters.sk-subsidized-housing.index"))
-                                    ->with("success", $this->responseMessage->response('Surat keterangan subsidi rumah'));
+                                    ->with("success", $this->responseMessage->response('Surat keterangan rumah bersubsidi'));
     
                 throw new Exception();
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.sk-subsidized-housing.create"))->with("error", $this->responseMessage->response('surat keterangan subsidi rumah', false));
+                return redirect(route("letters.sk-subsidized-housing.create"))->with("error", $this->responseMessage->response('surat keterangan rumah bersubsidi', false));
             }
         } else {
             abort(404);
@@ -86,12 +86,12 @@ class SkSubsidizedHousingController extends Controller
             $update = $this->skSubsidizedHousing->update($request->validated(), $skSubsidizedHousing);
             if($update == true) {
                 return redirect(route('letters.sk-subsidized-housing.index'))
-                                ->with('success', $this->responseMessage->response('Surat keterangan subsidi rumah', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Surat keterangan rumah bersubsidi', true, 'update'));
             }
 
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-subsidized-housing.edit', $skSubsidizedHousing->id)->with('error', $this->responseMessage->response('surat keterangan subsidi rumah', false, 'update'));
+            return redirect()->route('letters.sk-subsidized-housing.edit', $skSubsidizedHousing->id)->with('error', $this->responseMessage->response('surat keterangan rumah bersubsidi', false, 'update'));
         }
     }
 
@@ -148,14 +148,14 @@ class SkSubsidizedHousingController extends Controller
             $delete = $this->skSubsidizedHousing->delete($skSubsidizedHousing);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.sk-subsidized-housing.index')->with('success', $this->responseMessage->response('Surat keterangan subsidi rumah', true, 'delete'));
+                return redirect()->route('letters.sk-subsidized-housing.index')->with('success', $this->responseMessage->response('Surat keterangan rumah bersubsidi', true, 'delete'));
             } else if(isset($delete["status"])) {
                 return redirect()->route('letters.sk-subsidized-housing.index')->with('error', $delete["message"]);
             }
 
             throw new Exception();
         } catch (\Exception $e) {            
-            return redirect()->route('letters.sk-subsidized-housing.index')->with('error', $this->responseMessage->response('surat keterangan subsidi rumah', false, 'delete'));
+            return redirect()->route('letters.sk-subsidized-housing.index')->with('error', $this->responseMessage->response('surat keterangan rumah bersubsidi', false, 'delete'));
         }
     }
 }
