@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkDie\UpdateSkDieRequest;
 use App\Models\Sk;
 use App\Models\SkDieLetter;
 use App\Repositories\Letters\SkDieRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkDieController extends Controller
 {
     public function __construct(
         protected readonly SkDieRepository $skDie,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -32,7 +34,7 @@ class SkDieController extends Controller
             $letters = $this->skDie->findLetterByCitizent();
         } else {
             $letters = $this->skDie->findLetterByStatus(0);
-        }
+        }   
         return view('dashboard.letters.sk-die.index', compact('letters'));
     }
 
@@ -40,7 +42,9 @@ class SkDieController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-die.crud.create') : 
+               view('dashboard.letters.sk-die.crud.create', [
+                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +59,10 @@ class SkDieController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skDie->findById($skDie);                                         
-        return view('dashboard.letters.sk-die.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-die.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+        ]);
     }
 
     public function store(StoreSkDieRequest $request)

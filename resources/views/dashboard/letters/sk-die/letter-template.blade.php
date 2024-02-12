@@ -251,64 +251,69 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/banner-top.png') }}" alt="Banner Top" class="image-full">
-        <img src="{{ public_path('assets/border-top.png') }}" alt="Border Top" class="border-full">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Meninggal</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : 13 / I / Kppdk / Kel. Sub / 2022</p>
+            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>Subagan, 04-06-1976</span>
+                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>Laki-Laki</span>
+                <span>{{ $letter->sk->citizent->gender->label() }}</span>
             </div>
             <div class="input-group four">
                 <label>Agama</label>
                 <div>:</div>
-                <span>Hindu</span>
+                <span>{{ $letter->sk->citizent->religion->label() }}</span>
             </div>
             <div class="input-group six">
                 <label>Kewarganegaraan</label>
                 <div>:</div>
-                <span>Indonesia</span>
+                <span>{{ $letter->sk->citizent->citizenship }}</span>
             </div>
             <div class="input-group seven">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>Wiraswasta</span>
+                <span>{{ $letter->sk->citizent->work }}</span>
             </div>
             <div class="input-group eight">
                 <label>No KK/ KTP</label>
                 <div>:</div>
-                <span>5107040406760007</span>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 19 /LD / I /2021, Tanggal 27 Januari 2022, sepanjang pengetahuan kami bahwa memang benar orang tersebut diatas telah <strong style="font-style: italic;">Meninggal Dunia</strong> pada tahun <strong style="font-style: italic;">2011</strong></p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 19 /LD / I /2021, Tanggal 27 Januari 2022, sepanjang pengetahuan kami bahwa memang benar orang tersebut diatas telah <strong style="font-style: italic;">Meninggal Dunia</strong> pada tahun <strong style="font-style: italic;">{{ $letter->year }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya. </p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, 22 Pebruari 2023</p>
-                <p>A.n, Lurah Subagan</p>
-                <p class="other">kasi Pelum</p>
+                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
+                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
+                @elseif(isset($letter->sk->villageHead))
+                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                @endif
                 </div>
             </div>
         </div>
