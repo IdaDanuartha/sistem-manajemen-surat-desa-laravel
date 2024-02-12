@@ -144,6 +144,66 @@
             left: 61.3%;
         }
 
+        .input-group.nine label {
+            top: 68%;
+            left: 17.5%;
+        }
+
+        .input-group.nine div {
+            top: 68%;
+            left: 28%;
+        }
+
+        .input-group.nine span {
+            top: 68%;
+            left: 61.3%;
+        }
+
+        .input-group.ten label {
+            top: 71%;
+            left: 17.5%;
+        }
+
+        .input-group.ten div {
+            top: 71%;
+            left: 28%;
+        }
+
+        .input-group.ten span {
+            top: 71%;
+            left: 61.3%;
+        }
+
+        .input-group.eleven label {
+            top: 74%;
+            left: 17.5%;
+        }
+
+        .input-group.eleven div {
+            top: 74%;
+            left: 28%;
+        }
+
+        .input-group.eleven span {
+            top: 74%;
+            left: 61.3%;
+        }
+
+        .input-group.twelve label {
+            top: 77%;
+            left: 17.5%;
+        }
+
+        .input-group.twelve div {
+            top: 77%;
+            left: 28%;
+        }
+
+        .input-group.twelve span {
+            top: 77%;
+            left: 61.3%;
+        }
+
         .card-ttd p:first-child {
             text-align: center;
             font-size: 0.913rem;
@@ -198,6 +258,14 @@
             text-indent: 42px;
         }
 
+        .description-other-bottom {
+            position: relative;
+            top: 70.5%;
+            left: 50%;
+            width: 92%;
+            transform: translate(-50%);
+        }
+
         .paragraph-two {
             font-size: 0.913rem;
             line-height: 150%;
@@ -213,35 +281,114 @@
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
-            <div class="input-group one">
-                <label>Nama Ayah</label>
-                <div>:</div>
-                <span>Putu Aditya Prayatna</span>
-            </div>
-            <div class="input-group two">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>Subagan, 04-06-1976</span>
-            </div>
-            <div class="input-group seven">
-                <label>Pekerjaan</label>
-                <div>:</div>
-                <span>Wiraswasta</span>
-            </div>
-            <div class="input-group eight">
-                <label>Agama</label>
-                <div>:</div>
-                <span>Hindu</span>
-            </div>
-            <div class="input-group five">
-                <label>Alamat</label>
-                <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
-            </div>
+            @if($letter->sktm_type->value == 4 || $letter->sktm_type->value == 5)
+                <div class="input-group one">
+                    <label>Nama</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->name }}</span>
+                </div>
+                <div class="input-group two">
+                    <label>Tempat Tanggal Lahir</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                </div>
+                <div class="input-group seven">
+                    <label>Pekerjaan</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->work }}</span>
+                </div>
+                <div class="input-group eight">
+                    <label>Agama</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->religion->label() }}</span>
+                </div>
+                <div class="input-group five">
+                    <label>Alamat</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->address }}.</span>
+                </div>
+            @else
+                <div class="input-group one">
+                    <label>Nama</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->name }}</span>
+                </div>
+                <div class="input-group two">
+                    <label>Tempat Tanggal Lahir</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                </div>
+                <div class="input-group four">
+                    <label>Jenis Kelamin</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->gender->label() }}</span>
+                </div>
+                <div class="input-group four">
+                    <label>Agama</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->religion->label() }}</span>
+                </div>
+                <div class="input-group seven">
+                    <label>Pekerjaan</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->work }}</span>
+                </div>
+                <div class="input-group eight">
+                    <label>No KK/ KTP</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->national_identify_number }}</span>
+                </div>
+                <div class="input-group five">
+                    <label>Alamat</label>
+                    <div>:</div>
+                    <span>{{ $letter->sk->citizent->address }}</span>
+                </div>
+            @endif
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod No : 153/ LJK / III / 2019, tanggal 19 Maret 2019 menyatakan dengan sebenarnya bahwa memang benar orang tersebut diatas Tidak mampu/ Miskin dan Disabilitas.</p>
-                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagai persyaratan administrasi permohonan bantuan sosial.</p>
+                @if ($letter->sktm_type->value === 1)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler,  No:  92 / GLK / II / 2016, tanggal  15 Pebruari  2016,  Sepanjang pengetahuan kami memang benar orang tersebut di atas tidak mampu untuk membayar proses sidang perceraian.</p>
+                @elseif ($letter->sktm_type->value === 2)
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No. 04 / LD / I / 2023  tanggal 05 Januari 2024, memang benar orang tersebut diatas kurang mampu, untuk Membiayai Sekolah Anaknya, Atas Nama: </p>
+                @elseif ($letter->sktm_type->value === 3)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa,  No:  211 / LD /  X / 2023,  tanggal 27 Oktober 2023,  sepanjang pengetahuan kami memang benar orang tersebut di atas Kurang Mampu dan Memohon Bantuan Bedah Rumah.</p>
+                @elseif ($letter->sktm_type->value === 4)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod No : 153/ LJK /  III / 2019, tanggal 19 Maret 2019 menyatakan dengan sebenarnya bahwa memang benar orang tersebut diatas Tidak mampu/miskin dan Disabilitas</p>
+                @elseif ($letter->sktm_type->value === 5)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 107/ LJK  /  IV / 2023,    tanggal 05 April 2023 menyatakan dengan sebenarnya bahwa memang benar orang tersebut diatas Tidak mampu / Miskin.</p>
+                @else
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No: 430 /LD / VIII / 2021  tanggal  19 Agustus 2021 ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu / miskin dan lansia .</p>
+                @endif
+                @if (!$letter->sktm_type->value === 2)
+                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
+                @endif
             </div>
+            @if ($letter->sktm_type->value === 2)
+                <div class="input-group nine">
+                    <label>Nama</label>
+                    <div>:</div>
+                    <span>Putu Aditya Prayatna</span>
+                </div>
+                <div class="input-group ten">
+                    <label>Tempat Tanggal Lahir</label>
+                    <div>:</div>
+                    <span>Subagan, 04-06-1976</span>
+                </div>
+                <div class="input-group eleven">
+                    <label>Jenis Kelamin</label>
+                    <div>:</div>
+                    <span>Laki-Laki</span>
+                </div>
+                <div class="input-group twelve">
+                    <label>Sekolah</label>
+                    <div>:</div>
+                    <span>STKIP AMLAPURA</span>
+                </div>
+            @endif
+            @if ($letter->sktm_type->value === 2)
+                <div class="description-other-bottom">
+                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
+                </div>
+            @endif
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
