@@ -25,6 +25,8 @@ class StoreSkTravelingRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",            
+            "travel_destination" => "required",            
+            "purpose" => "required",            
         ];
     }
 
@@ -32,6 +34,8 @@ class StoreSkTravelingRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "travel_destination" => "tempat dituju",
+            "purpose" => "tujuan penggunaan",
         ];
     }
 }

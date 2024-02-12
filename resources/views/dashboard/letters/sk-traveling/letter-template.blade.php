@@ -16,8 +16,6 @@
         }
 
         .title {
-            width: 55%;
-            text-align: center;
             position: absolute;
             top: 24%;
             left: 50%;
@@ -43,7 +41,7 @@
             transform: translate(-50%);
             font-size: 0.913rem;
             line-height: 150%;
-            text-indent: 42px;
+            text-indent: 15px;
         }
 
         .input-group label {
@@ -68,139 +66,169 @@
         }
 
         .input-group.one label {
-            top: 40%;
+            top: 36%;
             left: 17.5%;
         }
 
         .input-group.one div {
-            top: 40%;
+            top: 36%;
             left: 28%;
         }
 
         .input-group.one span {
-            top: 40%;
+            top: 36%;
             left: 61.3%;
             text-transform: uppercase;
             font-weight: bold;
         }
 
         .input-group.two label {
-            top: 43%;
+            top: 39%;
             left: 17.5%;
         }
 
         .input-group.two div {
-            top: 43%;
+            top: 39%;
             left: 28%;
         }
 
         .input-group.two span {
-            top: 43%;
+            top: 39%;
             left: 61.3%;
         }
 
         .input-group.three label {
-            top: 46%;
+            top: 42%;
             left: 17.5%;
         }
 
         .input-group.three div {
-            top: 46%;
+            top: 42%;
             left: 28%;
         }
 
         .input-group.three span {
-            top: 46%;
-            left: 61.3%;
-        }
-
-        .input-group.four label {
-            top: 49%;
-            left: 17.5%;
-        }
-
-        .input-group.four div {
-            top: 49%;
-            left: 28%;
-        }
-
-        .input-group.four span {
-            top: 49%;
+            top: 42%;
             left: 61.3%;
         }
 
         .input-group.six label {
-            top: 52%;
+            top: 49%;
             left: 17.5%;
         }
 
         .input-group.six div {
-            top: 52%;
+            top: 49%;
             left: 28%;
         }
 
         .input-group.six span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 55%;
+            top: 49%;
             left: 61.3%;
         }
 
         .input-group.seven label {
-            top: 58%;
+            top: 52%;
             left: 17.5%;
         }
 
         .input-group.seven div {
-            top: 58%;
+            top: 52%;
             left: 28%;
         }
 
         .input-group.seven span {
-            top: 58%;
+            top: 52%;
             left: 61.3%;
         }
 
         .input-group.eight label {
-            top: 61%;
+            top: 55%;
             left: 17.5%;
         }
 
         .input-group.eight div {
-            top: 61%;
+            top: 55%;
             left: 28%;
         }
 
         .input-group.eight span {
+            top: 55%;
+            left: 61.3%;
+        }
+
+        .input-group.nine label {
+            top: 58%;
+            left: 17.5%;
+        }
+
+        .input-group.nine div {
+            top: 58%;
+            left: 28%;
+        }
+
+        .input-group.nine span {
+            top: 58%;
+            left: 61.3%;
+        }
+
+        .input-group.ten label {
+            top: 61%;
+            left: 17.5%;
+        }
+
+        .input-group.ten div {
+            top: 61%;
+            left: 28%;
+        }
+
+        .input-group.ten span {
             top: 61%;
             left: 61.3%;
         }
 
-        .input-group.five label {
+        .input-group.eleven label {
             top: 64%;
             left: 17.5%;
         }
 
-        .input-group.five div {
+        .input-group.eleven div {
             top: 64%;
             left: 28%;
         }
 
-        .input-group.five span {
+        .input-group.eleven span {
             top: 64%;
+            left: 61.3%;
+        }
+
+        .input-group.twelve label {
+            top: 67%;
+            left: 17.5%;
+        }
+
+        .input-group.twelve div {
+            top: 67%;
+            left: 28%;
+        }
+
+        .input-group.twelve span {
+            top: 67%;
+            left: 61.3%;
+        }
+
+        .input-group.five label {
+            top: 70%;
+            left: 17.5%;
+        }
+
+        .input-group.five div {
+            top: 70%;
+            left: 28%;
+        }
+
+        .input-group.five span {
+            top: 70%;
             left: 61.3%;
         }
 
@@ -244,6 +272,15 @@
             border-bottom: 1px dashed black;
         }
 
+        .description-caption {
+            position: relative;
+            top: 44%;
+            left: 56.5%;
+            width: 100%;
+            transform: translate(-50%);
+            font-size: 0.913rem;
+        }
+
         .description-other {
             position: relative;
             top: 68%;
@@ -269,58 +306,69 @@
     
     <div class="container">
         <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan {{ $letter->status === 1 ? "Belum Menikah" : "Sudah Menikah" }}</h3>
+        <h3 class="title">Surat Keterangan Bepergian</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
+            <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
+            <p class="description">Yang bertanda tangan di bawah ini,</p>
             <div class="input-group one">
+                <label>Nama</label>
+                <div>:</div>
+                <span>{{ $village_head->citizent->name }}</span>
+            </div>
+            <div class="input-group two">
+                <label>Jabatan</label>
+                <div>:</div>
+                <span>Lurah Subagan</span>
+            </div>
+            <div class="input-group three">
+                <label>Alamat</label>
+                <div>:</div>
+                <span>{{ $village_head->citizent->address }}</span>
+            </div>
+            <div class="input-group six">
                 <label>Nama</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->name }}</span>
             </div>
-            <div class="input-group two">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
-            </div>
-            <div class="input-group three">
+            <div class="input-group seven">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->gender->label() }}</span>
             </div>
-            <div class="input-group four">
+            <div class="input-group eight">
+                <label>Status Perkawinan</label>
+                <div>:</div>
+                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
+            </div>
+            <div class="input-group nine">
                 <label>Agama</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->religion->label() }}</span>
             </div>
-            <div class="input-group six">
+            <div class="input-group ten">
                 <label>Kewarganegaraan</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->citizenship }}</span>
             </div>
-            <div class="input-group nine">
-                <label>Status</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
-            </div>
-            <div class="input-group seven">
+            <div class="input-group eleven">
                 <label>Pekerjaan</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->work }}</span>
             </div>
-            <div class="input-group eight">
-                <label>No KK/ KTP</label>
+            <div class="input-group twelve">
+                <label>No. KTP/ SIM</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->family_card_number }}</span>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
+            <p class="description-caption">Menerangkan dengan sebenarnya bahwa :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan Desa, No: {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, Sepanjang pengetahuan kami bahwa memang benar orang tersebut di atas <strong>{{ $letter->status === 1 ? "Belum Menikah" : "Kawin" }} Sebelum Tanggal {{ $letter->sk->created_at->format("d M Y") }}.</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler Nomor: 285 / GLK / VII/ 2015, Tanggal 02 Juli 2015, memang benar yang bersangkutan melakukan perjalanan <strong>Wisata ke {{ $letter->travel_destination }}</strong></p>
+                <p class="paragraph-two">Demikian surat keterangan bepergian ini dikeluarkan untuk dapat dipergunakan sebagai {{ $letter->purpose }}.</p>
             </div>
         </div>
         <div class="content-ttd">

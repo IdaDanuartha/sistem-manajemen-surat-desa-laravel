@@ -358,19 +358,24 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod, Nomor : {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan adalah <strong>@if($letter->status == 1) Duda @elseif($letter->status == 2) Janda @else Cerai @endif dari {{ $letter->sk->citizent->gender->value == \App\Enums\Gender::MAN ? "Suami" : "Istri" }} {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
+                @if ($letter->status == 1)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : 278 / LJK / VII/ 2020, Tanggal 09 Juli 2020, memang benar yang bersangkutan adalah <strong>Duda dari Istri {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
+                @elseif($letter->status == 2)
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : 05 / LD / I / 2023, Tanggal 09 Januari 2023, memang benar yang bersangkutan adalah <strong>Janda dari Suami {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
+                @else
+                    <p class="paragraph-one">Berdasarkan  dengan surat pengantar dari Kepala Lingkungan Jasri Kelod, tertanggal 19  Juli 2019, Nomor : / LJK / 2019, yang bersangkutan memang benar telah Cerai dengan <strong style="text-transform: uppercase;">{{ $letter->citizent->name }}</strong> pada tahun {{ $letter->date->format("Y") }} di Lingkungan Jasri Kelod, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem.</p>
+                    @endif
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan untuk melengkapi Administrasi Pensiunan.</p>
             </div>
         </div>
         <div class="content-ttd">
-            <div class="card-ttd">
+            {{-- <div class="card-ttd">
                 <p>Mengetahui</p>
-                <p>Camat Karangasem</p>
-                {{-- <p class="other">Camat Karangasem</p> --}}
+                <p>Camat Karangasem</p>                
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
                 </div>
-            </div>
+            </div> --}}
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>

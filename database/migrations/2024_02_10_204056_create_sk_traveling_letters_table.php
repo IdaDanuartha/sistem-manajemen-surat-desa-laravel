@@ -18,6 +18,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string("travel_destination");
+            $table->string("purpose");
             $table->timestamps();
         });
     }
