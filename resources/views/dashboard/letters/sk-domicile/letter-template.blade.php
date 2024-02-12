@@ -270,8 +270,7 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/banner-top.png') }}" alt="Banner Top" class="image-full">
-        <img src="{{ public_path('assets/border-top.png') }}" alt="Border Top" class="border-full">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Domisili</h3>
         <div class="content-form">
             <p class="subtitle">Nomor: 374 / VI / Ket / Kel.Sub / 2023</p>

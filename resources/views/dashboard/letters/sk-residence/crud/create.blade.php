@@ -16,7 +16,7 @@
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="year" class="text-second mb-1">Tahun</label>
-                <input type="number" placeholder="YYYY" min="1900" class="input-crud" name="year" id="year" value="{{ old('year') }}" required />
+                <input type="number" placeholder="YYYY" min="1900" max="{{ date("Y") }}" class="input-crud" name="year" id="year" value="{{ old('year') }}" required />
                 @error('year')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
