@@ -135,10 +135,10 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-residence/{sk_residence}/reject", [SkResidenceController::class, 'rejectLetter'])->name('letters.sk-residence.reject');
 
     Route::resource("letters/sk-land-price", SkLandPriceController::class, ['as' => 'letters']);
-    Route::get("letters/sk-land-price/{sk_land-price}/preview", [SkLandPriceController::class, 'preview'])->name('letters.sk-land-price.preview');
-    Route::get("letters/sk-land-price/{sk_land-price}/download/{type?}", [SkLandPriceController::class, 'download'])->name('letters.sk-land-price.download');
-    Route::put("letters/sk-land-price/{sk_land-price}/approve", [SkLandPriceController::class, 'approveLetter'])->name('letters.sk-land-price.approve');
-    Route::put("letters/sk-land-price/{sk_land-price}/reject", [SkLandPriceController::class, 'rejectLetter'])->name('letters.sk-land-price.reject');
+    Route::get("letters/sk-land-price/{sk_land_price}/preview", [SkLandPriceController::class, 'preview'])->name('letters.sk-land-price.preview');
+    Route::get("letters/sk-land-price/{sk_land_price}/download/{type?}", [SkLandPriceController::class, 'download'])->name('letters.sk-land-price.download');
+    Route::put("letters/sk-land-price/{sk_land_price}/approve", [SkLandPriceController::class, 'approveLetter'])->name('letters.sk-land-price.approve');
+    Route::put("letters/sk-land-price/{sk_land_price}/reject", [SkLandPriceController::class, 'rejectLetter'])->name('letters.sk-land-price.reject');
 
     Route::resource("letters/sk-parent-income", SkParentIncomeController::class, ['as' => 'letters']);
     Route::get("letters/sk-parent-income/{sk_parent-income}/preview", [SkParentIncomeController::class, 'preview'])->name('letters.sk-parent-income.preview');

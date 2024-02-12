@@ -80,17 +80,25 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-4 flex flex-col">
-                <label for="" class="text-second mb-1">Status</label>
-                <input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? 'Belum Menikah' : 'Kawin' }}" disabled />
+                <label for="" class="text-second mb-1">Nomor Objek Pajak</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->nop }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-4 flex flex-col">
+                <label for="" class="text-second mb-1">Lokasi Tanah</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->land_location }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-4 flex flex-col">
+                <label for="" class="text-second mb-1">Harga Tanah</label>
+                <input type="text" class="input-crud" value="Rp. @rupiah($get_letter->price)-/are" disabled />
             </div>
             @if (auth()->user()->isCitizent())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
@@ -150,21 +158,21 @@
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-marry.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('letters.sk-land-price.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
+					<a href="{{ route('letters.sk-land-price.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 				</div>
 				<div class="flex items-center">
-					<a href="{{ route('letters.sk-marry.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
+					<a href="{{ route('letters.sk-land-price.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	
 <x-modal-approve-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/approve</x-slot>
+	<x-slot name="route">/letters/sk-land-price/{{ $get_letter->id }}/approve</x-slot>
 </x-modal-approve-letter>
 <x-modal-reject-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/reject</x-slot>
+	<x-slot name="route">/letters/sk-land-price/{{ $get_letter->id }}/reject</x-slot>
 </x-modal-reject-letter>
 @endsection
 

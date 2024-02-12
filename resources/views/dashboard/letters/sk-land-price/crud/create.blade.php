@@ -3,7 +3,7 @@
 @section('main')
 
 	<div class="table-wrapper mt-[20px] input-teacher">
-		<form action="{{ route('letters.sk-marry.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
+		<form action="{{ route('letters.sk-land-price.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
 			@csrf
 			<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			<div class="col-span-12 md:col-span-6 flex flex-col">
@@ -15,12 +15,26 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="status" class="text-second mb-2">Status</label>
-                <select name="status" id="status" class="status-select2">
-					<option value="1">Belum Menikah</option>
-					<option value="2">Kawin</option>
-				</select>
-                @error('status')
+                <label for="nop" class="text-second mb-1">Nomor Objek Pajak</label>
+                <input type="text" class="input-crud" name="nop" id="nop" value="{{ old('nop') }}"
+                    placeholder="Masukkan Nomor Objek Pajak..." required />
+                @error('nop')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="land_location" class="text-second mb-1">Lokasi Tanah</label>
+                <input type="text" class="input-crud" name="land_location" id="land_location" value="{{ old('land_location') }}"
+                    placeholder="Masukkan Lokasi Tanah..." required />
+                @error('land_location')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="price" class="text-second mb-1">Harga Tanah / are</label>
+                <input type="number" class="input-crud" name="price" id="price" value="{{ old('price') }}"
+                    placeholder="Masukkan Harga Tanah Per are..." required />
+                @error('price')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -34,15 +48,9 @@
 			<div class="flex col-span-12 justify-between mt-2">
 				<div class="flex items-center gap-3">
 					<button class="button btn-main" type="submit">Tambah Surat</button>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Batal Tambah</a>
+					<a href="{{ route('letters.sk-land-price.index') }}" class="button btn-second text-white" type="reset">Batal Tambah</a>
 				</div>
 			</div>
 		</form>
 	</div>
 @endsection
-
-@push('js')
-	<script>
-		let status = $(".status-select2").select2()
-	</script>
-@endpush

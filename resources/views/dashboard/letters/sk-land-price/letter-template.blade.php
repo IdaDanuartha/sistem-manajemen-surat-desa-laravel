@@ -99,23 +99,28 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/banner-top.png') }}" alt="Banner Top" class="image-full">
-        <img src="{{ public_path('assets/border-top.png') }}" alt="Border Top" class="border-full">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Harga Tanah</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor: 03 / III / Ket / Kel. Sub / 2019</p>
+            <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <div class="description-other">
-                <p class="paragraph-one">Yang bertanda tangan di bawah ini, Lurah subagan, Kecamatan Karangasem, Kabupaten Karangasem. Berdasarkan Surat Pengantar Kepala Lingkungan Telagamas, Nomor: 76 / TLGMS / III / 2019, tanggal 19 Maret 2019, dengan ini menerangkan dengan sebenarnya bahwa sepanjang pengetahuan kami harga tanah dengan Nomor Obyek Pajak (NOP) : 51.07.040.036.015-0032.0 atas nama SY HADIJAH yang berlokasi  di Jl.Nenas Lingkungan Telagamas, Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem. Harga saat ini adalah berkisaran Rp 150.000.000-/are.</p>
+                <p class="paragraph-one">Yang bertanda tangan di bawah ini, Lurah subagan, Kecamatan Karangasem, Kabupaten Karangasem. Berdasarkan Surat Pengantar Kepala Lingkungan Telagamas, Nomor: 76 / TLGMS / III / 2019, tanggal 19 Maret 2019, dengan ini menerangkan dengan sebenarnya bahwa sepanjang pengetahuan kami harga tanah dengan Nomor Obyek Pajak (NOP) : {{ $letter->nop }} atas nama {{ $letter->sk->citizent->name }} yang berlokasi  di {{ $letter->land_location }}. Harga saat ini adalah berkisaran Rp @rupiah($letter->price)-/are.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagai Administrasi Kredit di bank.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, 22 Pebruari 2023</p>
-                <p>Lurah Subagan</p>
-                {{-- <p class="other">Sekretaris</p> --}}
+                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    @if (Request::is("letters/sk-birth/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif(isset($letter->sk->villageHead))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
             </div>
         </div>
