@@ -28,8 +28,10 @@ class StoreSkMoveRequest extends FormRequest
             "citizent_id" => "required",
             "sk_move_type" => "required",
             "reason" => "required",
-            "sk_move_family.citizent_id" => "required",
-            "sk_move_family.relationship_status" => "required",
+            "moving_address" => "required",
+            "sk_move_type" => "required",
+            "family_citizent_id" => "nullable",
+            "family_relationship_status" => "nullable",
         ];
     }
 
@@ -40,8 +42,9 @@ class StoreSkMoveRequest extends FormRequest
             "citizent_id" => "kepala keluarga",
             "sk_move_type" => "jenis",
             "reason" => "alasan",
-            "sk_move_family.citizent_id" => "keluarga yang pindah",
-            "sk_move_family.relationship_status" => "status hubungan",
+            "moving_address" => "alamat pindah",
+            "family_citizent_id" => "keluarga yang pindah",
+            "family_relationship_status" => "status hubungan",
         ];
     }
 }

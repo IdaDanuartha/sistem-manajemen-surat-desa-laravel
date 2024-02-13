@@ -110,11 +110,13 @@ class SkMoveRepository
       $request["sk_id"] = $sk_letter->id;
       $sk_move = $this->letter->create(Arr::except($request, "sk"));
 
-      foreach(Arr::get($request, "sk_move_family") as $item) {
+      $request["family_citizent_id"] = explode(",", $request["family_citizent_id"]);
+      $request["family_relationship_status"] = explode(",", $request["family_relationship_status"]);
+      foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
         $this->skMoveFamilyLetter->create([
-          "sk_move_id" => $sk_move->id,
-          "citizent_id" => $item["citizent_id"],
-          "relationship_status" => $item["relationship_status"]
+          "sk_move_letter_id" => $sk_move->id,
+          "citizent_id" => $item,
+          "relationship_status" => $request["family_relationship_status"][$index]
         ]);
       }
 

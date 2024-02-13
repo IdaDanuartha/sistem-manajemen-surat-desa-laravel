@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkMove\UpdateSkMoveRequest;
 use App\Models\Sk;
 use App\Models\SkMoveLetter;
 use App\Repositories\Letters\SkMoveRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkMoveController extends Controller
 {
     public function __construct(
         protected readonly SkMoveRepository $skMove,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -40,7 +42,9 @@ class SkMoveController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-move.crud.create') : 
+               view('dashboard.letters.sk-move.crud.create', [
+                    "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +59,10 @@ class SkMoveController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMove->findById($skMove);                                         
-        return view('dashboard.letters.sk-move.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-move.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+        ]);
     }
 
     public function store(StoreSkMoveRequest $request)
