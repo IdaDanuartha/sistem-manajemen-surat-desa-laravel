@@ -9,7 +9,7 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Letter;
 use App\Models\Sk;
-use App\Models\SkMarryLetter;
+use App\Models\RegistrationFormLetter;
 use App\Models\User;
 use App\Utils\UploadFile;
 use Exception;
@@ -24,7 +24,7 @@ class RegistrationFormRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkMarryLetter $letter,    
+    protected readonly RegistrationFormLetter $letter,    
     protected readonly User $user,
     protected readonly UploadFile $uploadFile
   ) {}
@@ -91,7 +91,7 @@ class RegistrationFormRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkMarryLetter $letter): SkMarryLetter
+  public function findById(RegistrationFormLetter $letter): RegistrationFormLetter
   {
     return $this->letter
                 ->where('id', $letter->id)
@@ -107,7 +107,9 @@ class RegistrationFormRepository
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
-      $this->letter->create(["sk_id" => $sk_letter->id, "status" => Arr::get($request, "status")]);
+
+      $request["sk_id"] = $sk_letter->id;
+      $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
@@ -124,7 +126,7 @@ class RegistrationFormRepository
     return $sk_letter;
   }
 
-  public function update($request, SkMarryLetter $letter): bool|array|Exception
+  public function update($request, RegistrationFormLetter $letter): bool|array|Exception
   {
     DB::beginTransaction();    
 
@@ -137,7 +139,7 @@ class RegistrationFormRepository
           }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
-        $letter->updateOrFail(["status" => Arr::get($request, "status")]);
+        $letter->updateOrFail(Arr::except($request, "sk"));
 
         DB::commit();
         return true;
@@ -149,7 +151,7 @@ class RegistrationFormRepository
     }
   }
 
-  public function confirmationLetter(SkMarryLetter $letter, $status): bool|Exception
+  public function confirmationLetter(RegistrationFormLetter $letter, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
@@ -201,7 +203,7 @@ class RegistrationFormRepository
     }
   }
 
-  public function delete(SkMarryLetter $letter): bool|Array|Exception
+  public function delete(RegistrationFormLetter $letter): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           
