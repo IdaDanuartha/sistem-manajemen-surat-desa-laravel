@@ -25,6 +25,8 @@ class StoreRegistrationFormRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "time_period" => "required",
+            "reason" => "required",
         ];
     }
 
@@ -32,6 +34,8 @@ class StoreRegistrationFormRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "time_period" => "jangka waktu",
+            "reason" => "alasan",
         ];
     }
 }

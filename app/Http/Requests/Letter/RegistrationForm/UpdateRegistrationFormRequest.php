@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Letter\SkMarry;
+namespace App\Http\Requests\Letter\RegistrationForm;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSkMarryRequest extends FormRequest
+class UpdateRegistrationFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class UpdateSkMarryRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "time_period" => "required",
+            "reason" => "required",
         ];
     }
 
@@ -31,6 +33,8 @@ class UpdateSkMarryRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "time_period" => "jangka waktu",
+            "reason" => "alasan",
         ];
     }
 }
