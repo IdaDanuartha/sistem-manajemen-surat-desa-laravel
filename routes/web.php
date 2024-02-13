@@ -9,6 +9,7 @@ use App\Http\Controllers\LetterController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
 use App\Http\Controllers\Letters\ParentalPermissionLetterController;
+use App\Http\Controllers\Letters\RegisterFormLetterController;
 use App\Http\Controllers\Letters\SkBirthController;
 use App\Http\Controllers\Letters\SkDieController;
 use App\Http\Controllers\Letters\SkDomicileController;
@@ -177,7 +178,12 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-domicile/{sk_domicile}/approve", [SkDomicileController::class, 'approveLetter'])->name('letters.sk-domicile.approve');
     Route::put("letters/sk-domicile/{sk_domicile}/reject", [SkDomicileController::class, 'rejectLetter'])->name('letters.sk-domicile.reject');
 
-    // Route::resource("letters/sk-birth", Sk::class, ['as' => 'letters']); // surat pendaftaran
+    Route::resource("letters/registration-form", RegisterFormLetterController::class, ['as' => 'letters']); // surat pendaftaran
+    Route::get("letters/registration-form/{registration_form}/preview", [RegisterFormLetterController::class, 'preview'])->name('letters.registration-form.preview');
+    Route::get("letters/registration-form/{registration_form}/download/{type?}", [RegisterFormLetterController::class, 'download'])->name('letters.registration-form.download');
+    Route::put("letters/registration-form/{registration_form}/approve", [RegisterFormLetterController::class, 'approveLetter'])->name('letters.registration-form.approve');
+    Route::put("letters/registration-form/{registration_form}/reject", [RegisterFormLetterController::class, 'rejectLetter'])->name('letters.registration-form.reject');
+
     Route::resource("letters/tree-felling", TreeFellingLetterController::class, ['as' => 'letters']);
     Route::get("letters/tree-felling/{tree_felling}/preview", [TreeFellingLetterController::class, 'preview'])->name('letters.tree-felling.preview');
     Route::get("letters/tree-felling/{tree_felling}/download/{type?}", [TreeFellingLetterController::class, 'download'])->name('letters.tree-felling.download');
