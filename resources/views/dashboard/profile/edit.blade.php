@@ -139,7 +139,7 @@
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    @if (auth()->user()->isVillageHead())
+                    {{-- @if (auth()->user()->isVillageHead()) --}}
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label class="text-second">TTE</label>
                             @if (auth()->user()->signature_image)
@@ -152,7 +152,7 @@
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endif
                 <div class="col-12 flex items-center gap-2 mt-3">
                     <button class="button btn-main" type="submit">Edit Profile</button>

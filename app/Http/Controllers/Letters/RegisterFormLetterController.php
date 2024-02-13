@@ -66,13 +66,13 @@ class RegisterFormLetterController extends Controller
                 $store = $this->registrationForm->store($request->validated());            
     
                 if($store instanceof Sk) return redirect(route("letters.registration-form.index"))
-                                    ->with("success", $this->responseMessage->response('Surat keterangan lahir'));
+                                    ->with("success", $this->responseMessage->response('Surat pendaftaran atau pembatalan penduduk nonpermanen'));
     
                 throw new Exception("");
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.registration-form.create"))->with("error", $this->responseMessage->response('surat keterangan lahir', false));
+                return redirect(route("letters.registration-form.create"))->with("error", $this->responseMessage->response('surat pendaftaran atau pembatalan penduduk nonpermanen', false));
             }
         } else {
             abort(404);
@@ -86,11 +86,11 @@ class RegisterFormLetterController extends Controller
             $update = $this->registrationForm->update($request->validated(), $registrationForm);
             if($update == true) {
                 return redirect(route('letters.registration-form.index'))
-                                ->with('success', $this->responseMessage->response('Surat keterangan lahir', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Surat pendaftaran atau pembatalan penduduk nonpermanen', true, 'update'));
             }
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.registration-form.edit', $registrationForm->id)->with('error', $this->responseMessage->response('surat keterangan lahir', false, 'update'));
+            return redirect()->route('letters.registration-form.edit', $registrationForm->id)->with('error', $this->responseMessage->response('surat pendaftaran atau pembatalan penduduk nonpermanen', false, 'update'));
         }
     }
 
@@ -147,14 +147,14 @@ class RegisterFormLetterController extends Controller
             $delete = $this->registrationForm->delete($registrationForm);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.registration-form.index')->with('success', $this->responseMessage->response('Surat keterangan lahir', true, 'delete'));
+                return redirect()->route('letters.registration-form.index')->with('success', $this->responseMessage->response('Surat pendaftaran atau pembatalan penduduk nonpermanen', true, 'delete'));
             } else if(isset($delete["status"])) {
                 return redirect()->route('letters.registration-form.index')->with('error', $delete["message"]);
             }
 
             throw new Exception;
         } catch (\Exception $e) {            
-            return redirect()->route('letters.registration-form.index')->with('error', $this->responseMessage->response('surat keterangan lahir', false, 'delete'));
+            return redirect()->route('letters.registration-form.index')->with('error', $this->responseMessage->response('surat pendaftaran atau pembatalan penduduk nonpermanen', false, 'delete'));
         }
     }
 }
