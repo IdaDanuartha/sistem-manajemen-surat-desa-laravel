@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sk_power_attorneys', function (Blueprint $table) {
+        Schema::create('sk_inheritance_distributions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Sk::class)
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete(); // pewaris
-            $table->date("date_of_death");
+                ->cascadeOnDelete();
+            $table->integer("surface_area"); // luas tanah (meter)
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sk_power_attorneys');
+        Schema::dropIfExists('sk_inheritance_distributions');
     }
 };

@@ -8,18 +8,22 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
+use App\Http\Controllers\Letters\InheritanceGeneologyLetterController;
 use App\Http\Controllers\Letters\ParentalPermissionLetterController;
 use App\Http\Controllers\Letters\RegisterFormLetterController;
 use App\Http\Controllers\Letters\SkBirthController;
 use App\Http\Controllers\Letters\SkDieController;
 use App\Http\Controllers\Letters\SkDomicileController;
 use App\Http\Controllers\Letters\SkGrantController;
+use App\Http\Controllers\Letters\SkHeirController;
+use App\Http\Controllers\Letters\SkInheritanceDistributionController;
 use App\Http\Controllers\Letters\SkLandPriceController;
 use App\Http\Controllers\Letters\SkMaritalStatusController;
 use App\Http\Controllers\Letters\SkMarryController;
 use App\Http\Controllers\Letters\SkMoveController;
 use App\Http\Controllers\Letters\SkNameController;
 use App\Http\Controllers\Letters\SkParentIncomeController;
+use App\Http\Controllers\Letters\SkPowerAttorneyController;
 use App\Http\Controllers\Letters\SkResidenceController;
 use App\Http\Controllers\Letters\SkSubsidizedHousingController;
 use App\Http\Controllers\Letters\SktmController;
@@ -29,6 +33,7 @@ use App\Http\Controllers\Letters\TreeFellingLetterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\SkDomicileLetter;
+use App\Models\SkPowerAttorney;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
@@ -147,7 +152,30 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-parent-income/{sk_parent_income}/approve", [SkParentIncomeController::class, 'approveLetter'])->name('letters.sk-parent-income.approve');
     Route::put("letters/sk-parent-income/{sk_parent_income}/reject", [SkParentIncomeController::class, 'rejectLetter'])->name('letters.sk-parent-income.reject');
 
-    // Route::resource("letters/sk-bi", Sk::class, ['as' => 'letters']); // sk silsilah dan kuasa
+    Route::resource("letters/sk-inheritance-geneology", InheritanceGeneologyLetterController::class, ['as' => 'letters']);
+    Route::get("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/preview", [InheritanceGeneologyLetterController::class, 'preview'])->name('letters.sk-inheritance-geneology.preview');
+    Route::get("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/download/{type?}", [InheritanceGeneologyLetterController::class, 'download'])->name('letters.sk-inheritance-geneology.download');
+    Route::put("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/approve", [InheritanceGeneologyLetterController::class, 'approveLetter'])->name('letters.sk-inheritance-geneology.approve');
+    Route::put("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/reject", [InheritanceGeneologyLetterController::class, 'rejectLetter'])->name('letters.sk-inheritance-geneology.reject');
+
+    Route::resource("letters/sk-heir", SkHeirController::class, ['as' => 'letters']);
+    Route::get("letters/sk-heir/{sk_heir}/preview", [SkHeirController::class, 'preview'])->name('letters.sk-heir.preview');
+    Route::get("letters/sk-heir/{sk_heir}/download/{type?}", [SkHeirController::class, 'download'])->name('letters.sk-heir.download');
+    Route::put("letters/sk-heir/{sk_heir}/approve", [SkHeirController::class, 'approveLetter'])->name('letters.sk-heir.approve');
+    Route::put("letters/sk-heir/{sk_heir}/reject", [SkHeirController::class, 'rejectLetter'])->name('letters.sk-heir.reject');
+
+    Route::resource("letters/sk-power-attorney", SkPowerAttorneyController::class, ['as' => 'letters']);
+    Route::get("letters/sk-power-attorney/{sk_power_attorney}/preview", [SkPowerAttorney::class, 'preview'])->name('letters.sk-power-attorney.preview');
+    Route::get("letters/sk-power-attorney/{sk_power_attorney}/download/{type?}", [SkPowerAttorney::class, 'download'])->name('letters.sk-power-attorney.download');
+    Route::put("letters/sk-power-attorney/{sk_power_attorney}/approve", [SkPowerAttorney::class, 'approveLetter'])->name('letters.sk-power-attorney.approve');
+    Route::put("letters/sk-power-attorney/{sk_power_attorney}/reject", [SkPowerAttorney::class, 'rejectLetter'])->name('letters.sk-power-attorney.reject');
+
+    Route::resource("letters/sk-inheritance-distribution", SkInheritanceDistributionController::class, ['as' => 'letters']);
+    Route::get("letters/sk-inheritance-distribution/{sk_inheritance_distribution}/preview", [SkInheritanceDistributionController::class, 'preview'])->name('letters.sk-inheritance-distribution.preview');
+    Route::get("letters/sk-inheritance-distribution/{sk_inheritance_distribution}/download/{type?}", [SkInheritanceDistributionController::class, 'download'])->name('letters.sk-inheritance-distribution.download');
+    Route::put("letters/sk-inheritance-distribution/{sk_inheritance_distribution}/approve", [SkInheritanceDistributionController::class, 'approveLetter'])->name('letters.sk-inheritance-distribution.approve');
+    Route::put("letters/sk-inheritance-distribution/{sk_inheritance_distribution}/reject", [SkInheritanceDistributionController::class, 'rejectLetter'])->name('letters.sk-inheritance-distribution.reject');
+    
     Route::resource("letters/sk-die", SkDieController::class, ['as' => 'letters']);
     Route::get("letters/sk-die/{sk_die}/preview", [SkDieController::class, 'preview'])->name('letters.sk-die.preview');
     Route::get("letters/sk-die/{sk_die}/download/{type?}", [SkDieController::class, 'download'])->name('letters.sk-die.download');

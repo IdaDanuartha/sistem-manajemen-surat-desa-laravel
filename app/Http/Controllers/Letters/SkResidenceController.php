@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Letter\Residence\StoreResidenceRequest;
-use App\Http\Requests\Letter\Residence\UpdateResidenceRequest;
 use App\Http\Requests\Letter\SkResidence\StoreSkResidenceRequest;
 use App\Http\Requests\Letter\SkResidence\UpdateSkResidenceRequest;
 use App\Models\Sk;

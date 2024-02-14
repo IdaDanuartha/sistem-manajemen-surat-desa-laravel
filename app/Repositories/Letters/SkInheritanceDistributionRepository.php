@@ -8,7 +8,7 @@ use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Sk;
-use App\Models\SkPowerAttorney;
+use App\Models\SkInheritanceDistribution;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class SkPowerAttorneyRepository
+class SkInheritanceDistributionRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkPowerAttorney $letter,    
+    protected readonly SkInheritanceDistribution $letter,    
     protected readonly User $user,
   ) {}
 
@@ -88,7 +88,7 @@ class SkPowerAttorneyRepository
     return $this->letter->latest()->paginate(10);
   }
 
-  public function findById(SkPowerAttorney $letter): SkPowerAttorney
+  public function findById(SkInheritanceDistribution $letter): SkInheritanceDistribution
   {
     return $this->letter
                 ->where('id', $letter->id)
@@ -123,7 +123,7 @@ class SkPowerAttorneyRepository
     return $sk_letter;
   }
 
-  public function update($request, SkPowerAttorney $letter): bool|array|Exception
+  public function update($request, SkInheritanceDistribution $letter): bool|array|Exception
   {
     DB::beginTransaction();    
 
@@ -148,7 +148,7 @@ class SkPowerAttorneyRepository
     }
   }
 
-  public function confirmationLetter(SkPowerAttorney $letter, $status): bool|Exception
+  public function confirmationLetter(SkInheritanceDistribution $letter, $status): bool|Exception
   {
     DB::beginTransaction();    
     try {  	
@@ -200,7 +200,7 @@ class SkPowerAttorneyRepository
     }
   }
 
-  public function delete(SkPowerAttorney $letter): bool|Array|Exception
+  public function delete(SkInheritanceDistribution $letter): bool|Array|Exception
   {
     DB::beginTransaction();
     try {           

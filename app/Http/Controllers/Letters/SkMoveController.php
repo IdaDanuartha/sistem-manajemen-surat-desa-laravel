@@ -43,7 +43,7 @@ class SkMoveController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
                view('dashboard.letters.sk-move.crud.create', [
-                    "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                    "citizents" => $this->user->findAll()
                ]) : 
                abort(404);
     }
@@ -61,7 +61,7 @@ class SkMoveController extends Controller
         $get_letter = $this->skMove->findById($skMove);                                         
         return view('dashboard.letters.sk-move.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+            "citizents" => $this->user->findAll()
         ]);
     }
 

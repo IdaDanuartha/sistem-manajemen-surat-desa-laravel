@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Citizent;
 use App\Models\Sk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,13 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sk_power_attorneys', function (Blueprint $table) {
+        Schema::create('sk_heirs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Sk::class)
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete(); // pewaris
-            $table->date("date_of_death");
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Citizent::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete(); // penerima kuasa
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sk_power_attorneys');
+        Schema::dropIfExists('sk_heirs');
     }
 };

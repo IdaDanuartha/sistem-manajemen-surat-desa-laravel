@@ -43,7 +43,7 @@ class SkMaritalStatusController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
                view('dashboard.letters.sk-marital-status.crud.create', [
-                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                "citizents" => $this->user->findAll()
                ]) : 
                abort(404);
     }
@@ -59,7 +59,7 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status); 
-        $citizents = $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id);                                        
+        $citizents = $this->user->findAll();                                        
         return view('dashboard.letters.sk-marital-status.crud.edit', compact('get_letter', "citizents"));
     }
 
