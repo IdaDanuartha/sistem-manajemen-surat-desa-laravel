@@ -152,11 +152,11 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-parent-income/{sk_parent_income}/approve", [SkParentIncomeController::class, 'approveLetter'])->name('letters.sk-parent-income.approve');
     Route::put("letters/sk-parent-income/{sk_parent_income}/reject", [SkParentIncomeController::class, 'rejectLetter'])->name('letters.sk-parent-income.reject');
 
-    Route::resource("letters/sk-inheritance-geneology", InheritanceGeneologyLetterController::class, ['as' => 'letters']);
-    Route::get("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/preview", [InheritanceGeneologyLetterController::class, 'preview'])->name('letters.sk-inheritance-geneology.preview');
-    Route::get("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/download/{type?}", [InheritanceGeneologyLetterController::class, 'download'])->name('letters.sk-inheritance-geneology.download');
-    Route::put("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/approve", [InheritanceGeneologyLetterController::class, 'approveLetter'])->name('letters.sk-inheritance-geneology.approve');
-    Route::put("letters/sk-inheritance-geneology/{sk_inheritance_geneology}/reject", [InheritanceGeneologyLetterController::class, 'rejectLetter'])->name('letters.sk-inheritance-geneology.reject');
+    Route::resource("letters/inheritance-geneology", InheritanceGeneologyLetterController::class, ['as' => 'letters']);
+    Route::get("letters/inheritance-geneology/{inheritance_geneology}/preview", [InheritanceGeneologyLetterController::class, 'preview'])->name('letters.inheritance-geneology.preview');
+    Route::get("letters/inheritance-geneology/{inheritance_geneology}/download/{type?}", [InheritanceGeneologyLetterController::class, 'download'])->name('letters.inheritance-geneology.download');
+    Route::put("letters/inheritance-geneology/{inheritance_geneology}/approve", [InheritanceGeneologyLetterController::class, 'approveLetter'])->name('letters.inheritance-geneology.approve');
+    Route::put("letters/inheritance-geneology/{inheritance_geneology}/reject", [InheritanceGeneologyLetterController::class, 'rejectLetter'])->name('letters.inheritance-geneology.reject');
 
     Route::resource("letters/sk-heir", SkHeirController::class, ['as' => 'letters']);
     Route::get("letters/sk-heir/{sk_heir}/preview", [SkHeirController::class, 'preview'])->name('letters.sk-heir.preview');
