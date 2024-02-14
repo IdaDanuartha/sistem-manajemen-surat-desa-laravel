@@ -245,7 +245,7 @@
                     <span data-i18n="Letters" class="text-[#28242185]">SK Penghasilan Ortu</span>
                 </a>
             </li>
-            <li class="w-full">
+            {{-- <li class="w-full">
                 <a href="#" class="side-link  {{ Request::is('letters/sk-power-attorney*') ? 'active' : '' }}">
                     <span class="icon-sidebar-wrapper">
                         <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,6 +259,34 @@
                     </span>
                     <span data-i18n="Letters" class="text-[#28242185]">SK Silsilah & Kuasa</span>
                 </a>
+            </li> --}}
+            <li class="menu-item {{ Request::is('letters/inheritance-geneology*') || Request::is('letters/sk-power-attorney*') || Request::is('letters/sk-heir*') || Request::is('letters/sk-inheritance-distribution*')  ? 'active' : '' }}">
+                <a href="#" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-box"></i>
+                    <div>SK Silsilah & Kuasa</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div>Surat Silsilah Waris</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div>SK Ahli Waris</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div>Surat Kuasa</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">
+                            <div>Surat Pernyataan Pembagian Waris</div>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="w-full">
                 <a href="{{ route('letters.sk-die.index') }}" class="side-link  {{ Request::is('letters/sk-die*') ? 'active' : '' }}">
