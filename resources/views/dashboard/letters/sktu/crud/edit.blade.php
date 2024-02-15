@@ -29,12 +29,10 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sktu.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.sktu.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
 	</div>
 @endsection

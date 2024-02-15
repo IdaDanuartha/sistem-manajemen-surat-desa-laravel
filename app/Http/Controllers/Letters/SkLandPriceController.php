@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkLandPrice\UpdateSkLandPriceRequest;
 use App\Models\Sk;
 use App\Models\SkLandPriceLetter;
 use App\Repositories\Letters\SkLandPriceRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkLandPriceController extends Controller
 {
     public function __construct(
         protected readonly SkLandPriceRepository $skLandPrice,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class SkLandPriceController extends Controller
             $letters = $this->skLandPrice->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skLandPrice->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skLandPrice->findLetterByStatus(0);
+        } else {
+            $letters = $this->skLandPrice->findAll();
         }
+
         return view('dashboard.letters.sk-land-price.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-land-price.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-land-price.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class SkLandPriceController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skLandPrice->findById($sk_land_price);                                         
-        return view('dashboard.letters.sk-land-price.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-land-price.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkLandPriceRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skLandPrice->store($request->validated());            
     
@@ -130,7 +140,7 @@ class SkLandPriceController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-land-price.letter-template', ['letter' => $sk_land_price, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Harga Tanah " . $sk_land_price->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-harga-tanah-" . $sk_land_price->sk->citizent->name . ".pdf");
     }
     
     public function download(SkLandPriceLetter $sk_land_price, $type = "pdf")
@@ -138,7 +148,7 @@ class SkLandPriceController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-land-price.letter-template', ['letter' => $sk_land_price]);        
 
-        return $generated->download("SK Harga Tanah " . $sk_land_price->sk->citizent->name . ".$type");
+        return $generated->download("sk-harga-tanah-" . $sk_land_price->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkLandPriceLetter $sk_land_price)

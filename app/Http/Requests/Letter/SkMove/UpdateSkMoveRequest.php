@@ -27,8 +27,9 @@ class UpdateSkMoveRequest extends FormRequest
             "citizent_id" => "required",
             "sk_move_type" => "required",
             "reason" => "required",
-            "sk_move_family.citizent_id" => "required",
-            "sk_move_family.relationship_status" => "required",
+            "moving_address" => "required",
+            "family_citizent_id" => "required",
+            "family_relationship_status" => "required",
         ];
     }
 
@@ -39,6 +40,7 @@ class UpdateSkMoveRequest extends FormRequest
             "citizent_id" => "kepala keluarga",
             "sk_move_type" => "jenis",
             "reason" => "alasan",
+            "moving_address" => "alamat pindah",
             "sk_move_family.citizent_id" => "keluarga yang pindah",
             "sk_move_family.relationship_status" => "status hubungan",
         ];

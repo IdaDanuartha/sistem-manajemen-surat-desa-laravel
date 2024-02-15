@@ -32,18 +32,21 @@ class SkMaritalStatusController extends Controller
             $letters = $this->skMaritalStatus->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skMaritalStatus->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skMaritalStatus->findLetterByStatus(0);
+        } else {
+            $letters = $this->skMaritalStatus->findAll();
         }
+
         return view('dashboard.letters.sk-marital-status.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-marital-status.crud.create', [
-                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -59,14 +62,14 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status); 
-        $citizents = $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id);                                        
+        $citizents = $this->user->findAllCitizent();                                        
         return view('dashboard.letters.sk-marital-status.crud.edit', compact('get_letter', "citizents"));
     }
 
     public function store(StoreSkMaritalStatusRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skMaritalStatus->store($request->validated());            
     
@@ -134,7 +137,14 @@ class SkMaritalStatusController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Status Nikah " . $sk_marital_status->sk->citizent->name . ".pdf");
+        if($sk_marital_status === 1) {
+            $status = "duda";
+        } else if($sk_marital_status === 2) {
+            $status = "janda";
+        } else {
+            $status = "cerai";
+        }
+        return $generated->stream("surat-keterangan-" . $status . "-" . $sk_marital_status->sk->citizent->name . ".pdf");
     }
     
     public function download(SkMaritalStatusLetter $sk_marital_status, $type = "pdf")
@@ -142,7 +152,15 @@ class SkMaritalStatusController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status]);        
 
-        return $generated->download("SK Status Nikah " . $sk_marital_status->sk->citizent->name . ".$type");
+        if($sk_marital_status === 1) {
+            $status = "duda";
+        } else if($sk_marital_status === 2) {
+            $status = "janda";
+        } else {
+            $status = "cerai";
+        }
+
+        return $generated->download("surat-keterangan-" . $status . "-" . $sk_marital_status->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkMaritalStatusLetter $sk_marital_status)

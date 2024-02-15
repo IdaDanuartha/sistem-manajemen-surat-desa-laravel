@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("nop"); // nomor objek pajak
             $table->text("land_location");
             $table->bigInteger("price"); // price per are
+            $table->string("purpose");
             $table->timestamps();
         });
     }

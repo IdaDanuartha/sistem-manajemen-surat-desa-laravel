@@ -94,7 +94,7 @@ class SkMoveRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['families', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 
@@ -110,11 +110,11 @@ class SkMoveRepository
       $request["sk_id"] = $sk_letter->id;
       $sk_move = $this->letter->create(Arr::except($request, "sk"));
 
-      foreach(Arr::get($request, "sk_move_family") as $item) {
+      foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
         $this->skMoveFamilyLetter->create([
-          "sk_move_id" => $sk_move->id,
-          "citizent_id" => $item["citizent_id"],
-          "relationship_status" => $item["relationship_status"]
+          "sk_move_letter_id" => $sk_move->id,
+          "citizent_id" => $item,
+          "relationship_status" => $request["family_relationship_status"][$index]
         ]);
       }
 
@@ -140,14 +140,28 @@ class SkMoveRepository
 
     try {
         if(isset($request["sk"]["is_published"])) {
-            $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+          $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+          Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
-            $request["sk"]["is_published"] = true;
-          }
+          $request["sk"]["is_published"] = true;
+        }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
+
+        $sk_move = $this->skMoveFamilyLetter->where("sk_move_letter_id", $letter->id)->get();
+
+        foreach($sk_move as $item) {
+          $item->delete();
+        }
+
+        foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
+          $this->skMoveFamilyLetter->create([
+            "sk_move_letter_id" => $letter->id,
+            "citizent_id" => $item,
+            "relationship_status" => $request["family_relationship_status"][$index]
+          ]);
+        }
 
         DB::commit();
         return true;

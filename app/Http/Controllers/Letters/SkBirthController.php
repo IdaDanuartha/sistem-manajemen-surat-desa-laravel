@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkBirth\UpdateSkBirthRequest;
 use App\Models\Sk;
 use App\Models\SkBirthLetter;
 use App\Repositories\Letters\SkBirthRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkBirthController extends Controller
 {
     public function __construct(
         protected readonly SkBirthRepository $skBirth,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class SkBirthController extends Controller
             $letters = $this->skBirth->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skBirth->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skBirth->findLetterByStatus(0);
+        } else {
+            $letters = $this->skBirth->findAll();
         }
+
         return view('dashboard.letters.sk-birth.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-birth.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-birth.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class SkBirthController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skBirth->findById($sk_birth);                                         
-        return view('dashboard.letters.sk-birth.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-birth.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkBirthRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skBirth->store($request->validated());            
     
@@ -129,7 +139,7 @@ class SkBirthController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-birth.letter-template', ['letter' => $sk_birth, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Lahir " . $sk_birth->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-keterangan-lahir- " . $sk_birth->sk->citizent->name . ".pdf");
     }
     
     public function download(SkBirthLetter $sk_birth, $type = "pdf")
@@ -137,7 +147,7 @@ class SkBirthController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-birth.letter-template', ['letter' => $sk_birth]);        
 
-        return $generated->download("SK Lahir " . $sk_birth->sk->citizent->name . ".$type");
+        return $generated->download("surat-keterangan-lahir- " . $sk_birth->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkBirthLetter $sk_birth)

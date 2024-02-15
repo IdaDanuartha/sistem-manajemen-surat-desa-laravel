@@ -80,25 +80,33 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 {{ $get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">SKTM Type</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sktm_type->label() }}" disabled />
             </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Tujuan</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
+            </div>
 			@if ($get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH)
+				<div class="col-span-12 md:col-span-6 flex flex-col">
+					<label for="" class="text-second mb-1">Nama Anak</label>
+					<input type="text" class="input-crud" value="{{ $get_letter->sktmSchool?->citizent->name }}" disabled />
+				</div>
 				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label for="" class="text-second mb-1">Nama Sekolah</label>
 					<input type="text" class="input-crud" value="{{ $get_letter->sktmSchool?->school_name }}" disabled />
 				</div>
 			@endif
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input

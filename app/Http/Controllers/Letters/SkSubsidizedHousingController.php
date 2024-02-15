@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkSubsidizedHousing\UpdateSkSubsidizedHousingReques
 use App\Models\Sk;
 use App\Models\SkSubsidizedHousingLetter;
 use App\Repositories\Letters\SkSubsidizedHousingRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkSubsidizedHousingController extends Controller
 {
     public function __construct(
         protected readonly SkSubsidizedHousingRepository $skSubsidizedHousing,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class SkSubsidizedHousingController extends Controller
             $letters = $this->skSubsidizedHousing->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skSubsidizedHousing->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skSubsidizedHousing->findLetterByStatus(0);
+        } else {
+            $letters = $this->skSubsidizedHousing->findAll();
         }
+
         return view('dashboard.letters.sk-subsidized-housing.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-subsidized-housing.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-subsidized-housing.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class SkSubsidizedHousingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skSubsidizedHousing->findById($skSubsidizedHousing);                                         
-        return view('dashboard.letters.sk-subsidized-housing.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-subsidized-housing.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkSubsidizedHousingRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skSubsidizedHousing->store($request->validated());            
     
@@ -130,7 +140,7 @@ class SkSubsidizedHousingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-subsidized-housing.letter-template', ['letter' => $skSubsidizedHousing, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Rumah Bersubsidi " . $skSubsidizedHousing->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-rumah-bersubsidi-" . $skSubsidizedHousing->sk->citizent->name . ".pdf");
     }
     
     public function download(SkSubsidizedHousingLetter $skSubsidizedHousing, $type = "pdf")
@@ -138,7 +148,7 @@ class SkSubsidizedHousingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-subsidized-housing.letter-template', ['letter' => $skSubsidizedHousing]);        
 
-        return $generated->download("SK Rumah Bersubsidi " . $skSubsidizedHousing->sk->citizent->name . ".$type");
+        return $generated->download("sk-rumah-bersubsidi-" . $skSubsidizedHousing->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkSubsidizedHousingLetter $skSubsidizedHousing)

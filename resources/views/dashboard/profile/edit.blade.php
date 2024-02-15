@@ -139,21 +139,19 @@
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    @if (auth()->user()->isVillageHead())
-                        <div class="col-md-6 col-12 mb-4 flex flex-col">
-                            <label class="text-second">TTE</label>
-                            @if (auth()->user()->signature_image)
-                                <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
-                            @else
-                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
-                            @endif
-                            <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4 p-0"/>
-                            @error('user.signature_image')
-                                <div class="text-danger mt-1">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    @endif
                 @endif
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">TTE</label>
+                    @if (auth()->user()->signature_image)
+                        <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
+                    @endif
+                    <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4 p-0"/>
+                    @error('user.signature_image')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="col-12 flex items-center gap-2 mt-3">
                     <button class="button btn-main" type="submit">Edit Profile</button>
                     <a href="{{ route('profile.index') }}" class="button text-white btn-second" type="reset">Batal Edit</a>

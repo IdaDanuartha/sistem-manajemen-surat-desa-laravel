@@ -28,7 +28,7 @@
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="year" class="text-second mb-1">Tahun Meninggal</label>
-                <input type="number" min="1900" max="{{ date("Y") }}" class="input-crud" name="year" id="year" value="{{ old('year') }}"
+                <input type="number" min="1900" max="{{ date("Y") }}" class="input-crud" name="year" id="year"
                     placeholder="YYYY" required value="{{ $get_letter->year }}" />
                 @error('year')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -41,12 +41,10 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sk-die.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.sk-die.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
 	</div>
 @endsection

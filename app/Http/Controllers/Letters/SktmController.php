@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\Sktm\UpdateSktmRequest;
 use App\Models\Sk;
 use App\Models\SktmLetter;
 use App\Repositories\Letters\SktmRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SktmController extends Controller
 {
     public function __construct(
         protected readonly SktmRepository $sktm,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class SktmController extends Controller
             $letters = $this->sktm->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->sktm->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->sktm->findLetterByStatus(0);
+        } else {
+            $letters = $this->sktm->findAll();
         }
+
         return view('dashboard.letters.sktm.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sktm.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sktm.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class SktmController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->sktm->findById($sktm);                                         
-        return view('dashboard.letters.sktm.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sktm.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSktmRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->sktm->store($request->validated());            
     
@@ -130,7 +140,7 @@ class SktmController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sktm.letter-template', ['letter' => $sktm, "user" => auth()->user()]);        
 
-        return $generated->stream("SKTM " . $sktm->sk->citizent->name . ".pdf");
+        return $generated->stream("sktm-" . $sktm->sk->citizent->name . ".pdf");
     }
     
     public function download(SktmLetter $sktm, $type = "pdf")
@@ -138,7 +148,7 @@ class SktmController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sktm.letter-template', ['letter' => $sktm]);        
 
-        return $generated->download("SKTM " . $sktm->sk->citizent->name . ".$type");
+        return $generated->download("sktm-" . $sktm->sk->citizent->name . ".$type");
     }
 
     public function destroy(SktmLetter $sktm)

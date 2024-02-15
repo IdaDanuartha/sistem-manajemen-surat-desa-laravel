@@ -80,18 +80,38 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
-                <label for="" class="text-second mb-1">Status</label>
-                <input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? 'Belum Menikah' : 'Kawin' }}" disabled />
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Pewaris</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
             </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Tanggal Meninggal</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->date_of_death->format("d M Y") }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-8 flex flex-col heir-group">
+				<div class="flex items-center mb-2">
+					<label for="" class="text-second">Ahli Waris</label>
+				</div>
+                @foreach ($get_letter->families as $item)
+					<input type="text" class="input-crud" value="{{ $item->citizent->name }}" disabled />
+					<br>
+				@endforeach
+            </div>
+			<div class="col-span-12 md:col-span-4 flex flex-col relationship-status-group">
+                <label for="" class="text-second mb-2">Status Hubungan</label>
+                @foreach ($get_letter->families as $item)
+					<input type="text" class="input-crud" value="{{ $item->relationship_status->label() }}" disabled />
+					<br>
+				@endforeach            
+			</div>
             @if (auth()->user()->isCitizent())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
@@ -150,21 +170,21 @@
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-marry.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
-					<a href="{{ route('letters.sk-marry.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('letters.sk-power-attorney.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
+					<a href="{{ route('letters.sk-power-attorney.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 				</div>
 				<div class="flex items-center">
-					<a href="{{ route('letters.sk-marry.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
+					<a href="{{ route('letters.sk-power-attorney.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	
 <x-modal-approve-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/approve</x-slot>
+	<x-slot name="route">/letters/sk-power-attorney/{{ $get_letter->id }}/approve</x-slot>
 </x-modal-approve-letter>
 <x-modal-reject-letter>
-	<x-slot name="route">/letters/sk-marry/{{ $get_letter->id }}/reject</x-slot>
+	<x-slot name="route">/letters/sk-power-attorney/{{ $get_letter->id }}/reject</x-slot>
 </x-modal-reject-letter>
 @endsection
 

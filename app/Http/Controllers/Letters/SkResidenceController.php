@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Letter\Residence\StoreResidenceRequest;
-use App\Http\Requests\Letter\Residence\UpdateResidenceRequest;
 use App\Http\Requests\Letter\SkResidence\StoreSkResidenceRequest;
 use App\Http\Requests\Letter\SkResidence\UpdateSkResidenceRequest;
 use App\Models\Sk;
 use App\Models\SkResidenceLetter;
 use App\Repositories\Letters\SkResidenceRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -20,6 +19,7 @@ class SkResidenceController extends Controller
 {
     public function __construct(
         protected readonly SkResidenceRepository $skResidence,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -32,17 +32,22 @@ class SkResidenceController extends Controller
             $letters = $this->skResidence->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skResidence->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skResidence->findLetterByStatus(0);
+        } else {
+            $letters = $this->skResidence->findAll();
         }
+
         return view('dashboard.letters.sk-residence.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-residence.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-residence.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -57,13 +62,16 @@ class SkResidenceController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skResidence->findById($skResidence);                                         
-        return view('dashboard.letters.sk-residence.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-residence.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkResidenceRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skResidence->store($request->validated());            
     
@@ -132,7 +140,7 @@ class SkResidenceController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-residence.letter-template', ['letter' => $skResidence, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Tempat Tinggal " . $skResidence->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-tempat-tinggal-" . $skResidence->sk->citizent->name . ".pdf");
     }
     
     public function download(SkResidenceLetter $skResidence, $type = "pdf")
@@ -140,7 +148,7 @@ class SkResidenceController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-residence.letter-template', ['letter' => $skResidence]);        
 
-        return $generated->download("SK Tempat Tinggal " . $skResidence->sk->citizent->name . ".$type");
+        return $generated->download("sk-tempat-tinggal-" . $skResidence->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkResidenceLetter $skResidence)

@@ -10,6 +10,7 @@ use App\Models\Sk;
 use App\Models\SkTravelingLetter;
 use App\Models\VillageHead;
 use App\Repositories\Letters\SkTravelingRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -20,6 +21,7 @@ class SkTravellingController extends Controller
     public function __construct(
         protected readonly SkTravelingRepository $skTravelling,
         protected readonly VillageHead $villageHead,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -32,17 +34,22 @@ class SkTravellingController extends Controller
             $letters = $this->skTravelling->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skTravelling->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skTravelling->findLetterByStatus(0);
+        } else {
+            $letters = $this->skTravelling->findAll();
         }
+
         return view('dashboard.letters.sk-traveling.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-traveling.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-traveling.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -57,13 +64,16 @@ class SkTravellingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skTravelling->findById($sk_travelling);                                         
-        return view('dashboard.letters.sk-traveling.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-traveling.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkTravelingRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skTravelling->store($request->validated());            
     
@@ -136,7 +146,7 @@ class SkTravellingController extends Controller
             'village_head' => $this->villageHead->find(1)
         ]);        
 
-        return $generated->stream("SK Bepergian " . $sk_travelling->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-bepergian-" . $sk_travelling->sk->citizent->name . ".pdf");
     }
     
     public function download(SkTravelingLetter $sk_travelling, $type = "pdf")
@@ -144,7 +154,7 @@ class SkTravellingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-traveling.letter-template', ['letter' => $sk_travelling]);        
 
-        return $generated->download("SK Bepergian " . $sk_travelling->sk->citizent->name . ".$type");
+        return $generated->download("sk-bepergian-" . $sk_travelling->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkTravelingLetter $sk_travelling)

@@ -32,18 +32,22 @@ class SkParentIncomeController extends Controller
             $letters = $this->skParentIncome->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skParentIncome->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skParentIncome->findLetterByStatus(0);
+        } else {
+            $letters = $this->skParentIncome->findAll();
         }
+
         return view('dashboard.letters.sk-parent-income.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-parent-income.crud.create', [
-                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                    // "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,25 +65,26 @@ class SkParentIncomeController extends Controller
         $get_letter = $this->skParentIncome->findById($sk_parent_income);                                         
         return view('dashboard.letters.sk-parent-income.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+            // "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkParentIncomeRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skParentIncome->store($request->validated());            
     
                 if($store instanceof Sk) return redirect(route("letters.sk-parent-income.index"))
-                                    ->with("success", $this->responseMessage->response('Surat keterangan penghasilan orang tua'));
+                                    ->with("success", $this->responseMessage->response('Surat keterangan penghasilan'));
     
                 throw new Exception();
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.sk-parent-income.create"))->with("error", $this->responseMessage->response('surat keterangan penghasilan orang tua', false));
+                return redirect(route("letters.sk-parent-income.create"))->with("error", $this->responseMessage->response('surat keterangan penghasilan', false));
             }
         } else {
             abort(404);
@@ -93,12 +98,12 @@ class SkParentIncomeController extends Controller
             $update = $this->skParentIncome->update($request->validated(), $sk_parent_income);
             if($update == true) {
                 return redirect(route('letters.sk-parent-income.index'))
-                                ->with('success', $this->responseMessage->response('Surat keterangan penghasilan orang tua', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Surat keterangan penghasilan', true, 'update'));
             }
 
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-parent-income.edit', $sk_parent_income->id)->with('error', $this->responseMessage->response('surat keterangan penghasilan orang tua', false, 'update'));
+            return redirect()->route('letters.sk-parent-income.edit', $sk_parent_income->id)->with('error', $this->responseMessage->response('surat keterangan penghasilan', false, 'update'));
         }
     }
 
@@ -137,7 +142,7 @@ class SkParentIncomeController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-parent-income.letter-template', ['letter' => $sk_parent_income, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Penghasilan Orang Tua " . $sk_parent_income->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-penghasilan-orang-tua-" . $sk_parent_income->sk->citizent->name . ".pdf");
     }
     
     public function download(SkParentIncomeLetter $sk_parent_income, $type = "pdf")
@@ -145,7 +150,7 @@ class SkParentIncomeController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-parent-income.letter-template', ['letter' => $sk_parent_income]);        
 
-        return $generated->download("SK Penghasilan Orang Tua " . $sk_parent_income->sk->citizent->name . ".$type");
+        return $generated->download("sk-penghasilan-orang-tua-" . $sk_parent_income->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkParentIncomeLetter $sk_parent_income)
@@ -155,14 +160,14 @@ class SkParentIncomeController extends Controller
             $delete = $this->skParentIncome->delete($sk_parent_income);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.sk-parent-income.index')->with('success', $this->responseMessage->response('Surat keterangan penghasilan orang tua', true, 'delete'));
+                return redirect()->route('letters.sk-parent-income.index')->with('success', $this->responseMessage->response('Surat keterangan penghasilan', true, 'delete'));
             } else if(isset($delete["status"])) {
                 return redirect()->route('letters.sk-parent-income.index')->with('error', $delete["message"]);
             }
 
             throw new Exception;
         } catch (\Exception $e) {            
-            return redirect()->route('letters.sk-parent-income.index')->with('error', $this->responseMessage->response('surat keterangan penghasilan orang tua', false, 'delete'));
+            return redirect()->route('letters.sk-parent-income.index')->with('error', $this->responseMessage->response('surat keterangan penghasilan', false, 'delete'));
         }
     }
 }

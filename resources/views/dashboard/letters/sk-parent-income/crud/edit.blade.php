@@ -27,9 +27,9 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="income" class="text-second mb-1">Pendapatan</label>
+                <label for="income" class="text-second mb-1">Pendapatan (Rp)</label>
                 <input type="number" class="input-crud" name="income" id="income" value="{{ $get_letter->income }}"
-                    placeholder="Masukkan Penghasilan..." required />
+                    placeholder="Masukkan Pendapatan..." required />
                 @error('income')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
@@ -41,12 +41,10 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sk-parent-income.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.sk-parent-income.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
 	</div>
 @endsection

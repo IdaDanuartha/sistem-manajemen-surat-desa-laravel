@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkMove\UpdateSkMoveRequest;
 use App\Models\Sk;
 use App\Models\SkMoveLetter;
 use App\Repositories\Letters\SkMoveRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkMoveController extends Controller
 {
     public function __construct(
         protected readonly SkMoveRepository $skMove,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -28,10 +30,10 @@ class SkMoveController extends Controller
             $letters = $this->skMove->findLetterByVillageHead();
         } else if(auth()->user()->role === Role::SECTION_HEAD) {
             $letters = $this->skMove->findLetterBySectionHead();
-        } else if(auth()->user()->role === Role::CITIZENT) {
-            $letters = $this->skMove->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skMove->findLetterByStatus(0);
+        } else {
+            $letters = $this->skMove->findAll();
         }
         return view('dashboard.letters.sk-move.index', compact('letters'));
     }
@@ -39,8 +41,10 @@ class SkMoveController extends Controller
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-move.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-move.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +59,16 @@ class SkMoveController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMove->findById($skMove);                                         
-        return view('dashboard.letters.sk-move.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-move.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkMoveRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skMove->store($request->validated());            
     
@@ -130,7 +137,7 @@ class SkMoveController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-move.letter-template', ['letter' => $skMove, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Pindah " . $skMove->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-pindah-" . $skMove->sk->citizent->name . ".pdf");
     }
     
     public function download(SkMoveLetter $skMove, $type = "pdf")
@@ -138,7 +145,7 @@ class SkMoveController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-move.letter-template', ['letter' => $skMove]);        
 
-        return $generated->download("SK Pindah " . $skMove->sk->citizent->name . ".$type");
+        return $generated->download("sk-pindah-" . $skMove->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkMoveLetter $skMove)

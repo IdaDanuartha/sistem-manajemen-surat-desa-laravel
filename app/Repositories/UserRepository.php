@@ -53,6 +53,11 @@ class UserRepository
     return $query->get();
   }
 
+  public function findAllCitizent(): Collection
+  {
+    return $this->citizent->with(['user'])->whereRelation("user", "role", Role::CITIZENT)->latest()->get();
+  }
+
   public function findByFamilyNumber($family_card_number, $except_id): Collection
   {
     return $this->citizent->latest()->where("family_card_number", $family_card_number)->whereNot("id", $except_id)->with(['user', 'villageHead', 'environmentalHead', 'sectionHead'])->get();

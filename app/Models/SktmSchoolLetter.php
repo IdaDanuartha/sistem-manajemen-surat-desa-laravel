@@ -16,4 +16,9 @@ class SktmSchoolLetter extends Model
     {
         return $this->belongsTo(SktmLetter::class);
     }
+
+    public function citizent(): BelongsTo
+    {
+        return $this->belongsTo(Citizent::class);
+    }
 }

@@ -66,13 +66,13 @@
                     <label class="text-second">Status Pernikahan</label>
                     <input type="text" class="input-crud" value="{{ isset(auth()->user()->authenticatable->marital_status) ? auth()->user()->authenticatable->marital_status->label() : auth()->user()->authenticatable->citizent->marital_status->label() }}" readonly />
                 </div>
-                @if (auth()->user()->signature_image && auth()->user()->isVillageHead())
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label class="text-second">TTE</label>
-                        <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px]"/>
-                    </div>
-                @endif     
-            @endif
+                @endif
+            @if (auth()->user()->signature_image)
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">TTE</label>
+                    <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px]"/>
+                </div>
+            @endif     
             <div class="col-12">
                 <a href="{{ route('profile.edit') }}" class="button btn-main">Edit Profile</a>
             </div>
