@@ -297,7 +297,7 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No : {{ $letter->sk->reference_number }}, menerangkan bahwa memang benar orang tersebut diatas tidak Memiliki Tempat Tinggal/ Rumah, selama ini menumpang di Rumah Orang Tua.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No : 05 / LD / I / 2024, menerangkan bahwa memang benar orang tersebut diatas tidak Memiliki Tempat Tinggal/ Rumah, selama ini menumpang di Rumah Orang Tua.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat untuk  dapat  dipergunakan sebagai Administrasi Permohonan Rumah Bersubsidi.</p>
             </div>
         </div>
@@ -305,15 +305,17 @@
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p class="other">Sekretaris</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-subsidized-housing/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    @elseif (Request::is("letters/sk-subsidized-housing/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
             </div>
         </div>
