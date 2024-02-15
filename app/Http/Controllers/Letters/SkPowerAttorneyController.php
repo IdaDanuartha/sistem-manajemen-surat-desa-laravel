@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Letter\SkPowerAttorney\StoreSkPowerAttorneyRequest;
+use App\Http\Requests\Letter\SkPowerAttorney\UpdateSkPowerAttorneyRequest;
 use App\Models\Sk;
 use App\Models\SkPowerAttorney;
 use App\Repositories\Letters\SkPowerAttorneyRepository;
@@ -56,7 +58,7 @@ class SkPowerAttorneyController extends Controller
         return view('dashboard.letters.sk-power-attorney.crud.edit', compact('get_letter'));
     }
 
-    public function store(StoreSkResidenceRequest $request)
+    public function store(StoreSkPowerAttorneyRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
         if(auth()->user()->role === Role::CITIZENT) {
@@ -64,32 +66,32 @@ class SkPowerAttorneyController extends Controller
                 $store = $this->skPowerAttorney->store($request->validated());            
     
                 if($store instanceof Sk) return redirect(route("letters.sk-power-attorney.index"))
-                                    ->with("success", $this->responseMessage->response('Surat silsilah kuasa'));
+                                    ->with("success", $this->responseMessage->response('Surat keterangan ahli waris'));
     
                 throw new Exception();
             } catch (\Exception $e) {  
                 logger($e->getMessage());
     
-                return redirect(route("letters.sk-power-attorney.create"))->with("error", $this->responseMessage->response('surat silsilah kuasa', false));
+                return redirect(route("letters.sk-power-attorney.create"))->with("error", $this->responseMessage->response('surat keterangan ahli waris', false));
             }
         } else {
             abort(404);
         }
     }
 
-    public function update(UpdateSkResidenceRequest $request, SkPowerAttorney $skPowerAttorney)
+    public function update(UpdateSkPowerAttorneyRequest $request, SkPowerAttorney $skPowerAttorney)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
             $update = $this->skPowerAttorney->update($request->validated(), $skPowerAttorney);
             if($update == true) {
                 return redirect(route('letters.sk-power-attorney.index'))
-                                ->with('success', $this->responseMessage->response('Surat silsilah kuasa', true, 'update'));
+                                ->with('success', $this->responseMessage->response('Surat keterangan ahli waris', true, 'update'));
             }
 
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('letters.sk-power-attorney.edit', $skPowerAttorney->id)->with('error', $this->responseMessage->response('surat silsilah kuasa', false, 'update'));
+            return redirect()->route('letters.sk-power-attorney.edit', $skPowerAttorney->id)->with('error', $this->responseMessage->response('surat keterangan ahli waris', false, 'update'));
         }
     }
 
@@ -146,14 +148,14 @@ class SkPowerAttorneyController extends Controller
             $delete = $this->skPowerAttorney->delete($skPowerAttorney);  
 
             if(!isset($delete["status"])) {
-                return redirect()->route('letters.sk-power-attorney.index')->with('success', $this->responseMessage->response('Surat silsilah kuasa', true, 'delete'));
+                return redirect()->route('letters.sk-power-attorney.index')->with('success', $this->responseMessage->response('Surat keterangan ahli waris', true, 'delete'));
             } else if(isset($delete["status"])) {
                 return redirect()->route('letters.sk-power-attorney.index')->with('error', $delete["message"]);
             }
 
             throw new Exception();
         } catch (\Exception $e) {            
-            return redirect()->route('letters.sk-power-attorney.index')->with('error', $this->responseMessage->response('surat silsilah kuasa', false, 'delete'));
+            return redirect()->route('letters.sk-power-attorney.index')->with('error', $this->responseMessage->response('surat keterangan ahli waris', false, 'delete'));
         }
     }
 }
