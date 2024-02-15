@@ -10,6 +10,7 @@ use App\Mail\SendLetterToVillageHead;
 use App\Models\Sk;
 use App\Models\InheritanceGeneology;
 use App\Models\User;
+use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,6 +25,7 @@ class InheritanceGeneologyRepository
     protected readonly Sk $sk,    
     protected readonly InheritanceGeneology $letter,    
     protected readonly User $user,
+    protected readonly UploadFile $uploadFile
   ) {}
 
   public function findAll(): Collection
@@ -105,6 +107,11 @@ class InheritanceGeneologyRepository
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       
+      if (Arr::has($request, 'inheritance_image') && Arr::get($request, 'inheritance_image')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'inheritance_image'), "letters/inheritance-geneologies");
+        $request['inheritance_image'] = $filename;
+      }
+
       $request["sk_id"] = $sk_letter->id;
       $this->letter->create(Arr::except($request, "sk"));
       
@@ -133,7 +140,15 @@ class InheritanceGeneologyRepository
             Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
             $request["sk"]["is_published"] = true;
-          }
+        }
+        if (Arr::has($request, 'inheritance_image') && Arr::get($request, 'inheritance_image')) {
+          $this->uploadFile->deleteExistFile("letters/inheritance-geneologies/$letter->inheritance_image");
+  
+          $image = Arr::get($request, 'inheritance_image');
+  
+          $filename = $this->uploadFile->uploadSingleFile($image, "letters/inheritance-geneologies");
+          $request['inheritance_image'] = $filename;
+        }  
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
