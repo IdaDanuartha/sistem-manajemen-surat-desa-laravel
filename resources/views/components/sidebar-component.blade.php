@@ -266,22 +266,22 @@
                     <div>SK Silsilah & Kuasa</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item {{ Request::is("letters/inheritance-geneology*") ? "active":"" }}">
                         <a href="{{ route('letters.inheritance-geneology.index') }}" class="menu-link">
                             <div>Surat Silsilah Waris</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ Request::is("letters/sk-power-attorney*") ? "active":"" }}">
                         <a href="{{ route('letters.sk-power-attorney.index') }}" class="menu-link">
                             <div>SK Ahli Waris</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ Request::is("letters/sk-heir*") ? "active":"" }}">
                         <a href="{{ route('letters.sk-heir.index') }}" class="menu-link">
                             <div>Surat Kuasa</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ Request::is("letters/sk-inheritance-distribution*") ? "active":"" }}">
                         <a href="{{ route('letters.sk-inheritance-distribution.index') }}" class="menu-link">
                             <div>Surat Pernyataan Pembagian Waris</div>
                         </a>
