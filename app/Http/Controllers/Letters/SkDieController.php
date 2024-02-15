@@ -32,18 +32,21 @@ class SkDieController extends Controller
             $letters = $this->skDie->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skDie->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skDie->findLetterByStatus(0);
-        }   
+        } else {
+            $letters = $this->skDie->findAll();
+        }
+
         return view('dashboard.letters.sk-die.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-die.crud.create', [
-                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,14 +64,14 @@ class SkDieController extends Controller
         $get_letter = $this->skDie->findById($skDie);                                         
         return view('dashboard.letters.sk-die.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkDieRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skDie->store($request->validated());            
     
@@ -137,7 +140,7 @@ class SkDieController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-die.letter-template', ['letter' => $skDie, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Meninggal " . $skDie->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-meninggal-" . $skDie->sk->citizent->name . ".pdf");
     }
     
     public function download(SkDieLetter $skDie, $type = "pdf")
@@ -145,7 +148,7 @@ class SkDieController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-die.letter-template', ['letter' => $skDie]);        
 
-        return $generated->download("SK Meninggal " . $skDie->sk->citizent->name . ".$type");
+        return $generated->download("sk-meninggal-" . $skDie->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkDieLetter $skDie)
