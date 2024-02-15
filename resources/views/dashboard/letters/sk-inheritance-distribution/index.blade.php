@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Halaman Surat Keterangan Ahli Waris')
+@section('title', 'Halaman Surat Pernyataan Pembagian Waris')
 
 @section('main')
     <div class="table-wrapper mt-[20px]">
