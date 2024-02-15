@@ -317,22 +317,34 @@
                 <p>Mengetahui</p>
                 <p>Kepala Lingkungan Desa</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if(isset($letter->sk->environmentalHead))
+                        @if ($letter->sk->status_by_environmental_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
+                        @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif
                 </div>
-                <p class="other">I Gede Suasta Ardika</p>
+                @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
+                    <p class="other" style="text-transform: uppercase;">{{ $letter->sk->environmentalHead->citizent->name }}</p>                    
+                @endif           
             </div>
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                @if (Request::is("letters/sk-domicile/$letter->id/preview*"))
-                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
-                @elseif(isset($letter->sk->villageHead))
-                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                @endif
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
+                </div> 
             </div>
         </div>
     </div>
