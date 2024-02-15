@@ -242,7 +242,7 @@
                         </svg>
 
                     </span>
-                    <span data-i18n="Letters" class="text-[#28242185]">SK Penghasilan Ortu</span>
+                    <span data-i18n="Letters" class="text-[#28242185]">SK Penghasilan</span>
                 </a>
             </li>
             {{-- <li class="w-full">
