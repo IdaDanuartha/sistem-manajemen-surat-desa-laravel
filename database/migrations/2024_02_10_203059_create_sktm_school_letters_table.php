@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Citizent;
 use App\Models\SktmLetter;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,10 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->foreignIdFor(Citizent::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete(); // nama anak
             $table->string("school_name");
             $table->timestamps();
         });

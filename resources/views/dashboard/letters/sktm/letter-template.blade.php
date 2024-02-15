@@ -204,7 +204,47 @@
             left: 61.3%;
         }
 
-        .card-ttd p:first-child {
+        .card-ttd:first-child p:first-child {
+            text-align: center;
+            font-size: 0.913rem;
+            width: 40%;
+            position: absolute;
+            bottom: 11.7%;
+            left: 20%;
+            transform: translate(-50%);
+        }
+
+        .card-ttd:first-child p:nth-child(2) {
+            text-align: center;
+            font-size: 0.913rem;
+            width: 40%;
+            position: absolute;
+            bottom: 9.8%;
+            left: 20%;
+            transform: translate(-50%);
+        }
+
+        .card-ttd:first-child p.other {
+            text-align: center;
+            font-size: 0.913rem;
+            width: 40%;
+            position: absolute;
+            bottom: 7.9%;
+            left: 20%;
+            transform: translate(-50%);
+        }
+
+        .card-ttd:first-child .card-canvas {
+            width: 30%;
+            height: 70px;
+            position: absolute;
+            bottom: 1%;
+            left: 20%;
+            transform: translate(-50%);
+            border-bottom: 1px dashed black;
+        }
+
+        .card-ttd:last-child p:first-child {
             text-align: center;
             font-size: 0.913rem;
             width: 40%;
@@ -214,7 +254,7 @@
             transform: translate(-50%);
         }
 
-        .card-ttd p:nth-child(2) {
+        .card-ttd:last-child p:nth-child(2) {
             text-align: center;
             font-size: 0.913rem;
             width: 40%;
@@ -224,7 +264,7 @@
             transform: translate(-50%);
         }
 
-        .card-ttd p.other {
+        .card-ttd:last-child p.other {
             text-align: center;
             font-size: 0.913rem;
             width: 40%;
@@ -234,7 +274,7 @@
             transform: translate(-50%);
         }
 
-        .card-ttd .card-canvas {
+        .card-ttd:last-child .card-canvas {
             width: 30%;
             height: 70px;
             position: absolute;
@@ -318,7 +358,7 @@
                     <div>:</div>
                     <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
                 </div>
-                <div class="input-group four">
+                {{-- <div class="input-group four">
                     <label>Jenis Kelamin</label>
                     <div>:</div>
                     <span>{{ $letter->sk->citizent->gender->label() }}</span>
@@ -327,7 +367,7 @@
                     <label>Agama</label>
                     <div>:</div>
                     <span>{{ $letter->sk->citizent->religion->label() }}</span>
-                </div>
+                </div> --}}
                 <div class="input-group seven">
                     <label>Pekerjaan</label>
                     <div>:</div>
@@ -366,22 +406,22 @@
                 <div class="input-group nine">
                     <label>Nama</label>
                     <div>:</div>
-                    <span>Putu Aditya Prayatna</span>
+                    <span>{{ $letter->sktmSchool->citizent->name }}</span>
                 </div>
                 <div class="input-group ten">
                     <label>Tempat Tanggal Lahir</label>
                     <div>:</div>
-                    <span>Subagan, 04-06-1976</span>
+                    <span>{{ $letter->sktmSchool->citizent->birth_place . ", " . $letter->sktmSchool->citizent->birth_date->format("d-m-Y") }}</span>
                 </div>
                 <div class="input-group eleven">
                     <label>Jenis Kelamin</label>
                     <div>:</div>
-                    <span>Laki-Laki</span>
+                    <span>{{ $letter->sktmSchool->citizent->gender->label() }}</span>
                 </div>
                 <div class="input-group twelve">
                     <label>Sekolah</label>
                     <div>:</div>
-                    <span>STKIP AMLAPURA</span>
+                    <span>{{ $letter->sktmSchool->school_name }}</span>
                 </div>
             @endif
             @if ($letter->sktm_type->value === 2)
@@ -392,17 +432,27 @@
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p>Mengetahui</p>
+                <p>Camat Karangasem</p>                
                 <div class="card-canvas">
-                @if (Request::is("letters/sk-name/$letter->id/preview*"))
-                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
-                @elseif(isset($letter->sk->villageHead))
-                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                @endif
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                </div>
+            </div>
+            <div class="card-ttd">
+                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p class="other">Kasi Pem dan Kesos</p>
+                <div class="card-canvas">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/sktm/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif         
+                </div>
             </div>
         </div>
     </div>

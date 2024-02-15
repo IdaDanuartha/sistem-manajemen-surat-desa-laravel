@@ -114,6 +114,7 @@ class SktmRepository
       if($request["sktm_type"] == 2) {
         $this->sktmSchool->create([
           "sktm_letter_id" => $sktm->id,
+          "citizent_id" => Arr::get($request, "citizent_id"),
           "school_name" => Arr::get($request, "school_name")
         ]);
       }
@@ -148,8 +149,9 @@ class SktmRepository
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
 
-        if($request["sktm_type"] == 2) {
+        if($letter->sktm_type === SktmType::SEKOLAH) {
           $letter->sktmSchool->updateOrFail([
+            "citizent_id" => Arr::get($request, "citizent_id"),
             "school_name" => Arr::get($request, "school_name")
           ]);
         }

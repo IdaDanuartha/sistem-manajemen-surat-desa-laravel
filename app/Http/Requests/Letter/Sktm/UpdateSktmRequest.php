@@ -24,7 +24,7 @@ class UpdateSktmRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
-            "sktm_type" => "required",
+            "citizent_id" => "nullable",
             "school_name" => "nullable",
             "purpose" => "required"
         ];
@@ -35,6 +35,7 @@ class UpdateSktmRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "sktm_type" => "tipe sktm",
+            "citizent_id" => "nama anak",
             "school_name" => "nama sekolah",
             "purpose" => "tujuan"
         ];
