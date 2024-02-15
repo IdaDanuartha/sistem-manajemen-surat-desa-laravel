@@ -88,19 +88,23 @@
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Objek Pajak</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->nop }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Lokasi Tanah</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->land_location }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Harga Tanah</label>
                 <input type="text" class="input-crud" value="Rp. @rupiah($get_letter->price)-/are" disabled />
             </div>
-            @if (auth()->user()->isCitizent())
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Keperluan Surat</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
+            </div>
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input

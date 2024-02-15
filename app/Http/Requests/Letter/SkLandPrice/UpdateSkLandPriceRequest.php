@@ -27,6 +27,7 @@ class UpdateSkLandPriceRequest extends FormRequest
             "nop" => "required",
             "land_location" => "required",
             "price" => "required",
+            "purpose" => "required"
         ];
     }
 
@@ -36,7 +37,8 @@ class UpdateSkLandPriceRequest extends FormRequest
             "sk.reference_number" => "nomor surat",
             "nop" => "nomor objek pajak",
             "land_location" => "lokasi tanah",
-            "price" => "harga"
+            "price" => "harga",
+            "purpose" => "keperluan surat"
         ];
     }
 }

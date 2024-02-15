@@ -6,7 +6,7 @@
 		<form action="{{ route('letters.sk-land-price.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -38,6 +38,14 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="purpose" class="text-second mb-1">Keperluan Surat</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ $get_letter->purpose }}"
+                    placeholder="Masukkan Keperluan Surat..." required />
+                @error('purpose')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 			<div class="col-span-12 flex flex-col">
 				<p class="text-second mb-1">Kirim Surat</p>
 				<label class="switch">
@@ -45,12 +53,10 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sk-land-price.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+            <div class="col-span-12 flex items-center gap-3 mt-2">
+                <button class="button btn-main" type="submit">Edit Surat</button>
+                <a href="{{ route('letters.sk-land-price.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+            </div>
 		</form>
 	</div>
 @endsection
