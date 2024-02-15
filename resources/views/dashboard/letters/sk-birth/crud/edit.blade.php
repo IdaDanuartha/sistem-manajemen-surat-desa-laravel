@@ -25,29 +25,11 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sk-birth.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.sk-birth.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
-		{{-- @if (auth()->user()->isVillageHead())
-		<form method="POST" class="mt-4" action="{{ route('letters.signed', $get_letter->id) }}">
-				@csrf
-				@method("PUT")
-				<div class="col-md-12">
-						<label class="text-second mb-1">Signature</label>						
-						<div id="sig" class="rounded"></div>
-						<button id="clear" class="button p-0">Clear Signature</button>
-						<textarea id="signature64" name="signature_image" style="display: none"></textarea>
-				</div>
-				<div class="col-span-12 flex items-center mt-4 gap-3">
-					<button class="button btn-main" type="submit">Tambah TTE</button>
-					<a href="{{ route('letters.index') }}" class="button btn-second text-white" type="reset">Batal Tambah</a>
-				</div>				
-			</form>
-		@endif --}}
 	</div>
 @endsection
 

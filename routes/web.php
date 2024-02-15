@@ -218,10 +218,8 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/tree-felling/{tree_felling}/approve", [TreeFellingLetterController::class, 'approveLetter'])->name('letters.tree-felling.approve');
     Route::put("letters/tree-felling/{tree_felling}/reject", [TreeFellingLetterController::class, 'rejectLetter'])->name('letters.tree-felling.reject');
 
-    Route::middleware('is_citizent')->group(function() {
-        Route::get("histories", [LetterHistoryController::class, 'index'])->name('histories.index');
-        Route::get("histories/{history}", [LetterHistoryController::class, 'show'])->name('histories.show');
-    });
+    Route::get("histories", [LetterHistoryController::class, 'index'])->name('histories.index');
+    Route::get("histories/{sk}", [LetterHistoryController::class, 'show'])->name('histories.show');
 });
 
 Route::fallback(function() {
