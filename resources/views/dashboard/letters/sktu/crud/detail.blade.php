@@ -92,7 +92,7 @@
                 <label for="" class="text-second mb-1">Nama Usaha</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->business_name }}" disabled />
             </div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
@@ -167,11 +167,3 @@
 	<x-slot name="route">/letters/sktu/{{ $get_letter->id }}/reject</x-slot>
 </x-modal-reject-letter>
 @endsection
-
-@push('js')
-	<script>
-		// previewImg("create-tte-input", "create-tte-preview-img")
-		// $("#signature_image").change(function() {
-		// 	$("#signature_image_real").val($(".create-tte-input").val())
-	</script>
-@endpush
