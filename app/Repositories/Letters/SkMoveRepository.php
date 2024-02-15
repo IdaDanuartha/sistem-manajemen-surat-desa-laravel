@@ -140,14 +140,28 @@ class SkMoveRepository
 
     try {
         if(isset($request["sk"]["is_published"])) {
-            $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+          $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+          Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
-            $request["sk"]["is_published"] = true;
-          }
+          $request["sk"]["is_published"] = true;
+        }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
+
+        $sk_move = $this->skMoveFamilyLetter->where("sk_move_letter_id", $letter->id)->get();
+
+        foreach($sk_move as $item) {
+          $item->delete();
+        }
+
+        foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
+          $this->skMoveFamilyLetter->create([
+            "sk_move_letter_id" => $letter->id,
+            "citizent_id" => $item,
+            "relationship_status" => $request["family_relationship_status"][$index]
+          ]);
+        }
 
         DB::commit();
         return true;

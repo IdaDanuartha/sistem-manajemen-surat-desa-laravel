@@ -120,7 +120,7 @@
 					<br>
 				@endforeach            
 			</div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
@@ -162,7 +162,7 @@
 					</label>
 				</div>
 			@endif	
-			@if (auth()->user()->isVillageHead())
+			@if (auth()->user()->isSectionHead())
 			<div class="col-span-12 flex flex-col">
 				<label for="signature_image" class="text-second mb-1">Tanda Tangan Elektronik</label>
 				@if (auth()->user()->signature_image)

@@ -28,8 +28,8 @@ class UpdateSkMoveRequest extends FormRequest
             "sk_move_type" => "required",
             "reason" => "required",
             "moving_address" => "required",
-            "sk_move_family.citizent_id" => "required",
-            "sk_move_family.relationship_status" => "required",
+            "family_citizent_id" => "required",
+            "family_relationship_status" => "required",
         ];
     }
 

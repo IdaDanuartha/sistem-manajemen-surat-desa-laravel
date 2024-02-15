@@ -188,21 +188,21 @@
 
         .input-group.eight span {
             top: 50%;
-            left: 61.3%;
+            left: 38.3%;
         }
 
         .input-group.five label {
-            top: 52%;
+            top: 53%;
             left: 17.5%;
         }
 
         .input-group.five div {
-            top: 52%;
+            top: 53%;
             left: 28%;
         }
 
         .input-group.five span {
-            top: 52%;
+            top: 53%;
             left: 61.3%;
         }
 
@@ -330,12 +330,12 @@
             </tr>
             <tr>
                 <td>Kabupaten</td>
-                <td></td>
+                <td>07</td>
                 <td>Karangasem</td>
             </tr>
             <tr>
                 <td>Kecamatan</td>
-                <td></td>
+                <td>04</td>
                 <td>Karangasem</td>
             </tr>
             <tr>
@@ -398,36 +398,46 @@
                     <th>Nama</th>
                     <th>SHDK</th>
                 </tr>
-                @foreach ($letter->families as $item)
+                @forelse ($letter->families as $item)
                     <tr>
                         <td style="width: 50px;">{{ $loop->iteration }}</td>
                         <td>{{ $item->citizent->name }}</td>
                         <td>{{ $item->relationship_status->label() }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <th style="width: 50px;">1</th>
+                        <th>NIHIL</th>
+                        <th></th>
+                    </tr>
+                @endforelse
             </table>
             <p class="paragraph-other">Demikian surat pengantar pindah ini agar digunakan sebagaimana mestinya.</p>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Mengetahui</p>
-                <p>An Lurah Subagan</p>
-                <p class="other">Sekretaris</p>
+                <p>An {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->citizent->name : ".........." }}</p>
+                <p class="other">Kasi Pembangunan</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/domicile-purchase/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->sectionHead))
+                        @if ($letter->sk->status_by_section_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    @elseif (Request::is("letters/sk-move/$letter->id/preview*"))
+                        @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
             </div>
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Pemohon,</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                        <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
                 <p class="other">{{ $letter->sk->citizent->name }}</p>
             </div>
