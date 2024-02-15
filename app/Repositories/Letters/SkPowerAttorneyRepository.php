@@ -94,7 +94,7 @@ class SkPowerAttorneyRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['families', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 
@@ -147,6 +147,20 @@ class SkPowerAttorneyRepository
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
+
+        $sk_power_attorney_families = $this->skPowerAttorneyFamily->where("sk_power_attorney_id", $letter->id)->get();
+        
+        foreach($sk_power_attorney_families as $item) {
+          $item->delete();
+        }
+
+        foreach(Arr::get($request, "power_attorney_family") as $index => $item) {
+          $this->skPowerAttorneyFamily->create([
+            "sk_power_attorney_id" => $letter->id,
+            "citizent_id" => $item,
+            "relationship_status" => $request["power_attorney_relationship_status"][$index]
+          ]);
+        }
 
         DB::commit();
         return true;

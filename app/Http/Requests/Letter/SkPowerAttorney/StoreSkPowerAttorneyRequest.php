@@ -27,7 +27,8 @@ class StoreSkPowerAttorneyRequest extends FormRequest
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "date_of_death" => "required",
-            "power_attorney_family" => "required"
+            "power_attorney_family" => "required",
+            "power_attorney_relationship_status" => "required"
         ];
     }
 
@@ -37,7 +38,8 @@ class StoreSkPowerAttorneyRequest extends FormRequest
             "sk.reference_number" => "nomor surat",
             "citizent_id" => "pemberi warisan",
             "date_of_death" => "tanggal meninggal",
-            "power_attorney_family" => "ahli waris"
+            "power_attorney_family" => "ahli waris",
+            "power_attorney_relationship_status" => "status hubungan"
         ];
     }
 }

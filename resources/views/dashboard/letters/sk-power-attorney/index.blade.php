@@ -115,7 +115,7 @@
     </div>
 
     <x-modal-delete-letter>
-        <x-slot name="name">surat keterangan silsilah & kuasa</x-slot>
+        <x-slot name="name">surat keterangan ahli waris</x-slot>
         <x-slot name="modalId">SkPowerAttorney</x-slot>
     </x-modal-delete-letter>
 @endsection

@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SkPowerAttorney extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        "date_of_death" => "date"
+    ];
 
     public function sk(): BelongsTo
     {
@@ -20,5 +25,10 @@ class SkPowerAttorney extends Model
     public function citizent(): BelongsTo
     {
         return $this->belongsTo(Citizent::class);
+    }
+
+    public function families(): HasMany
+    {
+        return $this->hasMany(SkPowerAttorneyFamily::class);
     }
 }

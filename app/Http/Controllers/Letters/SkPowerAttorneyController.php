@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkPowerAttorney\UpdateSkPowerAttorneyRequest;
 use App\Models\Sk;
 use App\Models\SkPowerAttorney;
 use App\Repositories\Letters\SkPowerAttorneyRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkPowerAttorneyController extends Controller
 {
     public function __construct(
         protected readonly SkPowerAttorneyRepository $skPowerAttorney,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -40,7 +42,9 @@ class SkPowerAttorneyController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-power-attorney.crud.create') : 
+               view('dashboard.letters.sk-power-attorney.crud.create', [
+                    "citizents" => $this->user->findAll()
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +59,10 @@ class SkPowerAttorneyController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skPowerAttorney->findById($skPowerAttorney);                                         
-        return view('dashboard.letters.sk-power-attorney.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-power-attorney.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAll()
+        ]);
     }
 
     public function store(StoreSkPowerAttorneyRequest $request)
