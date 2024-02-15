@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\DieselPurchaseLetter\StoreDieselPurchaseRequest;
 use App\Models\DieselPurchaseLetter;
 use App\Models\Sk;
 use App\Repositories\Letters\DieselPurchaseLetterRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class DieselPurchaseLetterController extends Controller
 {
     public function __construct(
         protected readonly DieselPurchaseLetterRepository $dieselPurchaseLetter,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class DieselPurchaseLetterController extends Controller
             $letters = $this->dieselPurchaseLetter->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->dieselPurchaseLetter->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->dieselPurchaseLetter->findLetterByStatus(0);
+        } else {
+            $letters = $this->dieselPurchaseLetter->findAll();
         }
+
         return view('dashboard.letters.diesel-purchase.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.diesel-purchase.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.diesel-purchase.crud.create', [
+                "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class DieselPurchaseLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->dieselPurchaseLetter->findById($dieselPurchase);                                         
-        return view('dashboard.letters.diesel-purchase.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.diesel-purchase.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreDieselPurchaseRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->dieselPurchaseLetter->store($request->validated());            
     
@@ -130,7 +140,7 @@ class DieselPurchaseLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.diesel-purchase.letter-template', ['letter' => $dieselPurchase, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat Rekomendasi Pembelian Solar " . $dieselPurchase->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-rekomendasi-pembelian-solar-" . $dieselPurchase->sk->citizent->name . ".pdf");
     }
     
     public function download(DieselPurchaseLetter $dieselPurchase, $type = "pdf")
@@ -138,7 +148,7 @@ class DieselPurchaseLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.diesel-purchase.letter-template', ['letter' => $dieselPurchase]);        
 
-        return $generated->download("Surat Rekomendasi Pembelian Solar " . $dieselPurchase->sk->citizent->name . ".$type");
+        return $generated->download("surat-rekomendasi-pembelian-solar-" . $dieselPurchase->sk->citizent->name . ".$type");
     }
 
     public function destroy(DieselPurchaseLetter $dieselPurchase)

@@ -346,15 +346,20 @@
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p>Kepala Kelurahan</p>
                 <div class="card-canvas">
-                @if (Request::is("letters/domicile-purchase/$letter->id/preview*"))
-                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
-                @elseif(isset($letter->sk->villageHead))
-                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/diesel-purchase/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
+                </div>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->citizent->name }}</p>                    
                 @endif
             </div>
         </div>
