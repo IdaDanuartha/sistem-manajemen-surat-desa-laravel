@@ -256,6 +256,9 @@ class DashboardController extends Controller
                                                 ->where('status_by_section_head', 1)
                                                 ->count();
             $total_letters = Sk::where('status_by_section_head', 1)->count();
+        } else if(auth()->user()->role === Role::SUPER_ADMIN) {
+            $total_letters_approved = Sk::where('status_by_village_head', 1)->count();
+            $total_letters_not_approved = Sk::where('status_by_village_head', 0)->count();
         } else {
             $total_letters_approved = Sk::where('citizent_id', auth()->user()->authenticatable->id)
                                             ->where('status_by_village_head', 1)
