@@ -110,7 +110,7 @@ class SkMarryRepository
       $this->letter->create(Arr::except($request, "sk"));
       
       if($sk_letter->is_published) {
-        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();        
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
       }
       

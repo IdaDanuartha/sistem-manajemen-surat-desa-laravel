@@ -37,6 +37,7 @@ class SkBirthController extends Controller
         } else {
             $letters = $this->skBirth->findAll();
         }
+
         return view('dashboard.letters.sk-birth.index', compact('letters'));
     }
 
@@ -45,7 +46,7 @@ class SkBirthController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-birth.crud.create', [
-                    "citizents" => $this->user->findAll()
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -63,7 +64,7 @@ class SkBirthController extends Controller
         $get_letter = $this->skBirth->findById($sk_birth);                                         
         return view('dashboard.letters.sk-birth.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAll()
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
