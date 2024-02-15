@@ -92,7 +92,7 @@
                 <label for="" class="text-second mb-1">Tahun</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->year }}" disabled />
             </div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input

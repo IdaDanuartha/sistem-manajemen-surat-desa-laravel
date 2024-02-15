@@ -5,7 +5,22 @@
 	<div class="table-wrapper mt-[20px] input-teacher">
 		<form action="{{ route('letters.sk-residence.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
 			@csrf
-			<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
+			@if (auth()->user()->isCitizent())
+				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
+			@else
+				<div class="col-span-12 flex flex-col">
+					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
+					<select name="sk[citizent_id]" id="citizent_id" class="citizent-select2">
+						<option value="">Cari nama warga</option>
+						@foreach ($citizents as $item)
+							<option value="{{ $item->id }}">{{ $item->name }}</option>
+						@endforeach
+					</select>
+					@error('sk.citizent_id')
+						<div class="text-danger mt-1">{{ $message }}</div>
+					@enderror
+				</div>
+			@endif
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
@@ -15,7 +30,7 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="year" class="text-second mb-1">Tahun</label>
+                <label for="year" class="text-second mb-1">Tinggal Sejak Tahun</label>
                 <input type="number" placeholder="YYYY" min="1900" max="{{ date("Y") }}" class="input-crud" name="year" id="year" value="{{ old('year') }}" required />
                 @error('year')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -40,7 +55,8 @@
 
 @push('js')
 	<script>
-		document.querySelector("input[type=number]")
-      .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))		
+		let citizent = $(".citizent-select2").select2()		
+	// 	document.querySelector("input[type=number]")
+    //   .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))		
 	</script>
 @endpush
