@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\TreeFellingLetter\UpdateTreeFellingRequest;
 use App\Models\Sk;
 use App\Models\TreeFellingLetter;
 use App\Repositories\Letters\TreeFellingLetterRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class TreeFellingLetterController extends Controller
 {
     public function __construct(
         protected readonly TreeFellingLetterRepository $treeFelling,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class TreeFellingLetterController extends Controller
             $letters = $this->treeFelling->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->treeFelling->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->treeFelling->findLetterByStatus(0);
+        } else {
+            $letters = $this->treeFelling->findAll();
         }
+
         return view('dashboard.letters.tree-felling.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.tree-felling.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.tree-felling.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class TreeFellingLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->treeFelling->findById($treeFelling);                                         
-        return view('dashboard.letters.tree-felling.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.tree-felling.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreTreeFellingRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->treeFelling->store($request->validated());            
     
@@ -130,7 +140,7 @@ class TreeFellingLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.tree-felling.letter-template', ['letter' => $treeFelling, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat Penebangan Pohon " . $treeFelling->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-penebangan-pohon-" . $treeFelling->sk->citizent->name . ".pdf");
     }
     
     public function download(TreeFellingLetter $treeFelling, $type = "pdf")
@@ -138,7 +148,7 @@ class TreeFellingLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.tree-felling.letter-template', ['letter' => $treeFelling]);        
 
-        return $generated->download("Surat Penebangan Pohon " . $treeFelling->sk->citizent->name . ".$type");
+        return $generated->download("surat-penebangan-pohon-" . $treeFelling->sk->citizent->name . ".$type");
     }
 
     public function destroy(TreeFellingLetter $treeFelling)

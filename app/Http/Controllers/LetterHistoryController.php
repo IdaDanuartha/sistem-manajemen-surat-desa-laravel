@@ -46,7 +46,7 @@ class LetterHistoryController extends Controller
         } else if(isset($find_sk->skMove)) {
             return redirect(route("letters.sk-move.show", $find_sk->skMove->id));
         } else if(isset($find_sk->skTraveling)) {
-            return redirect(route("letters.sk-traveling.show", $find_sk->skTraveling->id));
+            return redirect(route("letters.sk-travelling.show", $find_sk->skTraveling->id));
         } else if(isset($find_sk->skResidence)) {
             return redirect(route("letters.sk-residence.show", $find_sk->skResidence->id));
         } else if(isset($find_sk->skLandPrice)) {
