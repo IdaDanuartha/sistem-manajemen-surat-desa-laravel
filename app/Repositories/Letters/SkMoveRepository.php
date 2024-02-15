@@ -94,7 +94,7 @@ class SkMoveRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['families', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 

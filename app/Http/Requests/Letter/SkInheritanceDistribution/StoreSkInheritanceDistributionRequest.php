@@ -25,8 +25,10 @@ class StoreSkInheritanceDistributionRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "certificate_number" => "required",
             "surface_area" => "required|numeric",
-            "family_citizent_id" => "required",
+            "inheritance_distribution_family" => "required",
+            "inheritance_distribution_area" => "required",
         ];
     }
 
@@ -34,8 +36,10 @@ class StoreSkInheritanceDistributionRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "certificate_number" => "nomor sertifikat hak milik",
             "surface_area" => "luas tanah",
-            "family_citizent_id" => "keluarga yang mendapat warisan"
+            "inheritance_distribution_family" => "keluarga yang mendapat warisan",
+            "inheritance_distribution_area" => "pembagian luas tanah"
         ];
     }
 }

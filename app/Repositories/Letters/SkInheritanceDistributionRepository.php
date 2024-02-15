@@ -94,7 +94,7 @@ class SkInheritanceDistributionRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['families', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 
@@ -110,11 +110,11 @@ class SkInheritanceDistributionRepository
       $request["sk_id"] = $sk_letter->id;
       $sk_inheritance_distribution = $this->letter->create(Arr::except($request, "sk"));
       
-      foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
+      foreach(Arr::get($request, "inheritance_distribution_family") as $index => $item) {
         $this->skInheritanceDistributionFamily->create([
           "sk_inheritance_distribution_id" => $sk_inheritance_distribution->id,
           "citizent_id" => $item,
-          "area" => $request["family_area"][$index]
+          "area" => $request["inheritance_distribution_area"][$index]
         ]);
       }
 
@@ -147,6 +147,20 @@ class SkInheritanceDistributionRepository
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
+
+        $sk_inheritance_distribution_families = $this->skInheritanceDistributionFamily->where("sk_inheritance_distribution_id", $letter->id)->get();
+
+        foreach($sk_inheritance_distribution_families as $item) {
+          $item->delete();
+        }
+
+        foreach(Arr::get($request, "inheritance_distribution_family") as $index => $item) {
+          $this->skInheritanceDistributionFamily->create([
+            "sk_inheritance_distribution_id" => $letter->id,
+            "citizent_id" => $item,
+            "area" => $request["inheritance_distribution_area"][$index]
+          ]);
+        }
 
         DB::commit();
         return true;
@@ -215,6 +229,12 @@ class SkInheritanceDistributionRepository
     DB::beginTransaction();
     try {           
       if(!$letter->status_by_environmental_head) {    
+        $sk_inheritance_distribution_families = $this->skInheritanceDistributionFamily->where("sk_inheritance_distribution_id", $letter->id)->get();
+        
+        foreach($sk_inheritance_distribution_families as $item) {
+          $item->delete();
+        }
+
         $delete_letter = $letter->sk->deleteOrFail();
         
         DB::commit();

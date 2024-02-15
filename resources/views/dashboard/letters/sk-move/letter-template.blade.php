@@ -346,37 +346,37 @@
         </table>
         <h3 class="title">Surat Pengantar Pindah WNI <br> Antar Desa/Kelurahan <br> Dalam Satu Kecamatan</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor: 475 / 54 / VI / kppdk / Kel. Subagan / 2023</p>
+            <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan di bawah ini :</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>NIK</label>
                 <div>:</div>
-                <span>5107040806830005</span>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="input-group three">
                 <label>Nomor KK</label>
                 <div>:</div>
-                <span>5107041608110002</span>
+                <span>{{ $letter->sk->citizent->family_card_number }}</span>
             </div>
             <div class="input-group four">
                 <label>Alamat Sekarang</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->sk->citizent->address }}.</span>
             </div>
             <div class="input-group six">
                 <label>Kepala Keluarga</label>
                 <div>:</div>
-                <span>Putu Aditya Prayatna</span>
+                <span>{{ $letter->citizent->name }}</span>
             </div>
             <div class="input-group seven">
                 <label>Alasan Pindah</label>
                 <div>:</div>
-                <span>Tempat Tinggal</span>
+                <span>{{ $letter->reason }}</span>
             </div>
             <div class="input-group eight">
                 <span>Dengan ini mohon pindah ke :</span>
@@ -384,7 +384,7 @@
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>Lingkungan Desa, Kelurahan Subagan,  Kecamatan Karangasem, Kabupaten Karangasem.</span>
+                <span>{{ $letter->moving_address }}.</span>
             </div>
             <div class="input-group nine">
                 <label>Keluarga yang Pindah</label>
@@ -398,26 +398,13 @@
                     <th>Nama</th>
                     <th>SHDK</th>
                 </tr>
-                <tr>
-                    <td style="width: 50px;"></td>
-                    <td>Nihil</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td style="width: 50px;"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td style="width: 50px;"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td style="width: 50px;"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($letter->families as $item)
+                    <tr>
+                        <td style="width: 50px;">{{ $loop->iteration }}</td>
+                        <td>{{ $item->citizent->name }}</td>
+                        <td>{{ $item->relationship_status->label() }}</td>
+                    </tr>
+                @endforeach
             </table>
             <p class="paragraph-other">Demikian surat pengantar pindah ini agar digunakan sebagaimana mestinya.</p>
         </div>
@@ -427,16 +414,22 @@
                 <p>An Lurah Subagan</p>
                 <p class="other">Sekretaris</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    @if (Request::is("letters/domicile-purchase/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif(isset($letter->sk->villageHead))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
             </div>
             <div class="card-ttd">
-                <p>Subagan, 6 September 2023</p>
+                <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Pemohon,</p>
                 <div class="card-canvas">
-                    <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p class="other">Kadek Suarmaja</p>
+                <p class="other">{{ $letter->sk->citizent->name }}</p>
             </div>
         </div>
     </div>

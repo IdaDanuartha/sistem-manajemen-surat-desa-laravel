@@ -110,7 +110,8 @@
                 @foreach ($get_letter->families as $item)
 					<input type="text" class="input-crud" value="{{ $item->relationship_status->label() }}" disabled />
 					<br>
-				@endforeach            </div>
+				@endforeach            
+			</div>
             @if (auth()->user()->isCitizent())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>

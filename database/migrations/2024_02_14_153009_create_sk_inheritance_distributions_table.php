@@ -19,6 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->integer("surface_area"); // luas tanah (meter)
+            $table->integer("certificate_number"); // nomor sertifikat hak milik
             $table->timestamps();
         });
     }

@@ -112,25 +112,6 @@
 			`)
 			
 			let relationship_status2 = $(".relationship-status2-select2").select2()
-
-			let family_data = []
-			$(".heir").change(function() {
-				if($(this).val() === "") {
-					new_data = family_data.filter((item, index) => item === $(this).val())
-					console.log(new_data)
-				} else {
-					family_data.push($(this).val())
-					new_data = family_data.filter((item, index) => family_data.indexOf(item) === index)
-				}
-
-				$(".sk_move_family_citizent_input").val(new_data);
-			})
-
-			let relationship_status_data = []
-			$(".relationship-status").change(function() {
-				relationship_status_data.push($(this).val())
-				$(".sk_move_family_status_input").val(relationship_status_data);
-			})
 		})
 </script>
 @endpush
