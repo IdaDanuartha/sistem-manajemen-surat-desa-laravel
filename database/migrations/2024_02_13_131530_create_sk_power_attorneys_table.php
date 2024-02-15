@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Citizent;
 use App\Models\Sk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,11 @@ return new class extends Migration
             $table->foreignIdFor(Sk::class)
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete(); // pewaris
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Citizent::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete(); // orang yang memberi warisan (alm)
             $table->date("date_of_death");
             $table->timestamps();
         });

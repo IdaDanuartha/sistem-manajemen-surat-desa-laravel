@@ -25,6 +25,8 @@ class StoreSkInheritanceDistributionRequest extends FormRequest
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "surface_area" => "required|numeric",
+            "family_citizent_id" => "required",
         ];
     }
 
@@ -32,6 +34,8 @@ class StoreSkInheritanceDistributionRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "surface_area" => "luas tanah",
+            "family_citizent_id" => "keluarga yang mendapat warisan"
         ];
     }
 }

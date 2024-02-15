@@ -23,6 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete(); // ahli waris
+            $table->smallInteger("relationship_status")->comment("[1: SUAMI, 2: ISTRI, 3: ANAK]");
             $table->timestamps();
         });
     }

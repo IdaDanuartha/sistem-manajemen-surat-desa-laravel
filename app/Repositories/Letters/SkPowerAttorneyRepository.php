@@ -9,6 +9,7 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Sk;
 use App\Models\SkPowerAttorney;
+use App\Models\SkPowerAttorneyFamily;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -23,6 +24,7 @@ class SkPowerAttorneyRepository
   public function __construct(
     protected readonly Sk $sk,    
     protected readonly SkPowerAttorney $letter,    
+    protected readonly SkPowerAttorneyFamily $skPowerAttorneyFamily,    
     protected readonly User $user,
   ) {}
 
@@ -106,8 +108,16 @@ class SkPowerAttorneyRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       
       $request["sk_id"] = $sk_letter->id;
-      $this->letter->create(Arr::except($request, "sk"));
+      $sk_power_attorney = $this->letter->create(Arr::except($request, "sk"));
       
+      foreach(Arr::get($request, "power_attorney_family") as $index => $item) {
+        $this->skPowerAttorneyFamily->create([
+          "sk_power_attorney_id" => $sk_power_attorney->id,
+          "citizent_id" => $item,
+          "relationship_status" => $request["power_attorney_relationship_status"][$index]
+        ]);
+      }
+
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));

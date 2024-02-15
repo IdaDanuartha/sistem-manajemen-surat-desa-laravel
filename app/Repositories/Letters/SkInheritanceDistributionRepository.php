@@ -9,6 +9,7 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Sk;
 use App\Models\SkInheritanceDistribution;
+use App\Models\SkInheritanceDistributionFamily;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -23,6 +24,7 @@ class SkInheritanceDistributionRepository
   public function __construct(
     protected readonly Sk $sk,    
     protected readonly SkInheritanceDistribution $letter,    
+    protected readonly SkInheritanceDistributionFamily $skInheritanceDistributionFamily,    
     protected readonly User $user,
   ) {}
 
@@ -106,8 +108,16 @@ class SkInheritanceDistributionRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       
       $request["sk_id"] = $sk_letter->id;
-      $this->letter->create(Arr::except($request, "sk"));
+      $sk_inheritance_distribution = $this->letter->create(Arr::except($request, "sk"));
       
+      foreach(Arr::get($request, "family_citizent_id") as $index => $item) {
+        $this->skInheritanceDistributionFamily->create([
+          "sk_inheritance_distribution_id" => $sk_inheritance_distribution->id,
+          "citizent_id" => $item,
+          "area" => $request["family_area"][$index]
+        ]);
+      }
+
       if($sk_letter->is_published) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
         Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));

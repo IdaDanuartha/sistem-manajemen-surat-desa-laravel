@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Letter\PowerAttorney;
+namespace App\Http\Requests\Letter\SkPowerAttorney;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePowerAttorneyRequest extends FormRequest
+class UpdateSkPowerAttorneyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class UpdatePowerAttorneyRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
-            "status" => "required",
+            "citizent_id" => "required",
+            "date_of_death" => "required",
+            "power_attorney_family" => "required"
         ];
     }
 
@@ -32,6 +34,9 @@ class UpdatePowerAttorneyRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "citizent_id" => "pemberi warisan",
+            "date_of_death" => "tanggal meninggal",
+            "power_attorney_family" => "ahli waris"
         ];
     }
 }

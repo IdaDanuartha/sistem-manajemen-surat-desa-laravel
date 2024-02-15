@@ -24,6 +24,8 @@ class UpdateSkInheritanceDistributionRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "surface_area" => "required|numeric",
+            "family_citizent_id" => "nullable"
         ];
     }
 
@@ -31,6 +33,8 @@ class UpdateSkInheritanceDistributionRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "surface_area" => "luas tanah",
+            "family_citizent_id" => "keluarga yang mendapat warisan"
         ];
     }
 }
