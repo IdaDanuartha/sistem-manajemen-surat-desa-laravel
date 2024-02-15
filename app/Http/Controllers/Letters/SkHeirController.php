@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkHeir\UpdateSkHeirRequest;
 use App\Models\Sk;
 use App\Models\SkHeir;
 use App\Repositories\Letters\SkHeirRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkHeirController extends Controller
 {
     public function __construct(
         protected readonly SkHeirRepository $skHeir,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -40,7 +42,9 @@ class SkHeirController extends Controller
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-heir.crud.create') : 
+               view('dashboard.letters.sk-heir.crud.create', [
+                    "citizents" => $this->user->findAll()
+               ]) : 
                abort(404);
     }
 
@@ -55,7 +59,10 @@ class SkHeirController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skHeir->findById($skHeir);                                         
-        return view('dashboard.letters.sk-heir.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-heir.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAll()
+        ]);
     }
 
     public function store(StoreSkHeirRequest $request)
