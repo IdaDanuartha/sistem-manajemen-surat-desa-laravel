@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkName\UpdateSkNameRequest;
 use App\Models\Sk;
 use App\Models\SkNameLetter;
 use App\Repositories\Letters\SkNameRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class SkNameController extends Controller
 {
     public function __construct(
         protected readonly SkNameRepository $skName,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class SkNameController extends Controller
             $letters = $this->skName->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skName->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skName->findLetterByStatus(0);
+        } else {
+            $letters = $this->skName->findAll();
         }
+
         return view('dashboard.letters.sk-name.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.sk-name.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.sk-name.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class SkNameController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skName->findById($skName);                                         
-        return view('dashboard.letters.sk-name.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.sk-name.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreSkNameRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skName->store($request->validated());            
     
@@ -130,7 +140,7 @@ class SkNameController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-name.letter-template', ['letter' => $skName, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Beda Nama " . $skName->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-beda-nik- " . $skName->sk->citizent->name . ".pdf");
     }
     
     public function download(SkNameLetter $skName, $type = "pdf")
@@ -138,7 +148,7 @@ class SkNameController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-name.letter-template', ['letter' => $skName]);        
 
-        return $generated->download("SK Beda Nama " . $skName->sk->citizent->name . ".$type");
+        return $generated->download("sk-beda-nik- " . $skName->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkNameLetter $skName)

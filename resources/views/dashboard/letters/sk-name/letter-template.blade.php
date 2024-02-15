@@ -102,23 +102,24 @@
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <div class="description-other">
-                <p class="paragraph-one">Yang bertanda tangan dibawah ini, Lurah Subagan, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem Propinsi Bali, Berdasarkan dengan Surat Pengantar Kepala Lingkungan Desa, No. {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, dengan ini menerangkan bahwa Nama <strong style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</strong> yang tercantum di Kartu Tanda Penduduk (KTP) <strong>No. {{ $letter->sk->citizent->national_identify_number }}</strong> dengan Nama <strong style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</strong> yang tercantum di <strong style="text-transform: uppercase;">{{ $letter->national_identify_number_listed }} dengan NIK : {{ $letter->national_identify_number_other }}</strong> adalah orangnya satu atau sama.</p>
+                <p class="paragraph-one">Yang bertanda tangan dibawah ini, Lurah Subagan, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem Propinsi Bali, Berdasarkan dengan Surat Pengantar Kepala Lingkungan Desa, No. 46 / LD / III / 2023, tanggal 28 Maret 2023, dengan ini menerangkan bahwa Nama <strong style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</strong> yang tercantum di Kartu Tanda Penduduk (KTP) <strong>No. {{ $letter->sk->citizent->national_identify_number }}</strong> dengan Nama <strong style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</strong> yang tercantum di <strong style="text-transform: uppercase;">{{ $letter->national_identify_number_listed }} dengan NIK : {{ $letter->national_identify_number_other }}</strong> adalah orangnya satu atau sama.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan Sebagaimana Mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                @if (Request::is("letters/sk-name/$letter->id/preview*"))
-                    @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
-                @elseif(isset($letter->sk->villageHead))
-                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                @endif
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/sk-name/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif         
                 </div>
             </div>
         </div>
