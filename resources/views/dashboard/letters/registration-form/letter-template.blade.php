@@ -7,47 +7,19 @@
     <title>Document</title>
 
     <style>
-        .image-full {
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
-        }
-
         .title {
-            width: 55%;
+            width: 100%;
             text-align: center;
             position: absolute;
-            top: 24%;
+            top: 0;
             left: 50%;
             transform: translate(-50%);
             text-transform: uppercase;
-            font-size: 1.2rem;
-            border-bottom: 2px solid black;
-        }
-
-        .subtitle {
-            position: absolute;
-            top: 28.5%;
-            left: 50%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
-        .description {
-            position: absolute;
-            top: 31.5%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
+            font-size: 1.125rem;
         }
 
         .input-group label {
-            width: 22% !important;
+            width: 40% !important;
             position: absolute;
             transform: translate(-50%);
             font-size: 0.913rem !important;
@@ -61,192 +33,525 @@
         }
 
         .input-group span {
-            width: 67% !important;
+            width: 50% !important;
             position: absolute;
             transform: translate(-50%);
             font-size: 0.913rem !important;
         }
 
+        .input-group.one label:first-child {
+            top: 12%;
+            left: 22%;
+        }
+
         .input-group.one label {
-            top: 40%;
-            left: 17.5%;
+            top: 12%;
+            left: 26%;
         }
 
         .input-group.one div {
-            top: 40%;
-            left: 28%;
+            top: 12%;
+            left: 49%;
         }
 
         .input-group.one span {
-            top: 40%;
-            left: 61.3%;
-            text-transform: uppercase;
-            font-weight: bold;
+            top: 12%;
+            left: 73%;
+        }
+
+        .input-group.two label:first-child {
+            top: 15%;
+            left: 22%;
         }
 
         .input-group.two label {
-            top: 43%;
-            left: 17.5%;
+            top: 15%;
+            left: 26%;
         }
 
         .input-group.two div {
-            top: 43%;
-            left: 28%;
+            top: 15%;
+            left: 49%;
         }
 
         .input-group.two span {
-            top: 43%;
-            left: 61.3%;
+            top: 15%;
+            left: 73%;
+        }
+
+        .input-group.three label:first-child {
+            top: 18%;
+            left: 22%;
         }
 
         .input-group.three label {
-            top: 46%;
-            left: 17.5%;
+            top: 18%;
+            left: 26%;
         }
 
         .input-group.three div {
-            top: 46%;
-            left: 28%;
+            top: 18%;
+            left: 49%;
         }
 
         .input-group.three span {
-            top: 46%;
-            left: 61.3%;
+            top: 18%;
+            left: 73%;
+        }
+
+        .input-group.four label:first-child {
+            top: 21%;
+            left: 22%;
         }
 
         .input-group.four label {
-            top: 49%;
-            left: 17.5%;
+            top: 21%;
+            left: 26%;
         }
 
         .input-group.four div {
-            top: 49%;
-            left: 28%;
+            top: 21%;
+            left: 49%;
         }
 
         .input-group.four span {
-            top: 49%;
-            left: 61.3%;
+            top: 21%;
+            left: 73%;
         }
 
-        .input-group.six label {
-            top: 52%;
-            left: 17.5%;
-        }
-
-        .input-group.six div {
-            top: 52%;
-            left: 28%;
-        }
-
-        .input-group.six span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 55%;
-            left: 61.3%;
-        }
-
-        .input-group.seven label {
-            top: 58%;
-            left: 17.5%;
-        }
-
-        .input-group.seven div {
-            top: 58%;
-            left: 28%;
-        }
-
-        .input-group.seven span {
-            top: 58%;
-            left: 61.3%;
-        }
-
-        .input-group.eight label {
-            top: 61%;
-            left: 17.5%;
-        }
-
-        .input-group.eight div {
-            top: 61%;
-            left: 28%;
-        }
-
-        .input-group.eight span {
-            top: 61%;
-            left: 61.3%;
+        .input-group.five label:first-child {
+            top: 26%;
+            left: 22%;
         }
 
         .input-group.five label {
-            top: 64%;
-            left: 17.5%;
+            top: 26%;
+            left: 26%;
         }
 
         .input-group.five div {
-            top: 64%;
-            left: 28%;
+            top: 26%;
+            left: 49%;
         }
 
         .input-group.five span {
-            top: 64%;
-            left: 61.3%;
+            top: 26%;
+            left: 73%;
         }
 
-        .card-ttd p:first-child {
-            text-align: center;
+        .input-group.six label:first-child {
+            top: 29%;
+            left: 22%;
+        }
+
+        .input-group.six label {
+            top: 29%;
+            left: 26%;
+        }
+
+        .input-group.six div {
+            top: 29%;
+            left: 49%;
+        }
+
+        .input-group.six span {
+            top: 29%;
+            left: 73%;
+        }
+
+        .input-group.seven label:first-child {
+            top: 32%;
+            left: 22%;
+        }
+
+        .input-group.seven label {
+            top: 32%;
+            left: 26%;
+        }
+
+        .input-group.seven div {
+            top: 32%;
+            left: 49%;
+        }
+
+        .input-group.seven span {
+            top: 32%;
+            left: 73%;
+        }
+
+        .input-group.eight label:first-child {
+            top: 35%;
+            left: 22%;
+        }
+
+        .input-group.eight label {
+            top: 35%;
+            left: 26%;
+        }
+
+        .input-group.eight div {
+            top: 35%;
+            left: 49%;
+        }
+
+        .input-group.eight span {
+            top: 35%;
+            left: 73%;
+        }
+
+        .input-group.nine label:first-child {
+            top: 38%;
+            left: 22%;
+        }
+
+        .input-group.nine label {
+            top: 38%;
+            left: 26%;
+        }
+
+        .input-group.nine div {
+            top: 38%;
+            left: 49%;
+        }
+
+        .input-group.nine span {
+            top: 38%;
+            left: 73%;
+        }
+
+        .input-group.ten label:first-child {
+            top: 41%;
+            left: 22%;
+        }
+
+        .input-group.ten label {
+            top: 41%;
+            left: 26%;
+        }
+
+        .input-group.ten div {
+            top: 41%;
+            left: 49%;
+        }
+
+        .input-group.ten span {
+            top: 41%;
+            left: 73%;
+        }
+
+        .input-group.eleven label:first-child {
+            top: 44%;
+            left: 22%;
+        }
+
+        .input-group.eleven label {
+            top: 44%;
+            left: 26%;
+        }
+
+        .input-group.eleven div {
+            top: 44%;
+            left: 49%;
+        }
+
+        .input-group.eleven span {
+            top: 44%;
+            left: 73%;
+        }
+
+        .input-group.twelve label:first-child {
+            top: 47%;
+            left: 22%;
+        }
+
+        .input-group.twelve label {
+            top: 47%;
+            left: 26%;
+        }
+
+        .input-group.twelve div {
+            top: 47%;
+            left: 49%;
+        }
+
+        .input-group.twelve span {
+            top: 47%;
+            left: 73%;
+        }
+
+        .input-group.thirteen label:first-child {
+            top: 50%;
+            left: 22%;
+        }
+
+        .input-group.thirteen label {
+            top: 50%;
+            left: 26%;
+        }
+
+        .input-group.thirteen div {
+            top: 50%;
+            left: 49%;
+        }
+
+        .input-group.thirteen span {
+            top: 50%;
+            left: 73%;
+        }
+
+        .input-group.fourteen label:first-child {
+            top: 53%;
+            left: 22%;
+        }
+
+        .input-group.fourteen label {
+            top: 53%;
+            left: 26%;
+        }
+
+        .input-group.fourteen div {
+            top: 53%;
+            left: 49%;
+        }
+
+        .input-group.fourteen span {
+            top: 53%;
+            left: 73%;
+        }
+
+        .input-group.fifteen label:first-child {
+            top: 56%;
+            left: 22%;
+        }
+
+        .input-group.fifteen label {
+            top: 56%;
+            left: 26%;
+        }
+
+        .input-group.fifteen div {
+            top: 56%;
+            left: 49%;
+        }
+
+        .input-group.fifteen span {
+            top: 56%;
+            left: 73%;
+        }
+
+        .input-group.sixteen label:first-child {
+            top: 59%;
+            left: 22%;
+        }
+
+        .input-group.sixteen label {
+            top: 59%;
+            left: 26%;
+        }
+
+        .input-group.sixteen div {
+            top: 59%;
+            left: 49%;
+        }
+
+        .input-group.sixteen span {
+            top: 59%;
+            left: 73%;
+        }
+
+        .input-group.seventeen label:first-child {
+            top: 62%;
+            left: 22%;
+        }
+
+        .input-group.seventeen label {
+            top: 62%;
+            left: 26%;
+        }
+
+        .input-group.seventeen div {
+            top: 62%;
+            left: 49%;
+        }
+
+        .input-group.seventeen span {
+            top: 62%;
+            left: 73%;
+        }
+
+        .input-group.eighteen label:first-child {
+            top: 65%;
+            left: 22%;
+        }
+
+        .input-group.eighteen label {
+            top: 65%;
+            left: 26%;
+        }
+
+        .input-group.eighteen div {
+            top: 65%;
+            left: 49%;
+        }
+
+        .input-group.eighteen span {
+            top: 65%;
+            left: 73%;
+        }
+
+        .card-ttd:first-child p:first-child {
             font-size: 0.913rem;
-            width: 40%;
+            width: 26%;
             position: absolute;
-            bottom: 11.7%;
-            left: 80%;
+            bottom: 25.7%;
+            left: 18%;
             transform: translate(-50%);
-        }
-
-        .card-ttd p:nth-child(2) {
             text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 9.8%;
-            left: 80%;
-            transform: translate(-50%);
         }
 
-        .card-ttd p.other {
+        .card-ttd:first-child p:nth-child(2) {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 23.8%;
+            left: 18%;
+            transform: translate(-50%);
             text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.9%;
-            left: 80%;
-            transform: translate(-50%);
         }
 
-        .card-ttd .card-canvas {
-            width: 30%;
+        .card-ttd:first-child .card-canvas {
+            width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 1%;
+            bottom: 17.7%;
+            left: 18%;
+            transform: translate(-50%);
+            text-align: center;
+            border-bottom: 1px dashed black;
+        }
+
+        .card-ttd:first-child p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 14.3%;
+            left: 18%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) p:first-child {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 22.7%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) p:nth-child(2) {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 23.8%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:nth-child(2) .card-canvas {
+            width: 26%;
+            height: 70px;
+            position: absolute;
+            bottom: 17.7%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+            border-bottom: 1px dashed black;
+        }
+
+        .card-ttd:nth-child(2) p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 11.3%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        /* .card-ttd:nth-child(2) span.other {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: -1%;
+            left: 49%;
+            transform: translate(-50%);
+            text-align: center;
+        } */
+
+        .card-ttd:last-child p:first-child {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 17.7%;
+            left: 80%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:last-child p:nth-child(2) {
+            font-size: 0.913rem;
+            width: 26%;
+            position: absolute;
+            bottom: 23.8%;
+            left: 80%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .card-ttd:last-child .card-canvas {
+            width: 26%;
+            height: 70px;
+            position: absolute;
+            bottom: 17.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
         }
 
+        .card-ttd:last-child p:last-child {
+            font-size: 0.875rem;
+            width: 26%;
+            position: absolute;
+            bottom: 14.5%;
+            left: 80%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        .description-caption {
+            position: relative;
+            top: 27%;
+            left: 56.5%;
+            width: 100%;
+            transform: translate(-50%);
+            font-size: 0.913rem;
+        }
+
+        .description-caption-two {
+            position: relative;
+            top: 56%;
+            left: 56.5%;
+            width: 100%;
+            transform: translate(-50%);
+            font-size: 0.913rem;
+        }
+
         .description-other {
             position: relative;
-            top: 68%;
+            top: 70%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -263,80 +568,182 @@
             line-height: 150%;
             text-indent: 42px;
         }
+
+        .content-other {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+        }
     </style>
 </head>
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan {{ $letter->status === 1 ? "Belum Menikah" : "Sudah Menikah" }}</h3>
+        <h3 class="title">Pendaftaran <br>Formulir Pendaftaran Atau Pembatalan Penduduk NonPermanen<br>(F1.15)</h3>
         <div class="content-form">
-            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
             <div class="input-group one">
+                <label>I.</label>
+                <label>NIK</label>
+                <div>:</div>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
+            </div>
+            <div class="input-group two">
+                <label>II.</label>
                 <label>Nama</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->name }}</span>
             </div>
-            <div class="input-group two">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
-            </div>
             <div class="input-group three">
-                <label>Jenis Kelamin</label>
+                <label>III.</label>
+                <label>Keterangan Sebagai Nonpermanen</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->gender->label() }}</span>
+                <span></span>
             </div>
             <div class="input-group four">
-                <label>Agama</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->religion->label() }}</span>
-            </div>
-            <div class="input-group six">
-                <label>Kewarganegaraan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->citizenship }}</span>
-            </div>
-            <div class="input-group nine">
-                <label>Status</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
-            </div>
-            <div class="input-group seven">
-                <label>Pekerjaan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->work }}</span>
-            </div>
-            <div class="input-group eight">
-                <label>No KK/ KTP</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->family_card_number }}</span>
-            </div>
-            <div class="input-group five">
-                <label>Alamat</label>
+                <label></label>
+                <label>a. Alamat</label>
                 <div>:</div>
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
-            <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan Desa, No: {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, Sepanjang pengetahuan kami bahwa memang benar orang tersebut di atas <strong>{{ $letter->status === 1 ? "Belum Menikah" : "Kawin" }} Sebelum Tanggal {{ $letter->sk->created_at->format("d M Y") }}.</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+            <div class="input-group five">
+                <label></label>
+                <label>b. RT/Rw</label>
+                <div>:</div>
+                <span>000/000</span>
+            </div>
+            <div class="input-group six">
+                <label></label>
+                <label>c. Kelurahan/Desa</label>
+                <div>:</div>
+                <span>Subagan</span>
+            </div>
+            <div class="input-group seven">
+                <label></label>
+                <label>d. Kecamatan</label>
+                <div>:</div>
+                <span>Karangasem</span>
+            </div>
+            <div class="input-group eight">
+                <label></label>
+                <label>e. Kabupaten</label>
+                <div>:</div>
+                <span>Karangasem</span>
+            </div>
+            <div class="input-group nine">
+                <label></label>
+                <label>f. Provinsi</label>
+                <div>:</div>
+                <span>Bali</span>
+            </div>
+            <div class="input-group ten">
+                <label>IV.</label>
+                <label>Keperluan Sebagai Nonpermanen</label>
+                <div>:</div>
+                <span></span>
+            </div>
+            <div class="input-group eleven">
+                <label></label>
+                <label>a. Pekerjaan</label>
+                <div>:</div>
+                <span>{{ $letter->sk->citizent->work }}</span>
+            </div>
+            <div class="input-group twelve">
+                <label></label>
+                <label>b. Pendidikan</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group thirteen">
+                <label></label>
+                <label>c. Lainnya*</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group fourteen">
+                <label>V.</label>
+                <label>Jangka Waktu sebagai Nonpermanen</label>
+                <div>:</div>
+                <span>{{ $letter->time_period }}</span>
+            </div>
+            <div class="input-group fifteen">
+                <label>VI.</label>
+                <label>Pembatalan Penduduk Nonpermanen Alasan</label>
+                <div>:</div>
+                <span></span>
+            </div>
+            <div class="input-group sixteen">
+                <label></label>
+                <label>a. Pekerjaan</label>
+                <div>:</div>
+                <span>{{ $letter->sk->citizent->work }}</span>
+            </div>
+            <div class="input-group seventeen">
+                <label></label>
+                <label>b. Pendidikan</label>
+                <div>:</div>
+                <span>-</span>
+            </div>
+            <div class="input-group eighteen">
+                <label></label>
+                <label>c. Lainnya*</label>
+                <div>:</div>
+                <span>-</span>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
+                {{-- <p>Find out</p> --}}
+                <p>Penduduk Nonpermanen</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-marry/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if ($letter->sk->citizent->user->signature_image)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif
                 </div>
+                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
+            </div>
+            <div class="card-ttd">
+                <p>Mengetahui, <br>Kepala Dinas Kependudukan dan Pencatatan Sipil Kabupaten Karangasem</p>
+                <div class="card-canvas">
+                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                </div>
+                <p><span style="text-transform: uppercase; text-decoration: underline;">DRs. MADE KUSUMA NEGARA</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP. 19750221 199311 1 001</span></p>
+            </div>
+            <div class="card-ttd">
+                <p></p>
+                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }} <br>Lurah Subagan</p>
+                <div class="card-canvas">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/registration-form/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif  
+                </div>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->citizent->name }}</p>
+                @endif
+            </div>
+        </div>
+        <div class="content-other">
+            <p style="margin: 0; font-size: 0.813rem;">Keterangan :</p>
+            <p style="margin: 0; font-size: 0.813rem;">*Diisi sesuai dengan keperluan sebagainonpermanen</p>
+            <p style="margin: 0; font-size: 0.813rem;">**Jangka Waktu Sebagai Nonpermanen 1 Tahun</p>
+            <div class="wrapper-kaling" style="display: flex; align-items: center; gap: 8px;">
+                <p style="margin: 0; font-size: 0.813rem;">No.Kaling <span>.................</span> : <span>.................</span></p>
+            </div>
+            <div class="wrapper-pemilik" style="display: flex; align-items: center; gap: 8px;">
+                <p style="margin: 0; font-size: 0.813rem;">Nama Pemilik Kos: <span>..............</span></p>
+            </div>
+            <div class="wrapper-alamat" style="display: flex; align-items: center; gap: 8px;">
+                <p style="margin: 0; font-size: 0.813rem;">Alamat: <span>............</span></p>
+            </div>
+            <div class="wrapper-handphone" style="display: flex; align-items: center; gap: 8px;">
+                <p style="margin: 0; font-size: 0.813rem;">No.Hp: <span>............</span></p>
             </div>
         </div>
     </div>
