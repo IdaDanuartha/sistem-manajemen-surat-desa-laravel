@@ -72,7 +72,7 @@
                                     </svg>
                                 </a>
 
-                                @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin() && $item->sk->is_published === 0)
+                                @if ((auth()->user()->isCitizent() || auth()->user()->isSuperAdmin()) && $item->sk->is_published === 0)
                                     <a href="{{ route('letters.sk-inheritance-distribution.edit', $item->id) }}"
                                         class="icon-table icon-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

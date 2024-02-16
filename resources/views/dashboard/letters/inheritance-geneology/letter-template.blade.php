@@ -139,7 +139,7 @@
                 </td>
                 <td style="height: 60px;">
                     @if ($letter->sk->citizent->user->signature_image)
-                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->  citizent->user->signature_image) }}">
+                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                     @endif
                 </td>
             </tr>

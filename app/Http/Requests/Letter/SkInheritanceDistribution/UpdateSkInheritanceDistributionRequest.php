@@ -25,6 +25,7 @@ class UpdateSkInheritanceDistributionRequest extends FormRequest
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "certificate_number" => "required",
+            "citizent_id" => "required",
             "surface_area" => "required|numeric",
             "inheritance_distribution_family" => "required",
             "inheritance_distribution_area" => "required",
@@ -36,6 +37,7 @@ class UpdateSkInheritanceDistributionRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "certificate_number" => "nomor sertifikat hak milik",
+            "citizent_id" => "penerima kuasa",
             "surface_area" => "luas tanah",
             "inheritance_distribution_family" => "keluarga yang mendapat warisan",
             "inheritance_distribution_area" => "pembagian luas tanah"

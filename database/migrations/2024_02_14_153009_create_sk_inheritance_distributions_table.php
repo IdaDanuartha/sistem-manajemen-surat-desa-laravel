@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Citizent;
 use App\Models\Sk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,6 +16,10 @@ return new class extends Migration
         Schema::create('sk_inheritance_distributions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Sk::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Citizent::class)
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

@@ -224,7 +224,7 @@
                         <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->citizent->name }}</strong>                    
                     @endif
                 </td>
-                @if ($letter->sk->villageHead && $letter->sk->status_by_environmental_head === 1)
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
                 <td class="ttd-text" style="font-size: 14px">
                     <span style="text-decoration: underline">
                         <strong style="font-size: 14px;">{{ $letter->sk->villageHead->citizent->name }}</strong>                    
