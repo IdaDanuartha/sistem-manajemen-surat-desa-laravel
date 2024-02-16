@@ -32,18 +32,21 @@ class SkInheritanceDistributionController extends Controller
             $letters = $this->skInheritanceDistribution->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skInheritanceDistribution->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skInheritanceDistribution->findLetterByStatus(0);
+        } else {
+            $letters = $this->skInheritanceDistribution->findAll();
         }
+
         return view('dashboard.letters.sk-inheritance-distribution.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-inheritance-distribution.crud.create', [
-                    "citizents" => $this->user->findAll()
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,14 +64,14 @@ class SkInheritanceDistributionController extends Controller
         $get_letter = $this->skInheritanceDistribution->findById($skInheritanceDistribution);                                         
         return view('dashboard.letters.sk-inheritance-distribution.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAll()
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkInheritanceDistributionRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skInheritanceDistribution->store($request->validated());            
     
@@ -137,7 +140,7 @@ class SkInheritanceDistributionController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat Pernyataan Pembagian Waris " . $skInheritanceDistribution->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-pernyataan-pembagian-waris-" . $skInheritanceDistribution->sk->citizent->name . ".pdf");
     }
     
     public function download(SkInheritanceDistribution $skInheritanceDistribution, $type = "pdf")
@@ -145,7 +148,7 @@ class SkInheritanceDistributionController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution]);        
 
-        return $generated->download("Surat Pernyataan Pembagian Waris " . $skInheritanceDistribution->sk->citizent->name . ".$type");
+        return $generated->download("surat-pernyataan-pembagian-waris-" . $skInheritanceDistribution->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkInheritanceDistribution $skInheritanceDistribution)

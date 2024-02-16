@@ -5,7 +5,22 @@
 	<div class="table-wrapper mt-[20px] input-teacher">
 		<form action="{{ route('letters.sk-inheritance-distribution.store') }}" method="post" class="grid grid-cols-12 gap-4" enctype="multipart/form-data">
 			@csrf
-			<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
+			@if (auth()->user()->isCitizent())
+				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
+			@else
+				<div class="col-span-12 flex flex-col">
+					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
+					<select name="sk[citizent_id]" id="citizent_id" class="citizent-select2">
+						<option value="">Cari nama warga</option>
+						@foreach ($citizents as $item)
+							<option value="{{ $item->id }}">{{ $item->name }}</option>
+						@endforeach
+					</select>
+					@error('sk.citizent_id')
+						<div class="text-danger mt-1">{{ $message }}</div>
+					@enderror
+				</div>
+			@endif
 			<div class="col-span-12 md:col-span-4 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
@@ -30,7 +45,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-8 flex flex-col heir-group">
+			<div class="md:col-span-8 col-span-6 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="inheritance_distribution_family" class="text-second">Ahli Waris</label>
 					<button type="button" class="ml-1 btn-add-family">
@@ -44,7 +59,7 @@
 					@endforeach
 				</select>
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col relationship-status-group">
+			<div class="md:col-span-4 col-span-6 flex flex-col relationship-status-group">
                 <label for="inheritance_distribution_area" class="text-second mb-1">Pembagian Tanah</label>
 				<input type="number" class="input-crud" name="inheritance_distribution_area[]" id="inheritance_distribution_area" value="{{ old('inheritance_distribution_area') }}"
                     placeholder="Masukkan luas tanah..." required />
@@ -68,6 +83,7 @@
 
 @push('js')
 	<script>
+		let citizent_id = $(".citizent-select2").select2()
 		let moving_family = $(".heir-select2").select2()
 		let relationship_status = $(".relationship-status-select2").select2()
 
