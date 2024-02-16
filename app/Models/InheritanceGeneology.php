@@ -16,4 +16,9 @@ class InheritanceGeneology extends Model
     {
         return $this->belongsTo(Sk::class);
     }
+
+    public function citizent(): BelongsTo
+    {
+        return $this->belongsTo(Citizent::class);
+    }
 }

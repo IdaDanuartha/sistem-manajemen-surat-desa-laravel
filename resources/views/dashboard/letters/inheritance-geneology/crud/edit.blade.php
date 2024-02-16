@@ -14,6 +14,18 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="citizent_id" class="text-second mb-2">Nama Pewaris</label>
+                <select name="citizent_id" id="citizent_id" class="citizent-select2">
+                    <option value="">Cari nama pewaris</option>
+                    @foreach ($citizents as $item)
+                        <option value="{{ $item->id }}" @selected($item->id === $get_letter->citizent_id)>{{ $item->name }}</option>
+                    @endforeach
+                </select>
+                @error('citizent_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 			<div class="col-span-12 flex flex-col">
 				<label for="inheritance_image" class="text-second mb-1">Gambar Silsilah Waris</label>
 				<label for="inheritance_image" class="d-block mb-3">
@@ -41,18 +53,17 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.inheritance-geneology.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.inheritance-geneology.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
 	</div>
 @endsection
 
 @push('js')
 <script>
+	let citizent = $(".citizent-select2").select2()
 	previewImg("edit-inheritance-geneology-input", "edit-inheritance-geneology-preview-img")
 </script>
 @endpush

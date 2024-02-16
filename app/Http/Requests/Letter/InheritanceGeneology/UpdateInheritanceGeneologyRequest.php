@@ -24,6 +24,7 @@ class UpdateInheritanceGeneologyRequest extends FormRequest
         return [
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
+            "citizent_id" => "required",
             'inheritance_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
         ];
     }
@@ -32,6 +33,7 @@ class UpdateInheritanceGeneologyRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "citizent_id" => "pewaris",
             "inheritance_image" => "gambar silsilah pewaris"
         ];
     }
