@@ -22,7 +22,7 @@ class UpdateSkBirthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
         ];
     }
@@ -30,7 +30,7 @@ class UpdateSkBirthRequest extends FormRequest
     public function attributes()
     {
         return [
-            "sk.reference_number" => "nomor surat",
+            // "sk.reference_number" => "nomor surat",
         ];
     }
 }

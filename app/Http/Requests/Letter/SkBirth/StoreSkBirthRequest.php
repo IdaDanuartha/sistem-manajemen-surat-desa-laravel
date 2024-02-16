@@ -23,7 +23,7 @@ class StoreSkBirthRequest extends FormRequest
     {
         return [
             "sk.citizent_id" => "required",
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
         ];
     }
@@ -31,7 +31,7 @@ class StoreSkBirthRequest extends FormRequest
     public function attributes()
     {
         return [
-            "sk.reference_number" => "nomor surat",
+            // "sk.reference_number" => "nomor surat",
         ];
     }
 }

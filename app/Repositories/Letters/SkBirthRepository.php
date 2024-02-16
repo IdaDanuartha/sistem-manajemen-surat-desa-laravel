@@ -11,6 +11,7 @@ use App\Models\Letter;
 use App\Models\Sk;
 use App\Models\SkBirthLetter;
 use App\Models\User;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -104,7 +105,10 @@ class SkBirthRepository
   {
     DB::beginTransaction();
     try {
+      $reference_number = new GenerateReferenceNumber($this->letter->latest()->first());
+      
       $request["sk"]["code"] = strtoupper(Str::random(8));
+      $request["sk"]["reference_number"] = $reference_number->generateSkbirth();
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       $this->letter->create(["sk_id" => $sk_letter->id]);

@@ -344,7 +344,18 @@
                 <td>Subagan</td>
             </tr>
         </table>
-        <h3 class="title">Surat Pengantar Pindah WNI <br> Antar Desa/Kelurahan <br> Dalam Satu Kecamatan</h3>
+        <h3 class="title">
+            Surat Pengantar Pindah WNI <br> Antar 
+            @if ($letter->sk_move_type === \App\Enums\SkMoveType::ANTAR_KECAMATAN)
+                Kecamatan dalam Satu Kabupaten
+            @elseif($letter->sk_move_type === \App\Enums\SkMoveType::ANTAR_LINGKUNGAN)
+                Lingkungan dalam Desa/Kelurahan        
+            @elseif($letter->sk_move_type === \App\Enums\SkMoveType::ANTAR_DESA)
+                Desa/Kelurahan <br> Dalam Satu Kecamatan
+            @else
+                Provinsi
+            @endif
+        </h3>
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <p class="description">Yang bertanda tangan di bawah ini :</p>
