@@ -178,7 +178,7 @@
             <table class="w-full">
                 <tr class="w-full">
                     <td class="ttd-text">Mengetahui</td>
-                    <td class="ttd-text">Subagan, 06 Juli 2023</td>
+                    <td class="ttd-text">Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</td>
                 </tr>
                 <tr class="w-full">
                     <td class="ttd-text">Kepala Lingkungan Desa</td>
@@ -190,7 +190,7 @@
                             @if ($letter->sk->status_by_village_head === 1)
                                 <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
                             @endif
-                        @elseif (Request::is("letters/sk-marry/$letter->id/preview*"))
+                        @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
                                 <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif
@@ -201,7 +201,7 @@
                             @if ($letter->sk->status_by_village_head === 1)
                                 <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                             @endif
-                        @elseif (Request::is("letters/sk-marry/$letter->id/preview*"))
+                        @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                                 <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif

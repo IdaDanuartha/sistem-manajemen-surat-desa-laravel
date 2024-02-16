@@ -26,6 +26,7 @@ class StoreSkHeirRequest extends FormRequest
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
+            "purpose" => "required",
         ];
     }
 
@@ -34,6 +35,7 @@ class StoreSkHeirRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "citizent_id" => "penerima kuasa",
+            "purpose" => "tujuan surat",
         ];
     }
 }

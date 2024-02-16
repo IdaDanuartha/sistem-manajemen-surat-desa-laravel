@@ -6,7 +6,7 @@
 		<form action="{{ route('letters.sk-heir.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -23,6 +23,14 @@
 					@endforeach
 				</select>
                 @error('citizent_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="purpose" class="text-second mb-1">Tujuan Surat</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ $get_letter->purpose }}"
+                    placeholder="Masukkan Tujuan Pembuatan Surat..." required />
+                @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

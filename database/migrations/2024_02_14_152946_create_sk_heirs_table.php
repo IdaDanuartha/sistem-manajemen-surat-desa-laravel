@@ -23,6 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete(); // penerima kuasa
+            $table->string("purpose");
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
 				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			@else
 				<div class="col-span-12 flex flex-col">
-					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
+					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat (Pemberi Kuasa)</label>
 					<select name="sk[citizent_id]" id="sk_citizent_id" class="sk-citizent-select2">
 						<option value="">Cari nama warga</option>
 						@foreach ($citizents as $item)
@@ -21,7 +21,7 @@
 					@enderror
 				</div>
 			@endif
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -38,6 +38,14 @@
 					@endforeach
 				</select>
                 @error('citizent_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="purpose" class="text-second mb-1">Tujuan Surat</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ old('purpose') }}"
+                    placeholder="Masukkan Tujuan Pembuatan Surat..." required />
+                @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

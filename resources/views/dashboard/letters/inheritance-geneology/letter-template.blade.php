@@ -131,7 +131,7 @@
                         @if ($letter->sk->status_by_village_head === 1)
                             <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
                         @endif
-                    @elseif (Request::is("letters/sk-marry/$letter->id/preview*"))
+                    @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                         @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
                             <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                         @endif
@@ -173,7 +173,7 @@
                         @if ($letter->sk->status_by_village_head === 1)
                             <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                         @endif
-                    @elseif (Request::is("letters/sk-marry/$letter->id/preview*"))
+                    @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                         @endif

@@ -25,6 +25,7 @@ class UpdateSkHeirRequest extends FormRequest
             "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
+            "purpose" => "required",
         ];
     }
 
@@ -33,6 +34,7 @@ class UpdateSkHeirRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "citizent_id" => "penerima kuasa",
+            "purpose" => "tujuan surat",
         ];
     }
 }
