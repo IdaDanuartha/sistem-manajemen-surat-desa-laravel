@@ -419,7 +419,6 @@
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                {{-- <p>Find out</p> --}}
                 <p> Calon PMI memohon Ijin</p>
                 <div class="card-canvas">
                     @if ($letter->citizent->user->signature_image)
