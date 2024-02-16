@@ -13,7 +13,7 @@
 					<select name="sk[citizent_id]" id="sk_citizent_id" class="sk-citizent-select2">
 						<option value="">Cari nama warga</option>
 						@foreach ($citizents as $item)
-							<option value="{{ $item->id }}">{{ $item->name }}</option>
+							<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 						@endforeach
 					</select>
 					@error('sk.citizent_id')
@@ -34,7 +34,7 @@
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari kepala keluarga</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
+						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
                 @error('citizent_id')
@@ -77,7 +77,7 @@
                 <select class="moving-family-select2 moving-family" name="family_citizent_id[]">
 					<option value="">Cari keluarga yang pindah</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
+						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
             </div>
@@ -123,7 +123,7 @@
                 <select class="moving-family2-select2 moving-family" name="family_citizent_id[]">
 					<option value="">Cari keluarga yang pindah</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
+						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
 			`)

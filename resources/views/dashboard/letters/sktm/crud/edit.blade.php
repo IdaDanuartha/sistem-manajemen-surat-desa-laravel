@@ -27,7 +27,7 @@
 				<select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari Nama Anak</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}" @selected($item->id === $get_letter->sktmSchool->citizent_id)>{{ $item->name }}</option>
+						<option value="{{ $item->id }}" @selected($item->id === $get_letter->sktmSchool->citizent_id)>{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
                 @error('school_name')

@@ -19,7 +19,7 @@
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari Nama Penerima Hibah</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}" @selected($get_letter->citizent_id === $item->id)>{{ $item->name }}</option>
+						<option value="{{ $item->id }}" @selected($get_letter->citizent_id === $item->id)>{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
                 @error('citizent_id')

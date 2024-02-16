@@ -67,7 +67,7 @@
                 <select class="heir-select2 heir" name="inheritance_distribution_family[]" required>
 					<option value="">Cari keluarga</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
+						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
             </div>
@@ -106,7 +106,7 @@
                 <select class="heir2-select2 heir" name="inheritance_distribution_family[]">
 					<option value="">Cari keluarga yang pindah</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}">{{ $item->name }}</option>
+						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
 			`)
