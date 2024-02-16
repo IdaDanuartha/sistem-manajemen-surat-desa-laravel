@@ -34,8 +34,10 @@ class SkDomicileController extends Controller
             $letters = $this->skDomicile->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skDomicile->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skDomicile->findLetterByStatus(0);
+        } else {
+            $letters = $this->skDomicile->findAll();
         }
         return view('dashboard.letters.sk-domicile.index', compact('letters'));
     }
@@ -43,9 +45,9 @@ class SkDomicileController extends Controller
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-domicile.crud.create', [
-                    "citizents" => $this->userRepository->findAll(auth()->user()->authenticatable->id)
+                    "citizents" => $this->userRepository->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -63,14 +65,14 @@ class SkDomicileController extends Controller
         $get_letter = $this->skDomicile->findById($skDomicile);                                         
         return view('dashboard.letters.sk-domicile.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->userRepository->findAll(auth()->user()->authenticatable->id)
+            "citizents" => $this->userRepository->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkDomicileRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skDomicile->store($request->validated());            
     
@@ -143,7 +145,7 @@ class SkDomicileController extends Controller
             "village_head" => $this->user->where("role", Role::VILLAGE_HEAD)->first()
         ]);        
 
-        return $generated->stream("SK Domisili " . $skDomicile->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-domisili-" . $skDomicile->sk->citizent->name . ".pdf");
     }
     
     public function download(SkDomicileLetter $skDomicile, $type = "pdf")
@@ -151,7 +153,7 @@ class SkDomicileController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-domicile.letter-template', ['letter' => $skDomicile]);        
 
-        return $generated->download("SK Domisili " . $skDomicile->sk->citizent->name . ".$type");
+        return $generated->download("sk-domisili-" . $skDomicile->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkDomicileLetter $skDomicile)

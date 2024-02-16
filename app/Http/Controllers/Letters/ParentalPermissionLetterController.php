@@ -32,18 +32,21 @@ class ParentalPermissionLetterController extends Controller
             $letters = $this->parentalPermissionLetter->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->parentalPermissionLetter->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->parentalPermissionLetter->findLetterByStatus(0);
+        } else {
+            $letters = $this->parentalPermissionLetter->findAll();
         }
+
         return view('dashboard.letters.parental-permission.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.parental-permission.crud.create', [
-                "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,14 +64,14 @@ class ParentalPermissionLetterController extends Controller
         $get_letter = $this->parentalPermissionLetter->findById($parentalPermission);                                         
         return view('dashboard.letters.parental-permission.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreParentalPermissionLetterRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->parentalPermissionLetter->store($request->validated());            
     
@@ -137,7 +140,7 @@ class ParentalPermissionLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.parental-permission.letter-template', ['letter' => $parentalPermission, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat Izin Orang Tua " . $parentalPermission->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-izin-orang-tua-" . $parentalPermission->sk->citizent->name . ".pdf");
     }
     
     public function download(ParentalPermissionLetter $parentalPermission, $type = "pdf")
@@ -145,7 +148,7 @@ class ParentalPermissionLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.parental-permission.letter-template', ['letter' => $parentalPermission]);        
 
-        return $generated->download("Surat Izin Orang Tua " . $parentalPermission->sk->citizent->name . ".$type");
+        return $generated->download("surat-izin-orang-tua-" . $parentalPermission->sk->citizent->name . ".$type");
     }
 
     public function destroy(ParentalPermissionLetter $parentalPermission)

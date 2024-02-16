@@ -89,6 +89,14 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+				<label for="" class="text-second mb-1">Pemberi Kuasa</label>
+				<input type="text" class="input-crud" value="{{ $get_letter->sk->citizent->name }}" disabled />
+			</div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Penerima Kuasa</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Nomor Sertifikat Hak Milik</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->certificate_number }}" disabled />
 			</div>
@@ -96,7 +104,7 @@
                 <label for="" class="text-second mb-1">Luas Tanah (m2)</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->surface_area . " m2" }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-8 flex flex-col heir-group">
+			<div class="col-span-6 md:col-span-8 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="" class="text-second">Ahli Waris</label>
 				</div>
@@ -105,14 +113,14 @@
 					<br>
 				@endforeach
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col relationship-status-group">
+			<div class="col-span-6 md:col-span-4 flex flex-col relationship-status-group">
                 <label for="" class="text-second mb-2">Pembagian Tanah</label>
                 @foreach ($get_letter->families as $item)
-					<input type="text" class="input-crud" value="{{ $item->area }}" disabled />
+					<input type="text" class="input-crud" value="{{ $item->area }} m2" disabled />
 					<br>
 				@endforeach            
 			</div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
@@ -154,7 +162,7 @@
 					</label>
 				</div>
 			@endif	
-			@if (auth()->user()->isVillageHead())
+			@if (auth()->user()->isVillageHead() || auth()->user()->isCitizent())
 			<div class="col-span-12 flex flex-col">
 				<label for="signature_image" class="text-second mb-1">Tanda Tangan Elektronik</label>
 				@if (auth()->user()->signature_image)

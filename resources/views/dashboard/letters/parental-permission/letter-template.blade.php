@@ -358,7 +358,7 @@
 <body>
     
     <div class="container">
-        <h3 class="title">Surat Keterangan Ijin Orang Tua</h3>
+        <h3 class="title">Surat Keterangan Ijin Keluarga</h3>
         <div class="content-form">
             <p class="description">Yang bertanda tangan di bawah ini,</p>
             <div class="input-group one">
@@ -413,16 +413,17 @@
             </div>
             <p class="description-caption">Selaku {{ $letter->relationship_status->label() }} dari yang dibawah ini :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan Jasri Kaler No: 489 / JSK / XII/2021, tanggal 22 Desember 2021 menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada @if($letter->relationship_status->value === 1 || $letter->relationship_status->value === 2) Anaknya @elseif($letter->relationship_status->value === 3) Istrinya @else Suaminya @endif  Atas Nama : {{ $letter->citizent->name }} {{ $letter->description }}
+                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan Jasri Kaler No: 489 / JSK / XII/2021, tanggal 22 Desember 2021 menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada @if($letter->relationship_status->value === 1 || $letter->relationship_status->value === 2) Anaknya @elseif($letter->relationship_status->value === 3) Istrinya @else Suaminya @endif  Atas Nama : {{ $letter->citizent->name }} untuk {{ $letter->description }}
                 <p class="paragraph-two">Demikian surat Pernyataan ini, saya buat dengan penuh tanggung jawab dan benar.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                {{-- <p>Find out</p> --}}
                 <p> Calon PMI memohon Ijin</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if ($letter->citizent->user->signature_image)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif
                 </div>
                 <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
             </div>
@@ -430,22 +431,32 @@
                 <p>Mengetahui</p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/parental-permission/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
-                {{-- <p>Satpam Code.</p> --}}
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->citizent->name }}</p>                    
+                @endif
             </div>
             <div class="card-ttd">
                 <p>Denpasar, {{ $letter->sk->created_at->format("d M Y") }}</p>
                 <p>Yang Membuat Pernyataan /yang
                     memberikan Ijin</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if(isset($letter->sk->citizent))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
                 <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
             </div>

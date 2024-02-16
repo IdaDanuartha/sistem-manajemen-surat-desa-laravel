@@ -94,7 +94,7 @@ class InheritanceGeneologyRepository
   {
     return $this->letter
                 ->where('id', $letter->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['citizent', 'sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->first();
   }
 

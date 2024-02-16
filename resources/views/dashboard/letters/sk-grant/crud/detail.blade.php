@@ -136,7 +136,7 @@
                 <label for="" class="text-second mb-1">No. BPKB</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->bpkb_number }}" disabled />
             </div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
@@ -178,7 +178,7 @@
 					</label>
 				</div>
 			@endif	
-			@if (auth()->user()->isVillageHead())
+			@if (auth()->user()->isVillageHead() || auth()->user()->isCitizent())
 			<div class="col-span-12 flex flex-col">
 				<label for="signature_image" class="text-second mb-1">Tanda Tangan Elektronik</label>
 				@if (auth()->user()->signature_image)

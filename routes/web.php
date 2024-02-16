@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LetterController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
 use App\Http\Controllers\Letters\InheritanceGeneologyLetterController;
@@ -32,9 +31,6 @@ use App\Http\Controllers\Letters\SktuController;
 use App\Http\Controllers\Letters\TreeFellingLetterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Models\SkDomicileLetter;
-use App\Models\SkPowerAttorney;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -165,10 +161,10 @@ Route::middleware(['auth'])->group(function() {
     Route::put("letters/sk-heir/{sk_heir}/reject", [SkHeirController::class, 'rejectLetter'])->name('letters.sk-heir.reject');
 
     Route::resource("letters/sk-power-attorney", SkPowerAttorneyController::class, ['as' => 'letters']);
-    Route::get("letters/sk-power-attorney/{sk_power_attorney}/preview", [SkPowerAttorney::class, 'preview'])->name('letters.sk-power-attorney.preview');
-    Route::get("letters/sk-power-attorney/{sk_power_attorney}/download/{type?}", [SkPowerAttorney::class, 'download'])->name('letters.sk-power-attorney.download');
-    Route::put("letters/sk-power-attorney/{sk_power_attorney}/approve", [SkPowerAttorney::class, 'approveLetter'])->name('letters.sk-power-attorney.approve');
-    Route::put("letters/sk-power-attorney/{sk_power_attorney}/reject", [SkPowerAttorney::class, 'rejectLetter'])->name('letters.sk-power-attorney.reject');
+    Route::get("letters/sk-power-attorney/{sk_power_attorney}/preview", [SkPowerAttorneyController::class, 'preview'])->name('letters.sk-power-attorney.preview');
+    Route::get("letters/sk-power-attorney/{sk_power_attorney}/download/{type?}", [SkPowerAttorneyController::class, 'download'])->name('letters.sk-power-attorney.download');
+    Route::put("letters/sk-power-attorney/{sk_power_attorney}/approve", [SkPowerAttorneyController::class, 'approveLetter'])->name('letters.sk-power-attorney.approve');
+    Route::put("letters/sk-power-attorney/{sk_power_attorney}/reject", [SkPowerAttorneyController::class, 'rejectLetter'])->name('letters.sk-power-attorney.reject');
 
     Route::resource("letters/sk-inheritance-distribution", SkInheritanceDistributionController::class, ['as' => 'letters']);
     Route::get("letters/sk-inheritance-distribution/{sk_inheritance_distribution}/preview", [SkInheritanceDistributionController::class, 'preview'])->name('letters.sk-inheritance-distribution.preview');

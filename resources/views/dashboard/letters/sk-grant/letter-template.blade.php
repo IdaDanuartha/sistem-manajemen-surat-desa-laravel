@@ -699,7 +699,9 @@
                 {{-- <p>Find out</p> --}}
                 <p>Yang menerima Hibah</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if ($letter->citizent->user->signature_image)
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @endif                
                 </div>
                 <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
             </div>
@@ -707,22 +709,31 @@
                 <p>Mengetahui</p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-grant/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
-                <p><span style="text-transform: uppercase; text-decoration: underline;">{{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : "" }}</span></p>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->citizent->name }}</p>
+                @endif            
             </div>
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Yang membuat pernyataan memberi hibah</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
-                </div>
+                    @if(isset($letter->sk->citizent))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif                 </div>
                 <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
             </div>
         </div>

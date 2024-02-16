@@ -96,7 +96,7 @@
                 <label for="" class="text-second mb-1">Tanggal Meninggal</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->date_of_death->format("d M Y") }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-8 flex flex-col heir-group">
+			<div class="md:col-span-8 col-span-6 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="" class="text-second">Ahli Waris</label>
 				</div>
@@ -105,14 +105,14 @@
 					<br>
 				@endforeach
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col relationship-status-group">
+			<div class="md:col-span-4 col-span-6 flex flex-col relationship-status-group">
                 <label for="" class="text-second mb-2">Status Hubungan</label>
                 @foreach ($get_letter->families as $item)
 					<input type="text" class="input-crud" value="{{ $item->relationship_status->label() }}" disabled />
 					<br>
 				@endforeach            
 			</div>
-            @if (auth()->user()->isCitizent())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input

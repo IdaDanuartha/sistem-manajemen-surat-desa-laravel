@@ -32,18 +32,21 @@ class SkHeirController extends Controller
             $letters = $this->skHeir->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skHeir->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skHeir->findLetterByStatus(0);
+        } else {
+            $letters = $this->skHeir->findAll();
         }
+
         return view('dashboard.letters.sk-heir.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-heir.crud.create', [
-                    "citizents" => $this->user->findAll()
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,14 +64,14 @@ class SkHeirController extends Controller
         $get_letter = $this->skHeir->findById($skHeir);                                         
         return view('dashboard.letters.sk-heir.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAll()
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkHeirRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skHeir->store($request->validated());            
     
@@ -137,7 +140,7 @@ class SkHeirController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-heir.letter-template', ['letter' => $skHeir, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat Kuasa " . $skHeir->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-kuasa-" . $skHeir->sk->citizent->name . ".pdf");
     }
     
     public function download(SkHeir $skHeir, $type = "pdf")
@@ -145,7 +148,7 @@ class SkHeirController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-heir.letter-template', ['letter' => $skHeir]);        
 
-        return $generated->download("Surat Kuasa " . $skHeir->sk->citizent->name . ".$type");
+        return $generated->download("surat-kuasa-" . $skHeir->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkHeir $skHeir)

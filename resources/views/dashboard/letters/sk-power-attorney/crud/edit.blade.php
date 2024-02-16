@@ -34,7 +34,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-8 flex mt-5 flex-col heir-group">
+			<div class="md:col-span-8 col-span-6 flex mt-5 flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="power_attorney_family" class="text-second">Ahli Waris</label>
 					<button type="button" class="ml-1 btn-add-family">
@@ -45,20 +45,20 @@
 					<select class="heir-select2 heir" name="power_attorney_family[]" required>
 						<option value="">Cari keluarga</option>
 						@foreach ($citizents as $item)
-							<option value="{{ $item->id }}" @selected($family->id === $item->id)>{{ $item->name }}</option>
+							<option value="{{ $item->id }}" @selected($family->citizent_id === $item->id)>{{ $item->name }}</option>
 						@endforeach
 					</select>
 					<br>
 				@endforeach
             </div>
-			<div class="col-span-12 md:col-span-4 flex mt-5 flex-col relationship-status-group">
+			<div class="md:col-span-4 col-span-6 flex mt-5 flex-col relationship-status-group">
                 <label for="relationship_status" class="text-second mb-2">Status Hubungan</label>
 
 				@foreach ($get_letter->families as $family)
 					<select class="relationship-status-select2 relationship-status" name="power_attorney_relationship_status[]" required>
 						<option value="">Pilih status hubungan</option>
 						@foreach (\App\Enums\RelationshipStatus2::labels() as $key => $item)
-							<option value="{{ $key+1 }}" @selected($family->id === $key+1)>{{ $item }}</option>
+							<option value="{{ $key+1 }}" @selected($family->relationship_status->value === $key+1)>{{ $item }}</option>
 						@endforeach
 					</select>
 					<br>
@@ -71,12 +71,10 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			@if (auth()->user()->isCitizent())
-				<div class="col-span-12 flex items-center gap-3 mt-2">
-					<button class="button btn-main" type="submit">Edit Surat</button>
-					<a href="{{ route('letters.sk-power-attorney.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
-				</div>
-			@endif
+			<div class="col-span-12 flex items-center gap-3 mt-2">
+				<button class="button btn-main" type="submit">Edit Surat</button>
+				<a href="{{ route('letters.sk-power-attorney.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+			</div>
 		</form>
 	</div>
 @endsection

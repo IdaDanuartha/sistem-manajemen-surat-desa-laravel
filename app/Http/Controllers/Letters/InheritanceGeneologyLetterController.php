@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\InheritanceGeneology\UpdateInheritanceGeneologyRequ
 use App\Models\InheritanceGeneology;
 use App\Models\Sk;
 use App\Repositories\Letters\InheritanceGeneologyRepository;
+use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -18,6 +19,7 @@ class InheritanceGeneologyLetterController extends Controller
 {
     public function __construct(
         protected readonly InheritanceGeneologyRepository $inheritanceGeneology,
+        protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -30,17 +32,22 @@ class InheritanceGeneologyLetterController extends Controller
             $letters = $this->inheritanceGeneology->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->inheritanceGeneology->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->inheritanceGeneology->findLetterByStatus(0);
+        } else {
+            $letters = $this->inheritanceGeneology->findAll();
         }
+
         return view('dashboard.letters.inheritance-geneology.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
-               view('dashboard.letters.inheritance-geneology.crud.create') : 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
+               view('dashboard.letters.inheritance-geneology.crud.create', [
+                    "citizents" => $this->user->findAllCitizent()
+               ]) : 
                abort(404);
     }
 
@@ -55,13 +62,16 @@ class InheritanceGeneologyLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->inheritanceGeneology->findById($inheritanceGeneology);                                         
-        return view('dashboard.letters.inheritance-geneology.crud.edit', compact('get_letter'));
+        return view('dashboard.letters.inheritance-geneology.crud.edit', [
+            "get_letter" => $get_letter,
+            "citizents" => $this->user->findAllCitizent()
+        ]);
     }
 
     public function store(StoreInheritanceGeneologyRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->inheritanceGeneology->store($request->validated());            
     
@@ -130,7 +140,7 @@ class InheritanceGeneologyLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.inheritance-geneology.letter-template', ['letter' => $inheritanceGeneology, "user" => auth()->user()]);        
 
-        return $generated->stream("Surat silsilah waris " . $inheritanceGeneology->sk->citizent->name . ".pdf");
+        return $generated->stream("surat-silsilah-waris-" . $inheritanceGeneology->sk->citizent->name . ".pdf");
     }
     
     public function download(InheritanceGeneology $inheritanceGeneology, $type = "pdf")
@@ -138,7 +148,7 @@ class InheritanceGeneologyLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.inheritance-geneology.letter-template', ['letter' => $inheritanceGeneology]);        
 
-        return $generated->download("Surat silsilah waris " . $inheritanceGeneology->sk->citizent->name . ".$type");
+        return $generated->download("surat-silsilah-waris-" . $inheritanceGeneology->sk->citizent->name . ".$type");
     }
 
     public function destroy(InheritanceGeneology $inheritanceGeneology)

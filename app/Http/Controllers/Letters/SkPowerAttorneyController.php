@@ -32,18 +32,21 @@ class SkPowerAttorneyController extends Controller
             $letters = $this->skPowerAttorney->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skPowerAttorney->findLetterByCitizent();
-        } else {
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->skPowerAttorney->findLetterByStatus(0);
+        } else {
+            $letters = $this->skPowerAttorney->findAll();
         }
+
         return view('dashboard.letters.sk-power-attorney.index', compact('letters'));
     }
 
     public function create()
     { 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
-        return auth()->user()->role === Role::CITIZENT ? 
+        return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-power-attorney.crud.create', [
-                    "citizents" => $this->user->findAll()
+                    "citizents" => $this->user->findAllCitizent()
                ]) : 
                abort(404);
     }
@@ -61,14 +64,14 @@ class SkPowerAttorneyController extends Controller
         $get_letter = $this->skPowerAttorney->findById($skPowerAttorney);                                         
         return view('dashboard.letters.sk-power-attorney.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAll()
+            "citizents" => $this->user->findAllCitizent()
         ]);
     }
 
     public function store(StoreSkPowerAttorneyRequest $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);            
-        if(auth()->user()->role === Role::CITIZENT) {
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
             try {            
                 $store = $this->skPowerAttorney->store($request->validated());            
     
@@ -137,7 +140,7 @@ class SkPowerAttorneyController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney, "user" => auth()->user()]);        
 
-        return $generated->stream("SK Tempat Tinggal " . $skPowerAttorney->sk->citizent->name . ".pdf");
+        return $generated->stream("sk-ahli-waris-" . $skPowerAttorney->sk->citizent->name . ".pdf");
     }
     
     public function download(SkPowerAttorney $skPowerAttorney, $type = "pdf")
@@ -145,7 +148,7 @@ class SkPowerAttorneyController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);
         $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney]);        
 
-        return $generated->download("SK Tempat Tinggal " . $skPowerAttorney->sk->citizent->name . ".$type");
+        return $generated->download("sk-ahli-waris-" . $skPowerAttorney->sk->citizent->name . ".$type");
     }
 
     public function destroy(SkPowerAttorney $skPowerAttorney)
