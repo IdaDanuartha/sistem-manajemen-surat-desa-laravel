@@ -104,6 +104,7 @@ class RegistrationFormRepository
     DB::beginTransaction();
     try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
+      $request["sk"]["reference_number"] = "-";
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
@@ -136,9 +137,9 @@ class RegistrationFormRepository
             Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
             $request["sk"]["is_published"] = true;
+            $letter->sk->updateOrFail(Arr::get($request, "sk"));
           }
 
-        $letter->sk->updateOrFail(Arr::get($request, "sk"));
         $letter->updateOrFail(Arr::except($request, "sk"));
 
         DB::commit();

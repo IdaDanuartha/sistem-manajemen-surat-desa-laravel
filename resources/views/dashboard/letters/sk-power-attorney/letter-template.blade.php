@@ -51,7 +51,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <img width="100%" height="auto" src="{{ public_path('assets/img/letter-header.png') }}" alt="">
+        <img width="100%" height="auto" src="{{ public_path('assets/img/letter-header-2.png') }}" alt="">
         <div class="title-surat-wrapper">
             <h1 class="title-surat">SURAT KETERANGAN AHLI WARIS</h1>
             <h5 class="subtitle-surat">Nomor : {{ $letter->sk->reference_number }}</h5>

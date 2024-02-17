@@ -10,6 +10,7 @@ use App\Models\Sk;
 use App\Models\SkParentIncomeLetter;
 use App\Repositories\Letters\SkParentIncomeRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -43,11 +44,14 @@ class SkParentIncomeController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("", 9);
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-parent-income.crud.create', [
                     // "citizents" => $this->user->findByFamilyNumber(auth()->user()->authenticatable->family_card_number, auth()->user()->authenticatable->id)
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }

@@ -21,15 +21,15 @@
 					@enderror
 				</div>
 			@endif
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+            </div> --}}
+			<div class="col-span-12 flex flex-col">
                 <label for="regarding" class="text-second mb-2">Perihal</label>
 				<input type="text" class="input-crud" name="regarding" id="regarding" value="{{ old('regarding') }}"
 				placeholder="Masukkan Perihal Surat..." required />

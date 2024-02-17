@@ -80,14 +80,14 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Jangka Waktu sebagai Nonpermanen</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->time_period }}" disabled />
@@ -95,6 +95,22 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Alasan Pembatalan Penduduk</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->reason }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">No Kaling</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->kaling_number }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nama Pemilik Kos</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->bourding_house_owner }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Alamat</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->address }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nomor Telepon</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->phone_number }}" disabled />
             </div>
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">

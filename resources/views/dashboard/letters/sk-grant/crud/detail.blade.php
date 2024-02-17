@@ -80,14 +80,14 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Penerima Hibah</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />

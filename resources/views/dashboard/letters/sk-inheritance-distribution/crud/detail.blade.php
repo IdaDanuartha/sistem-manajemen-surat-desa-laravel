@@ -80,14 +80,14 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Pemberi Kuasa</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->citizent->name }}" disabled />
@@ -104,7 +104,7 @@
                 <label for="" class="text-second mb-1">Luas Tanah (m2)</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->surface_area . " m2" }}" disabled />
             </div>
-			<div class="col-span-6 md:col-span-8 flex flex-col heir-group">
+			<div class="col-span-12 md:col-span-6 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="" class="text-second">Ahli Waris</label>
 				</div>
@@ -113,7 +113,7 @@
 					<br>
 				@endforeach
             </div>
-			<div class="col-span-6 md:col-span-4 flex flex-col relationship-status-group">
+			<div class="col-span-12 md:col-span-6 flex flex-col relationship-status-group">
                 <label for="" class="text-second mb-2">Pembagian Tanah</label>
                 @foreach ($get_letter->families as $item)
 					<input type="text" class="input-crud" value="{{ $item->area }} m2" disabled />

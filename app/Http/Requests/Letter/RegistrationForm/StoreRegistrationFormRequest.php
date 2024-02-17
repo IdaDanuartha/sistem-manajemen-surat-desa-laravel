@@ -23,10 +23,14 @@ class StoreRegistrationFormRequest extends FormRequest
     {
         return [
             "sk.citizent_id" => "required",
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "time_period" => "required",
             "reason" => "required",
+            "kaling_number" => "nullable",
+            "bourding_house_owner" => "nullable",
+            "address" => "nullable",
+            "phone_number" => "nullable",
         ];
     }
 

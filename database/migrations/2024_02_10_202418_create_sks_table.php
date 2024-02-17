@@ -38,6 +38,7 @@ return new class extends Migration
             $table->smallInteger('status_by_village_head')->comment('[1: BelumDikonfirmasi, 2: Disetujui, 3: Ditolak]')->default(0);
             $table->string('code');
             $table->string('reference_number');
+            $table->integer('mode')->nullable();
             $table->boolean('is_published')->default(0);
             $table->timestamps();
         });

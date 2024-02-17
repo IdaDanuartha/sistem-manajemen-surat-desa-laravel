@@ -10,6 +10,7 @@ use App\Models\DieselPurchaseLetter;
 use App\Models\Sk;
 use App\Repositories\Letters\DieselPurchaseLetterRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -43,10 +44,13 @@ class DieselPurchaseLetterController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("517", 5, "", "Ket.", "Kel. Subagan");
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.diesel-purchase.crud.create', [
-                "citizents" => $this->user->findAllCitizent()
+                "citizents" => $this->user->findAllCitizent(),
+                "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }

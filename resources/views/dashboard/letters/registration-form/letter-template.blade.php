@@ -734,16 +734,16 @@
             <p style="margin: 0; font-size: 0.813rem;">*Diisi sesuai dengan keperluan sebagainonpermanen</p>
             <p style="margin: 0; font-size: 0.813rem;">**Jangka Waktu Sebagai Nonpermanen 1 Tahun</p>
             <div class="wrapper-kaling" style="display: flex; align-items: center; gap: 8px;">
-                <p style="margin: 0; font-size: 0.813rem;">No.Kaling <span>.................</span> : <span>.................</span></p>
+                <p style="margin: 0; font-size: 0.813rem;">No.Kaling <span>{{ $letter->kaling_number ?? "................. : ................." }}</span></p>
             </div>
             <div class="wrapper-pemilik" style="display: flex; align-items: center; gap: 8px;">
-                <p style="margin: 0; font-size: 0.813rem;">Nama Pemilik Kos: <span>..............</span></p>
+                <p style="margin: 0; font-size: 0.813rem;">Nama Pemilik Kos: <span>{{ $letter->bourding_house_owner ?? ".............." }}</span></p>
             </div>
             <div class="wrapper-alamat" style="display: flex; align-items: center; gap: 8px;">
-                <p style="margin: 0; font-size: 0.813rem;">Alamat: <span>............</span></p>
+                <p style="margin: 0; font-size: 0.813rem;">Alamat: <span>{{ $letter->address ?? "............" }}</span></p>
             </div>
             <div class="wrapper-handphone" style="display: flex; align-items: center; gap: 8px;">
-                <p style="margin: 0; font-size: 0.813rem;">No.Hp: <span>............</span></p>
+                <p style="margin: 0; font-size: 0.813rem;">No.Hp: <span>{{ $letter->phone_number ?? "............" }}</span></p>
             </div>
         </div>
     </div>

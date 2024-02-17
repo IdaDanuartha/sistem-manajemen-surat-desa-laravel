@@ -23,7 +23,7 @@ class StoreParentalPermissionLetterRequest extends FormRequest
     {
         return [
             "sk.citizent_id" => "required",
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "relationship_status" => "required",

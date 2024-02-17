@@ -11,6 +11,7 @@ use App\Models\SkTravelingLetter;
 use App\Models\VillageHead;
 use App\Repositories\Letters\SkTravelingRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -20,6 +21,7 @@ class SkTravellingController extends Controller
 {
     public function __construct(
         protected readonly SkTravelingRepository $skTravelling,
+        protected readonly SkTravelingLetter $letter,
         protected readonly VillageHead $villageHead,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
@@ -45,10 +47,13 @@ class SkTravellingController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("", 4);
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-traveling.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }

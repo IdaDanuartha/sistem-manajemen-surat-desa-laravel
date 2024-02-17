@@ -11,6 +11,7 @@ use App\Models\SkDomicileLetter;
 use App\Models\User;
 use App\Repositories\Letters\SkDomicileRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -44,10 +45,13 @@ class SkDomicileController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("", 9);
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-domicile.crud.create', [
-                    "citizents" => $this->userRepository->findAllCitizent()
+                    "citizents" => $this->userRepository->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }

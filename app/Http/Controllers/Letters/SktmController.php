@@ -46,8 +46,8 @@ class SktmController extends Controller
 
     public function create()
     { 
-        $reference_number_1 = new GenerateReferenceNumber($this->letter->where("sktm_type", SktmType::BEDAH_RUMAH)->latest()->first(), "416", 6, "Kppdk", "Ket.", "Kel. Subagan");
-        $reference_number_2 = new GenerateReferenceNumber($this->letter->where("sktm_type", "!=", SktmType::BEDAH_RUMAH)->latest()->first(), "416", 5, "Kppdk", "Ket", "Kel. Subagan");
+        $reference_number_1 = new GenerateReferenceNumber("416", 6, "Kppdk", "Ket.", "Kel. Subagan");
+        $reference_number_2 = new GenerateReferenceNumber("416", 5, "Kppdk", "Ket", "Kel. Subagan");
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
