@@ -10,6 +10,7 @@ use App\Models\Sk;
 use App\Models\SktuLetter;
 use App\Repositories\Letters\SktuRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -19,6 +20,7 @@ class SktuController extends Controller
 {
     public function __construct(
         protected readonly SktuRepository $sktu,
+        protected readonly SktuLetter $letter,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -42,10 +44,13 @@ class SktuController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber($this->letter->latest()->first(), "517", 5, "Kppdk", "Ket", "Kel. Subagan");
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sktu.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }

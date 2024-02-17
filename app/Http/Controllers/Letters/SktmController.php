@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Letters;
 
 use App\Enums\Role;
+use App\Enums\SktmType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\Sktm\StoreSktmRequest;
 use App\Http\Requests\Letter\Sktm\UpdateSktmRequest;
@@ -10,6 +11,7 @@ use App\Models\Sk;
 use App\Models\SktmLetter;
 use App\Repositories\Letters\SktmRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -19,6 +21,7 @@ class SktmController extends Controller
 {
     public function __construct(
         protected readonly SktmRepository $sktm,
+        protected readonly SktmLetter $letter,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -43,10 +46,15 @@ class SktmController extends Controller
 
     public function create()
     { 
+        $reference_number_1 = new GenerateReferenceNumber($this->letter->where("sktm_type", SktmType::BEDAH_RUMAH)->latest()->first(), "416", 6, "Kppdk", "Ket.", "Kel. Subagan");
+        $reference_number_2 = new GenerateReferenceNumber($this->letter->where("sktm_type", "!=", SktmType::BEDAH_RUMAH)->latest()->first(), "416", 5, "Kppdk", "Ket", "Kel. Subagan");
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sktm.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number_1" => $reference_number_1->generate(),
+                    "reference_number_2" => $reference_number_2->generate()
                ]) : 
                abort(404);
     }

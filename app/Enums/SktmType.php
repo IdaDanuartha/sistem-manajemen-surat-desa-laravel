@@ -19,7 +19,7 @@ enum SktmType: int
 			self::BEDAH_RUMAH => 'Bedah Rumah',			
 			self::DISABILITAS => 'Disabilitas',			
 			self::BPJS => 'BPJS',			
-			self::LANSIA => 'LANSIA',			
+			self::LANSIA => 'Lansia',		
 		};
 	}
 
@@ -31,7 +31,7 @@ enum SktmType: int
 			'Bedah Rumah',			
 			'Disabilitas',			
 			'BPJS',			
-			'LANSIA',	
+			'Lansia',	
 		];
 	}
 }

@@ -8,7 +8,7 @@
 			@method('PUT')			
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
-                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
+                <input type="text" class="input-crud" name="sk[reference_number]" readonly id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -22,12 +22,13 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+
 			<div class="col-span-12 md:col-span-6 flex-col {{ $get_letter->sktm_type->value === 2 ? "flex" : "hidden" }}">
                 <label for="school_name" class="text-second mb-1">Nama Anak</label>
 				<select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari Nama Anak</option>
 					@foreach ($citizents as $item)
-						<option value="{{ $item->id }}" @selected($item->id === $get_letter->sktmSchool->citizent_id)>{{ "$item->name - $item->national_identify_number" }}</option>
+						<option value="{{ $item->id }}" @selected($item->id === $get_letter->sktmSchool?->citizent_id)>{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach
 				</select>
                 @error('school_name')
