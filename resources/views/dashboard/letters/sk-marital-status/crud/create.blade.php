@@ -21,9 +21,17 @@
 					@enderror
 				</div>
 			@endif			
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-6 hidden flex-col reference-number-1">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
-                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
+                <input type="text" class="input-crud" name="" readonly value="{{ $reference_number_1 }}"
+                    placeholder="Masukkan Nomor Surat..." required />
+                @error('reference_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex-col flex reference-number-2">
+                <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
+                <input type="text" class="input-crud" name="sk[reference_number]" readonly value="{{ $reference_number_2 }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -82,5 +90,25 @@
 		let status = $(".status-select2").select2()
 		let citizent = $(".citizent-select2").select2()
 		let sk_citizent = $(".sk_citizent-select2").select2()
+
+		$(".status-select2").change(function() {
+			if($(this).val() == 3) {
+				$(".reference-number-1").addClass("flex")
+				$(".reference-number-1").removeClass("hidden")
+				$(".reference-number-1 input").attr("name", "sk[reference_number]")
+
+				$(".reference-number-2").addClass("hidden")
+				$(".reference-number-2").removeClass("flex")
+				$(".reference-number-2 input").attr("name", "")
+			} else if($(this).val() == 1 || $(this).val() == 2) {
+				$(".reference-number-1").addClass("hidden")
+				$(".reference-number-1").removeClass("flex")
+				$(".reference-number-1 input").attr("name", "")
+				
+				$(".reference-number-2").addClass("flex")
+				$(".reference-number-2").removeClass("hidden")
+				$(".reference-number-2 input").attr("name", "sk[reference_number]")
+			}
+		})
 	</script>
 @endpush

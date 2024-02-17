@@ -104,11 +104,8 @@ class SkBirthRepository
   public function store($request): Sk|Exception
   {
     DB::beginTransaction();
-    try {
-      $reference_number = new GenerateReferenceNumber($this->letter->latest()->first());
-      
+    try {      
       $request["sk"]["code"] = strtoupper(Str::random(8));
-      $request["sk"]["reference_number"] = $reference_number->generateSkbirth();
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       $this->letter->create(["sk_id" => $sk_letter->id]);

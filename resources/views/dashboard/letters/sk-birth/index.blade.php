@@ -11,7 +11,7 @@
                 </svg>
                 <input type="search" class="searchInputTable w-full focus:ring-0 focus:outline-none" placeholder="Cari surat ...">
             </div>
-            @if (auth()->user()->isSuperAdmin())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
             <div class="flex">
                 <a href="{{ route('letters.sk-birth.create') }}"
                     class="flex button btn-main duration-200 capitalize w-max items-center gap-1" type="button">

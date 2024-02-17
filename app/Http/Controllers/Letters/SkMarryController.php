@@ -10,6 +10,7 @@ use App\Models\Sk;
 use App\Models\SkMarryLetter;
 use App\Repositories\Letters\SkMarryRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -19,6 +20,7 @@ class SkMarryController extends Controller
 {
     public function __construct(
         protected readonly SkMarryRepository $skMarry,
+        protected readonly SkMarryLetter $letter,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -43,10 +45,12 @@ class SkMarryController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber($this->letter->latest()->first(), "474.2", 2);
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-marry.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }
