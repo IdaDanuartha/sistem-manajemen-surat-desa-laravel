@@ -63,7 +63,7 @@
             </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Tambah Pengguna</button>
-                <a href="{{ route('users.index') }}" class="button btn-second text-white" type="reset">Batal
+                <a href="{{ route('admins.index') }}" class="button btn-second text-white" type="reset">Batal
                     Tambah</a>
             </div>
         </form>

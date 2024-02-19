@@ -53,6 +53,15 @@ class UserRepository
     return $query->get();
   }
 
+  public function findAllStaff()
+  {
+    return collect([
+      $this->villageHead->with(['citizent.user'])->latest()->get(),
+      $this->environmentalHead->with(['citizent.user'])->latest()->get(),
+      $this->sectionHead->with(['citizent.user'])->latest()->get()
+    ]);
+  }
+
   public function findAllCitizent(): Collection
   {
     return $this->citizent->with(['user'])->whereRelation("user", "role", Role::CITIZENT)->latest()->get();

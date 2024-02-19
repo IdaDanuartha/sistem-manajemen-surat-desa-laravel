@@ -8,6 +8,7 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Citizent;
 use App\Models\EnvironmentalHead;
 use App\Models\SectionHead;
+use App\Models\User;
 use App\Models\VillageHead;
 use App\Repositories\AdminRepository;
 use App\Repositories\UserRepository;
@@ -19,17 +20,16 @@ class UserController extends Controller
 {
     public function __construct(
         protected readonly UserRepository $userRepository,
-        protected readonly AdminRepository $adminRepository,
+        protected readonly User $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
     public function index(Request $request)
     {     
-        $admins = [];
-        if(auth()->user()->role === Role::SUPER_ADMIN) $admins = $this->adminRepository->findAll();
-        $users = $this->userRepository->findAll();
+        if(request()->route()->getName() === "staff.index") $users = $this->userRepository->findAllStaff();
+        else $users = $this->userRepository->findAllCitizent();
         
-        return view('dashboard.users.index', compact('users', 'admins'));
+        return view('dashboard.users.index-citizent', compact('users'));
     }
 
     public function create()
@@ -43,7 +43,17 @@ class UserController extends Controller
     }
 
     public function edit(Citizent $citizent)
-    {                                           
+    {                          
+        if($citizent->villageHead) {
+            $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
+        } else if($citizent->environmentalHead) {
+            $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
+        } else if($citizent->sectionHead) {
+            $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
+        } else {
+            $citizent = $this->user->where("role", Role::CITIZENT)->first();  
+        }
+
         return view('dashboard.users.crud.edit', compact('citizent'));
     }
 
@@ -56,14 +66,23 @@ class UserController extends Controller
             $store instanceof VillageHead ||
             $store instanceof EnvironmentalHead ||
             $store instanceof SectionHead) {
-                return redirect(route("users.index"))
+                if(request()->route()->getName() === "staff.index") {
+                    return redirect(route("staff.index"))
                             ->with("success", $this->responseMessage->response('Pengguna'));
+                } else {
+                    return redirect(route("citizents.index"))
+                            ->with("success", $this->responseMessage->response('Pengguna'));
+                }
             } 
             throw new Exception;
         } catch (\Exception $e) {  
             logger($e->getMessage());
 
-            return redirect(route("citizents.create"))->with("error", $this->responseMessage->response('pengguna', false));
+            if(request()->route()->getName() === "staff.index") {
+                return redirect(route("staff.create"))->with("error", $this->responseMessage->response('pengguna', false));
+            } else {
+                return redirect(route("citizents.create"))->with("error", $this->responseMessage->response('pengguna', false));
+            }
         }
     }
 
@@ -72,11 +91,22 @@ class UserController extends Controller
         try {                     
             $update = $this->userRepository->update($request->validated(), $citizent);
 
-            if($update) return redirect(route('users.index'))
+            if($update) {
+                if(request()->route()->getName() === "staff.index") {
+                    return redirect(route('staff.index'))
                                 ->with('success', $this->responseMessage->response('Pengguna', true, 'update'));
+                } else {
+                    return redirect(route('citizents.index'))
+                                ->with('success', $this->responseMessage->response('Pengguna', true, 'update'));
+                }
+            }
             throw new Exception;
         } catch (\Exception $e) {
-            return redirect()->route('citizents.edit', $citizent->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
+            if(request()->route()->getName() === "staff.index") {
+                return redirect()->route('staff.edit', $citizent->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
+            } else {
+                return redirect()->route('citizents.edit', $citizent->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
+            }
         }
     }
 
@@ -85,9 +115,17 @@ class UserController extends Controller
         try {
             $this->userRepository->delete($citizent);
 
-            return redirect()->route('users.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
-        } catch (\Exception $e) {            
-            return redirect()->route('users.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));
+            if(request()->route()->getName() === "staff.index") {
+                return redirect()->route('staff.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
+            } else {
+                return redirect()->route('citizents.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
+            }
+        } catch (\Exception $e) {    
+            if(request()->route()->getName() === "staff.index") {
+                return redirect()->route('staff.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));
+            } else {
+                return redirect()->route('citizents.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));
+            }        
         }
     }
 }
