@@ -22,7 +22,7 @@ class UpdateInheritanceGeneologyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             'inheritance_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			

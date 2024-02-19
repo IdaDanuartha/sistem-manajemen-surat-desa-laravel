@@ -23,7 +23,7 @@ class StoreTreeFellingRequest extends FormRequest
     {
         return [
             "sk.citizent_id" => "required",
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "regarding" => "required",
             "description" => "required",

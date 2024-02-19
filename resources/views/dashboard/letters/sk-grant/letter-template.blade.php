@@ -713,7 +713,7 @@
                         @if ($letter->sk->status_by_village_head === 1)
                             <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                    @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
@@ -727,13 +727,14 @@
                 <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Yang membuat pernyataan memberi hibah</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->citizent))
+                    @if(isset($letter->sk->citizent->user->signature_image))
                         <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
-                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                    @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
+                        @if (($user->isCitizent() && $user->signature_image))
                             <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @endif                 </div>
+                    @endif                 
+                </div>
                 <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
             </div>
         </div>

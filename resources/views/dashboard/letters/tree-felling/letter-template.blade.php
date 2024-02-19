@@ -1,344 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
     <style>
-        .image-full {
+        .wrapper{
+            /*margin: 2cm;*/
+        }
+        .title-surat{
+            font-size: 18px;
+            text-decoration: underline;
+        }
+        .subtitle-surat{
+            font-size: 14px;
+            margin-top: 0;
+        }
+        .title-surat-wrapper{
             width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
-        }
-
-        .title {
-            width: 55%;
             text-align: center;
-            position: absolute;
-            top: 24%;
-            left: 50%;
-            transform: translate(-50%);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            border-bottom: 2px solid black;
-        }
-
-        .subtitle {
-            position: absolute;
-            top: 28.5%;
-            left: 50%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
-        .description {
-            position: absolute;
-            top: 31.5%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .input-group label {
-            width: 22% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group div {
-            width: 5% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group span {
-            width: 67% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group.one label {
-            top: 40%;
-            left: 17.5%;
-        }
-
-        .input-group.one div {
-            top: 40%;
-            left: 28%;
-        }
-
-        .input-group.one span {
-            top: 40%;
-            left: 61.3%;
-            text-transform: uppercase;
             font-weight: bold;
+            margin-top: 30px;
         }
-
-        .input-group.two label {
-            top: 43%;
-            left: 17.5%;
+        .content-surat{
+            margin-top: -14px;
+            font-size: 14px;
         }
-
-        .input-group.two div {
-            top: 43%;
-            left: 28%;
+        table{
+            font-size: 14px;
         }
-
-        .input-group.two span {
-            top: 43%;
-            left: 61.3%;
+        .paragraph{
+            text-indent: 20px;
         }
-
-        .input-group.three label {
-            top: 46%;
-            left: 17.5%;
+        .table-mt{
+            margin-top: 30px;
         }
-
-        .input-group.three div {
-            top: 46%;
-            left: 28%;
+        .last-paragraph{
+            margin-top: -10px;
         }
-
-        .input-group.three span {
-            top: 46%;
-            left: 61.3%;
-        }
-
-        .input-group.four label {
-            top: 49%;
-            left: 17.5%;
-        }
-
-        .input-group.four div {
-            top: 49%;
-            left: 28%;
-        }
-
-        .input-group.four span {
-            top: 49%;
-            left: 61.3%;
-        }
-
-        .input-group.six label {
-            top: 52%;
-            left: 17.5%;
-        }
-
-        .input-group.six div {
-            top: 52%;
-            left: 28%;
-        }
-
-        .input-group.six span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 55%;
-            left: 61.3%;
-        }
-
-        .input-group.seven label {
-            top: 58%;
-            left: 17.5%;
-        }
-
-        .input-group.seven div {
-            top: 58%;
-            left: 28%;
-        }
-
-        .input-group.seven span {
-            top: 58%;
-            left: 61.3%;
-        }
-
-        .input-group.eight label {
-            top: 61%;
-            left: 17.5%;
-        }
-
-        .input-group.eight div {
-            top: 61%;
-            left: 28%;
-        }
-
-        .input-group.eight span {
-            top: 61%;
-            left: 61.3%;
-        }
-
-        .input-group.five label {
-            top: 64%;
-            left: 17.5%;
-        }
-
-        .input-group.five div {
-            top: 64%;
-            left: 28%;
-        }
-
-        .input-group.five span {
-            top: 64%;
-            left: 61.3%;
-        }
-
-        .card-ttd p:first-child {
+        .ttd-text{
+            width: 100%;
             text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 11.7%;
-            left: 80%;
-            transform: translate(-50%);
         }
-
-        .card-ttd p:nth-child(2) {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 9.8%;
-            left: 80%;
-            transform: translate(-50%);
+        .w-full{
+            width: 100%;
         }
-
-        .card-ttd p.other {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.9%;
-            left: 80%;
-            transform: translate(-50%);
+        p{
+            font-size: 14px;
         }
-
-        .card-ttd .card-canvas {
-            width: 30%;
-            height: 70px;
-            position: absolute;
-            bottom: 1%;
-            left: 80%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .description-other {
-            position: relative;
-            top: 68%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-        }
-
-        .paragraph-one {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .paragraph-two {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
+        .table-content tr td:first-child{
+            width: 60px;
         }
     </style>
 </head>
 <body>
-    
-    <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan {{ $letter->status === 1 ? "Belum Menikah" : "Sudah Menikah" }}</h3>
-        <div class="content-form">
-            <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten  Karangasem dengan ini menerangkan bahwa :</p>
-            <div class="input-group one">
-                <label>Nama</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->name }}</span>
-            </div>
-            <div class="input-group two">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
-            </div>
-            <div class="input-group three">
-                <label>Jenis Kelamin</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->gender->label() }}</span>
-            </div>
-            <div class="input-group four">
-                <label>Agama</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->religion->label() }}</span>
-            </div>
-            <div class="input-group six">
-                <label>Kewarganegaraan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->citizenship }}</span>
-            </div>
-            <div class="input-group nine">
-                <label>Status</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->marital_status->label() }}</span>
-            </div>
-            <div class="input-group seven">
-                <label>Pekerjaan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->work }}</span>
-            </div>
-            <div class="input-group eight">
-                <label>No KK/ KTP</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->family_card_number }}</span>
-            </div>
-            <div class="input-group five">
-                <label>Alamat</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->address }}</span>
-            </div>
-            <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan Desa, No: {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, Sepanjang pengetahuan kami bahwa memang benar orang tersebut di atas <strong>{{ $letter->status === 1 ? "Belum Menikah" : "Kawin" }} Sebelum Tanggal {{ $letter->sk->created_at->format("d M Y") }}.</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+<div class="wrapper">
+    <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
+    <p style="margin-top: -10px;">Kepada,</p>
+    <p style="margin-top: -10px;">Yth. <br>Kepala Dinas Lingkungan Hidup Kabupaten Karangasem di <u>Amlapura</u></p>
+    <table class="table-hal" style="margin-top: -10px; text-align: left">
+        <tr>
+            <td>Hal</td>
+            <td>:</td>
+            <td>
+                {{ $letter->regarding }}
+            </td>
+        </tr>
+    </table>
+    <div class="content-surat" style="margin-top: 4px;">
+        <p   class="">
+            Dengan hormat, <br>
+            Yang bertanda tangan dibawah ini :
+
+        </p>
+        <div class="table-wrapper" style="margin-top: -10px;">
+            <div class="table-1">
+                <table class="table-content">
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>{{ $letter->sk->citizent->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pekerjaan</td>
+                        <td>:</td>
+                        <td>{{ $letter->sk->citizent->work }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:</td>
+                        <td>
+                            {{ $letter->sk->citizent->address }}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>No. HP</td>
+                        <td>:</td>
+                        <td>
+                            {{ $letter->sk->citizent->phone_number }}
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="content-ttd">
-            <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
-                <p class="other">Kepala Kelurahan</p>
-                <div class="card-canvas">
-                    @if (Request::is("letters/tree-felling/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif(isset($letter->sk->villageHead))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
-                </div>
-            </div>
-        </div>
+        <p class="paragraph">
+            {!! $letter->description !!}
+        </p>
+        <p class="paragraph last-paragraph">
+            Demikian kami sampaikan atas bantuan dan kerjasamanya kami ucapkan banyak terimakasih.
+        </p>
     </div>
+    <div class="" style="margin-top: 30px;">
+        <table class="w-full">
+            <tr class="w-full">
+                <td class="ttd-text">Mengetahui</td>
+            </tr>
+            <tr class="w-full">
+                <td class="ttd-text">Kepala Lingkungan Desa</td>
+                <td class="ttd-text">Pemohon</td>
+            </tr>
+            <tr style="text-align: center">
+                <td style="height: 60px;">
+                    @if(isset($letter->sk->environmentalHead))
+                        @if ($letter->sk->status_by_environmental_head === 1)
+                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                        @endif
+                    @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
+                        @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
+                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                        @endif
+                    @endif 
+                </td>
+                <td style="height: 60px;">
+                    @if (($user->isCitizent() && $user->signature_image))
+                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                    @elseif(isset($letter->sk->citizent->user->signature_image))
+                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
+                    @endif
+                </td>
+            </tr>
+            <tr class="w-full">
+                <td class="ttd-text">
+                    @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
+                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->citizent->name }}</strong>                    
+                    @endif
+                </td>
+                <td class="ttd-text">
+                    @if ($letter->sk->citizent->name)
+                        <strong style="font-size: 14px;">{{ $letter->sk->citizent->name }}</strong>                    
+                    @endif
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>

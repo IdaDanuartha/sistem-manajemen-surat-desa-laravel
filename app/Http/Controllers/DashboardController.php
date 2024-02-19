@@ -238,7 +238,8 @@ class DashboardController extends Controller
                                             ->where('status_by_environmental_head', 1)
                                             ->count();
             $total_letters_not_approved = Sk::where('status_by_environmental_head', 0)
-                                                ->count();
+                                            ->where('is_published', 1)
+                                            ->count();
             $total_letters = Sk::where('is_published', 1)->count();
         } else if(auth()->user()->role === Role::SECTION_HEAD) {
             $total_letters_approved = Sk::where('section_head_id', auth()->user()->authenticatable->id)

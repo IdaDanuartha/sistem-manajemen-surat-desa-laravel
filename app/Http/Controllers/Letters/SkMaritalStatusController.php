@@ -20,7 +20,6 @@ class SkMaritalStatusController extends Controller
 {
     public function __construct(
         protected readonly SkMaritalStatusRepository $skMaritalStatus,
-        protected readonly SkMaritalStatusLetter $letter,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -45,8 +44,8 @@ class SkMaritalStatusController extends Controller
 
     public function create()
     { 
-        $reference_number_1 = new GenerateReferenceNumber($this->letter->where("status", 3)->latest()->first(), "", 3); // cerai
-        $reference_number_2 = new GenerateReferenceNumber($this->letter->where("status", "!=", 3)->latest()->first(), "", 4, "", "S.ket"); // janda or duda
+        $reference_number_1 = new GenerateReferenceNumber("", 3); // cerai
+        $reference_number_2 = new GenerateReferenceNumber("", 4, "", "S.ket"); // janda or duda
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 

@@ -23,7 +23,7 @@ class StoreInheritanceGeneologyRequest extends FormRequest
     {
         return [
             "sk.citizent_id" => "required",
-            "sk.reference_number" => "required",
+            // "sk.reference_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             'inheritance_image' => ['required', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			

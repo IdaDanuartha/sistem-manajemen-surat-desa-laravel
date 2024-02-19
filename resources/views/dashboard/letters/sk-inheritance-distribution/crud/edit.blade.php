@@ -6,15 +6,15 @@
 		<form action="{{ route('letters.sk-inheritance-distribution.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+            </div> --}}
+			<div class="col-span-12 flex flex-col">
                 <label for="citizent_id" class="text-second mb-2">Penerima Kuasa</label>
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari nama penerima kuasa</option>
@@ -42,7 +42,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-6 md:col-span-8 flex flex-col heir-group">
+			<div class="col-span-12 md:col-span-6 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="inheritance_distribution_family" class="text-second">Ahli Waris</label>
 					<button type="button" class="ml-1 btn-add-family">
@@ -59,7 +59,7 @@
 					<br>
 				@endforeach
             </div>
-			<div class="col-span-6 md:col-span-4 flex flex-col relationship-status-group">
+			<div class="col-span-12 md:col-span-6 flex flex-col relationship-status-group">
                 <label for="inheritance_distribution_area" class="text-second mb-1">Pembagian Tanah</label>
 				@foreach ($get_letter->families as $family)
 					<input type="number" class="input-crud" name="inheritance_distribution_area[]" id="inheritance_distribution_area" value="{{ $family->area }}"

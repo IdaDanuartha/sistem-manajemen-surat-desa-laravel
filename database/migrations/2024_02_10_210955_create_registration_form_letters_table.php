@@ -20,6 +20,10 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string("time_period");
             $table->string("reason");
+            $table->string("kaling_number")->nullable();
+            $table->string("bourding_house_owner")->nullable();
+            $table->string("address")->nullable();
+            $table->string("phone_number")->nullable();
             $table->timestamps();
         });
     }

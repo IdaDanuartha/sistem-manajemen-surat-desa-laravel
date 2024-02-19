@@ -45,7 +45,7 @@ class SkNameController extends Controller
 
     public function create()
     { 
-        $reference_number = new GenerateReferenceNumber($this->letter->latest()->first());
+        $reference_number = new GenerateReferenceNumber();
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 

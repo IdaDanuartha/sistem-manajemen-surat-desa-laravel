@@ -10,6 +10,7 @@ use App\Models\Sk;
 use App\Models\SkMoveLetter;
 use App\Repositories\Letters\SkMoveRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -19,6 +20,7 @@ class SkMoveController extends Controller
 {
     public function __construct(
         protected readonly SkMoveRepository $skMove,
+        protected readonly SkMoveLetter $letter,
         protected readonly UserRepository $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -40,10 +42,13 @@ class SkMoveController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("475", 7);
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-move.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->user->findAllCitizent(),
+                    "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
     }
