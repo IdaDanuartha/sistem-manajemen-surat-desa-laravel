@@ -40,6 +40,7 @@
                         <th class="md:table-cell">Nama</th>
                         <th class="md:table-cell">Jenis Kelamin</th>
                         <th class="lg:table-cell">Tempat Tanggal Lahir</th>
+                        <th class="lg:table-cell">Role</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -52,6 +53,15 @@
                             <td class="md:table-cell">{{ $item[0]->citizent->name }}</td>
                             <td class="md:table-cell">{{ $item[0]->citizent->gender->label() }}</td>
                             <td class="lg:table-cell">{{ $item[0]->citizent->birth_place . ', ' . $item[0]->citizent->birth_date->format('d M Y') }}</td>
+                            <td class="lg:table-cell">
+                                @if ($item[0]->citizent->villageHead)
+                                    Kepala Kelurahan
+                                @elseif ($item[0]->citizent->environmentalHead)
+                                    Kepala Lingkungan
+                                @elseif ($item[0]->citizent->sectionHead)
+                                    Kepala Seksi
+                                @endif
+                            </td>
                             <td>
                                 <div class="flex gap-2 items-center">
 

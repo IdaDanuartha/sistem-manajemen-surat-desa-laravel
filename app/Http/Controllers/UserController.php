@@ -38,7 +38,17 @@ class UserController extends Controller
     }
 
     public function show(Citizent $citizent)
-    {                                                   
+    {          
+        if($citizent->villageHead) {
+            $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
+        } else if($citizent->environmentalHead) {
+            $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
+        } else if($citizent->sectionHead) {
+            $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
+        } else {
+            $citizent = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();  
+        }
+                                                 
         return view('dashboard.users.crud.detail', compact('citizent'));
     }
 
@@ -51,7 +61,7 @@ class UserController extends Controller
         } else if($citizent->sectionHead) {
             $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
         } else {
-            $citizent = $this->user->where("role", Role::CITIZENT)->first();  
+            $citizent = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();  
         }
 
         return view('dashboard.users.crud.edit', compact('citizent'));
@@ -66,7 +76,7 @@ class UserController extends Controller
             $store instanceof VillageHead ||
             $store instanceof EnvironmentalHead ||
             $store instanceof SectionHead) {
-                if(request()->route()->getName() === "staff.index") {
+                if(request()->route()->getName() === "staff.store") {
                     return redirect(route("staff.index"))
                             ->with("success", $this->responseMessage->response('Pengguna'));
                 } else {
@@ -78,7 +88,7 @@ class UserController extends Controller
         } catch (\Exception $e) {  
             logger($e->getMessage());
 
-            if(request()->route()->getName() === "staff.index") {
+            if(request()->route()->getName() === "staff.store") {
                 return redirect(route("staff.create"))->with("error", $this->responseMessage->response('pengguna', false));
             } else {
                 return redirect(route("citizents.create"))->with("error", $this->responseMessage->response('pengguna', false));
@@ -88,11 +98,11 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, Citizent $citizent)
     {
-        try {                     
+        try { 
             $update = $this->userRepository->update($request->validated(), $citizent);
 
             if($update) {
-                if(request()->route()->getName() === "staff.index") {
+                if(request()->route()->getName() === "staff.update") {
                     return redirect(route('staff.index'))
                                 ->with('success', $this->responseMessage->response('Pengguna', true, 'update'));
                 } else {
@@ -102,7 +112,7 @@ class UserController extends Controller
             }
             throw new Exception;
         } catch (\Exception $e) {
-            if(request()->route()->getName() === "staff.index") {
+            if(request()->route()->getName() === "staff.update") {
                 return redirect()->route('staff.edit', $citizent->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
             } else {
                 return redirect()->route('citizents.edit', $citizent->id)->with('error', $this->responseMessage->response('pengguna', false, 'update'));
@@ -115,13 +125,13 @@ class UserController extends Controller
         try {
             $this->userRepository->delete($citizent);
 
-            if(request()->route()->getName() === "staff.index") {
+            if(request()->route()->getName() === "staff.destroy") {
                 return redirect()->route('staff.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
             } else {
                 return redirect()->route('citizents.index')->with('success', $this->responseMessage->response('Pengguna', true, 'delete'));
             }
         } catch (\Exception $e) {    
-            if(request()->route()->getName() === "staff.index") {
+            if(request()->route()->getName() === "staff.destroy") {
                 return redirect()->route('staff.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));
             } else {
                 return redirect()->route('citizents.index')->with('error', $this->responseMessage->response('pengguna', false, 'delete'));

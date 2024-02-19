@@ -121,7 +121,17 @@ class UserRepository
   public function update($request, Citizent $citizent): bool
   {
     DB::beginTransaction();    
-    try {              
+    try {      
+      if($citizent->villageHead) {
+        $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
+      } else if($citizent->environmentalHead) {
+        $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
+      } else if($citizent->sectionHead) {
+        $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
+      } else {
+        $citizent = $this->user->where("role", Role::CITIZENT)->first();  
+      }       
+
       if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {
         $this->uploadFile->deleteExistFile("users/$citizent->profile_image");
 
@@ -136,8 +146,15 @@ class UserRepository
       
       if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
 
-      $citizent->updateOrFail(Arr::except($request, 'user'));
-			$citizent->user->updateOrFail(Arr::get($request, 'user'));
+      if($citizent->role === Role::CITIZENT) {
+        $user = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();
+        $user->authenticatable->updateOrFail(Arr::except($request, 'user'));
+        $user->updateOrFail(Arr::get($request, 'user'));
+      } else {
+        $citizent->authenticatable->citizent->updateOrFail(Arr::except($request, 'user'));
+        $citizent->updateOrFail(Arr::get($request, 'user'));
+      }
+
 
       DB::commit();
       return true;

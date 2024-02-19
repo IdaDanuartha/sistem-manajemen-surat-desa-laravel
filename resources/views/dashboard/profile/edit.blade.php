@@ -140,7 +140,7 @@
                         @enderror
                     </div>
                 @endif
-                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                <div class="col-md-6 col-12 mt-4 flex flex-col">
                     <label class="text-second">TTE</label>
                     @if (auth()->user()->signature_image)
                         <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>

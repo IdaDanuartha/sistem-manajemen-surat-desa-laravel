@@ -36,7 +36,7 @@ class StoreUserRequest extends FormRequest
 			'citizenship' => ['nullable'],			
 			'work' => ['nullable'],			
 			'address' => ['nullable'],			
-			'user.email' => ['required', 'email:dns', Rule::unique('users', 'email')],
+			'user.email' => ['required', 'email', Rule::unique('users', 'email')],
 			'user.password' => ['required', 'min:6'],
 			'user.status' => ['nullable'],
             'user.role' => 'required',

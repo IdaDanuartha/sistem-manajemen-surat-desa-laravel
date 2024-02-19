@@ -3,7 +3,7 @@
 @section('main')
 	
 	<div class="table-wrapper mt-[20px] input-teacher">
-		<form action="{{ Request::is("staff*") ? route('staff.update', $citizent->authenticatable->citizent->id) : route('citizents.update', $citizent->authenticatable->citizent->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
+		<form action="{{ Request::is("staff*") ? route('staff.update', $citizent->authenticatable->citizent->id) : route('citizents.update', $citizent->authenticatable->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
 			<div class="col-span-12 md:col-span-6 flex flex-col">
@@ -13,7 +13,7 @@
 				 	class="input-crud"
 					name="name"
 					id="name"
-					value="{{ $citizent->authenticatable->citizent->name }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->name : $citizent->authenticatable->name }}"
 				  placeholder="Masukkan Nama..."
 					required
 				/>
@@ -30,7 +30,7 @@
 					required
 					id="national_identify_number"
           name="national_identify_number"
-					value="{{ $citizent->authenticatable->citizent->national_identify_number }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->national_identify_number : $citizent->authenticatable->national_identify_number }}"
 				>
 				@error('national_identify_number')
           <div class="text-danger mt-1">{{ $message }}</div>
@@ -45,7 +45,7 @@
 					required
 					id="family_card_number"
           name="family_card_number"
-					value="{{ $citizent->authenticatable->citizent->family_card_number }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->family_card_number : $citizent->authenticatable->family_card_number }}"
 				>
 				@error('family_card_number')
           <div class="text-danger mt-1">{{ $message }}</div>
@@ -60,7 +60,7 @@
 					required
 					id="phone_number"
           name="phone_number"
-					value="{{ $citizent->authenticatable->citizent->phone_number }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->phone_number : $citizent->authenticatable->phone_number }}"
 				>
 				@error('phone_number')
           <div class="text-danger mt-1">{{ $message }}</div>
@@ -75,7 +75,7 @@
 					id="birth_place"
 					name="birth_place"
 					placeholder="Masukkan Tempat Lahir Warga"
-					value="{{ $citizent->authenticatable->citizent->birth_place }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->birth_place : $citizent->authenticatable->birth_place }}"
 				>
 				@error('birth_place')
 					<div class="text-danger mt-1">{{ $message }}</div>
@@ -89,7 +89,7 @@
 					required
 					id="birth_date"
 					name="birth_date"
-					value="{{ $citizent->authenticatable->citizent->birth_date->format('Y-m-d') }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->birth_date->format('Y-m-d') : $citizent->authenticatable->birth_date->format('Y-m-d') }}"
 				>
 				@error('birth_date')
 					<div class="text-danger mt-1">{{ $message }}</div>
@@ -103,7 +103,7 @@
 					required
 					id="citizenship"
 					name="citizenship"
-					value="{{ $citizent->authenticatable->citizent->citizenship }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->citizenship : $citizent->authenticatable->citizenship }}"
 				>
 				@error('citizenship')
 					<div class="text-danger mt-1">{{ $message }}</div>
@@ -117,7 +117,7 @@
 					required
 					id="work"
 					name="work"
-					value="{{ $citizent->authenticatable->citizent->work }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->work : $citizent->authenticatable->work }}"
 				>
 				@error('work')
 					<div class="text-danger mt-1">{{ $message }}</div>
@@ -131,7 +131,7 @@
 					required
 					id="address"
 					name="address"
-					value="{{ $citizent->authenticatable->citizent->address }}"
+					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->address : $citizent->authenticatable->address }}"
 				>
 				@error('address')
 					<div class="text-danger mt-1">{{ $message }}</div>
@@ -141,7 +141,7 @@
 				<label for="gender" class="text-second mb-2">Jenis Kelamin</label>
 				<select required class="gender-select2 input-crud" name="gender">
 				@foreach (App\Enums\Gender::labels() as $key => $value)
-					<option value="{{ $key+1 }}" class="capitalize" @selected($citizent->authenticatable->citizent->gender->value == $key+1)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected(Request::is("staff*") ? $citizent->authenticatable->citizent->gender->value : $citizent->authenticatable->gender->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('gender')
@@ -152,7 +152,7 @@
 				<label for="blood_group" class="text-second mb-2">Golongan Darah</label>
 				<select required class="blood-group-select2 input-crud" name="blood_group">
 				@foreach (App\Enums\BloodGroup::labels() as $key => $value)
-					<option value="{{ $key+1 }}" class="capitalize" @selected($citizent->authenticatable->citizent->blood_group->value == $key+1)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected(Request::is("staff*") ? $citizent->authenticatable->citizent->blood_group->value : $citizent->authenticatable->blood_group->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('blood_group')
@@ -163,7 +163,7 @@
 				<label for="religion" class="text-second mb-2">Agama</label>
 				<select required class="religion-select2 input-crud" name="religion">
 				@foreach (App\Enums\Religion::labels() as $key => $value)
-					<option value="{{ $key+1 }}" class="capitalize" @selected($citizent->authenticatable->citizent->religion->value == $key+1)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected(Request::is("staff*") ? $citizent->authenticatable->citizent->religion->value : $citizent->authenticatable->religion->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('religion')
@@ -174,7 +174,7 @@
 				<label for="marital_status" class="text-second mb-2">Status Pernikahan</label>
 				<select required class="marital-status-select2 input-crud" name="marital_status">
 				@foreach (App\Enums\MaritalStatus::labels() as $key => $value)
-					<option value="{{ $key+1 }}" class="capitalize" @selected($citizent->authenticatable->citizent->marital_status->value == $key+1)>{{ $value }}</option>
+					<option value="{{ $key+1 }}" class="capitalize" @selected(Request::is("staff*") ? $citizent->authenticatable->citizent->marital_status->value : $citizent->authenticatable->marital_status->value == $key+1)>{{ $value }}</option>
 				@endforeach
 				</select>
 				@error('marital_status')
