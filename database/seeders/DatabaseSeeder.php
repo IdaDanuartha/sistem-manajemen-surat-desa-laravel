@@ -35,65 +35,65 @@ class DatabaseSeeder extends Seeder
             'role' => Role::ADMIN
         ]);
 
-        Citizent::create([
-            "name" => "Danuartha",
-            "national_identify_number" => "51013834734434",
-            "phone_number" => "081234567890",
-            "family_card_number" => "520483734434",
-            "gender" => Gender::MAN,
-            "birth_place" => "Bandung",
-            "birth_date" => "2004-12-14",
-            "blood_group" => BloodGroup::O,
-            "religion" => Religion::HINDU,
-            "marital_status" => MaritalStatus::SINGLE,
-            "work" => "Pegawai Negeri Sipil",
-            "address" => "Jln Gunung Agung"
-        ])->villageHead()->create()->user()->create([
-            'username' => '51013834734434',
-            'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
-            'role' => Role::VILLAGE_HEAD,
-        ]);
+        // Citizent::create([
+        //     "name" => "Danuartha",
+        //     "national_identify_number" => "51013834734434",
+        //     "phone_number" => "081234567890",
+        //     "family_card_number" => "520483734434",
+        //     "gender" => Gender::MAN,
+        //     "birth_place" => "Bandung",
+        //     "birth_date" => "2004-12-14",
+        //     "blood_group" => BloodGroup::O,
+        //     "religion" => Religion::HINDU,
+        //     "marital_status" => MaritalStatus::SINGLE,
+        //     "work" => "Pegawai Negeri Sipil",
+        //     "address" => "Jln Gunung Agung"
+        // ])->villageHead()->create()->user()->create([
+        //     'username' => '51013834734434',
+        //     'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+        //     'password' => '123456',
+        //     'role' => Role::VILLAGE_HEAD,
+        // ]);
 
-        Citizent::create([
-            "name" => "Putu",
-            "national_identify_number" => "51034734734434",
-            "phone_number" => "081234567890",
-            "family_card_number" => "510438434634434",
-            "gender" => Gender::WOMAN,
-            "birth_place" => "Surabaya",
-            "birth_date" => "2004-12-14",
-            "blood_group" => BloodGroup::O,
-            "religion" => Religion::HINDU,
-            "marital_status" => MaritalStatus::SINGLE,
-            "work" => "Pegawai Negeri Swasta",
-            "address" => "Monang Maning"
-        ])->environmentalHead()->create()->user()->create([
-            'username' => '51034734734434',
-            'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
-            'role' => Role::ENVIRONMENTAL_HEAD,
-        ]);
+        // Citizent::create([
+        //     "name" => "Putu",
+        //     "national_identify_number" => "51034734734434",
+        //     "phone_number" => "081234567890",
+        //     "family_card_number" => "510438434634434",
+        //     "gender" => Gender::WOMAN,
+        //     "birth_place" => "Surabaya",
+        //     "birth_date" => "2004-12-14",
+        //     "blood_group" => BloodGroup::O,
+        //     "religion" => Religion::HINDU,
+        //     "marital_status" => MaritalStatus::SINGLE,
+        //     "work" => "Pegawai Negeri Swasta",
+        //     "address" => "Monang Maning"
+        // ])->environmentalHead()->create()->user()->create([
+        //     'username' => '51034734734434',
+        //     'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+        //     'password' => '123456',
+        //     'role' => Role::ENVIRONMENTAL_HEAD,
+        // ]);
 
-        Citizent::create([
-            "name" => "Ivan Verdyansyah",
-            "national_identify_number" => "51053857343434",
-            "phone_number" => "081234567890",
-            "family_card_number" => "5948347343434",
-            "gender" => Gender::MAN,
-            "birth_place" => "Bali",
-            "birth_date" => "2004-12-14",
-            "blood_group" => BloodGroup::O,
-            "religion" => Religion::ISLAM,
-            "marital_status" => MaritalStatus::SINGLE,
-            "work" => "Guru",
-            "address" => "Dalung Permai"
-        ])->sectionHead()->create()->user()->create([
-            'username' => '51053857343434',
-            'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
-            'role' => Role::SECTION_HEAD,
-        ]);
+        // Citizent::create([
+        //     "name" => "Ivan Verdyansyah",
+        //     "national_identify_number" => "51053857343434",
+        //     "phone_number" => "081234567890",
+        //     "family_card_number" => "5948347343434",
+        //     "gender" => Gender::MAN,
+        //     "birth_place" => "Bali",
+        //     "birth_date" => "2004-12-14",
+        //     "blood_group" => BloodGroup::O,
+        //     "religion" => Religion::ISLAM,
+        //     "marital_status" => MaritalStatus::SINGLE,
+        //     "work" => "Guru",
+        //     "address" => "Dalung Permai"
+        // ])->sectionHead()->create()->user()->create([
+        //     'username' => '51053857343434',
+        //     'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+        //     'password' => '123456',
+        //     'role' => Role::SECTION_HEAD,
+        // ]);
 
         Citizent::create([
             "name" => "Widyasa",

@@ -46,26 +46,27 @@
                     </thead>
                     <tbody>
                     @forelse($users as $item)
+                    {{-- @dd($item->authenticatable) --}}
                         <tr class="table-body">
-                            <input type="hidden" class="user_id" value="{{ $item[0]->id }}">
+                            <input type="hidden" class="user_id" value="{{ $item }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item[0]->citizent->national_identify_number }}</td>
-                            <td class="md:table-cell">{{ $item[0]->citizent->name }}</td>
-                            <td class="md:table-cell">{{ $item[0]->citizent->gender->label() }}</td>
-                            <td class="lg:table-cell">{{ $item[0]->citizent->birth_place . ', ' . $item[0]->citizent->birth_date->format('d M Y') }}</td>
+                            <td>{{ $item->authenticatable->national_identify_number }}</td>
+                            <td class="md:table-cell">{{ $item->authenticatable->name }}</td>
+                            <td class="md:table-cell">{{ $item->authenticatable->gender->label() }}</td>
+                            <td class="lg:table-cell">{{ $item->authenticatable->birth_place . ', ' . $item->authenticatable->birth_date->format('d M Y') }}</td>
                             <td class="lg:table-cell">
-                                @if ($item[0]->citizent->villageHead)
+                                @if ($item->role === \App\Enums\Role::VILLAGE_HEAD)
                                     Kepala Kelurahan
-                                @elseif ($item[0]->citizent->environmentalHead)
+                                @elseif ($item->role === \App\Enums\Role::ENVIRONMENTAL_HEAD)
                                     Kepala Lingkungan
-                                @elseif ($item[0]->citizent->sectionHead)
+                                @elseif ($item->role === \App\Enums\Role::SECTION_HEAD)
                                     Kepala Seksi
                                 @endif
                             </td>
                             <td>
                                 <div class="flex gap-2 items-center">
 
-                                    <a href="{{ route('staff.show', $item[0]->citizent->id) }}"  class="icon-table icon-detail">
+                                    <a href="{{ route('staff.show', $item->authenticatable->id) }}"  class="icon-table icon-detail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <g clip-path="url(#clip0_7909_2017)">
                                                 <path d="M0 7.78109C0.212656 6.95097 0.740438 6.29931 1.24125 5.6395C2.12616 4.47366 3.19309 3.50834 4.50056 2.82897C5.7475 2.18103 7.07422 1.89766 8.4775 1.98525C10.5819 2.11656 12.3039 3.05512 13.7758 4.51181C14.561 5.28887 15.2174 6.16656 15.7538 7.13109C15.8652 7.33144 15.9194 7.56362 16 7.78112C16 7.92697 16 8.07278 16 8.21862C15.8249 8.97666 15.3426 9.56675 14.9142 10.1839C14.7143 10.472 14.3293 10.5169 14.0539 10.3173C13.7778 10.1172 13.7147 9.75144 13.9047 9.45662C14.1583 9.06322 14.4121 8.66997 14.664 8.27553C14.7712 8.10766 14.7799 7.93334 14.6796 7.75862C13.9052 6.40959 12.9389 5.23069 11.6377 4.35347C10.4538 3.55537 9.14866 3.16141 7.71775 3.22531C6.30425 3.28844 5.05559 3.80041 3.94309 4.65969C2.85125 5.50303 2.00934 6.55978 1.32541 7.74953C1.23597 7.90512 1.21938 8.06566 1.30903 8.22512C2.15775 9.73437 3.23072 11.0487 4.76469 11.8967C7.13203 13.2055 9.46419 13.0716 11.7278 11.601C11.865 11.5118 12.0125 11.4158 12.168 11.3827C12.4535 11.3219 12.7262 11.4948 12.8329 11.7585C12.9426 12.0291 12.8587 12.3243 12.6085 12.5059C11.8959 13.023 11.1268 13.4367 10.2803 13.683C7.68197 14.4388 5.30903 13.9606 3.16566 12.3297C1.92459 11.3854 0.971719 10.1891 0.22 8.83041C0.116406 8.64316 0.071875 8.42331 0 8.21859C0 8.07275 0 7.92694 0 7.78109Z" fill="#547DE2" fill-opacity="0.72"/>
@@ -80,7 +81,7 @@
                                         </svg>
                                     </a>
                                     
-                                    <a href="{{ route('staff.edit', $item[0]->citizent->id) }}"
+                                    <a href="{{ route('staff.edit', $item->authenticatable->id) }}"
                                         class="icon-table icon-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 viewBox="0 0 16 16" fill="none">

@@ -47,7 +47,7 @@ class SendLetterToEnvironmentalHead extends Mailable
         return new Content(
             view: 'mail.send-letter-to-environmental-head',
             with: [
-                'name' => $this->user->authenticatable->citizent->name,
+                'name' => $this->user->authenticatable->name,
                 'code' => $this->letter_code,
             ],
         );

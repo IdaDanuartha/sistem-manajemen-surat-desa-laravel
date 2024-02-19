@@ -227,7 +227,7 @@
                 <td class="ttd-text">
                     @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
                         <strong>
-                            <span style="text-decoration: underline">{{ $letter->sk->villageHead->citizent->name }}</span> <br>
+                            <span style="text-decoration: underline">{{ $letter->sk->villageHead->name }}</span> <br>
                             NIP. 19880402 200701 1 002
                         </strong>
                     @endif

@@ -39,31 +39,23 @@ class UserController extends Controller
 
     public function show(Citizent $citizent)
     {          
-        if($citizent->villageHead) {
-            $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
-        } else if($citizent->environmentalHead) {
-            $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
-        } else if($citizent->sectionHead) {
-            $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
-        } else {
-            $citizent = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();  
-        }
+        // if($citizent->villageHead) {
+        //     $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
+        // } else if($citizent->environmentalHead) {
+        //     $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
+        // } else if($citizent->sectionHead) {
+        //     $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
+        // } else {
+        //     $citizent = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();  
+        // }
+
+        // dd($citizent->user);
                                                  
         return view('dashboard.users.crud.detail', compact('citizent'));
     }
 
     public function edit(Citizent $citizent)
     {                          
-        if($citizent->villageHead) {
-            $citizent = $this->user->where("role", Role::VILLAGE_HEAD)->first();
-        } else if($citizent->environmentalHead) {
-            $citizent = $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->first();
-        } else if($citizent->sectionHead) {
-            $citizent = $this->user->where("role", Role::SECTION_HEAD)->first();
-        } else {
-            $citizent = $this->user->with("authenticatable")->where("role", Role::CITIZENT)->whereRelation("authenticatable", "id", $citizent->id)->first();  
-        }
-
         return view('dashboard.users.crud.edit', compact('citizent'));
     }
 

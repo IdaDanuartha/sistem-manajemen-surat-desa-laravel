@@ -720,7 +720,7 @@
                     @endif 
                 </div>
                 @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->citizent->name }}</p>
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>
                 @endif            
             </div>
             <div class="card-ttd">

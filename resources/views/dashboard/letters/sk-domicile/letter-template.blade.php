@@ -328,7 +328,7 @@
                     @endif
                 </div>
                 @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                    <p class="other" style="text-transform: uppercase;">{{ $letter->sk->environmentalHead->citizent->name }}</p>                    
+                    <p class="other" style="text-transform: uppercase;">{{ $letter->sk->environmentalHead->name }}</p>                    
                 @endif           
             </div>
             <div class="card-ttd">

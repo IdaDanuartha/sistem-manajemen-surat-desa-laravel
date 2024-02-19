@@ -9,7 +9,7 @@
 				<input
 					type="text"
 				 	class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->name : $citizent->authenticatable->name }}"
+					value="{{ $citizent->name }}"
 					disabled
 				/>
 			</div>
@@ -18,7 +18,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->national_identify_number : $citizent->authenticatable->national_identify_number }}"
+					value="{{ $citizent->national_identify_number }}"
 					disabled
 				>
 			</div>
@@ -27,7 +27,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->family_card_number : $citizent->authenticatable->family_card_number }}"
+					value="{{ $citizent->family_card_number }}"
 					disabled
 				>
 			</div>
@@ -36,7 +36,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->phone_number : $citizent->authenticatable->phone_number }}"
+					value="{{ $citizent->phone_number }}"
 					disabled
 				>
 			</div>
@@ -45,7 +45,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->birth_place : $citizent->authenticatable->birth_place }}"
+					value="{{ $citizent->birth_place }}"
 					disabled
 				>
 			</div>
@@ -54,7 +54,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->birth_date->format('d M Y') : $citizent->authenticatable->birth_date->format('d M Y') }}"
+					value="{{ $citizent->birth_date->format('d M Y') }}"
 					disabled
 				>
 			</div>
@@ -63,7 +63,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->citizenship : $citizent->authenticatable->citizenship }}"
+					value="{{ $citizent->citizenship }}"
 					disabled
 				>
 			</div>
@@ -72,7 +72,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->work : $citizent->authenticatable->work }}"
+					value="{{ $citizent->work }}"
 					disabled
 				>
 			</div>
@@ -81,7 +81,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->address : $citizent->authenticatable->address }}"
+					value="{{ $citizent->address }}"
 					disabled
 				>
 			</div>
@@ -90,7 +90,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->gender->label() : $citizent->authenticatable->gender->label() }}"
+					value="{{ $citizent->gender->label() }}"
 					disabled
 				>
 			</div>
@@ -99,7 +99,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->blood_group->label() : $citizent->authenticatable->blood_group->label()}}"
+					value="{{ $citizent->blood_group->label() }}"
 					disabled
 				>
 			</div>
@@ -108,7 +108,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->religion->label() : $citizent->authenticatable->religion->label() }}"
+					value="{{ $citizent->religion->label() }}"
 					disabled
 				>
 			</div>
@@ -117,7 +117,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ Request::is("staff*") ? $citizent->authenticatable->citizent->marital_status->label() : $citizent->authenticatable->marital_status->label() }}"
+					value="{{ $citizent->marital_status->label() }}"
 					disabled
 				>
 			</div>
@@ -126,7 +126,7 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $citizent->email }}"
+					value="{{ $citizent->user->email }}"
 					disabled
 				>
 			</div>
@@ -135,22 +135,22 @@
 				<input
 					type="text"
 					class="input-crud"
-					value="{{ $citizent->role->label() }}"
+					value="{{ $citizent->user->role->label() }}"
 					disabled
 				>
 			</div>
 			<div class="col-span-12 flex flex-col">
 				<p class="text-second mb-1">Status Akun</p>
 				<label class="switch">
-					<input type="checkbox" disabled @checked($citizent->status->value == 1 ? 'on' : '')>
+					<input type="checkbox" disabled @checked($citizent->user->status->value == 1 ? 'on' : '')>
 					<span class="slider round"></span>
 				</label>
 			</div>
 			<div class="col-span-12 flex flex-col">
 				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
 				<label for="profile_image" class="d-block mb-3">
-					@if ($citizent->profile_image)
-						<img src="{{ asset('uploads/users/' . $citizent->profile_image) }}" class="border" width="300" alt="">
+					@if ($citizent->user->profile_image)
+						<img src="{{ asset('uploads/users/' . $citizent->user->profile_image) }}" class="border" width="300" alt="">
 					@else
 						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="border" width="300" alt="">
 					@endif

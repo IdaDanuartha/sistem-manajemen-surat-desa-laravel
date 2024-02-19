@@ -111,7 +111,7 @@
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->citizent->name : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->villageHead ? $letter->sk->villageHead->name : ".........." }}</p>
                 <p class="other">Kepala Kelurahan</p>
                 <div class="card-canvas">
                     @if (Request::is("letters/sk-land-price/$letter->id/preview*"))

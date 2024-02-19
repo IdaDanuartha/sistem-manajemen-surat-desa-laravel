@@ -104,7 +104,7 @@ class SkBirthRepository
   public function store($request): Sk|Exception
   {
     DB::beginTransaction();
-    try {      
+    try {   
       $request["sk"]["code"] = strtoupper(Str::random(8));
       $request["sk"]["mode"] = 1;
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
@@ -133,12 +133,12 @@ class SkBirthRepository
 
     try {
         if(isset($request["sk"]["is_published"])) {
-            $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
-
-            $request["sk"]["is_published"] = true;
-          }
-
+          $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+          Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+          
+          $request["sk"]["is_published"] = true;
+        }
+      
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
 
         DB::commit();

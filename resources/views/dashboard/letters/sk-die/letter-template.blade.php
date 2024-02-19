@@ -304,7 +304,7 @@
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->sectionHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->sectionHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->sectionHead->citizent->name : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->sectionHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->sectionHead->name : ".........." }}</p>
                 <p class="other">Kasi Pelum</p>
                 <div class="card-canvas">
                     @if(isset($letter->sk->sectionHead))
