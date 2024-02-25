@@ -13,6 +13,7 @@
                     </svg>
                     <input type="search" class="searchInputTable w-full focus:ring-0 focus:outline-none" placeholder="Cari data warga ...">
                 </div>
+                @if (App\Enums\Role::labels() != [])
                 <div class="flex">
                     <a href="{{ route('staff.create') }}"
                         class="flex button btn-main duration-200 capitalize w-max items-center gap-1" type="button">
@@ -30,6 +31,7 @@
                         </svg>
                     </a>
                 </div>
+                @endif
             </div>
             <div class="mt-[32px]">
                 <table class="dataTable w-full ">
@@ -46,7 +48,6 @@
                     </thead>
                     <tbody>
                     @forelse($users as $item)
-                    {{-- @dd($item->authenticatable) --}}
                         <tr class="table-body">
                             <input type="hidden" class="user_id" value="{{ $item }}">
                             <td>{{ $loop->iteration }}</td>

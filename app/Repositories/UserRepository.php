@@ -55,7 +55,12 @@ class UserRepository
 
   public function findAllStaff()
   {
-    return $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->orWhere("role", Role::ENVIRONMENTAL_HEAD)->orWhere("role", Role::VILLAGE_HEAD)->latest()->get();
+    return $this->user
+                ->where("role", Role::ENVIRONMENTAL_HEAD)
+                ->orWhere("role", Role::SECTION_HEAD)
+                ->orWhere("role", Role::VILLAGE_HEAD)
+                ->latest()
+                ->get();
   }
 
   public function findAllUserCitizent()
@@ -80,7 +85,7 @@ class UserRepository
 
   public function findById(Citizent $citizent): Citizent
   {
-    return $citizent;
+    return $this->citizent->with("user")->find($citizent->id);
   }
 
   public function store($request): Citizent|VillageHead|EnvironmentalHead|SectionHead|Exception

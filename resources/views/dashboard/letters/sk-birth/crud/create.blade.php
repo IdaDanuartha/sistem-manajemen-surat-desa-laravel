@@ -8,7 +8,7 @@
 			@if (auth()->user()->isCitizent())
 				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			@else
-				<div class="col-span-12 md:col-span-6 flex flex-col">
+				<div class="col-span-12 flex flex-col">
 					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
 					<select name="sk[citizent_id]" id="citizent_id" class="citizent-select2">
 						<option value="">Cari nama warga</option>

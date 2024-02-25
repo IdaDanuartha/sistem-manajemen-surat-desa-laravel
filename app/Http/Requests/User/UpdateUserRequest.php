@@ -25,7 +25,8 @@ class UpdateUserRequest extends FormRequest
         return [            
 			'name' => ['required', Rule::unique('citizents', 'name')->ignore($this->citizent->id)],
 			'national_identify_number' => ['required', Rule::unique('citizents', 'national_identify_number')->ignore($this->citizent->id)],
-			'family_card_number' => ['required'],			
+			'family_card_number' => ['required'],		
+            'employee_number' => ['nullable'],				
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['required'],			
 			'birth_place' => ['required'],			

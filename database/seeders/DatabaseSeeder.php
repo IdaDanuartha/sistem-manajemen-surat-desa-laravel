@@ -12,6 +12,7 @@ use App\Enums\Role;
 use App\Models\Admin;
 use App\Models\Citizent;
 use App\Models\SuperAdmin;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'role' => Role::ADMIN
         ]);
 
-        Citizent::create([
+        $villageHead = Citizent::create([
             "name" => "Danuartha",
             "national_identify_number" => "51013834734434",
             "phone_number" => "081234567890",
@@ -48,10 +49,14 @@ class DatabaseSeeder extends Seeder
             "marital_status" => MaritalStatus::SINGLE,
             "work" => "Pegawai Negeri Sipil",
             "address" => "Jln Gunung Agung"
-        ])->villageHead()->create()->user()->create([
+        ]);
+        
+        User::create([
             'username' => '51013834734434',
             'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
+            'authenticatable_id' => 1,
+            'authenticatable_type' => 'App\Models\Citizent',
             'role' => Role::VILLAGE_HEAD,
         ]);
 
@@ -68,10 +73,14 @@ class DatabaseSeeder extends Seeder
             "marital_status" => MaritalStatus::SINGLE,
             "work" => "Pegawai Negeri Swasta",
             "address" => "Monang Maning"
-        ])->environmentalHead()->create()->user()->create([
+        ]);
+
+        User::create([
             'username' => '51034734734434',
             'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
+            'authenticatable_id' => 2,
+            'authenticatable_type' => 'App\Models\Citizent',
             'role' => Role::ENVIRONMENTAL_HEAD,
         ]);
 
@@ -88,10 +97,14 @@ class DatabaseSeeder extends Seeder
             "marital_status" => MaritalStatus::SINGLE,
             "work" => "Guru",
             "address" => "Dalung Permai"
-        ])->sectionHead()->create()->user()->create([
+        ]);
+
+        User::create([
             'username' => '51053857343434',
             'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
+            'authenticatable_id' => 3,
+            'authenticatable_type' => 'App\Models\Citizent',
             'role' => Role::SECTION_HEAD,
         ]);
 
@@ -114,6 +127,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'pengguna123',
             'role' => Role::CITIZENT,
         ]);
+        
         Citizent::create([
             "name" => "Aditya Prayatna",
             "national_identify_number" => "5007456564456",

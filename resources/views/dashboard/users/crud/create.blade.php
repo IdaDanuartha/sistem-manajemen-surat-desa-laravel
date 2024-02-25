@@ -24,6 +24,15 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="col-span-12 md:col-span-6 flex-col employee-number-input hidden">
+                <label for="employee_number" class="text-second mb-1">NIP</label>
+                <input type="number" class="input-crud" placeholder="Masukkan Nomor Induk Pegawai..."
+                    id="employee_number" name="employee_number"
+                    value="{{ old('employee_number') }}">
+                @error('employee_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="family_card_number" class="text-second mb-1">Nomor KK</label>
                 <input type="number" class="input-crud" placeholder="Masukkan Nomor Kartu Keluarga Warga..." required
@@ -147,7 +156,7 @@
             @if (Request::is('staff*'))
                 <div class="col-span-12 md:col-span-6 flex flex-col">
                     <label for="role" class="text-second mb-2">Role</label>
-                    <select required class="marital-status-select2 input-crud" name="user[role]">
+                    <select required class="role-select2 input-crud" name="user[role]">
                         @foreach (App\Enums\Role::labels() as $key => $value)
                             <option value="{{ $key }}" class="capitalize" @selected(old('role') == $key)>
                                 {{ $value }}</option>
@@ -171,7 +180,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 flex flex-col">
+            {{-- <div class="col-span-12 flex flex-col">
                 <label for="profile_image" class="text-second mb-1">Foto Profil</label>
                 <label for="profile_image" class="d-block mb-3">
                     <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-citizent-preview-img border"
@@ -183,7 +192,7 @@
                 @error('user.profile_image')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Tambah Pengguna</button>
                 <a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}"
@@ -196,10 +205,26 @@
 
 @push('js')
     <script>
+        function showEmployeeNumber() {
+            if($(".role-select2").val() == 2 || $(".role-select2").val() == 4) {
+                $(".employee-number-input").addClass("flex")
+                $(".employee-number-input").removeClass("hidden")
+            } else {
+                $(".employee-number-input").addClass("hidden")
+                $(".employee-number-input").removeClass("flex")
+                $(".employee-number-input input").val("")
+            }
+        }
         $('.gender-select2').select2();
         $('.blood-group-select2').select2();
         $('.religion-select2').select2();
         $('.marital-status-select2').select2();
-        previewImg("create-citizent-input", "create-citizent-preview-img")
+        $('.role-select2').select2();
+        // previewImg("create-citizent-input", "create-citizent-preview-img")
+
+        showEmployeeNumber()
+        $(".role-select2").change(function() {
+            showEmployeeNumber()
+        })
     </script>
 @endpush

@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Detail Pengguna')
 @section('main')
-
 	<div class="table-wrapper mt-[20px] input-teacher">
 		<form class="grid grid-cols-12 gap-4">						
 			<div class="col-span-12 md:col-span-6 flex flex-col">
@@ -22,6 +21,13 @@
 					disabled
 				>
 			</div>
+			@if ($citizent->villageHead || $citizent->sectionHead)
+				<div class="col-span-12 md:col-span-6 flex flex-col">
+					<label for="employee_number" class="text-second mb-1">NIP</label>
+					<input type="text" class="input-crud" disabled
+						value="{{ $citizent->employee_number }}">
+				</div>
+			@endif
 			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="family_card_number" class="text-second mb-1">Nomor KK</label>
 				<input
@@ -130,7 +136,7 @@
 					disabled
 				>
 			</div>
-			<div class="col-span-12 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="role" class="text-second mb-2">Role</label>
 				<input
 					type="text"
@@ -146,7 +152,7 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			<div class="col-span-12 flex flex-col">
+			{{-- <div class="col-span-12 flex flex-col">
 				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
 				<label for="profile_image" class="d-block mb-3">
 					@if ($citizent->user->profile_image)
@@ -155,7 +161,7 @@
 						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="border" width="300" alt="">
 					@endif
 				</label>
-			</div>
+			</div> --}}
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
 				<a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>

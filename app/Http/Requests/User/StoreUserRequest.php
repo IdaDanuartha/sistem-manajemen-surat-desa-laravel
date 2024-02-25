@@ -26,6 +26,7 @@ class StoreUserRequest extends FormRequest
 			'name' => ['required', Rule::unique('citizents', 'name')],			
 			'national_identify_number' => ['required', Rule::unique('citizents', 'national_identify_number')],			
 			'family_card_number' => ['required'],			
+			'employee_number' => ['nullable'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['required'],			
 			'birth_place' => ['required'],			

@@ -33,8 +33,9 @@ class UserController extends Controller
     }
 
     public function create()
-    {                                           
-        return view('dashboard.users.crud.create');
+    {           
+        if(Role::labels() !== []) return view('dashboard.users.crud.create');
+        abort(404);                             
     }
 
     public function show(Citizent $citizent)
