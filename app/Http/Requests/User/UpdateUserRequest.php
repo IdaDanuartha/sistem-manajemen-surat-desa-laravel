@@ -36,7 +36,7 @@ class UpdateUserRequest extends FormRequest
             'citizenship' => ['nullable'],			
 			'work' => ['nullable'],			
 			'address' => ['nullable'],			
-			'user.email' => ['required', 'email:dns', Rule::unique('users', 'email')->ignore($this->citizent->user->id)],
+			'user.email' => ['required', 'email'],
 			'user.password' => ['nullable', 'min:6'],
 			'user.status' => ['nullable'],
 			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			

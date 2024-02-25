@@ -34,7 +34,7 @@ class UpdateProfileRequest extends FormRequest
 			'religion' => ['nullable'],			
 			'marital_status' => ['nullable'],			
 			'user.username' => ['nullable', 'alpha_dash', Rule::unique('users', 'username')->ignore(auth()->id())],
-			'user.email' => ['nullable', 'email:dns', Rule::unique('users', 'email')->ignore(auth()->id())],
+			'user.email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore(auth()->id())],
 			'user.password' => ['nullable', 'min:6'],
 			'user.signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],
 			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			

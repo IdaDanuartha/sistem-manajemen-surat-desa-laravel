@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('title', 'Edit Pengguna')
 @section('main')
-
+	
 	<div class="table-wrapper mt-[20px] input-teacher">
-		<form action="{{ route('citizents.update', $citizent->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
+		<form action="{{ Request::is("staff*") ? route('staff.update', $citizent->id) : route('citizents.update', $citizent->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
 			<div class="col-span-12 md:col-span-6 flex flex-col">
@@ -242,7 +242,7 @@
 			</div>
 			<div class="col-span-12 flex items-center gap-3 mt-2">
 				<button class="button btn-main" type="submit">Edit Pengguna</button>
-				<a href="{{ route('users.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
+				<a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
 			</div>
 		</form>
 	</div>

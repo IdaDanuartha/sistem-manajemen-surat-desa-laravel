@@ -53,6 +53,16 @@ class UserRepository
     return $query->get();
   }
 
+  public function findAllStaff()
+  {
+    return $this->user->where("role", Role::ENVIRONMENTAL_HEAD)->orWhere("role", Role::ENVIRONMENTAL_HEAD)->orWhere("role", Role::VILLAGE_HEAD)->latest()->get();
+  }
+
+  public function findAllUserCitizent()
+  {
+    return $this->user->where("role", Role::CITIZENT)->latest()->get();
+  }
+
   public function findAllCitizent(): Collection
   {
     return $this->citizent->with(['user'])->whereRelation("user", "role", Role::CITIZENT)->latest()->get();
@@ -76,7 +86,8 @@ class UserRepository
   public function store($request): Citizent|VillageHead|EnvironmentalHead|SectionHead|Exception
   {
     DB::beginTransaction();
-    try {  
+    try {
+
       if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {         
         $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'user.profile_image'), "users");
         $request['user']['profile_image'] = $filename;
@@ -112,7 +123,7 @@ class UserRepository
   public function update($request, Citizent $citizent): bool
   {
     DB::beginTransaction();    
-    try {              
+    try {       
       if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {
         $this->uploadFile->deleteExistFile("users/$citizent->profile_image");
 
@@ -125,10 +136,10 @@ class UserRepository
       if(Arr::get($request, 'user.status')) $request['user']['status'] = UserStatus::ACTIVE;			
       else $request['user']['status'] = UserStatus::NONACTIVE;			
       
-      if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
-
+      if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');	
+      
       $citizent->updateOrFail(Arr::except($request, 'user'));
-			$citizent->user->updateOrFail(Arr::get($request, 'user'));
+      $citizent->user->updateOrFail(Arr::get($request, 'user'));
 
       DB::commit();
       return true;

@@ -33,7 +33,7 @@ enum Role: int
 			2 => 'Kepala Kelurahan',
 			3 => 'Kepala Lingkungan',
 			4 => 'Kepala Seksi',
-			5 => 'Warga',
+			// 5 => 'Warga',
 		];
 
 		if($user->where("role", self::VILLAGE_HEAD)->first()) {

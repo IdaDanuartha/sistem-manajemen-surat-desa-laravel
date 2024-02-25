@@ -428,7 +428,7 @@
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Mengetahui</p>
-                <p>An {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->citizent->name : ".........." }}</p>
+                <p>An {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->name : ".........." }}</p>
                 <p class="other">Kasi Pembangunan</p>
                 <div class="card-canvas">
                     @if(isset($letter->sk->sectionHead))

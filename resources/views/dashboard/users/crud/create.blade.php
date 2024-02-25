@@ -3,7 +3,8 @@
 @section('main')
 
     <div class="table-wrapper mt-[20px] input-teacher">
-        <form action="{{ route('citizents.store') }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
+        <form action="{{ Request::is("staff*") ? route('staff.store') : route('citizents.store') }}" method="post" enctype="multipart/form-data"
+            class="grid grid-cols-12 gap-4">
             @csrf
             {{-- <input type="hidden" id="authenticatable_type" name="authenticatable_type" value="App\Models\Citizent"/> --}}
             <div class="col-span-12 md:col-span-6 flex flex-col">
@@ -58,15 +59,15 @@
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="citizenship" class="text-second mb-1">Kewarganegaraan</label>
                 <input type="text" class="input-crud" id="citizenship" name="citizenshi"
-                    placeholder="Masukkan kewarganegaraan..." value="{{ old('citizenship') ?? "Indonesia" }}">
+                    placeholder="Masukkan kewarganegaraan..." value="{{ old('citizenship') ?? 'Indonesia' }}">
                 @error('citizenship')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="work" class="text-second mb-1">Pekerjaan</label>
-                <input type="text" class="input-crud" id="work" name="work"
-                    placeholder="Masukkan pekerjaan..." value="{{ old('work') }}">
+                <input type="text" class="input-crud" id="work" name="work" placeholder="Masukkan pekerjaan..."
+                    value="{{ old('work') }}">
                 @error('work')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
@@ -135,7 +136,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 md:col-span-6 flex flex-col">
+            <div class="col-span-12 {{ Request::is("staff*") ? "md:col-span-6" : "" }} flex flex-col">
                 <label for="password" class="text-second mb-1">Password</label>
                 <input type="password" class="input-crud" id="password" name="user[password]"
                     placeholder="Masukkan Password..." required>
@@ -143,18 +144,22 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="role" class="text-second mb-2">Role</label>
-                <select required class="marital-status-select2 input-crud" name="user[role]">
-                    @foreach (App\Enums\Role::labels() as $key => $value)
-                        <option value="{{ $key }}" class="capitalize" @selected(old('role') == $key)>
-                            {{ $value }}</option>
-                    @endforeach
-                </select>
-                @error('role')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
+            @if (Request::is('staff*'))
+                <div class="col-span-12 md:col-span-6 flex flex-col">
+                    <label for="role" class="text-second mb-2">Role</label>
+                    <select required class="marital-status-select2 input-crud" name="user[role]">
+                        @foreach (App\Enums\Role::labels() as $key => $value)
+                            <option value="{{ $key }}" class="capitalize" @selected(old('role') == $key)>
+                                {{ $value }}</option>
+                        @endforeach
+                    </select>
+                    @error('role')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+            @else
+                <input type="hidden" name="user[role]" value="5">
+            @endif
             <div class="col-span-12 flex flex-col">
                 <p class="text-second mb-1">Status Akun</p>
                 <label class="switch">
@@ -181,7 +186,8 @@
             </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Tambah Pengguna</button>
-                <a href="{{ route('users.index') }}" class="button btn-second text-white" type="reset">Batal
+                <a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}"
+                    class="button btn-second text-white" type="reset">Batal
                     Tambah</a>
             </div>
         </form>

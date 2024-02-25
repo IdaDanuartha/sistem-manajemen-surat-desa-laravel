@@ -130,7 +130,7 @@
 					disabled
 				>
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
 				<label for="role" class="text-second mb-2">Role</label>
 				<input
 					type="text"
@@ -157,7 +157,7 @@
 				</label>
 			</div>
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
-				<a href="{{ route('users.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+				<a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>
 		</form>
 	</div>

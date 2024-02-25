@@ -19,6 +19,13 @@ class AdminController extends Controller
         protected readonly ResponseMessage $responseMessage
     ) {}
 
+    public function index(Request $request)
+    {     
+        $admins = $this->adminRepository->findAll();
+        
+        return view('dashboard.users.index', compact('admins'));
+    }
+
     public function create()
     {                                           
         return view('dashboard.users.crud-admin.create');
@@ -40,7 +47,7 @@ class AdminController extends Controller
             $store = $this->adminRepository->store($request->validated());
 
             if($store instanceof Admin) {
-                return redirect(route("users.index"))
+                return redirect(route("admins.index"))
                             ->with("success", $this->responseMessage->response('Admin'));
             } 
             throw new Exception;
@@ -56,7 +63,7 @@ class AdminController extends Controller
         try {                     
             $update = $this->adminRepository->update($request->validated(), $admin);
 
-            if($update) return redirect(route('users.index'))
+            if($update) return redirect(route('admins.index'))
                                 ->with('success', $this->responseMessage->response('Admin', true, 'update'));
             throw new Exception;
         } catch (\Exception $e) {
@@ -69,9 +76,9 @@ class AdminController extends Controller
         try {
             $this->adminRepository->delete($admin);
 
-            return redirect()->route('users.index')->with('success', $this->responseMessage->response('Admin', true, 'delete'));
+            return redirect()->route('admins.index')->with('success', $this->responseMessage->response('Admin', true, 'delete'));
         } catch (\Exception $e) {            
-            return redirect()->route('users.index')->with('error', $this->responseMessage->response('admin', false, 'delete'));
+            return redirect()->route('admins.index')->with('error', $this->responseMessage->response('admin', false, 'delete'));
         }
     }
 }

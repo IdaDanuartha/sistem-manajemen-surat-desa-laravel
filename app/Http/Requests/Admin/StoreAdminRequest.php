@@ -25,7 +25,7 @@ class StoreAdminRequest extends FormRequest
         return [            
 			'name' => ['required', Rule::unique('admins', 'name')],
 			'user.username' => ['required', 'alpha_dash', Rule::unique('users', 'username')],
-			'user.email' => ['required', 'email:dns', Rule::unique('users', 'email')],
+			'user.email' => ['required', 'email', Rule::unique('users', 'email')],
 			'user.password' => ['required', 'min:6'],
 			'user.status' => ['nullable'],
 			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			

@@ -146,7 +146,7 @@
             <tr class="w-full">
                 <td class="ttd-text" style="text-transform: uppercase">
                     @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->citizent->name }}</strong>                    
+                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>                    
                     @endif
                 </td>
                 <td class="ttd-text" style="text-transform: uppercase">

@@ -54,16 +54,17 @@ class ProfileRepository
       else {
         $citizent = Citizent::find(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id);
         $citizent->updateOrFail(Arr::except($request, 'user'));
+        $citizent->user->updateOrFail(Arr::get($request, 'user'));
 
-        if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
-          $citizent->environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
-        } else if(auth()->user()->role === Role::SECTION_HEAD) {
-          $citizent->sectionHead->user->updateOrFail(Arr::get($request, 'user'));
-        } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
-          $citizent->villageHead->user->updateOrFail(Arr::get($request, 'user'));
-        } else {
-          $citizent->user->updateOrFail(Arr::get($request, 'user'));
-        }
+        // if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+        //   $citizent->environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
+        // } else if(auth()->user()->role === Role::SECTION_HEAD) {
+        //   $citizent->sectionHead->user->updateOrFail(Arr::get($request, 'user'));
+        // } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
+        //   $citizent->villageHead->user->updateOrFail(Arr::get($request, 'user'));
+        // } else {
+        //   $citizent->user->updateOrFail(Arr::get($request, 'user'));
+        // }
       }			
 
       DB::commit();

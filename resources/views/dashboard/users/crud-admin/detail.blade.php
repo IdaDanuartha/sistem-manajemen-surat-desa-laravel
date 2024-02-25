@@ -49,7 +49,7 @@
 				</label>
 			</div>
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
-				<a href="{{ route('users.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+				<a href="{{ route('admins.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>
 		</form>
 	</div>

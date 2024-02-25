@@ -221,13 +221,13 @@
             <tr class="w-full">
                 <td class="ttd-text">
                     @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->citizent->name }}</strong>                    
+                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>                    
                     @endif
                 </td>
                 @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
                 <td class="ttd-text" style="font-size: 14px">
                     <span style="text-decoration: underline">
-                        <strong style="font-size: 14px;">{{ $letter->sk->villageHead->citizent->name }}</strong>                    
+                        <strong style="font-size: 14px;">{{ $letter->sk->villageHead->name }}</strong>                    
                     </span> 
                     <br>
                     NIP 19650404 200604 1 011

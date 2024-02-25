@@ -20,17 +20,17 @@ class Sk extends Model
 
     public function villageHead(): BelongsTo
     {
-        return $this->belongsTo(VillageHead::class);
+        return $this->belongsTo(Citizent::class);
     }
 
     public function environmentalHead(): BelongsTo
     {
-        return $this->belongsTo(EnvironmentalHead::class);
+        return $this->belongsTo(Citizent::class);
     }
 
     public function sectionHead(): BelongsTo
     {
-        return $this->belongsTo(SectionHead::class);
+        return $this->belongsTo(Citizent::class);
     }  
 
     public function skBirth(): HasOne
