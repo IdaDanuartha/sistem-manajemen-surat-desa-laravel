@@ -2,13 +2,13 @@
 @section('title', 'Profile Pengguna')
 @section('main')
 <div class="mt-[20px] p-0 flex gap-5 lg:flex-row flex-col">
-    <div class="table-wrapper p-[18px] w-full h-fit md:max-w-[300px]">
+    {{-- <div class="table-wrapper p-[18px] w-full h-fit md:max-w-[300px]">
         @if (isset(auth()->user()->profile_image))
             <img src="{{ asset('uploads/users/' . auth()->user()->profile_image) }}" alt="Profile Image" class="rounded w-full edit-profile-preview-img aspect-square object-cover object-center h-auto"/>
         @else
             <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="edit-profile-preview-img rounded w-full aspect-square object-cover object-center h-auto"/>
         @endif
-    </div>
+    </div> --}}
     <div class="table-wrapper">
         <div class="row">
             <div class="col-md-6 col-12 mb-4 flex flex-col">

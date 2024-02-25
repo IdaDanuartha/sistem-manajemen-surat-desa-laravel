@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         ])->villageHead()->create()->user()->create([
             'username' => '51013834734434',
             'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
+            'password' => 'pengguna123',
             'role' => Role::VILLAGE_HEAD,
         ]);
 
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
         ])->environmentalHead()->create()->user()->create([
             'username' => '51034734734434',
             'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
+            'password' => 'pengguna123',
             'role' => Role::ENVIRONMENTAL_HEAD,
         ]);
 
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
         ])->sectionHead()->create()->user()->create([
             'username' => '51053857343434',
             'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
+            'password' => 'pengguna123',
             'role' => Role::SECTION_HEAD,
         ]);
 
@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
         ])->user()->create([
             'username' => '5205394853435',
             'email' => 'dandevofficial@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
+            'password' => 'pengguna123',
             'role' => Role::CITIZENT,
         ]);
         Citizent::create([
@@ -130,7 +130,7 @@ class DatabaseSeeder extends Seeder
         ])->user()->create([
             'username' => '5007456564456',
             'email' => 'widyarusmananda15@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
-            'password' => '123456',
+            'password' => 'pengguna123',
             'role' => Role::CITIZENT,
         ]);
     }

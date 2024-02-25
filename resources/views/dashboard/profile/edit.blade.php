@@ -3,7 +3,7 @@
 
 @section('main')
 <div class=" mt-[20px] p-0 rounded-b-[0px] flex gap-5 items-start lg:flex-row flex-col">
-    <div class="table-wrapper relative w-full md:max-w-[300px]">
+    {{-- <div class="table-wrapper relative w-full md:max-w-[300px]">
         <div class="profile-wrapper w-full">
             <label for="profile_image" class="profile-image w-full">
                 @if (isset(auth()->user()->profile_image))
@@ -20,7 +20,7 @@
         @error('profile_image')
         <div class="text-danger mt-1">{{ $message }}</div>
         @enderror
-    </div>
+    </div> --}}
     <div class="table-wrapper ">
         <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
             @csrf

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('national_identify_number')->unique()->comment('nik');
             $table->string('phone_number', 15);
             $table->string('family_card_number')->comment('no kartu keluarga');
+            $table->string('employee_number')->nullable()->comment('nomor induk pegawai');
             $table->smallInteger('gender')->comment('[1: Laki-Laki, 2: Perempuan]');
             $table->string('birth_place');
             $table->date('birth_date');
