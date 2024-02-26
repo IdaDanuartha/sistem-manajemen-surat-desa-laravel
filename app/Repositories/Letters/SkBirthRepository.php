@@ -104,7 +104,7 @@ class SkBirthRepository
   public function store($request): Sk|Exception
   {
     DB::beginTransaction();
-    try {   
+    try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
       $request["sk"]["mode"] = 1;
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;

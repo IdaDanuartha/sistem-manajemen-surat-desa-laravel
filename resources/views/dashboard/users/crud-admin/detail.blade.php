@@ -38,7 +38,7 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			<div class="col-span-12 flex flex-col">
+			{{-- <div class="col-span-12 flex flex-col">
 				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
 				<label for="profile_image" class="d-block mb-3">
 					@if ($admin->user->profile_image)
@@ -47,7 +47,7 @@
 						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="border" width="300" alt="">
 					@endif
 				</label>
-			</div>
+			</div> --}}
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
 				<a href="{{ route('admins.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>

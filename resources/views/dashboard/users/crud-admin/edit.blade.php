@@ -50,7 +50,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 flex flex-col">
+            {{-- <div class="col-span-12 flex flex-col">
                 <label for="profile_image" class="text-second mb-1">Foto Profil</label>
                 <label for="profile_image" class="d-block mb-3">
                     @if ($admin->user->profile_image)
@@ -67,7 +67,7 @@
                 @error('user.profile_image')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Edit Pengguna</button>
                 <a href="{{ route('admins.index') }}" class="button btn-second text-white" type="reset">Batal Edit</a>
