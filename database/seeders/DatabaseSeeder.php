@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $villageHead = Citizent::create([
-            "name" => "Danuartha",
+            "name" => "Citizen 0",
             "national_identify_number" => "51013834734434",
             "phone_number" => "081234567890",
             "family_card_number" => "520483734434",
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         
         User::create([
             'username' => '51013834734434',
-            'email' => 'danuart21@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'citizen0@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
             'authenticatable_id' => 1,
             'authenticatable_type' => 'App\Models\Citizent',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Citizent::create([
-            "name" => "Putu",
+            "name" => "Citizen 1",
             "national_identify_number" => "51034734734434",
             "phone_number" => "081234567890",
             "family_card_number" => "510438434634434",
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => '51034734734434',
-            'email' => 'sucitadanuarthabali12@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'citizen1@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
             'authenticatable_id' => 2,
             'authenticatable_type' => 'App\Models\Citizent',
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Citizent::create([
-            "name" => "Ivan Verdyansyah",
+            "name" => "Citizen 2",
             "national_identify_number" => "51053857343434",
             "phone_number" => "081234567890",
             "family_card_number" => "5948347343434",
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => '51053857343434',
-            'email' => 'sampleakun19@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'citizen2@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
             'authenticatable_id' => 3,
             'authenticatable_type' => 'App\Models\Citizent',
@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Citizent::create([
-            "name" => "Widyasa",
+            "name" => "Citizen 3",
             "national_identify_number" => "5205394853435",
             "phone_number" => "081234567890",
             "family_card_number" => "5350259385334",
@@ -123,13 +123,13 @@ class DatabaseSeeder extends Seeder
             "address" => "Ubung Kaja"
         ])->user()->create([
             'username' => '5205394853435',
-            'email' => 'dandevofficial@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'citizen3@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
             'role' => Role::CITIZENT,
         ]);
         
         Citizent::create([
-            "name" => "Aditya Prayatna",
+            "name" => "Citizen 4",
             "national_identify_number" => "5007456564456",
             "phone_number" => "081234567890",
             "family_card_number" => "5350259385334",
@@ -143,7 +143,7 @@ class DatabaseSeeder extends Seeder
             "address" => "Ubung Kaja"
         ])->user()->create([
             'username' => '5007456564456',
-            'email' => 'widyarusmananda15@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
+            'email' => 'citizen4@gmail.com', // pake akun sendiri kalau mau coba fitur kirim emailnya
             'password' => 'pengguna123',
             'role' => Role::CITIZENT,
         ]);
