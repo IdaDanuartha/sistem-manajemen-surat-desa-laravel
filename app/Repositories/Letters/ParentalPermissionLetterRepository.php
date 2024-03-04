@@ -109,10 +109,10 @@ class ParentalPermissionLetterRepository
       $request["sk_id"] = $sk_letter->id;
       $this->letter->create(Arr::except($request, "sk"));
       
-      if($sk_letter->is_published) {
-        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-      }
+      // if($sk_letter->is_published) {
+      //   $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+      //   Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
+      // }
       
     } catch (\Exception $e) {  
       logger($e->getMessage());
@@ -129,12 +129,12 @@ class ParentalPermissionLetterRepository
     DB::beginTransaction();    
 
     try {
-        if(isset($request["sk"]["is_published"])) {
-            $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $parentalPermission->sk->code));
+        // if(isset($request["sk"]["is_published"])) {
+        //     $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+        //     Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $parentalPermission->sk->code));
 
-            $request["sk"]["is_published"] = true;
-          }
+        //     $request["sk"]["is_published"] = true;
+        //   }
 
         $parentalPermission->sk->updateOrFail(Arr::get($request, "sk"));
         $parentalPermission->updateOrFail(Arr::except($request, "sk"));
