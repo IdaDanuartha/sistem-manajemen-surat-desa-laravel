@@ -43,6 +43,7 @@
                 </div>
             </li>
 
+            @if (auth()->user()->isSuperAdmin())
             <!-- Admin -->
             <li class="w-full">
                 <a href="{{ route('admins.index') }}" class="side-link  {{ Request::is('admins*') ? 'active' : '' }}">
@@ -61,6 +62,7 @@
                     <span data-i18n="admins" class="text-[#28242185]">Admin</span>
                 </a>
             </li>
+            @endif
             <!-- Staff -->
             <li class="w-full">
                 <a href="{{ route('staff.index') }}" class="side-link  {{ Request::is('staff*') ? 'active' : '' }}">
@@ -99,6 +101,7 @@
             </li>
         @endif
 
+        @if (!auth()->user()->isAdmin())
             <!-- Dashboards -->
             <li class="px-4 w-full">
                 <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">
@@ -106,7 +109,6 @@
                 </div>
             </li>
 
-            @if (!auth()->user()->isAdmin())
             <!-- Letter -->
             <li class="w-full">
                 <a href="{{ route('letters.sk-birth.index') }}" class="side-link  {{ Request::is('letters/sk-birth*') ? 'active' : '' }}">
@@ -333,7 +335,7 @@
                             <div>Surat Kuasa</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::is("letters/sk-inheritance-distribution*") ? "active":"" }}">
+                    <li class="menu-list {{ Request::is("letters/sk-inheritance-distribution*") ? "active":"" }}">
                         <a href="{{ route('letters.sk-inheritance-distribution.index') }}" class="menu-link">
                             <div>Surat Pernyataan Pembagian Waris</div>
                         </a>
@@ -445,14 +447,17 @@
                     <span data-i18n="Letters" class="text-[#28242185]">Surat Penebangan Pohon</span>
                 </a>
             </li>
+
             @endif
 
-            <!-- Dashboards -->
-            <li class="px-4 w-full">
-                <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">
-                    Riwayat
-                </div>
-            </li>
+            @if (!auth()->user()->isAdmin())                
+                <!-- Dashboards -->
+                <li class="px-4 w-full">
+                    <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">
+                        Riwayat
+                    </div>
+                </li>
+            @endif
 
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
             <!-- Letter History -->

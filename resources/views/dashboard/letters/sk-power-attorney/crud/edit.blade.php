@@ -43,7 +43,7 @@
 				</div>
                 @foreach ($get_letter->families as $family)
 					<select class="heir-select2 heir" name="power_attorney_family[]" required>
-						<option value="">Cari keluarga</option>
+						<option value="">Cari Keluarga</option>
 						@foreach ($citizents as $item)
 							<option value="{{ $item->id }}" @selected($family->citizent_id === $item->id)>{{ "$item->name - $item->national_identify_number" }}</option>
 						@endforeach
@@ -89,7 +89,7 @@
 		$(".btn-add-family").click(function() {
 			$(".heir-group").append(`				
                 <select class="heir2-select2 heir" name="power_attorney_family[]">
-					<option value="">Cari keluarga yang pindah</option>
+					<option value="">Cari Keluarga</option>
 					@foreach ($citizents as $item)
 						<option value="{{ $item->id }}">{{ "$item->name - $item->national_identify_number" }}</option>
 					@endforeach

@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Models\Citizent;
 use App\Models\Letter;
 use App\Models\Sk;
+use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,10 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
+    public function __construct(
+        protected readonly UserRepository $userRepository,
+    ) {}
+
     public function getChartData()
     {
         if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
@@ -226,6 +231,7 @@ class DashboardController extends Controller
         $letter_monthly = $this->getChartData()[2];
 
         $total_citizents = Citizent::count();
+        $total_staff = count($this->userRepository->findAllStaff());
         $total_letters = Sk::count();
 
         if(auth()->user()->role === Role::ADMIN) {
@@ -277,7 +283,8 @@ class DashboardController extends Controller
             'total_citizents',
             'total_letters_approved',
             'total_letters_not_approved',
-            'total_letters'
+            'total_letters',
+            "total_staff"
         ));
     }
 }

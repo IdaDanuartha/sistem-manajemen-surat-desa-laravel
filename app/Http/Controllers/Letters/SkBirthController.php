@@ -95,7 +95,7 @@ class SkBirthController extends Controller
     public function update(UpdateSkBirthRequest $request, SkBirthLetter $sk_birth)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        try {                     
+        try {   
             $update = $this->skBirth->update($request->validated(), $sk_birth);
             if($update == true) {
                 return redirect(route('letters.sk-birth.index'))

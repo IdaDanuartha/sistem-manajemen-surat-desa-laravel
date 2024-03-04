@@ -446,9 +446,13 @@
                 <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
                 <p>Pemohon,</p>
                 <div class="card-canvas">
-                    @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
-                        <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+                    @if(isset($letter->sk->citizent->user->signature_image))
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
+                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif 
                 </div>
                 <p class="other">{{ $letter->sk->citizent->name }}</p>
             </div>

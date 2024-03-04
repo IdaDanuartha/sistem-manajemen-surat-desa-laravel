@@ -398,9 +398,9 @@
                 @else
                     <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No: 430 /LD / VIII / 2021  tanggal  19 Agustus 2021 ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu / miskin dan lansia .</p>
                 @endif
-                @if (!$letter->sktm_type->value === 2)
+                {{-- @if (!$letter->sktm_type->value === 2) --}}
                     <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
-                @endif
+                {{-- @endif --}}
             </div>
             @if ($letter->sktm_type->value === 2)
                 <div class="input-group nine">
@@ -424,20 +424,22 @@
                     <span>{{ $letter->sktmSchool->school_name }}</span>
                 </div>
             @endif
-            @if ($letter->sktm_type->value === 2)
+            {{-- @if ($letter->sktm_type->value === 2)
                 <div class="description-other-bottom">
                     <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
                 </div>
-            @endif
+            @endif --}}
         </div>
         <div class="content-ttd">
-            <div class="card-ttd">
-                <p>Mengetahui</p>
-                <p>Camat Karangasem</p>                
-                <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+            @if ($letter->sktm_type->value === 2)
+                <div class="card-ttd">
+                    <p>Mengetahui</p>
+                    <p>Camat Karangasem</p>                
+                    <div class="card-canvas">
+                        {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    </div>
                 </div>
-            </div>
+            @endif
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->villageHead->name : ".........." }}</p>

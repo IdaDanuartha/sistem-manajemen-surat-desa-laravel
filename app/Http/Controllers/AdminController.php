@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAdminRequest;
 use App\Http\Requests\Admin\UpdateAdminRequest;
@@ -21,24 +22,40 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {     
-        $admins = $this->adminRepository->findAll();
+        if(auth()->user()->role === Role::SUPER_ADMIN) {
+            $admins = $this->adminRepository->findAll();
+        } else {
+            abort(404);
+        }
         
         return view('dashboard.users.index', compact('admins'));
     }
 
     public function create()
-    {                                           
-        return view('dashboard.users.crud-admin.create');
+    {      
+        if(auth()->user()->role === Role::SUPER_ADMIN) {
+            return view('dashboard.users.crud-admin.create');
+        } else {
+            abort(404);
+        }                                     
     }
 
     public function show(Admin $admin)
-    {                                                   
-        return view('dashboard.users.crud-admin.detail', compact('admin'));
+    {    
+        if(auth()->user()->role === Role::SUPER_ADMIN) {
+            return view('dashboard.users.crud-admin.detail', compact('admin'));
+        } else {
+            abort(404);
+        }                                               
     }
 
     public function edit(Admin $admin)
-    {                                           
-        return view('dashboard.users.crud-admin.edit', compact('admin'));
+    {      
+        if(auth()->user()->role === Role::SUPER_ADMIN) {
+            return view('dashboard.users.crud-admin.edit', compact('admin'));
+        } else {
+            abort(404);
+        }                                     
     }
 
     public function store(StoreAdminRequest $request)
