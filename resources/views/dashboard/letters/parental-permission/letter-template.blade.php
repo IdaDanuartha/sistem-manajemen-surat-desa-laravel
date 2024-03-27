@@ -207,7 +207,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 11.7%;
+            top: 11.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -217,7 +217,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 9.8%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -227,7 +227,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 3.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -238,7 +238,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 0.3%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -248,7 +248,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 11.7%;
+            top: 11.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -258,7 +258,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 9.8%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -268,7 +268,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 3.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -279,7 +279,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 0.3%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -289,7 +289,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 13.7%;
+            top: 13.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -299,7 +299,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 9.8%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -309,7 +309,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 3.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -319,7 +319,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 0.3%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -336,7 +336,7 @@
 
         .description-other {
             position: relative;
-            top: 45%;
+            top: 60%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -353,11 +353,23 @@
             line-height: 150%;
             text-indent: 42px;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
+
+        .page_break { page-break-before: always; }
+
     </style>
 </head>
 <body>
     
-    <div class="container">
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+    <div class="container" style="position: relative">
         <h3 class="title">Surat Keterangan Ijin Keluarga</h3>
         <div class="content-form">
             <p class="description">Yang bertanda tangan di bawah ini,</p>
@@ -417,6 +429,7 @@
                 <p class="paragraph-two">Demikian surat Pernyataan ini, saya buat dengan penuh tanggung jawab dan benar.</p>
             </div>
         </div>
+        <div class="page_break"></div>
         <div class="content-ttd">
             <div class="card-ttd">
                 <p> Calon PMI memohon Ijin</p>
@@ -450,10 +463,10 @@
                 <p>Yang Membuat Pernyataan /yang
                     memberikan Ijin</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->citizent))
+                    @if($letter->sk->citizent->user->signature_image)
                         <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
-                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
+                        @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent->user->signature_image)
                             <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 

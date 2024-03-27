@@ -1,7 +1,7 @@
 @component("mail::message")
 
 <div class="flex justify-center">
-    <p style="margin-bottom: 0 !important; color: black !important;">Hi Nama...</p>
+    <p style="margin-bottom: 0 !important; color: black !important;">Hi, </p>
     <div class="" style="margin-top: 14px;">
         <p style="margin-bottom: 0 !important; color: black !important;">Forgot Your Password?</p>
         <p style="margin-bottom: 0 !important; color: black !important;">We received a request to reset the password for your account.</p>

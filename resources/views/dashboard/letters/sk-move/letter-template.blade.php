@@ -10,7 +10,7 @@
         table.first {
             width: 92%;
             position: absolute;
-            top: 0;
+            top: 2%;
             left: 50%;
             transform: translate(-50%);
         }
@@ -45,7 +45,7 @@
             width: 92%;
             text-align: center;
             position: absolute;
-            top: 12%;
+            top: 13%;
             left: 50%;
             transform: translate(-50%);
             text-transform: uppercase;
@@ -226,7 +226,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 11.7%;
+            top: 7.9%;
             left: 20%;
             transform: translate(-50%);
         }
@@ -236,7 +236,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 9.8%;
+            top: 9.8%;
             left: 20%;
             transform: translate(-50%);
         }
@@ -246,7 +246,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 7.9%;
+            top: 11.7%;
             left: 20%;
             transform: translate(-50%);
         }
@@ -255,7 +255,7 @@
             width: 30%;
             height: 70px;
             position: absolute;
-            bottom: 1%;
+            top: 17%;
             left: 20%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -266,7 +266,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 11.7%;
+            top: 9.8%;
             left: 80%;
             transform: translate(-50%);
         }
@@ -276,7 +276,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 9.8%;
+            top: 11.7%;
             left: 80%;
             transform: translate(-50%);
         }
@@ -286,7 +286,7 @@
             font-size: 0.913rem;
             width: 40%;
             position: absolute;
-            bottom: 0.3%;
+            top: 23%;
             left: 80%;
             transform: translate(-50%);
             text-transform: uppercase;
@@ -297,7 +297,7 @@
             width: 30%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 17%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -317,10 +317,25 @@
             line-height: 150%;
             text-indent: 42px;
         }
+        
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
+        
+        .container {
+            position: relative;
+        }
+
+        .page_break { page-break-before: always; }
     </style>
 </head>
 <body>
-    
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+
     <div class="container">
         <table class="first">
             <tr>
@@ -423,8 +438,9 @@
                     </tr>
                 @endforelse
             </table>
-            <p class="paragraph-other">Demikian surat pengantar pindah ini agar digunakan sebagaimana mestinya.</p>
         </div>
+        <div class="page_break"></div>
+        <p class="paragraph-other">Demikian surat pengantar pindah ini agar digunakan sebagaimana mestinya.</p>
         <div class="content-ttd">
             <div class="card-ttd">
                 <p>Mengetahui</p>

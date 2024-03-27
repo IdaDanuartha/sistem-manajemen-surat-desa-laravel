@@ -60,11 +60,19 @@
         .flex{
             display: flex;
         }
+        
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
     </style>
 </head>
 <body>
 <div class="wrapper">
-
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="title-surat-wrapper">
         <h1 class="title-surat">“SILSILAH WARIS”</h1>
         <table class="table-mt w-full table-title">
@@ -101,7 +109,7 @@
         </table>
     </div>
     <div class="content-surat">
-        <img width="55%" style="left: 20%; position: relative;" height="auto" src="{{ public_path("uploads/letters/inheritance-geneologies/" . $letter->inheritance_image) }}" alt="">
+        <img width="60%" style="left: 20%; position: relative;" height="auto" src="{{ public_path("uploads/letters/inheritance-geneologies/" . $letter->inheritance_image) }}" alt="">
         <div class="" style="margin-top: 10px;">
             <img src="{{ public_path('assets/img/keterangan.png') }}" style="width: 330px" height="auto" alt="">
         </div>
@@ -110,7 +118,7 @@
         </p>
     </div>
 
-    <div class="" style="margin-top: 30px;">
+    <div class="" style="margin-top: 160px;">
         <table class="w-full">
             <tr>
                 <td class="w-full" style="text-align: center"></td>

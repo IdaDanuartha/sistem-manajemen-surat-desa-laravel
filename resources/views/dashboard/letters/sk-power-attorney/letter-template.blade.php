@@ -47,11 +47,19 @@
         .w-full{
             width: 100%;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <img width="100%" height="auto" src="{{ public_path('assets/img/letter-header-2.png') }}" alt="">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
         <div class="title-surat-wrapper">
             <h1 class="title-surat">SURAT KETERANGAN AHLI WARIS</h1>
             <h5 class="subtitle-surat">Nomor : {{ $letter->sk->reference_number }}</h5>

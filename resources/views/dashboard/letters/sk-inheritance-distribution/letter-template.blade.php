@@ -69,10 +69,19 @@
         .list-warisan li:first-child{
             margin-top: 0;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
     </style>
 </head>
 <body>
 <div class="wrapper">
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
 
     <div class="title-surat-wrapper">
         <h1 class="title-surat">SURAT PERNYATAAN PEMBAGIAN WARIS</h1>

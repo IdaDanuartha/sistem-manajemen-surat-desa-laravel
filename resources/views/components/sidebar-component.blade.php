@@ -2,8 +2,9 @@
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme border-r border-r-[#1414141F]">
         <div class="app-brand demo mb-3">
 
-            <a href="#" class="flex justify-center w-full">
-                <img src=" {{ asset('assets/img/sidebar/logo.svg') }}" alt="">
+            <a href="#" class="flex justify-center w-full text-[20px] font-bold">
+                {{-- <img src=" {{ asset('assets/img/sidebar/logo.svg') }}" alt=""> --}}
+                Simpel Bertaksu
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

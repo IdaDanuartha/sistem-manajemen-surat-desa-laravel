@@ -403,7 +403,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 25.7%;
+            top: 25.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -413,7 +413,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 23.8%;
+            top: 23.8%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -423,7 +423,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 17.7%;
+            top: 17.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -434,7 +434,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 14.3%;
+            top: 14.3%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -444,7 +444,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 22.7%;
+            top: 22.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -454,7 +454,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 23.8%;
+            top: 23.8%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -464,7 +464,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 17.7%;
+            top: 17.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -475,7 +475,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 11.3%;
+            top: 11.3%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -485,7 +485,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: -1%;
+            top: -1%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -495,7 +495,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 17.7%;
+            top: 17.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -505,7 +505,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 23.8%;
+            top: 23.8%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -515,7 +515,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 17.7%;
+            top: 17.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -525,7 +525,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 14.5%;
+            top: 14.5%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -570,16 +570,30 @@
         }
 
         .content-other {
-            position: absolute;
+            position: relative;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
+        
+        .container {
+            position: relative;
+        }
+
+        .page_break { page-break-before: always; }
     </style>
 </head>
 <body>
-    
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="container">
         <h3 class="title">Pendaftaran <br>Formulir Pendaftaran Atau Pembatalan Penduduk NonPermanen<br>(F1.15)</h3>
         <div class="content-form">
@@ -692,6 +706,7 @@
                 <span>-</span>
             </div>
         </div>
+        <div class="page_break"></div>
         <div class="content-ttd">
             <div class="card-ttd">
                 {{-- <p>Find out</p> --}}

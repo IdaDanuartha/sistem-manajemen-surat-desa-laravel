@@ -53,9 +53,18 @@
         .table-content tr td:first-child{
             width: 60px;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
     </style>
 </head>
 <body>
+<img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
 <div class="wrapper">
     <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
     <p style="margin-top: -10px;">Kepada,</p>

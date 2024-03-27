@@ -92,7 +92,7 @@ class ParentalPermissionLetterRepository
   {
     return $this->letter
                 ->where('id', $parentalPermission->id)
-                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent.user'])
                 ->first();
   }
 

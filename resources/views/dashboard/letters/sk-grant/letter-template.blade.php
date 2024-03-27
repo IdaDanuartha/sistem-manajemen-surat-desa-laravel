@@ -18,7 +18,7 @@
         }
 
         .description {
-            position: absolute;
+            position: relative;
             top: 6%;
             left: 50%;
             width: 92%;
@@ -400,7 +400,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 11.7%;
+            top: 21.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -410,7 +410,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 19.8%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -420,7 +420,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 13.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -431,7 +431,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 10.3%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -441,7 +441,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 11.7%;
+            top: 21.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -451,7 +451,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 19.8%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -461,7 +461,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 13.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -472,7 +472,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 10.3%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -482,7 +482,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: -1%;
+            top: -1%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -492,7 +492,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 13.7%;
+            top: 23.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -502,7 +502,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            bottom: 9.8%;
+            top: 19.8%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -512,7 +512,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            bottom: 3.7%;
+            top: 13.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -522,7 +522,7 @@
             font-size: 0.875rem;
             width: 26%;
             position: absolute;
-            bottom: 0.3%;
+            top: 10.3%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -530,7 +530,7 @@
 
         .description-caption {
             position: relative;
-            top: 27%;
+            top: 29%;
             left: 56.5%;
             width: 100%;
             transform: translate(-50%);
@@ -539,7 +539,7 @@
 
         .description-caption-two {
             position: relative;
-            top: 56%;
+            top: 69%;
             left: 56.5%;
             width: 100%;
             transform: translate(-50%);
@@ -548,7 +548,7 @@
 
         .description-other {
             position: relative;
-            top: 70%;
+            top: 0;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -565,10 +565,26 @@
             line-height: 150%;
             text-indent: 42px;
         }
+
+        .image-full {
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            border-bottom: 3px solid black;
+        }
+        
+        .container {
+            position: relative;
+        }
+
+        .page_break { page-break-before: always; }
+
     </style>
 </head>
 <body>
     
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="container">
         <h3 class="title">Surat Keterangan Hibah</h3>
         <div class="content-form">
@@ -690,9 +706,10 @@
             </div>
             <p class="description-caption">Dengan ini saya mengibahkan kendaraan dengan data sebagai berikut :</p>
             <p class="description-caption-two">Dihibahkan kepada Anak Saya dengan Identitas sebagai berikut :</p>
-            <div class="description-other">
-                <p class="paragraph-one">Demikian surat pernyataan ini saya buat dengan sebenarnya untuk dapat dipergunakan sebagai mana mestinya.</p>
-            </div>
+        </div>
+        <div class="page_break"></div>
+        <div class="description-other">
+            <p class="paragraph-one">Demikian surat pernyataan ini saya buat dengan sebenarnya untuk dapat dipergunakan sebagai mana mestinya.</p>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
