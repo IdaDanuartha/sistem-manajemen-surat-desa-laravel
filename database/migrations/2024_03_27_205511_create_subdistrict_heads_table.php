@@ -12,11 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('section_heads', function (Blueprint $table) {
+        Schema::create('subdistrict_heads', function (Blueprint $table) {
             $table->id();
             $table->string("employee_id");
             $table->string("name");
-            $table->string("position");
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('section_heads');
+        Schema::dropIfExists('subdistrict_heads');
     }
 };

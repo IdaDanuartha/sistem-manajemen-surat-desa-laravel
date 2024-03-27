@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Environmental;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,10 @@ return new class extends Migration
     {
         Schema::create('citizents', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Environmental::class)
+                  ->nullable()
+                  ->cascadeOnUpdate()
+                  ->nullOnDelete();
             $table->string('name')->unique();
             $table->string('national_identify_number')->unique()->comment('nik');
             $table->string('phone_number', 15);
@@ -29,6 +34,11 @@ return new class extends Migration
             $table->string("citizenship")->default("Indonesia");
             $table->string("work");
             $table->text("address")->nullable();
+            $table->string("position")->nullable();
+            $table->string("id_card")->nullable();
+            $table->string("family_card")->nullable();
+            $table->string("birth_certificate")->nullable();
+            $table->string("marriage_certificate")->nullable();
             $table->timestamps();
         });
     }

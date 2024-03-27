@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Citizent;
+use App\Models\Environmental;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('environmental_heads', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Citizent::class)
+            $table->foreignIdFor(Environmental::class)
                   ->constrained()
                   ->cascadeOnUpdate()
                   ->cascadeOnDelete();
+            $table->string("name");
             $table->timestamps();
         });
     }

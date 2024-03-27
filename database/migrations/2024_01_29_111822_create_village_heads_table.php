@@ -14,10 +14,8 @@ return new class extends Migration
     {
         Schema::create('village_heads', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Citizent::class)
-                  ->constrained()
-                  ->cascadeOnUpdate()
-                  ->cascadeOnDelete();
+            $table->string("employee_id");
+            $table->string("name");
             $table->timestamps();
         });
     }
