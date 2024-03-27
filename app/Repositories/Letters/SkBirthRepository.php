@@ -111,11 +111,11 @@ class SkBirthRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       $this->letter->create(["sk_id" => $sk_letter->id]);
       
-      // if($sk_letter->is_published) {
-      //   $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-      //   Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
-      //   // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
-      // }
+      if($sk_letter->is_published) {
+        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));
+        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
+      }
       
     } catch (\Exception $e) {  
       logger($e->getMessage());
@@ -132,12 +132,12 @@ class SkBirthRepository
     DB::beginTransaction();    
 
     try {
-        // if(isset($request["sk"]["is_published"])) {
-        //   $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        //   Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+        if(isset($request["sk"]["is_published"])) {
+          $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+          Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
           
-        //   $request["sk"]["is_published"] = true;
-        // }
+          $request["sk"]["is_published"] = true;
+        }
       
         $letter->sk->updateOrFail(Arr::get($request, "sk"));
 
