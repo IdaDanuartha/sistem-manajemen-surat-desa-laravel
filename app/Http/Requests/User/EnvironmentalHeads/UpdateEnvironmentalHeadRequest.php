@@ -11,7 +11,7 @@ class UpdateEnvironmentalHeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class UpdateEnvironmentalHeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => "required",
+            'environmental_id' => "required",
+            'user.email' => 'required|email',
+			'user.password' => 'nullable|min:6',
+			'user.status' => 'nullable',
+			'user.signature_image' => 'nullable|file|image|mimes:png,jpg,jpeg,gif,svg,webp|max:2000',	
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'name' => 'nama',
+            'environmental_id' => 'lingkungan',
+            'user.email' => 'email',
+            'user.password' => 'password',
+            'user.status' => 'status',
+            'user.signature_image' => 'tanda tangan elektronik',            
         ];
     }
 }

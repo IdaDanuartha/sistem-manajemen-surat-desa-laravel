@@ -8,6 +8,7 @@ use App\Http\Requests\User\EnvironmentalHeads\UpdateEnvironmentalHeadRequest;
 use App\Models\EnvironmentalHead;
 use App\Models\User;
 use App\Repositories\EnvironmentalHeadRepository;
+use App\Repositories\EnvironmentalRepository;
 use App\Utils\ResponseMessage;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class EnvironmentalHeadController extends Controller
 {
     public function __construct(
         protected readonly EnvironmentalHeadRepository $environmentalHead,
+        protected readonly EnvironmentalRepository $environmental,
         protected readonly User $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -29,7 +31,9 @@ class EnvironmentalHeadController extends Controller
 
     public function create()
     {           
-        return view('dashboard.users.environmental-heads.create');                          
+        $environmentals = $this->environmental->findAll();
+
+        return view('dashboard.users.environmental-heads.create', compact('environmentals'));                          
     }
 
     public function show(EnvironmentalHead $environmentalHead)
@@ -38,8 +42,10 @@ class EnvironmentalHeadController extends Controller
     }
 
     public function edit(EnvironmentalHead $environmentalHead)
-    {                          
-        return view('dashboard.users.environmental-heads.edit', compact('environmentalHead'));
+    {                       
+        $environmentals = $this->environmental->findAll();
+   
+        return view('dashboard.users.environmental-heads.edit', compact('environmentalHead', 'environmentals'));
     }
 
     public function store(StoreEnvironmentalHeadRequest $request)
@@ -51,6 +57,7 @@ class EnvironmentalHeadController extends Controller
                 return redirect(route("environmental-heads.index"))
                             ->with("success", $this->responseMessage->response('Pengguna'));
             } 
+            dd($store);
             throw new Exception();
         } catch (\Exception $e) {  
             logger($e->getMessage());

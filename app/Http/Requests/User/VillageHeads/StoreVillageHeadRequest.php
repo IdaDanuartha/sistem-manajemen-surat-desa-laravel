@@ -11,7 +11,7 @@ class StoreVillageHeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreVillageHeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => "required|unique:village_heads,name",
+            'employee_number' => "required",
+            'user.email' => 'required|email|unique:users,email',
+			'user.password' => 'required|min:6',
+			'user.status' => 'nullable',
+			'user.signature_image' => 'nullable|file|image|mimes:png,jpg,jpeg,gif,svg,webp|max:2000',	
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'name' => 'nama',
+            'employee_number' => 'nip',
+            'user.email' => 'email',
+            'user.password' => 'password',
+            'user.status' => 'status',
+            'user.signature_image' => 'tanda tangan elektronik',            
         ];
     }
 }

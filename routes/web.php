@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\CitizentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EnvironmentalHeadController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
 use App\Http\Controllers\Letters\InheritanceGeneologyLetterController;
@@ -31,7 +32,9 @@ use App\Http\Controllers\Letters\SkTravellingController;
 use App\Http\Controllers\Letters\SktuController;
 use App\Http\Controllers\Letters\TreeFellingLetterController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SectionHeadController;
+use App\Http\Controllers\SubdistrictHeadController;
+use App\Http\Controllers\VillageHeadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,19 +71,18 @@ Route::prefix('auth')->group(function() {
 
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', DashboardController::class)->name("dashboard");        
-    Route::resource('citizents', CitizentController::class)->middleware('is_admin');
-    Route::resource('staff', CitizentController::class)->middleware('is_admin');
-    Route::resource('subdistrict-head', CitizentController::class)->middleware('is_admin');
+    
+    Route::middleware('is_admin')->group(function() {
+        Route::resource('citizents', CitizentController::class);
+        Route::resource('environmental-heads', EnvironmentalHeadController::class);
+        Route::resource('village-heads', VillageHeadController::class);
+        Route::resource('section-heads', SectionHeadController::class);
+        Route::resource('subdistrict-heads', SubdistrictHeadController::class);
 
-    // Route::get('staff', [UserController::class, 'index'])->name('staff.index')->middleware('is_admin');    
-    // Route::get('staff/create', [UserController::class, 'create'])->name('staff.create')->middleware('is_admin');    
-    // Route::get('staff/{citizent}', [UserController::class, 'show'])->name('staff.show')->middleware('is_admin');    
-    // Route::get('staff/{citizent}/edit', [UserController::class, 'edit'])->name('staff.edit')->middleware('is_admin');    
-    // Route::post('staff', [UserController::class, 'store'])->name('staff.store')->middleware('is_admin');    
-    // Route::put('staff/{citizent}', [UserController::class, 'update'])->name('staff.update')->middleware('is_admin');    
-    // Route::delete('staff/{citizent}', [UserController::class, 'destroy'])->name('staff.destroy')->middleware('is_admin');    
+        Route::resource('admins', AdminController::class)->middleware('is_admin');    
+        Route::resource('environmentals', AdminController::class)->middleware('is_admin');    
+    });
 
-    Route::resource('admins', AdminController::class)->middleware('is_admin');    
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

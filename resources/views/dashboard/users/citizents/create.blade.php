@@ -24,15 +24,6 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 md:col-span-6 flex-col employee-number-input hidden">
-                <label for="employee_number" class="text-second mb-1">NIP</label>
-                <input type="number" class="input-crud" placeholder="Masukkan Nomor Induk Pegawai..."
-                    id="employee_number" name="employee_number"
-                    value="{{ old('employee_number') }}">
-                @error('employee_number')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="family_card_number" class="text-second mb-1">Nomor KK</label>
                 <input type="number" class="input-crud" placeholder="Masukkan Nomor Kartu Keluarga Warga..." required
@@ -205,26 +196,10 @@
 
 @push('js')
     <script>
-        function showEmployeeNumber() {
-            if($(".role-select2").val() == 2 || $(".role-select2").val() == 4) {
-                $(".employee-number-input").addClass("flex")
-                $(".employee-number-input").removeClass("hidden")
-            } else {
-                $(".employee-number-input").addClass("hidden")
-                $(".employee-number-input").removeClass("flex")
-                $(".employee-number-input input").val("")
-            }
-        }
         $('.gender-select2').select2();
         $('.blood-group-select2').select2();
         $('.religion-select2').select2();
         $('.marital-status-select2').select2();
         $('.role-select2').select2();
-        // previewImg("create-citizent-input", "create-citizent-preview-img")
-
-        showEmployeeNumber()
-        $(".role-select2").change(function() {
-            showEmployeeNumber()
-        })
     </script>
 @endpush

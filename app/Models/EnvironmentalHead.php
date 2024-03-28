@@ -22,4 +22,9 @@ class EnvironmentalHead extends Model
     {
         return $this->belongsTo(Citizent::class);
     }
+
+    public function environmental(): BelongsTo
+    {
+        return $this->belongsTo(Environmental::class);
+    }
 }

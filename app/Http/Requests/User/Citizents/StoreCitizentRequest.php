@@ -39,7 +39,6 @@ class StoreCitizentRequest extends FormRequest
 			'user.email' => ['required', 'email', Rule::unique('users', 'email')],
 			'user.password' => ['required', 'min:6'],
 			'user.status' => ['nullable'],
-            'user.role' => 'required',
 			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
         ];
     }
@@ -62,7 +61,6 @@ class StoreCitizentRequest extends FormRequest
             'user.email' => 'email',
             'user.password' => 'password',
             'user.status' => 'status',
-            'user.role' => 'role',
             'user.profile_image' => 'foto profil',            
         ];
     }

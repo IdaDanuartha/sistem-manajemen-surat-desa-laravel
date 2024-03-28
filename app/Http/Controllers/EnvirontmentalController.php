@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Environtmental;
+use App\Models\Environmental;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EnvirontmentalController extends Controller
+class EnvironmentalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class EnvirontmentalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Environtmental $environtmental)
+    public function show(Environmental $environmental)
     {
         //
     }
@@ -43,7 +43,7 @@ class EnvirontmentalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Environtmental $environtmental)
+    public function edit(Environmental $environmental)
     {
         //
     }
@@ -51,7 +51,7 @@ class EnvirontmentalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Environtmental $environtmental)
+    public function update(Request $request, Environmental $environmental)
     {
         //
     }
@@ -59,7 +59,7 @@ class EnvirontmentalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Environtmental $environtmental)
+    public function destroy(Environmental $environmental)
     {
         //
     }

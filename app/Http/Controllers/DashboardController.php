@@ -6,7 +6,10 @@ use App\Enums\Role;
 use App\Models\Citizent;
 use App\Models\Letter;
 use App\Models\Sk;
+use App\Repositories\EnvironmentalHeadRepository;
+use App\Repositories\SectionHeadRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\VillageHeadRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +20,9 @@ class DashboardController extends Controller
      * Handle the incoming request.
      */
     public function __construct(
-        protected readonly UserRepository $userRepository,
+        protected readonly EnvironmentalHeadRepository $environmentalHead,
+        protected readonly VillageHeadRepository $villageHead,
+        protected readonly SectionHeadRepository $sectionHead,
     ) {}
 
     public function getChartData()
@@ -231,7 +236,7 @@ class DashboardController extends Controller
         $letter_monthly = $this->getChartData()[2];
 
         $total_citizents = Citizent::count();
-        $total_staff = count($this->userRepository->findAllStaff());
+        $total_staff = count($this->villageHead->findAll()) + count($this->environmentalHead->findAll()) + count($this->sectionHead->findAll());
         $total_letters = Sk::count();
 
         if(auth()->user()->role === Role::ADMIN) {

@@ -30,7 +30,8 @@ class VillageHeadController extends Controller
 
     public function create()
     {           
-        return view('dashboard.users.village-heads.create');                          
+        if(count($this->villageHead->findAll()) == 0) return view('dashboard.users.village-heads.create');
+        abort(404);                          
     }
 
     public function show(VillageHead $villageHead)
@@ -48,7 +49,7 @@ class VillageHeadController extends Controller
         try {
             $store = $this->villageHead->store($request->validated());
 
-            if($store instanceof EnvironmentalHead) {
+            if($store instanceof VillageHead) {
                 return redirect(route("village-heads.index"))
                             ->with("success", $this->responseMessage->response('Pengguna'));
             } 
