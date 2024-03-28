@@ -11,7 +11,7 @@ class UpdateSectionHeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,26 @@ class UpdateSectionHeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => "required",
+            'employee_number' => "required",
+            'position' => "required",
+            'user.email' => 'required|email',
+			'user.password' => 'nullable|min:6',
+			'user.status' => 'nullable',
+			'user.signature_image' => 'nullable|file|image|mimes:png,jpg,jpeg,gif,svg,webp|max:2000',	
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'name' => 'nama',
+            'employee_number' => 'nip',
+            'position' => 'jabatan',
+            'user.email' => 'email',
+            'user.password' => 'password',
+            'user.status' => 'status',
+            'user.signature_image' => 'tanda tangan elektronik',            
         ];
     }
 }
