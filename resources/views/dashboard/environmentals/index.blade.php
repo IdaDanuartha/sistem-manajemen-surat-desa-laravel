@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Halaman Pengguna')
+@section('title', 'Halaman Data Lingkungan')
 
 @section('main')
     <div class="table-wrapper mt-[20px]">
@@ -11,10 +11,10 @@
                         fill="#282421" fill-opacity="0.52" />
                 </svg>
                 <input type="search" class="searchInputTable w-full focus:ring-0 focus:outline-none"
-                    placeholder="Cari data kepala lingkungan ...">
+                    placeholder="Cari data lingkungan ...">
             </div>
             <div class="flex">
-                <a href="{{ route('environmental-heads.create') }}"
+                <a href="{{ route('environmentals.create') }}"
                     class="flex button btn-main duration-200 capitalize w-max items-center gap-1" type="button">
                     Tambah
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
@@ -40,22 +40,20 @@
                         <th>#</th>
                         <th>Kode Kaling</th>
                         <th class="md:table-cell">Nama</th>
-                        <th class="md:table-cell">Lingkungan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($users as $item)
+                    @forelse($environmentals as $item)
                         <tr class="table-body">
-                            <input type="hidden" class="user_id" value="{{ $item->id }}">
+                            <input type="hidden" class="environmental_id" value="{{ $item->id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->environmental ? $item->environmental->code : "-" }}</td>
+                            <td>{{ $item->code }}</td>
                             <td class="md:table-cell">{{ $item->name }}</td>
-                            <td class="md:table-cell">{{ $item->environmental ? $item->environmental->name : "-" }}</td>
                             <td>
                                 <div class="flex gap-2 items-center">
 
-                                    <a href="{{ route('environmental-heads.show', $item->id) }}" class="icon-table icon-detail">
+                                    <a href="{{ route('environmentals.show', $item->id) }}" class="icon-table icon-detail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 16 16" fill="none">
                                             <g clip-path="url(#clip0_7909_2017)">
@@ -77,7 +75,7 @@
                                         </svg>
                                     </a>
 
-                                    <a href="{{ route('environmental-heads.edit', $item->id) }}" class="icon-table icon-edit">
+                                    <a href="{{ route('environmentals.edit', $item->id) }}" class="icon-table icon-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 16 16" fill="none">
                                             <g clip-path="url(#clip0_7909_699)">
@@ -95,6 +93,15 @@
                                             </defs>
                                         </svg>
                                     </a>
+
+                                    <button type="button"  class="icon-table icon-delete delete-environmental-data" data-bs-toggle="modal" data-bs-target="#deleteEnvironmentalModal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M9.2823 0C9.52783 0.0933731 9.79325 0.153622 10.0151 0.286536C10.6124 0.644362 10.915 1.1916 10.9386 1.88896C10.9437 2.03946 10.9394 2.19029 10.9394 2.36458C11.0096 2.36458 11.0701 2.36458 11.1306 2.36458C11.917 2.36466 12.7035 2.36124 13.4898 2.36628C13.9256 2.36908 14.2124 2.71069 14.129 3.11577C14.0862 3.32377 13.9657 3.48047 13.7686 3.55484C13.6578 3.59668 13.6374 3.65522 13.6375 3.76071C13.6401 5.92184 13.6398 8.08292 13.6385 10.244C13.6384 10.3476 13.6384 10.4549 13.6131 10.5539C13.5401 10.8393 13.2655 11.0217 12.961 11.0012C12.6809 10.9824 12.4431 10.7622 12.4025 10.4781C12.3908 10.3961 12.3899 10.3121 12.3899 10.229C12.3892 8.09908 12.3894 5.96925 12.3894 3.83938C12.3894 3.77251 12.3894 3.70563 12.3894 3.62672C9.46321 3.62672 6.55006 3.62672 3.62041 3.62672C3.61775 3.6823 3.61283 3.73738 3.61283 3.79251C3.61246 6.99511 3.61196 10.1977 3.61287 13.4003C3.61312 14.2366 4.13115 14.7496 4.97068 14.7497C7.01226 14.7498 9.05384 14.7506 11.0954 14.7492C11.7315 14.7488 12.232 14.3552 12.3617 13.7555C12.3835 13.6544 12.3829 13.5486 12.3959 13.4455C12.4395 13.1028 12.7207 12.8595 13.0476 12.8802C13.3947 12.9021 13.6404 13.1774 13.6374 13.5409C13.6282 14.6329 12.8748 15.6118 11.8157 15.905C11.6812 15.9422 11.5437 15.9684 11.4075 15.9998C9.13647 15.9998 6.86543 15.9998 4.59435 15.9998C4.56506 15.9905 4.53635 15.9772 4.50631 15.9726C3.84216 15.8726 3.30246 15.5568 2.88851 15.0303C2.51335 14.5531 2.35969 14.0053 2.36044 13.4009C2.36456 10.2032 2.36182 7.00548 2.36427 3.80776C2.36436 3.67913 2.35277 3.5918 2.20603 3.53905C2.0257 3.47426 1.91812 3.32014 1.87508 3.13144C1.78145 2.72128 2.06986 2.36924 2.51165 2.36633C3.29813 2.36116 4.08461 2.3647 4.87114 2.36462C4.93168 2.36462 4.99222 2.36462 5.04659 2.36462C5.05526 2.33099 5.06005 2.32091 5.06013 2.31083C5.06118 2.18062 5.05988 2.05042 5.06234 1.92025C5.07588 1.20239 5.38538 0.644279 6.00041 0.278953C6.21844 0.149456 6.47865 0.0909568 6.7196 4.19608e-05C7.57379 2.94995e-07 8.42802 0 9.2823 0ZM6.31486 2.35379C7.44779 2.35379 8.5634 2.35379 9.68571 2.35379C9.68571 2.172 9.69871 1.99967 9.68287 1.83C9.65358 1.51597 9.38201 1.25743 9.06414 1.25368C8.35669 1.24531 7.64904 1.24556 6.9416 1.25343C6.61694 1.25702 6.34207 1.52222 6.31715 1.84125C6.30423 2.00633 6.31486 2.17325 6.31486 2.35379Z" fill="#D55051" fill-opacity="0.72"/>
+                                            <path d="M7.3761 9.17002C7.3761 8.3005 7.37476 7.43097 7.37685 6.56145C7.37755 6.27766 7.53772 6.05392 7.79371 5.9625C8.03533 5.87626 8.32008 5.93796 8.46907 6.148C8.55141 6.26408 8.61861 6.42116 8.61941 6.5602C8.62936 8.30437 8.62703 10.0487 8.62507 11.7929C8.62465 12.1615 8.35316 12.436 8.0015 12.4364C7.65042 12.4368 7.37793 12.1613 7.37685 11.7943C7.37435 10.9195 7.37605 10.0448 7.3761 9.17002Z" fill="#D55051" fill-opacity="0.72"/>
+                                            <path d="M11.014 9.18057C11.014 10.0396 11.0154 10.8986 11.0133 11.7576C11.0124 12.1034 10.8463 12.3327 10.5484 12.4141C10.1983 12.5097 9.83702 12.2799 9.77848 11.9224C9.76843 11.8611 9.7646 11.7981 9.76456 11.7359C9.76385 10.0335 9.7646 8.33109 9.76318 6.62871C9.76302 6.42209 9.80714 6.23455 9.96685 6.09247C10.1646 5.91656 10.3947 5.87756 10.6353 5.97881C10.8779 6.08085 11.0082 6.27672 11.0111 6.54109C11.0167 7.04599 11.0137 7.55103 11.014 8.05601C11.0142 8.43088 11.0141 8.80571 11.014 9.18057Z" fill="#D55051" fill-opacity="0.72"/>
+                                            <path d="M4.9876 9.1711C4.98776 8.30691 4.98368 7.44268 4.98935 6.57849C4.99247 6.10283 5.42704 5.79971 5.84645 5.97321C6.05903 6.06117 6.18816 6.2227 6.22432 6.45224C6.23399 6.51362 6.23699 6.57657 6.23699 6.63882C6.23766 8.33599 6.23803 10.0332 6.23711 11.7303C6.2369 12.103 6.06582 12.3424 5.75125 12.4201C5.40238 12.5064 5.0391 12.2609 4.99801 11.9036C4.98322 11.775 4.98797 11.6438 4.98785 11.5138C4.98705 10.7329 4.98743 9.952 4.9876 9.1711Z" fill="#D55051" fill-opacity="0.72"/>
+                                        </svg>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -107,4 +114,12 @@
             </table>
         </div>
     </div>
+    <x-modal-delete>
+        <x-slot name="name">lingkungan</x-slot>
+        <x-slot name="modalId">Environmental</x-slot>
+    </x-modal-delete>
 @endsection
+
+@push('js')
+    <script src="{{ asset('assets/js/custom/environmental.js') }}"></script>
+@endpush

@@ -13,6 +13,15 @@
 				/>
 			</div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+				<label for="environmental_id" class="text-second mb-1">Lingkungan</label>
+				<input
+					type="text"
+				 	class="input-crud"
+					value="{{ $citizent->environmental ? ($citizent->environmental->name . " (" . $citizent->environmental->code . ")") : "-" }}"
+					disabled
+				/>
+			</div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="national_identify_number" class="text-second mb-1">NIK</label>
 				<input
 					type="text"
@@ -136,16 +145,18 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-			{{-- <div class="col-span-12 flex flex-col">
-				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
-				<label for="profile_image" class="d-block mb-3">
-					@if ($citizent->user->profile_image)
-						<img src="{{ asset('uploads/users/' . $citizent->user->profile_image) }}" class="border" width="300" alt="">
-					@else
-						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="border" width="300" alt="">
-					@endif
-				</label>
-			</div> --}}
+            <div class="col-span-12 flex flex-col">
+                <label for="signature_image" class="text-second mb-1">Foto TTE</label>
+                <label for="signature_image" class="d-block mb-3">
+                    @if ($citizent->user->signature_image)
+                        <img src="{{ asset('uploads/users/signatures/' . $citizent->user->signature_image) }}" class="edit-tte-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-tte-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+            </div>
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
 				<a href="{{ route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>

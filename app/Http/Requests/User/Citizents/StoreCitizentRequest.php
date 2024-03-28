@@ -24,6 +24,7 @@ class StoreCitizentRequest extends FormRequest
     {
         return [            
 			'name' => ['required', Rule::unique('citizents', 'name')],			
+			'environmental_id' => ['required'],			
 			'national_identify_number' => ['required', Rule::unique('citizents', 'national_identify_number')],			
 			'family_card_number' => ['required'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
@@ -39,7 +40,7 @@ class StoreCitizentRequest extends FormRequest
 			'user.email' => ['required', 'email', Rule::unique('users', 'email')],
 			'user.password' => ['required', 'min:6'],
 			'user.status' => ['nullable'],
-			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
+			'user.signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
         ];
     }
 
@@ -47,6 +48,7 @@ class StoreCitizentRequest extends FormRequest
     {
         return [
             'name' => 'nama',
+            'environmental' => 'lingkungan',
             'national_identify_number' => 'nik',
             'family_card_number' => 'nomor kartu keluarga',
             'phone_number' => 'nomor hp',
@@ -61,7 +63,7 @@ class StoreCitizentRequest extends FormRequest
             'user.email' => 'email',
             'user.password' => 'password',
             'user.status' => 'status',
-            'user.profile_image' => 'foto profil',            
+            'user.signature_image' => 'tanda tangan elektronik',            
         ];
     }
 }

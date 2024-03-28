@@ -8,7 +8,7 @@ use App\Enums\MaritalStatus;
 use App\Enums\Religion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Citizent extends Model
@@ -28,5 +28,10 @@ class Citizent extends Model
     public function user(): MorphOne
 	{
 		return $this->morphOne(User::class, 'authenticatable');
+	}
+    
+    public function environmental(): BelongsTo
+	{
+		return $this->belongsTo(Environmental::class);
 	}
 }

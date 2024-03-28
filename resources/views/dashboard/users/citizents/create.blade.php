@@ -6,12 +6,23 @@
         <form action="{{ Request::is("staff*") ? route('staff.store') : route('citizents.store') }}" method="post" enctype="multipart/form-data"
             class="grid grid-cols-12 gap-4">
             @csrf
-            {{-- <input type="hidden" id="authenticatable_type" name="authenticatable_type" value="App\Models\Citizent"/> --}}
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="name" class="text-second mb-1">Nama</label>
                 <input type="text" class="input-crud" name="name" id="name" value="{{ old('name') }}"
                     placeholder="Masukkan Nama..." required />
                 @error('name')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="environmental_id" class="text-second mb-1">Lingkungan</label>
+                <select required class="environmental-select2 input-crud" name="environmental_id">
+                    @foreach ($environmentals as $environmental)
+                        <option value="{{ $environmental->id }}" class="capitalize" @selected(old('environmental_id') == $environmental->id)>
+                            {{ $environmental->name . " (" . $environmental->code . ")" }}</option>
+                    @endforeach
+                </select>
+                @error('environmental_id')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -136,7 +147,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-span-12 {{ Request::is("staff*") ? "md:col-span-6" : "" }} flex flex-col">
+            <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="password" class="text-second mb-1">Password</label>
                 <input type="password" class="input-crud" id="password" name="user[password]"
                     placeholder="Masukkan Password..." required>
@@ -144,22 +155,6 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            @if (Request::is('staff*'))
-                <div class="col-span-12 md:col-span-6 flex flex-col">
-                    <label for="role" class="text-second mb-2">Role</label>
-                    <select required class="role-select2 input-crud" name="user[role]">
-                        @foreach (App\Enums\Role::labels() as $key => $value)
-                            <option value="{{ $key }}" class="capitalize" @selected(old('role') == $key)>
-                                {{ $value }}</option>
-                        @endforeach
-                    </select>
-                    @error('role')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            @else
-                <input type="hidden" name="user[role]" value="5">
-            @endif
             <div class="col-span-12 flex flex-col">
                 <p class="text-second mb-1">Status Akun</p>
                 <label class="switch">
@@ -171,19 +166,19 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            {{-- <div class="col-span-12 flex flex-col">
-                <label for="profile_image" class="text-second mb-1">Foto Profil</label>
-                <label for="profile_image" class="d-block mb-3">
-                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-citizent-preview-img border"
+            <div class="col-span-12 flex flex-col">
+                <label for="signature_image" class="text-second mb-1">Foto TTE</label>
+                <label for="signature_image" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-tte-preview-img border"
                         width="300" alt="">
                 </label>
-                <input type="file" id="profile_image" name="user[profile_image]"
-                    class="input-crud py-0 create-citizent-input hidden" />
-                <label for="profile_image" class="button btn-second text-center w-[300px]">Upload File</label>
-                @error('user.profile_image')
+                <input type="file" id="signature_image" name="user[signature_image]"
+                    class="input-crud py-0 create-tte-input hidden" />
+                <label for="signature_image" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('user.signature_image')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div> --}}
+            </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Tambah Pengguna</button>
                 <a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}"
@@ -196,10 +191,13 @@
 
 @push('js')
     <script>
+        $('.environmental-select2').select2();
         $('.gender-select2').select2();
         $('.blood-group-select2').select2();
         $('.religion-select2').select2();
         $('.marital-status-select2').select2();
         $('.role-select2').select2();
+
+        previewImg('create-tte-input', 'create-tte-preview-img')
     </script>
 @endpush

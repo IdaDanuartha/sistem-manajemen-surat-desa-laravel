@@ -11,7 +11,7 @@ class UpdateSubdistrictHeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class UpdateSubdistrictHeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => "required",
+            'employee_number' => "required",
+			'signature_image' => 'nullable|file|image|mimes:png,jpg,jpeg,gif,svg,webp|max:2000',	
+        ];
+    }
+    
+    public function attributes()
+    {
+        return [
+            'name' => 'nama',
+            'employee_number' => 'nip',
+            'signature_image' => 'tanda tangan elektronik',            
         ];
     }
 }

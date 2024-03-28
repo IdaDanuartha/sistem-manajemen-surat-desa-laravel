@@ -7,6 +7,7 @@ use App\Http\Requests\User\Citizents\UpdateCitizentRequest;
 use App\Models\Citizent;
 use App\Models\User;
 use App\Repositories\CitizentRepository;
+use App\Repositories\EnvironmentalRepository;
 use App\Utils\ResponseMessage;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class CitizentController extends Controller
 {
     public function __construct(
         protected readonly CitizentRepository $citizentRepository,
+        protected readonly EnvironmentalRepository $environmental,
         protected readonly User $user,
         protected readonly ResponseMessage $responseMessage
     ) {}
@@ -27,8 +29,10 @@ class CitizentController extends Controller
     }
 
     public function create()
-    {           
-        return view('dashboard.users.citizents.create');                          
+    {     
+        $environmentals = $this->environmental->findAll();
+      
+        return view('dashboard.users.citizents.create', compact('environmentals'));                          
     }
 
     public function show(Citizent $citizent)
@@ -37,8 +41,10 @@ class CitizentController extends Controller
     }
 
     public function edit(Citizent $citizent)
-    {                          
-        return view('dashboard.users.citizents.edit', compact('citizent'));
+    {        
+        $environmentals = $this->environmental->findAll();
+                  
+        return view('dashboard.users.citizents.edit', compact('citizent', 'environmentals'));
     }
 
     public function store(StoreCitizentRequest $request)

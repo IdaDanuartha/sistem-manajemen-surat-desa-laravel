@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string("employee_number");
             $table->string("name");
+            $table->string("signature_image")->nullable();
             $table->timestamps();
         });
     }

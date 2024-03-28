@@ -5,10 +5,7 @@ namespace App\Repositories;
 use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\Citizent;
-use App\Models\EnvironmentalHead;
-use App\Models\SectionHead;
 use App\Models\User;
-use App\Models\VillageHead;
 use App\Utils\UploadFile;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -26,7 +23,7 @@ class CitizentRepository
 
   public function findAll($except_id = null): Collection
   {
-    $query = $this->citizent->latest()->with(['user']);
+    $query = $this->citizent->latest()->with(['user', 'environmental']);
 
     if($except_id) {
       $query->whereNot("id", $except_id);
@@ -37,12 +34,12 @@ class CitizentRepository
 
   public function findByFamilyNumber($family_card_number, $except_id): Collection
   {
-    return $this->citizent->latest()->where("family_card_number", $family_card_number)->whereNot("id", $except_id)->with(['user'])->get();
+    return $this->citizent->latest()->where("family_card_number", $family_card_number)->whereNot("id", $except_id)->with(['user', 'environmental'])->get();
   }
 
   public function findAllPaginate(): LengthAwarePaginator
   {
-    return $this->citizent->latest()->with(['user'])->paginate(10);
+    return $this->citizent->latest()->with(['user', 'environmental'])->paginate(10);
   }
 
   public function findById(Citizent $citizent): Citizent
@@ -55,19 +52,12 @@ class CitizentRepository
     DB::beginTransaction();
     try {
 
-      // if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {         
-      //   $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'user.profile_image'), "users");
-      //   $request['user']['profile_image'] = $filename;
-      // }  
+      if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'user.signature_image'), "users/signatures");
+        $request['user']['signature_image'] = $filename;
+      }  
 
       $citizent = $this->citizent->create(Arr::except($request, ['user']));
-      // if(Arr::get($request, 'user.role') != 5) {
-      //   match(Arr::get($request, 'user.role')) {
-      //     '2' => $this->villageHead->create(['citizent_id' => $citizent->id]),
-      //     '3' => $this->environmentalHead->create(['citizent_id' => $citizent->id]),
-      //     '4' => $this->sectionHead->create(['citizent_id' => $citizent->id]),
-      //   };
-      // }
       
       $citizent->user()->create([
         'username' => Arr::get($request, 'national_identify_number'),
@@ -75,7 +65,7 @@ class CitizentRepository
         'password' => Arr::get($request, 'user.password'),
         'status' => Arr::has($request, 'user.status') ? UserStatus::ACTIVE : UserStatus::NONACTIVE,
         'role' => Role::CITIZENT,
-        // 'profile_image' => Arr::get($request, 'user.profile_image'),
+        'signature_image' => Arr::get($request, 'user.signature_image'),
       ]);
     } catch (\Exception $e) {  
       logger($e->getMessage());
@@ -90,15 +80,15 @@ class CitizentRepository
   public function update($request, Citizent $citizent): bool
   {
     DB::beginTransaction();    
-    try {       
-      // if (Arr::has($request, 'user.profile_image') && Arr::get($request, 'user.profile_image')) {
-      //   $this->uploadFile->deleteExistFile("users/$citizent->profile_image");
+  try {       
+      if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {
+        $this->uploadFile->deleteExistFile("users/signatures/" . $citizent->user->signature_image);
 
-      //   $image = Arr::get($request, 'user.profile_image');
+        $image = Arr::get($request, 'user.signature_image');
 
-      //   $filename = $this->uploadFile->uploadSingleFile($image, "users");
-      //   $request['user']['profile_image'] = $filename;
-      // }  
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/signatures");
+        $request['user']['signature_image'] = $filename;
+      }  
       
       if(Arr::get($request, 'user.status')) $request['user']['status'] = UserStatus::ACTIVE;			
       else $request['user']['status'] = UserStatus::NONACTIVE;			

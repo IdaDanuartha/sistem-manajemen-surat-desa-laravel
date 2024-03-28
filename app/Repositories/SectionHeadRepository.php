@@ -84,7 +84,7 @@ class SectionHeadRepository
       $request["user"]["username"] = $request["employee_number"];
 
       if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {
-        $this->uploadFile->deleteExistFile("users/signatures/" . auth()->user()->signature_image);
+        $this->uploadFile->deleteExistFile("users/signatures/" . $sectionHead->user->signature_image);
 
         $image = Arr::get($request, 'user.signature_image');
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\CitizentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EnvironmentalController;
 use App\Http\Controllers\EnvironmentalHeadController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
@@ -79,8 +80,8 @@ Route::middleware(['auth'])->group(function() {
         Route::resource('section-heads', SectionHeadController::class);
         Route::resource('subdistrict-heads', SubdistrictHeadController::class);
 
-        Route::resource('admins', AdminController::class)->middleware('is_admin');    
-        Route::resource('environmentals', AdminController::class)->middleware('is_admin');    
+        Route::resource('admins', AdminController::class);   
+        Route::resource('environmentals', EnvironmentalController::class);   
     });
 
 

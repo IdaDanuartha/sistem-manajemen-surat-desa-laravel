@@ -17,6 +17,18 @@
                 @enderror
             </div>
             <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="environmental_id" class="text-second mb-2">Lingkungan</label>
+                <select required class="environmental-select2 input-crud" name="environmental_id">
+                    @foreach ($environmentals as $environmental)
+                        <option value="{{ $environmental->id }}" @selected($citizent->environmental_id == $environmental->id)>
+                            {{ $environmental->name . ' (' . $environmental->code . ')' }}</option>
+                    @endforeach
+                </select>
+                @error('environmental_id')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="national_identify_number" class="text-second mb-1">NIK</label>
                 <input type="number" class="input-crud" placeholder="Masukkan Nomor Induk Kependudukan Warga..." required
                     id="national_identify_number" name="national_identify_number"
@@ -158,26 +170,24 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            {{-- <div class="col-span-12 flex flex-col">
-				<label for="profile_image" class="text-second mb-1">Foto Profil</label>
-				<label for="profile_image" class="d-block mb-3">
-					@if ($citizent->user->profile_image)
-						<img src="{{ asset('uploads/users/' . $citizent->user->profile_image) }}" class="edit-citizent-preview-img border" width="300" alt="">
-					@else
-						<img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-citizent-preview-img border" width="300" alt="">
-					@endif
-				</label>
-				<input
-					type="file"
-					id="profile_image"
-					name="user[profile_image]"
-					class="input-crud py-0 edit-citizent-input hidden"
-					/>
-				<label for="profile_image" class="button btn-second text-center w-[300px]">Upload File</label>
-				@error('user.profile_image')
-					<div class="text-danger mt-1">{{ $message }}</div>
-				@enderror
-			</div> --}}
+            <div class="col-span-12 flex flex-col">
+                <label for="signature_image" class="text-second mb-1">Foto TTE</label>
+                <label for="signature_image" class="d-block mb-3">
+                    @if ($citizent->user->signature_image)
+                        <img src="{{ asset('uploads/users/signatures/' . $citizent->user->signature_image) }}" class="edit-tte-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-tte-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="signature_image" name="user[signature_image]"
+                    class="input-crud py-0 edit-tte-input hidden" />
+                <label for="signature_image" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('user.signature_image')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Edit Pengguna</button>
                 <a href="{{ route('citizents.index') }}"
@@ -189,10 +199,11 @@
 
 @push('js')
     <script>
+        $('.environmental-select2').select2();
         $('.gender-select2').select2();
         $('.blood-group-select2').select2();
         $('.religion-select2').select2();
         $('.marital-status-select2').select2();
-        previewImg("edit-citizent-input", "edit-citizent-preview-img")
+        previewImg("edit-tte-input", "edit-tte-preview-img")
     </script>
 @endpush

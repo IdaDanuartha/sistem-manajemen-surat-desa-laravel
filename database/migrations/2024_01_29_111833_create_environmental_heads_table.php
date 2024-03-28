@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('environmental_heads', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Environmental::class)
-                  ->constrained()
+                  ->nullable()
                   ->cascadeOnUpdate()
-                  ->cascadeOnDelete();
+                  ->nullOnDelete();
             $table->string("name");
             $table->timestamps();
         });

@@ -29,8 +29,9 @@ class SubdistrictHeadController extends Controller
     }
 
     public function create()
-    {           
-        return view('dashboard.users.subdistrict-heads.create');                          
+    {      
+        if(count($this->subdistrictHead->findAll()) == 0) return view('dashboard.users.subdistrict-heads.create', compact('subdistrictHead'));
+        abort(404);      
     }
 
     public function show(SubdistrictHead $subdistrictHead)
@@ -48,7 +49,7 @@ class SubdistrictHeadController extends Controller
         try {
             $store = $this->subdistrictHead->store($request->validated());
 
-            if($store instanceof SectionHead) {
+            if($store instanceof SubdistrictHead) {
                 return redirect(route("subdistrict-heads.index"))
                             ->with("success", $this->responseMessage->response('Pengguna'));
             } 
