@@ -313,7 +313,7 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $village_head->citizent->name }}</span>
+                <span>{{ $village_head->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Jabatan</label>
@@ -323,7 +323,7 @@
             <div class="input-group three">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>{{ $village_head->citizent->address }}</span>
+                <span>{{ $village_head->address ?? '-' }}</span>
             </div>
             <div class="input-group six">
                 <label>Nama</label>

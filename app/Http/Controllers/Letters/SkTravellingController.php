@@ -151,7 +151,6 @@ class SkTravellingController extends Controller
             'user' => auth()->user(), 
             'village_head' => $this->villageHead->find(1)
         ]);        
-
         return $generated->stream("sk-bepergian-" . $sk_travelling->sk->citizent->name . ".pdf");
     }
     

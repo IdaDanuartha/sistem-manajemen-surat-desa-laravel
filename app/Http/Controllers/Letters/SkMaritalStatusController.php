@@ -8,9 +8,9 @@ use App\Http\Requests\Letter\SkMaritalStatus\StoreSkMaritalStatusRequest;
 use App\Http\Requests\Letter\SkMaritalStatus\UpdateSkMaritalStatusRequest;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkMaritalStatusRepository;
-use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -22,6 +22,7 @@ class SkMaritalStatusController extends Controller
     public function __construct(
         protected readonly SkMaritalStatusRepository $skMaritalStatus,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -140,9 +141,10 @@ class SkMaritalStatusController extends Controller
     public function preview(SkMaritalStatusLetter $sk_marital_status)
     {
         $sk_marital_status = $this->skMaritalStatus->findById($sk_marital_status);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-marital-status.letter-template', ['letter' => $sk_marital_status, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         if($sk_marital_status === 1) {
             $status = "duda";
