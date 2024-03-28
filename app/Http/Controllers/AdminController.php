@@ -28,13 +28,13 @@ class AdminController extends Controller
             abort(404);
         }
         
-        return view('dashboard.users.index', compact('admins'));
+        return view('dashboard.users.admins.index', compact('admins'));
     }
 
     public function create()
     {      
         if(auth()->user()->role === Role::SUPER_ADMIN) {
-            return view('dashboard.users.crud-admin.create');
+            return view('dashboard.users.admins.create');
         } else {
             abort(404);
         }                                     
@@ -43,7 +43,7 @@ class AdminController extends Controller
     public function show(Admin $admin)
     {    
         if(auth()->user()->role === Role::SUPER_ADMIN) {
-            return view('dashboard.users.crud-admin.detail', compact('admin'));
+            return view('dashboard.users.admins.detail', compact('admin'));
         } else {
             abort(404);
         }                                               
@@ -52,7 +52,7 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {      
         if(auth()->user()->role === Role::SUPER_ADMIN) {
-            return view('dashboard.users.crud-admin.edit', compact('admin'));
+            return view('dashboard.users.admins.edit', compact('admin'));
         } else {
             abort(404);
         }                                     
