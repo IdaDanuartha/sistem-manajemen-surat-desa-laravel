@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkInheritanceDistribution\StoreSkInheritanceDistrib
 use App\Http\Requests\Letter\SkInheritanceDistribution\UpdateSkInheritanceDistributionRequest;
 use App\Models\Sk;
 use App\Models\SkInheritanceDistribution;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkInheritanceDistributionRepository;
 use App\Repositories\UserRepository;
@@ -21,6 +22,7 @@ class SkInheritanceDistributionController extends Controller
     public function __construct(
         protected readonly SkInheritanceDistributionRepository $skInheritanceDistribution,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -137,9 +139,10 @@ class SkInheritanceDistributionController extends Controller
     public function preview(SkInheritanceDistribution $skInheritanceDistribution)
     {
         $skInheritanceDistribution = $this->skInheritanceDistribution->findById($skInheritanceDistribution);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         return $generated->stream("surat-pernyataan-pembagian-waris-" . $skInheritanceDistribution->sk->citizent->name . ".pdf");
     }

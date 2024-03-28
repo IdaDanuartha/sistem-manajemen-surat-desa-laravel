@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\InheritanceGeneology\StoreInheritanceGeneologyReque
 use App\Http\Requests\Letter\InheritanceGeneology\UpdateInheritanceGeneologyRequest;
 use App\Models\InheritanceGeneology;
 use App\Models\Sk;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\InheritanceGeneologyRepository;
 use App\Repositories\UserRepository;
@@ -21,6 +22,7 @@ class InheritanceGeneologyLetterController extends Controller
     public function __construct(
         protected readonly InheritanceGeneologyRepository $inheritanceGeneology,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -137,9 +139,10 @@ class InheritanceGeneologyLetterController extends Controller
     public function preview(InheritanceGeneology $inheritanceGeneology)
     {
         $inheritanceGeneology = $this->inheritanceGeneology->findById($inheritanceGeneology);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.inheritance-geneology.letter-template', ['letter' => $inheritanceGeneology, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.inheritance-geneology.letter-template', ['letter' => $inheritanceGeneology, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         return $generated->stream("surat-silsilah-waris-" . $inheritanceGeneology->sk->citizent->name . ".pdf");
     }
