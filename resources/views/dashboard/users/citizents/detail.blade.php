@@ -21,13 +21,6 @@
 					disabled
 				>
 			</div>
-			@if ($citizent->villageHead || $citizent->sectionHead)
-				<div class="col-span-12 md:col-span-6 flex flex-col">
-					<label for="employee_number" class="text-second mb-1">NIP</label>
-					<input type="text" class="input-crud" disabled
-						value="{{ $citizent->employee_number }}">
-				</div>
-			@endif
 			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="family_card_number" class="text-second mb-1">Nomor KK</label>
 				<input
@@ -136,15 +129,6 @@
 					disabled
 				>
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
-				<label for="role" class="text-second mb-2">Role</label>
-				<input
-					type="text"
-					class="input-crud"
-					value="{{ $citizent->user->role->label() }}"
-					disabled
-				>
-			</div>
 			<div class="col-span-12 flex flex-col">
 				<p class="text-second mb-1">Status Akun</p>
 				<label class="switch">
@@ -163,7 +147,7 @@
 				</label>
 			</div> --}}
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
-				<a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+				<a href="{{ route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>
 		</form>
 	</div>

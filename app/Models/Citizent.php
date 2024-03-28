@@ -29,19 +29,4 @@ class Citizent extends Model
 	{
 		return $this->morphOne(User::class, 'authenticatable');
 	}
-
-    public function villageHead(): HasOne
-    {
-        return $this->hasOne(VillageHead::class);
-    }
-
-    public function environmentalHead(): HasOne
-    {
-        return $this->hasOne(EnvironmentalHead::class);
-    }
-
-    public function sectionHead(): HasOne
-    {
-        return $this->hasOne(SectionHead::class);
-    }  
 }

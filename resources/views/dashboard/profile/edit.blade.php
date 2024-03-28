@@ -21,7 +21,7 @@
         <div class="text-danger mt-1">{{ $message }}</div>
         @enderror
     </div> --}}
-    <div class="table-wrapper ">
+    <div class="table-wrapper w-full">
         <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\CitizentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LetterHistoryController;
 use App\Http\Controllers\Letters\DieselPurchaseLetterController;
@@ -67,15 +68,17 @@ Route::prefix('auth')->group(function() {
 
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', DashboardController::class)->name("dashboard");        
-    Route::resource('citizents', UserController::class)->middleware('is_admin');
+    Route::resource('citizents', CitizentController::class)->middleware('is_admin');
+    Route::resource('staff', CitizentController::class)->middleware('is_admin');
+    Route::resource('subdistrict-head', CitizentController::class)->middleware('is_admin');
 
-    Route::get('staff', [UserController::class, 'index'])->name('staff.index')->middleware('is_admin');    
-    Route::get('staff/create', [UserController::class, 'create'])->name('staff.create')->middleware('is_admin');    
-    Route::get('staff/{citizent}', [UserController::class, 'show'])->name('staff.show')->middleware('is_admin');    
-    Route::get('staff/{citizent}/edit', [UserController::class, 'edit'])->name('staff.edit')->middleware('is_admin');    
-    Route::post('staff', [UserController::class, 'store'])->name('staff.store')->middleware('is_admin');    
-    Route::put('staff/{citizent}', [UserController::class, 'update'])->name('staff.update')->middleware('is_admin');    
-    Route::delete('staff/{citizent}', [UserController::class, 'destroy'])->name('staff.destroy')->middleware('is_admin');    
+    // Route::get('staff', [UserController::class, 'index'])->name('staff.index')->middleware('is_admin');    
+    // Route::get('staff/create', [UserController::class, 'create'])->name('staff.create')->middleware('is_admin');    
+    // Route::get('staff/{citizent}', [UserController::class, 'show'])->name('staff.show')->middleware('is_admin');    
+    // Route::get('staff/{citizent}/edit', [UserController::class, 'edit'])->name('staff.edit')->middleware('is_admin');    
+    // Route::post('staff', [UserController::class, 'store'])->name('staff.store')->middleware('is_admin');    
+    // Route::put('staff/{citizent}', [UserController::class, 'update'])->name('staff.update')->middleware('is_admin');    
+    // Route::delete('staff/{citizent}', [UserController::class, 'destroy'])->name('staff.destroy')->middleware('is_admin');    
 
     Route::resource('admins', AdminController::class)->middleware('is_admin');    
 

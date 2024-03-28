@@ -9,7 +9,7 @@
             <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Profile Image" class="edit-profile-preview-img rounded w-full aspect-square object-cover object-center h-auto"/>
         @endif
     </div> --}}
-    <div class="table-wrapper">
+    <div class="table-wrapper w-full">
         <div class="row">
             <div class="col-md-6 col-12 mb-4 flex flex-col">
                 <label class="text-second">Nama Lengkap</label>

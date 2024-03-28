@@ -15,7 +15,7 @@ class SectionHeadSeeder extends Seeder
     public function run(): void
     {
         SectionHead::create([
-            'employee_id' => "19730223 200701 1025",
+            'employee_number' => "19730223 200701 1025",
             'name' => 'I Gede Tantra Eka Putra, SE',
             'position' => 'Sekretaris'
         ])->user()->create([
@@ -26,7 +26,7 @@ class SectionHeadSeeder extends Seeder
         ]);
 
         SectionHead::create([
-            'employee_id' => "19700815 200604 1005",
+            'employee_number' => "19700815 200604 1005",
             'name' => 'I Made Widastra, SE',
             'position' => 'Kasi Pembangungan'
         ])->user()->create([
@@ -37,7 +37,7 @@ class SectionHeadSeeder extends Seeder
         ]);
 
         SectionHead::create([
-            'employee_id' => "19700601 200604 1009",
+            'employee_number' => "19700601 200604 1009",
             'name' => 'I MADE KAJENG NGURAH SUPARTA, SH',
             'position' => 'Kasi Pemerintahan dan Kesejahteraan Sosial'
         ])->user()->create([

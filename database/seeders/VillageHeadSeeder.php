@@ -15,7 +15,7 @@ class VillageHeadSeeder extends Seeder
     public function run(): void
     {
         VillageHead::create([
-            'employee_id' => "19671031 201212 1001",
+            'employee_number' => "19671031 201212 1001",
             'name' => 'I Ketut Oka Putra Werdiyasa, SE'
         ])->user()->create([
             'username' => '196710312012121001',

@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('subdistrict_heads', function (Blueprint $table) {
             $table->id();
-            $table->string("employee_id");
+            $table->string("employee_number");
             $table->string("name");
             $table->timestamps();
         });
