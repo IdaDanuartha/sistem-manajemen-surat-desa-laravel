@@ -1,9 +1,11 @@
 @extends('layouts.main')
-@section('title') Edit Profile Pengguna @endsection
+@section('title')
+    Edit Profile Pengguna
+@endsection
 
 @section('main')
-<div class=" mt-[20px] p-0 rounded-b-[0px] flex gap-5 items-start lg:flex-row flex-col">
-    {{-- <div class="table-wrapper relative w-full md:max-w-[300px]">
+    <div class=" mt-[20px] p-0 rounded-b-[0px] flex gap-5 items-start lg:flex-row flex-col">
+        {{-- <div class="table-wrapper relative w-full md:max-w-[300px]">
         <div class="profile-wrapper w-full">
             <label for="profile_image" class="profile-image w-full">
                 @if (isset(auth()->user()->profile_image))
@@ -21,154 +23,175 @@
         <div class="text-danger mt-1">{{ $message }}</div>
         @enderror
     </div> --}}
-    <div class="table-wrapper w-full">
-        <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <input type="file" class="hidden edit-profile-input" name="user[profile_image]" id="profile_image">
-            <div class="row">
-                <div class="col-md-6 col-12 mb-4 flex flex-col">
-                    <label for="name" class="text-second">Nama Lengkap</label>
-                    <input required type="text" name="name" class="input-crud" value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" />
-                    @error('name')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                @if(auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
+        <div class="table-wrapper w-full">
+            <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <input type="file" class="hidden edit-profile-input" name="user[profile_image]" id="profile_image">
+                <div class="row">
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Username</label>
-                        <input required type="text" name="user[username]" class="input-crud" value="{{ auth()->user()->username }}" />
-                        @error('user.username')
-                        <div class="text-danger mt-1">{{ $message }}</div>
+                        <label for="name" class="text-second">Nama Lengkap</label>
+                        <input required type="text" name="name" class="input-crud"
+                            value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" />
+                        @error('name')
+                            <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                @else
-                    <input type="hidden" name="user[username]" value="{{ auth()->user()->username }}" />
-                @endif
-                <div class="col-md-6 col-12 flex flex-col">
-                    <label for="name" class="text-second">Email</label>
-                    <input required type="email" name="user[email]" class="input-crud" value="{{ auth()->user()->email }}" />
-                    @error('user.email')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-6 col-12 flex flex-col">
-                    <label for="name" class="text-second">Password</label>
-                    <input type="password" name="user[password]" class="input-crud" />
-                    @error('user.password')
-                    <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                @if(auth()->user()->isVillageHead() || auth()->user()->isEnvironmentalHead() || auth()->user()->isSectionHead() || auth()->user()->isCitizent())
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">NIK</label>
-                        <input required type="text" name="national_identify_number" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" />
-                        @error('national_identify_number')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Nomor KK</label>
-                        <input required type="text" name="family_card_number" class="input-crud" value="{{ auth()->user()->authenticatable->family_card_number ?? auth()->user()->authenticatable->citizent->family_card_number }}" />
-                        @error('family_card_number')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Nomor Telepon</label>
-                        <input required type="text" name="phone_number" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number ?? auth()->user()->authenticatable->citizent->phone_number }}" />
-                        @error('phone_number')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Tempat Lahir</label>
-                        <input required type="text" name="birth_place" class="input-crud" value="{{ auth()->user()->authenticatable->birth_place ?? auth()->user()->authenticatable->citizent->birth_place }}" />
-                        @error('birth_place')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Tanggal Lahir</label>
-                        <input required type="date" name="birth_date" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date->format('Y-m-d') }}" />
-                        @error('birth_date')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Jenis Kelamin</label>
-                        <select required class="gender-select2 input-crud" name="gender">
-                            @foreach (App\Enums\Gender::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->gender->value == $key+1)>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                        @error('gender')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Golongan Darah</label>
-                        <select required class="blood-group-select2 input-crud" name="blood_group">
-                            @foreach (App\Enums\BloodGroup::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->blood_group->value == $key+1)>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                        @error('blood_group')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Agama</label>
-                        <select required class="religion-select2 input-crud" name="religion">
-                            @foreach (App\Enums\Religion::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->religion->value == $key+1)>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                        @error('religion')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label for="name" class="text-second">Status Pernikahan</label>
-                        <select required class="marital-status-select2 input-crud" name="marital_status">
-                            @foreach (App\Enums\MaritalStatus::labels() as $key => $value)
-                                <option value="{{ $key+1 }}" class="capitalize" @selected(auth()->user()->authenticatable->marital_status->value == $key+1)>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                        @error('marital_status')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                @endif
-                <div class="col-md-6 col-12 mt-4 flex flex-col">
-                    <label class="text-second">TTE</label>
-                    @if (auth()->user()->signature_image)
-                        <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
+                    @if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Username</label>
+                            <input required type="text" name="user[username]" class="input-crud"
+                                value="{{ auth()->user()->username }}" />
+                            @error('user.username')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
                     @else
-                        <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image" class="w-[200px] edit-tte-preview-img"/>
+                        <input type="hidden" name="user[username]" value="{{ auth()->user()->username }}" />
                     @endif
-                    <input type="file" name="user[signature_image]" class="input-crud edit-tte-input mt-4 p-0"/>
-                    @error('user.signature_image')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                    @enderror
+                    <div class="col-md-6 col-12 flex flex-col">
+                        <label for="name" class="text-second">Email</label>
+                        <input required type="email" name="user[email]" class="input-crud"
+                            value="{{ auth()->user()->email }}" />
+                        @error('user.email')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 col-12 md:mt-0 mt-4 flex flex-col">
+                        <label for="name" class="text-second">Password</label>
+                        <input type="password" name="user[password]" class="input-crud" />
+                        @error('user.password')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    @if (auth()->user()->isVillageHead() ||
+                            auth()->user()->isEnvironmentalHead() ||
+                            auth()->user()->isSectionHead() ||
+                            auth()->user()->isCitizent())
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">NIK</label>
+                            <input required type="text" name="national_identify_number" class="input-crud"
+                                value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" />
+                            @error('national_identify_number')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Nomor KK</label>
+                            <input required type="text" name="family_card_number" class="input-crud"
+                                value="{{ auth()->user()->authenticatable->family_card_number ?? auth()->user()->authenticatable->citizent->family_card_number }}" />
+                            @error('family_card_number')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Nomor Telepon</label>
+                            <input required type="text" name="phone_number" class="input-crud"
+                                value="{{ auth()->user()->authenticatable->phone_number ?? auth()->user()->authenticatable->citizent->phone_number }}" />
+                            @error('phone_number')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Tempat Lahir</label>
+                            <input required type="text" name="birth_place" class="input-crud"
+                                value="{{ auth()->user()->authenticatable->birth_place ?? auth()->user()->authenticatable->citizent->birth_place }}" />
+                            @error('birth_place')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Tanggal Lahir</label>
+                            <input required type="date" name="birth_date" class="input-crud"
+                                value="{{ auth()->user()->authenticatable->birth_date->format('Y-m-d') }}" />
+                            @error('birth_date')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Jenis Kelamin</label>
+                            <select required class="gender-select2 input-crud" name="gender">
+                                @foreach (App\Enums\Gender::labels() as $key => $value)
+                                    <option value="{{ $key + 1 }}" class="capitalize" @selected(auth()->user()->authenticatable->gender->value == $key + 1)>
+                                        {{ $value }}</option>
+                                @endforeach
+                            </select>
+                            @error('gender')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Golongan Darah</label>
+                            <select required class="blood-group-select2 input-crud" name="blood_group">
+                                @foreach (App\Enums\BloodGroup::labels() as $key => $value)
+                                    <option value="{{ $key + 1 }}" class="capitalize" @selected(auth()->user()->authenticatable->blood_group->value == $key + 1)>
+                                        {{ $value }}</option>
+                                @endforeach
+                            </select>
+                            @error('blood_group')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Agama</label>
+                            <select required class="religion-select2 input-crud" name="religion">
+                                @foreach (App\Enums\Religion::labels() as $key => $value)
+                                    <option value="{{ $key + 1 }}" class="capitalize" @selected(auth()->user()->authenticatable->religion->value == $key + 1)>
+                                        {{ $value }}</option>
+                                @endforeach
+                            </select>
+                            @error('religion')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label for="name" class="text-second">Status Pernikahan</label>
+                            <select required class="marital-status-select2 input-crud" name="marital_status">
+                                @foreach (App\Enums\MaritalStatus::labels() as $key => $value)
+                                    <option value="{{ $key + 1 }}" class="capitalize" @selected(auth()->user()->authenticatable->marital_status->value == $key + 1)>
+                                        {{ $value }}</option>
+                                @endforeach
+                            </select>
+                            @error('marital_status')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif
+                    {{-- @if (!auth()->user()->isSuperAdmin() && !auth()->user()->isAdmin()) --}}
+                        <div class="col-md-6 col-12 mt-4 flex flex-col">
+                            <label class="text-second">TTE</label>
+                            @if (auth()->user()->signature_image)
+                                <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}"
+                                    alt="Signature Image" class="w-[200px] edit-tte-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image"
+                                    class="w-[200px] edit-tte-preview-img" />
+                            @endif
+                            <input type="file" name="user[signature_image]"
+                                class="input-crud edit-tte-input mt-4 p-0" />
+                            @error('user.signature_image')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    {{-- @endif --}}
+                    <div class="col-12 flex items-center gap-2 mt-3">
+                        <button class="button btn-main" type="submit">Edit Profile</button>
+                        <a href="{{ route('profile.index') }}" class="button text-white btn-second" type="reset">Batal
+                            Edit</a>
+                    </div>
                 </div>
-                <div class="col-12 flex items-center gap-2 mt-3">
-                    <button class="button btn-main" type="submit">Edit Profile</button>
-                    <a href="{{ route('profile.index') }}" class="button text-white btn-second" type="reset">Batal Edit</a>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('js')
-<script>
-	$('.gender-select2').select2();
-	$('.blood-group-select2').select2();
-	$('.religion-select2').select2();
-	$('.marital-status-select2').select2();
-	previewImg("edit-profile-input", "edit-profile-preview-img")
-	previewImg("edit-tte-input", "edit-tte-preview-img")
-</script>
+    <script>
+        $('.gender-select2').select2();
+        $('.blood-group-select2').select2();
+        $('.religion-select2').select2();
+        $('.marital-status-select2').select2();
+        previewImg("edit-profile-input", "edit-profile-preview-img")
+        previewImg("edit-tte-input", "edit-tte-preview-img")
+    </script>
 @endpush

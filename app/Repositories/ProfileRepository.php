@@ -42,13 +42,14 @@ class ProfileRepository
       
       if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
 
+      // dd($request);
       if(auth()->user()->role === Role::SUPER_ADMIN) {
-        $admin = SuperAdmin::find(auth()->id());
-        $admin->updateOrFail(['name' => Arr::get($request, 'name')]);
+        $admin = SuperAdmin::find(auth()->user()->authenticatable->id);
+        $admin->updateOrFail(Arr::only($request, "name"));
         $admin->user->updateOrFail(Arr::get($request, 'user'));
       } else if(auth()->user()->role === Role::ADMIN) {
-        $admin = Admin::find(auth()->id());
-        $admin->updateOrFail(['name' => Arr::get($request, 'name')]);
+        $admin = Admin::find(auth()->user()->authenticatable->id);
+        $admin->updateOrFail(Arr::only($request, "name"));
         $admin->user->updateOrFail(Arr::get($request, 'user'));
       }
       else {
