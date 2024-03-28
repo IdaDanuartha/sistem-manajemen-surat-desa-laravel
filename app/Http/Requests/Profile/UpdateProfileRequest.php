@@ -23,8 +23,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [            
-			'name' => ['nullable', Rule::unique('citizents', 'name')->ignore(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id)],
+			'name' => ['nullable'],
 			'national_identify_number' => ['nullable', Rule::unique('citizents', 'national_identify_number')->ignore(auth()->user()->authenticatable->citizent->id ?? auth()->user()->authenticatable->id)],
+			'employee_number' => ['nullable'],			
+			'position' => ['nullable'],			
 			'family_card_number' => ['nullable'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['nullable'],
@@ -45,6 +47,8 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'nama',
+            'employee_number' => 'nip',
+            'position' => 'jabatan',
             'national_identify_number' => 'nik',
             'family_card_number' => 'nomor kartu keluarga',
             'phone_number' => 'nomor hp',

@@ -86,6 +86,7 @@ class SkPowerAttorneyRepository
                 ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
                 ->whereRelation('sk', 'status_by_village_head', $status)
                 ->whereRelation('sk', 'is_published', 1)
+                ->whereRelation('sk.citizent', 'environmental_id', auth()->user()->authenticatable->environmental_id)
                 ->get();
   }
 

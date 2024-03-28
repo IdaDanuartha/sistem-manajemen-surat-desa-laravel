@@ -27,16 +27,49 @@
             <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input type="file" class="hidden edit-profile-input" name="user[profile_image]" id="profile_image">
                 <div class="row">
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Nama Lengkap</label>
                         <input required type="text" name="name" class="input-crud"
-                            value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" />
+                            value="{{ auth()->user()->authenticatable->name }}" />
                         @error('name')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
+                    @if (auth()->user()->isSectionHead() || auth()->user()->isVillageHead())
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
+                        <label for="employee_number" class="text-second">NIP</label>
+                        <input required type="text" name="employee_number" class="input-crud"
+                            value="{{ auth()->user()->authenticatable->employee_number }}" />
+                        @error('employee_number')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    @endif
+                    @if (auth()->user()->isSectionHead())
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
+                        <label for="position" class="text-second">Jabatan</label>
+                        <input required type="text" name="position" class="input-crud"
+                            value="{{ auth()->user()->authenticatable->position }}" />
+                        @error('position')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    @endif
+                    {{-- @if (auth()->user()->isEnvironmentalHead())
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
+                        <label for="environmental_id" class="text-second">Lingkungan</label>
+                        <select required class="gender-select2 input-crud" name="gender">
+                            @foreach ($environmentals as $environmental)
+                                <option value="{{ $environmental->id }}" class="capitalize" @selected(auth()->user()->authenticatable->environmental->id === $environmental->id)>
+                                    {{ $environmental->name . " (" . $environmental->code . ")" }}</option>
+                            @endforeach
+                        </select>
+                        @error('environmental_id')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    @endif --}}
                     @if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label for="name" class="text-second">Username</label>
@@ -49,7 +82,7 @@
                     @else
                         <input type="hidden" name="user[username]" value="{{ auth()->user()->username }}" />
                     @endif
-                    <div class="col-md-6 col-12 flex flex-col">
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Email</label>
                         <input required type="email" name="user[email]" class="input-crud"
                             value="{{ auth()->user()->email }}" />
@@ -57,21 +90,18 @@
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 col-12 md:my-0 my-4 flex flex-col">
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="name" class="text-second">Password</label>
                         <input type="password" name="user[password]" class="input-crud" />
                         @error('user.password')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    @if (auth()->user()->isVillageHead() ||
-                            auth()->user()->isEnvironmentalHead() ||
-                            auth()->user()->isSectionHead() ||
-                            auth()->user()->isCitizent())
+                    @if (auth()->user()->isCitizent())
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label for="name" class="text-second">NIK</label>
                             <input required type="text" name="national_identify_number" class="input-crud"
-                                value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" />
+                                value="{{ auth()->user()->authenticatable->national_identify_number }}" />
                             @error('national_identify_number')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -79,7 +109,7 @@
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label for="name" class="text-second">Nomor KK</label>
                             <input required type="text" name="family_card_number" class="input-crud"
-                                value="{{ auth()->user()->authenticatable->family_card_number ?? auth()->user()->authenticatable->citizent->family_card_number }}" />
+                                value="{{ auth()->user()->authenticatable->family_card_number }}" />
                             @error('family_card_number')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -87,7 +117,7 @@
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label for="name" class="text-second">Nomor Telepon</label>
                             <input required type="text" name="phone_number" class="input-crud"
-                                value="{{ auth()->user()->authenticatable->phone_number ?? auth()->user()->authenticatable->citizent->phone_number }}" />
+                                value="{{ auth()->user()->authenticatable->phone_number }}" />
                             @error('phone_number')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -95,7 +125,7 @@
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label for="name" class="text-second">Tempat Lahir</label>
                             <input required type="text" name="birth_place" class="input-crud"
-                                value="{{ auth()->user()->authenticatable->birth_place ?? auth()->user()->authenticatable->citizent->birth_place }}" />
+                                value="{{ auth()->user()->authenticatable->birth_place }}" />
                             @error('birth_place')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
@@ -158,21 +188,20 @@
                         </div>
                     @endif
                     {{-- @if (!auth()->user()->isSuperAdmin() && !auth()->user()->isAdmin()) --}}
-                        <div class="col-md-6 col-12 mt-4 flex flex-col">
-                            <label class="text-second">TTE</label>
-                            @if (auth()->user()->signature_image)
-                                <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}"
-                                    alt="Signature Image" class="w-[200px] edit-tte-preview-img" />
-                            @else
-                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image"
-                                    class="w-[200px] edit-tte-preview-img" />
-                            @endif
-                            <input type="file" name="user[signature_image]"
-                                class="input-crud edit-tte-input mt-4 p-0" />
-                            @error('user.signature_image')
-                                <div class="text-danger mt-1">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    <div class="col-12 mt-4 flex flex-col">
+                        <label class="text-second">TTE</label>
+                        @if (auth()->user()->signature_image)
+                            <img src="{{ asset('uploads/users/signatures/' . auth()->user()->signature_image) }}"
+                                alt="Signature Image" class="w-[200px] edit-tte-preview-img" />
+                        @else
+                            <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Signature Image"
+                                class="w-[200px] edit-tte-preview-img" />
+                        @endif
+                        <input type="file" name="user[signature_image]" class="col-md-6 col-12 input-crud edit-tte-input mt-4 p-0" />
+                        @error('user.signature_image')
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
                     {{-- @endif --}}
                     <div class="col-12 flex items-center gap-2 mt-3">
                         <button class="button btn-main" type="submit">Edit Profile</button>

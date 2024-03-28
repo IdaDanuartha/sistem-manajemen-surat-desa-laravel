@@ -13,8 +13,26 @@
         <div class="row">
             <div class="col-md-6 col-12 mb-4 flex flex-col">
                 <label class="text-second">Nama Lengkap</label>
-                <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->name ?? auth()->user()->authenticatable->citizent->name }}" readonly />
+                <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->name }}" readonly />
             </div>
+            @if (auth()->user()->isSectionHead() || auth()->user()->isVillageHead())
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">NIP</label>
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->employee_number }}" readonly />
+                </div>
+            @endif
+            @if (auth()->user()->isSectionHead())
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">Jabatan</label>
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->position }}" readonly />
+                </div>
+            @endif
+            @if (auth()->user()->isEnvironmentalHead())
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">Lingkungan</label>
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->environmental->name . " (" . auth()->user()->authenticatable->environmental->code . ")" }}" readonly />
+                </div>
+            @endif
             @if(auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Username</label>
@@ -29,42 +47,42 @@
                 <label class="text-second">Role</label>
                 <input type="text" class="input-crud" value="{{ auth()->user()->role->label() }}" readonly />
             </div>
-            @if(auth()->user()->isVillageHead() || auth()->user()->isEnvironmentalHead() || auth()->user()->isSectionHead() || auth()->user()->isCitizent())
+            @if(auth()->user()->isCitizent())
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">NIK</label>
-                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number ?? auth()->user()->authenticatable->citizent->national_identify_number }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->national_identify_number }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Nomor KK</label>
-                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->family_card_number ?? auth()->user()->authenticatable->citizent->family_card_number }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->family_card_number }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Nomor Telepon</label>
-                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number ?? auth()->user()->authenticatable->citizent->phone_number }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Tempat Lahir</label>
-                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->birth_place ?? auth()->user()->authenticatable->citizent->birth_place }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->birth_place }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Tanggal Lahir</label>
-                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date ?? auth()->user()->authenticatable->citizent->birth_date->format('d M Y') }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->birth_date }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Jenis Kelamin</label>
-                    <input type="text" class="input-crud" value="{{ isset(auth()->user()->authenticatable->gender) ? auth()->user()->authenticatable->gender->label() : auth()->user()->authenticatable->citizent->gender->label() }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->gender->label() }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Golongan Darah</label>
-                    <input type="text" class="input-crud" value="{{ isset(auth()->user()->authenticatable->blood_group) ? auth()->user()->authenticatable->blood_group->label() : auth()->user()->authenticatable->citizent->blood_group->label() }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->blood_group->label() }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Agama</label>
-                    <input type="text" class="input-crud" value="{{ isset(auth()->user()->authenticatable->religion) ? auth()->user()->authenticatable->religion->label() : auth()->user()->authenticatable->citizent->religion->label() }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->religion->label() }}" readonly />
                 </div>
                 <div class="col-md-6 col-12 mb-4 flex flex-col">
                     <label class="text-second">Status Pernikahan</label>
-                    <input type="text" class="input-crud" value="{{ isset(auth()->user()->authenticatable->marital_status) ? auth()->user()->authenticatable->marital_status->label() : auth()->user()->authenticatable->citizent->marital_status->label() }}" readonly />
+                    <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->marital_status->label() }}" readonly />
                 </div>
                 @endif
             @if (auth()->user()->signature_image)

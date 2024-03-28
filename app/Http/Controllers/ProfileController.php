@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Repositories\EnvironmentalRepository;
 use App\Repositories\ProfileRepository;
 use App\Utils\ResponseMessage;
 use Exception;
@@ -12,6 +13,7 @@ class ProfileController extends Controller
 {
     public function __construct(
         protected readonly ProfileRepository $profileRepository,
+        protected readonly EnvironmentalRepository $environmental,
         protected readonly ResponseMessage $responseMessage
     ) {}
     
@@ -21,13 +23,15 @@ class ProfileController extends Controller
     }
 
     public function edit()
-    {                                           
-        return view('dashboard.profile.edit');
+    {             
+        $environmentals = $this->environmental->findAll();
+
+        return view('dashboard.profile.edit', compact('environmentals'));
     }
 
     public function update(UpdateProfileRequest $request)
     {
-        try {                
+        try {    
             $update = $this->profileRepository->update($request->validated());
 
             if($update == true) return redirect(route('profile.index'))
