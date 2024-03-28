@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkMarry\StoreSkMarryRequest;
 use App\Http\Requests\Letter\SkMarry\UpdateSkMarryRequest;
 use App\Models\Sk;
 use App\Models\SkMarryLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkMarryRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -20,7 +21,7 @@ class SkMarryController extends Controller
 {
     public function __construct(
         protected readonly SkMarryRepository $skMarry,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -48,7 +49,7 @@ class SkMarryController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-marry.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -67,7 +68,7 @@ class SkMarryController extends Controller
         $get_letter = $this->skMarry->findById($sk_marry);                                         
         return view('dashboard.letters.sk-marry.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

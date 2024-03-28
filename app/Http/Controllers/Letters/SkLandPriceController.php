@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkLandPrice\StoreSkLandPriceRequest;
 use App\Http\Requests\Letter\SkLandPrice\UpdateSkLandPriceRequest;
 use App\Models\Sk;
 use App\Models\SkLandPriceLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkLandPriceRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -20,7 +21,7 @@ class SkLandPriceController extends Controller
 {
     public function __construct(
         protected readonly SkLandPriceRepository $skLandPrice,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -49,7 +50,7 @@ class SkLandPriceController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-land-price.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -68,7 +69,7 @@ class SkLandPriceController extends Controller
         $get_letter = $this->skLandPrice->findById($sk_land_price);                                         
         return view('dashboard.letters.sk-land-price.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkMaritalStatus\StoreSkMaritalStatusRequest;
 use App\Http\Requests\Letter\SkMaritalStatus\UpdateSkMaritalStatusRequest;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkMaritalStatusRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -20,7 +21,7 @@ class SkMaritalStatusController extends Controller
 {
     public function __construct(
         protected readonly SkMaritalStatusRepository $skMaritalStatus,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -50,7 +51,7 @@ class SkMaritalStatusController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-marital-status.crud.create', [
-                "citizents" => $this->user->findAllCitizent(),
+                "citizents" => $this->citizent->findAll(),
                 "reference_number_1" => $reference_number_1->generate(),
                 "reference_number_2" => $reference_number_2->generate(),
                ]) : 
@@ -68,7 +69,7 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);  
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status); 
-        $citizents = $this->user->findAllCitizent();                                        
+        $citizents = $this->citizent->findAll();                                        
         return view('dashboard.letters.sk-marital-status.crud.edit', compact('get_letter', "citizents"));
     }
 

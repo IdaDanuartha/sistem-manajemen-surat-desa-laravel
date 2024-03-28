@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkGrant\StoreSkGrantRequest;
 use App\Http\Requests\Letter\SkGrant\UpdateSkGrantRequest;
 use App\Models\Sk;
 use App\Models\SkGrantLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkGrantRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class SkGrantController extends Controller
 {
     public function __construct(
         protected readonly SkGrantRepository $skGrant,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class SkGrantController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-grant.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class SkGrantController extends Controller
         $get_letter = $this->skGrant->findById($skGrant);                                         
         return view('dashboard.letters.sk-grant.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

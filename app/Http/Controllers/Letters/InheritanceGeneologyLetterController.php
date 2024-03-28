@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\InheritanceGeneology\StoreInheritanceGeneologyReque
 use App\Http\Requests\Letter\InheritanceGeneology\UpdateInheritanceGeneologyRequest;
 use App\Models\InheritanceGeneology;
 use App\Models\Sk;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\InheritanceGeneologyRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class InheritanceGeneologyLetterController extends Controller
 {
     public function __construct(
         protected readonly InheritanceGeneologyRepository $inheritanceGeneology,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class InheritanceGeneologyLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.inheritance-geneology.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class InheritanceGeneologyLetterController extends Controller
         $get_letter = $this->inheritanceGeneology->findById($inheritanceGeneology);                                         
         return view('dashboard.letters.inheritance-geneology.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

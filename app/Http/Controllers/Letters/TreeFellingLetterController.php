@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\TreeFellingLetter\StoreTreeFellingRequest;
 use App\Http\Requests\Letter\TreeFellingLetter\UpdateTreeFellingRequest;
 use App\Models\Sk;
 use App\Models\TreeFellingLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\TreeFellingLetterRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class TreeFellingLetterController extends Controller
 {
     public function __construct(
         protected readonly TreeFellingLetterRepository $treeFelling,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class TreeFellingLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.tree-felling.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class TreeFellingLetterController extends Controller
         $get_letter = $this->treeFelling->findById($treeFelling);                                         
         return view('dashboard.letters.tree-felling.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

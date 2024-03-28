@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\ParentalPermissionLetter\StoreParentalPermissionLet
 use App\Http\Requests\Letter\ParentalPermissionLetter\UpdateParentalPermissionLetterRequest;
 use App\Models\ParentalPermissionLetter;
 use App\Models\Sk;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\ParentalPermissionLetterRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class ParentalPermissionLetterController extends Controller
 {
     public function __construct(
         protected readonly ParentalPermissionLetterRepository $parentalPermissionLetter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class ParentalPermissionLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.parental-permission.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class ParentalPermissionLetterController extends Controller
         $get_letter = $this->parentalPermissionLetter->findById($parentalPermission);                                         
         return view('dashboard.letters.parental-permission.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

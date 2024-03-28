@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkHeir\StoreSkHeirRequest;
 use App\Http\Requests\Letter\SkHeir\UpdateSkHeirRequest;
 use App\Models\Sk;
 use App\Models\SkHeir;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkHeirRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class SkHeirController extends Controller
 {
     public function __construct(
         protected readonly SkHeirRepository $skHeir,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class SkHeirController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-heir.crud.create', [
-                    "citizents" => $this->user->findAllCitizent()
+                    "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class SkHeirController extends Controller
         $get_letter = $this->skHeir->findById($skHeir);                                         
         return view('dashboard.letters.sk-heir.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

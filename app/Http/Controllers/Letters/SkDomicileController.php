@@ -9,8 +9,8 @@ use App\Http\Requests\Letter\SkDomicile\UpdateSkDomicileRequest;
 use App\Models\Sk;
 use App\Models\SkDomicileLetter;
 use App\Models\User;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkDomicileRepository;
-use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -22,7 +22,7 @@ class SkDomicileController extends Controller
     public function __construct(
         protected readonly SkDomicileRepository $skDomicile,
         protected readonly User $user,
-        protected readonly UserRepository $userRepository,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -50,7 +50,7 @@ class SkDomicileController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-domicile.crud.create', [
-                    "citizents" => $this->userRepository->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -69,7 +69,7 @@ class SkDomicileController extends Controller
         $get_letter = $this->skDomicile->findById($skDomicile);                                         
         return view('dashboard.letters.sk-domicile.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->userRepository->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

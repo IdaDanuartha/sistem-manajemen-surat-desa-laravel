@@ -57,7 +57,7 @@
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 col-12 md:mt-0 mt-4 flex flex-col">
+                    <div class="col-md-6 col-12 md:my-0 my-4 flex flex-col">
                         <label for="name" class="text-second">Password</label>
                         <input type="password" name="user[password]" class="input-crud" />
                         @error('user.password')

@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\Sktm\StoreSktmRequest;
 use App\Http\Requests\Letter\Sktm\UpdateSktmRequest;
 use App\Models\Sk;
 use App\Models\SktmLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SktmRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -22,7 +23,7 @@ class SktmController extends Controller
     public function __construct(
         protected readonly SktmRepository $sktm,
         protected readonly SktmLetter $letter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -52,7 +53,7 @@ class SktmController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sktm.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number_1" => $reference_number_1->generate(),
                     "reference_number_2" => $reference_number_2->generate()
                ]) : 
@@ -72,7 +73,7 @@ class SktmController extends Controller
         $get_letter = $this->sktm->findById($sktm);                                         
         return view('dashboard.letters.sktm.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

@@ -7,6 +7,8 @@ use App\Mail\SendLetterToCitizent;
 use App\Mail\SendLetterToEnvironmentalHead;
 use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
+use App\Models\Citizent;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkSubsidizedHousingLetter;
 use App\Models\User;
@@ -22,7 +24,9 @@ class SkSubsidizedHousingRepository
 {
   public function __construct(
     protected readonly Sk $sk,    
-    protected readonly SkSubsidizedHousingLetter $letter,    
+    protected readonly SkSubsidizedHousingLetter $letter, 
+    protected readonly Citizent $citizent,
+    protected readonly EnvironmentalHead $environmentalHead,   
     protected readonly User $user,
   ) {}
 
@@ -107,9 +111,13 @@ class SkSubsidizedHousingRepository
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));
       $this->letter->create(["sk_id" => $sk_letter->id]);
       
-      if($sk_letter->is_published) {
-        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $sk_letter->code));        
+      $citizent = $this->citizent->find($request["sk"]["citizent_id"]);
+
+      if ($sk_letter->is_published) {
+        $environmentalHead = $this->environmentalHead->where("environmental_id", $citizent->environmental_id)->first();
+
+        Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $sk_letter->code));
+        // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
       
     } catch (\Exception $e) {  
@@ -127,12 +135,12 @@ class SkSubsidizedHousingRepository
     DB::beginTransaction();    
 
     try {
-        if(isset($request["sk"]["is_published"])) {
-            $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-            Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+      if (isset($request["sk"]["is_published"])) {
+        $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
+        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
-            $request["sk"]["is_published"] = true;
-          }
+        $request["sk"]["is_published"] = true;
+      }
 
         $letter->sk->updateOrFail(Arr::get($request, "sk"));        
 

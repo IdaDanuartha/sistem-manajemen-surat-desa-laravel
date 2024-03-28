@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkName\StoreSkNameRequest;
 use App\Http\Requests\Letter\SkName\UpdateSkNameRequest;
 use App\Models\Sk;
 use App\Models\SkNameLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkNameRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -21,7 +22,7 @@ class SkNameController extends Controller
     public function __construct(
         protected readonly SkNameRepository $skName,
         protected readonly SkNameLetter $letter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -50,7 +51,7 @@ class SkNameController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-name.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -69,7 +70,7 @@ class SkNameController extends Controller
         $get_letter = $this->skName->findById($skName);                                         
         return view('dashboard.letters.sk-name.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

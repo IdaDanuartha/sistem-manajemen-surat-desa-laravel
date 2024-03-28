@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\SkTraveling\UpdateSkTravelingRequest;
 use App\Models\Sk;
 use App\Models\SkTravelingLetter;
 use App\Models\VillageHead;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkTravelingRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -23,7 +24,7 @@ class SkTravellingController extends Controller
         protected readonly SkTravelingRepository $skTravelling,
         protected readonly SkTravelingLetter $letter,
         protected readonly VillageHead $villageHead,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -52,7 +53,7 @@ class SkTravellingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-traveling.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -71,7 +72,7 @@ class SkTravellingController extends Controller
         $get_letter = $this->skTravelling->findById($sk_travelling);                                         
         return view('dashboard.letters.sk-traveling.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

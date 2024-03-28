@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkSubsidizedHousing\StoreSkSubsidizedHousingRequest
 use App\Http\Requests\Letter\SkSubsidizedHousing\UpdateSkSubsidizedHousingRequest;
 use App\Models\Sk;
 use App\Models\SkSubsidizedHousingLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkSubsidizedHousingRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -21,7 +22,7 @@ class SkSubsidizedHousingController extends Controller
     public function __construct(
         protected readonly SkSubsidizedHousingRepository $skSubsidizedHousing,
         protected readonly SkSubsidizedHousingLetter $letter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -50,7 +51,7 @@ class SkSubsidizedHousingController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-subsidized-housing.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -69,7 +70,7 @@ class SkSubsidizedHousingController extends Controller
         $get_letter = $this->skSubsidizedHousing->findById($skSubsidizedHousing);                                         
         return view('dashboard.letters.sk-subsidized-housing.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

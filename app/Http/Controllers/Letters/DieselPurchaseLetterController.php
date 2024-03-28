@@ -8,8 +8,8 @@ use App\Http\Requests\Letter\DieselPurchaseLetter\UpdateDieselPurchaseRequest;
 use App\Http\Requests\Letter\DieselPurchaseLetter\StoreDieselPurchaseRequest;
 use App\Models\DieselPurchaseLetter;
 use App\Models\Sk;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\DieselPurchaseLetterRepository;
-use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -20,7 +20,7 @@ class DieselPurchaseLetterController extends Controller
 {
     public function __construct(
         protected readonly DieselPurchaseLetterRepository $dieselPurchaseLetter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -49,7 +49,7 @@ class DieselPurchaseLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.diesel-purchase.crud.create', [
-                "citizents" => $this->user->findAllCitizent(),
+                "citizents" => $this->citizent->findAll(),
                 "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -68,7 +68,7 @@ class DieselPurchaseLetterController extends Controller
         $get_letter = $this->dieselPurchaseLetter->findById($dieselPurchase);                                         
         return view('dashboard.letters.diesel-purchase.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

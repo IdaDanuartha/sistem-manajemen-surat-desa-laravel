@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkMove\StoreSkMoveRequest;
 use App\Http\Requests\Letter\SkMove\UpdateSkMoveRequest;
 use App\Models\Sk;
 use App\Models\SkMoveLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkMoveRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -21,7 +22,7 @@ class SkMoveController extends Controller
     public function __construct(
         protected readonly SkMoveRepository $skMove,
         protected readonly SkMoveLetter $letter,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -47,7 +48,7 @@ class SkMoveController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-move.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -66,7 +67,7 @@ class SkMoveController extends Controller
         $get_letter = $this->skMove->findById($skMove);                                         
         return view('dashboard.letters.sk-move.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

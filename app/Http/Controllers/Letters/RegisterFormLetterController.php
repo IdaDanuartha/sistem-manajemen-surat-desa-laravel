@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\RegistrationForm\StoreRegistrationFormRequest;
 use App\Http\Requests\Letter\RegistrationForm\UpdateRegistrationFormRequest;
 use App\Models\RegistrationFormLetter;
 use App\Models\Sk;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\RegistrationFormRepository;
 use App\Repositories\UserRepository;
 use App\Utils\ResponseMessage;
@@ -19,7 +20,7 @@ class RegisterFormLetterController extends Controller
 {
     public function __construct(
         protected readonly RegistrationFormRepository $registrationForm,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -46,7 +47,7 @@ class RegisterFormLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.registration-form.crud.create', [
-                "citizents" => $this->user->findAllCitizent()
+                "citizents" => $this->citizent->findAll()
                ]) : 
                abort(404);
     }
@@ -64,7 +65,7 @@ class RegisterFormLetterController extends Controller
         $get_letter = $this->registrationForm->findById($registrationForm);                                         
         return view('dashboard.letters.registration-form.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

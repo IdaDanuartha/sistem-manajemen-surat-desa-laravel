@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\Sktu\StoreSktuRequest;
 use App\Http\Requests\Letter\Sktu\UpdateSktuRequest;
 use App\Models\Sk;
 use App\Models\SktuLetter;
+use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SktuRepository;
 use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
@@ -20,7 +21,7 @@ class SktuController extends Controller
 {
     public function __construct(
         protected readonly SktuRepository $sktu,
-        protected readonly UserRepository $user,
+        protected readonly CitizentRepository $citizent,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -48,7 +49,7 @@ class SktuController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sktu.crud.create', [
-                    "citizents" => $this->user->findAllCitizent(),
+                    "citizents" => $this->sktu->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -67,7 +68,7 @@ class SktuController extends Controller
         $get_letter = $this->sktu->findById($sktu);                                         
         return view('dashboard.letters.sktu.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->user->findAllCitizent()
+            "citizents" => $this->sktu->findAll()
         ]);
     }
 
