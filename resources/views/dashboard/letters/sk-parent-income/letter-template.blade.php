@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -302,14 +303,16 @@
         }
     </style>
 </head>
+
 <body>
-    
+
     <div class="container">
         <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Penghasilan</h3>
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem menerangkan dengan sebenarnya :</p>
+            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten
+                Karangasem menerangkan dengan sebenarnya :</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
@@ -318,7 +321,7 @@
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->birth_place . ", " . $letter->citizent->birth_date->format('d-m-Y') }}</span>
+                <span>{{ $letter->citizent->birth_place . ', ' . $letter->citizent->birth_date->format('d-m-Y') }}</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
@@ -350,10 +353,14 @@
                 <div>:</div>
                 <span>{{ $letter->citizent->address }}</span>
             </div>
-            <p class="description-caption">Yang Merupakan orang Tua/Wali dari : <span style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</span></p>
+            <p class="description-caption">Yang Merupakan orang Tua/Wali dari : <span
+                    style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</span></p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 53 / LD / IV / 2022 tertanggal, 07 April 2022. Bahwa memang benar orang tersebut di atas memiliki penghasilan Rp. @rupiah($letter->income),-/ Bulan.</p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 53 / LD / IV / 2022
+                    tertanggal, 07 April 2022. Bahwa memang benar orang tersebut di atas memiliki penghasilan Rp.
+                    @rupiah($letter->income),-/ Bulan.</p>
+                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat
+                    dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">
@@ -361,25 +368,33 @@
                 <p>Mengetahui</p>
                 <p>Camat Karangasem</p>
                 <div class="card-canvas">
-                    {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                    @if (isset($subdistrictHead->signature_image))
+                        <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                            style="width: 100%; height: 100%;">
+                    @endif
                 </div>
             </div>
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>Subagan,
+                    {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format('d M Y') : '..........' }}
+                </p>
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->villageHead))
+                    @if (isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sk-parent-income/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
                         @endif
-                    @endif         
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

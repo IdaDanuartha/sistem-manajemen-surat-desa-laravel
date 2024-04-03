@@ -110,8 +110,8 @@
 					<input
 						type="text"
 						class="input-crud"
-						value="@if ($get_letter->sk->status_by_environmental_head == 1){{ $get_letter->sk->environmentalHead?->citizent->name . ' (Menyetujui) ' }}
-						@elseif($get_letter->sk->status_by_environmental_head == 2){{ $get_letter->sk->environmentalHead?->citizent->name . ' (Menolak) '  }}
+						value="@if ($get_letter->sk->status_by_environmental_head == 1){{ $get_letter->sk->environmentalHead?->name . ' (Menyetujui) ' }}
+						@elseif($get_letter->sk->status_by_environmental_head == 2){{ $get_letter->sk->environmentalHead?->name . ' (Menolak) '  }}
 						@else Belum Dikonfirmasi @endif"
 						disabled
 					>
@@ -121,8 +121,8 @@
 					<input
 						type="text"
 						class="input-crud"
-						value="@if ($get_letter->sk->status_by_section_head == 1){{ $get_letter->sk->sectionHead?->citizent->name . ' (Menyetujui) ' }}
-						@elseif($get_letter->sk->status_by_section_head == 2){{ $get_letter->sk->sectionHead?->citizent->name . ' (Menolak) '  }}
+						value="@if ($get_letter->sk->status_by_section_head == 1){{ $get_letter->sk->sectionHead?->name . ' (Menyetujui) ' }}
+						@elseif($get_letter->sk->status_by_section_head == 2){{ $get_letter->sk->sectionHead?->name . ' (Menolak) '  }}
 						@else Belum Dikonfirmasi @endif"
 						disabled
 					>
@@ -132,8 +132,8 @@
 					<input
 						type="text"
 						class="input-crud"
-						value="@if ($get_letter->sk->status_by_village_head == 1){{ $get_letter->sk->villageHead?->citizent->name . ' (Menyetujui) ' }}
-						@elseif($get_letter->sk->status_by_village_head == 2){{ $get_letter->sk->villageHead?->citizent->name . ' (Menolak) '  }}
+						value="@if ($get_letter->sk->status_by_village_head == 1){{ $get_letter->sk->villageHead?->name . ' (Menyetujui) ' }}
+						@elseif($get_letter->sk->status_by_village_head == 2){{ $get_letter->sk->villageHead?->name . ' (Menolak) '  }}
 						@else Belum Dikonfirmasi @endif"
 						disabled
 					>

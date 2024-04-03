@@ -305,16 +305,16 @@
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->villageHead->name : ".........." }}</p>
+                <p>Subagan, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->name : ".........." }}</p>
                 <p class="other">Kasi Pem dan Kesos</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->villageHead))
-                        @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if(isset($letter->sk->sectionHead))
+                        @if ($letter->sk->status_by_section_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sktu/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                        @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
                             <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif         

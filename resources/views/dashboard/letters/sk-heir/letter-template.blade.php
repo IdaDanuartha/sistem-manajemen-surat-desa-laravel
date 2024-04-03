@@ -194,14 +194,14 @@
                 </td>
             </tr>
         </table>
-        <table class="w-full table-mt">
+        <table class="w-full table-mt" style="margin-top: 100px">
             <tr>
                 <td class="w-full" style="text-align: center">Mengetahui :</td>
             </tr>
         </table>
         <table class="w-full table-mt">
             <tr class="w-full">
-                <td class="ttd-text">Kepala Lingkungan Gede</td>
+                <td class="ttd-text">Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}</td>
                 <td class="ttd-text">Lurah Subagan,</td>
             </tr>
             <tr style="text-align: center">
@@ -240,7 +240,7 @@
                         <strong style="font-size: 14px;">{{ $letter->sk->villageHead->name }}</strong>                    
                     </span> 
                     <br>
-                    NIP 19650404 200604 1 011
+                    NIP {{ $letter->sk->villageHead->employee_number }}
                 </td>
                 @endif
             </tr>

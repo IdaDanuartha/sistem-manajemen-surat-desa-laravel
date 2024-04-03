@@ -49,7 +49,7 @@ class SkDieController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-die.crud.create', [
-                    "citizents" => $this->findAll(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -68,7 +68,7 @@ class SkDieController extends Controller
         $get_letter = $this->skDie->findById($skDie);                                         
         return view('dashboard.letters.sk-die.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->findAll()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

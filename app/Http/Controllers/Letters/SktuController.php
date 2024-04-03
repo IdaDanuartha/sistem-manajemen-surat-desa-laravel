@@ -49,7 +49,7 @@ class SktuController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sktu.crud.create', [
-                    "citizents" => $this->sktu->findAll(),
+                    "citizents" => $this->citizent->findAll(),
                     "reference_number" => $reference_number->generate()
                ]) : 
                abort(404);
@@ -68,7 +68,7 @@ class SktuController extends Controller
         $get_letter = $this->sktu->findById($sktu);                                         
         return view('dashboard.letters.sktu.crud.edit', [
             "get_letter" => $get_letter,
-            "citizents" => $this->sktu->findAll()
+            "citizents" => $this->citizent->findAll()
         ]);
     }
 

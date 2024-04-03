@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -313,15 +314,17 @@
         }
     </style>
 </head>
+
 <body>
-    
+
     <div class="container">
         <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Tidak Mampu</h3>
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
-            @if($letter->sktm_type->value == 4 || $letter->sktm_type->value == 5)
+            <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten
+                Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
+            @if ($letter->sktm_type->value == 4 || $letter->sktm_type->value == 5)
                 <div class="input-group one">
                     <label>Nama</label>
                     <div>:</div>
@@ -330,7 +333,7 @@
                 <div class="input-group two">
                     <label>Tempat Tanggal Lahir</label>
                     <div>:</div>
-                    <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                    <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
                 </div>
                 <div class="input-group seven">
                     <label>Pekerjaan</label>
@@ -356,7 +359,7 @@
                 <div class="input-group two">
                     <label>Tempat Tanggal Lahir</label>
                     <div>:</div>
-                    <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                    <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
                 </div>
                 {{-- <div class="input-group four">
                     <label>Jenis Kelamin</label>
@@ -386,20 +389,33 @@
             @endif
             <div class="description-other">
                 @if ($letter->sktm_type->value === 1)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler,  No:  92 / GLK / II / 2016, tanggal  15 Pebruari  2016,  Sepanjang pengetahuan kami memang benar orang tersebut di atas tidak mampu untuk membayar proses sidang perceraian.</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler, No: 92 / GLK /
+                        II / 2016, tanggal 15 Pebruari 2016, Sepanjang pengetahuan kami memang benar orang tersebut di
+                        atas tidak mampu untuk membayar proses sidang perceraian.</p>
                 @elseif ($letter->sktm_type->value === 2)
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No. 04 / LD / I / 2023  tanggal 05 Januari 2024, memang benar orang tersebut diatas kurang mampu, untuk Membiayai Sekolah Anaknya, Atas Nama: </p>
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No. 04 / LD / I /
+                        2023 tanggal 05 Januari 2024, memang benar orang tersebut diatas kurang mampu, untuk Membiayai
+                        Sekolah Anaknya, Atas Nama: </p>
                 @elseif ($letter->sktm_type->value === 3)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa,  No:  211 / LD /  X / 2023,  tanggal 27 Oktober 2023,  sepanjang pengetahuan kami memang benar orang tersebut di atas Kurang Mampu dan Memohon Bantuan Bedah Rumah.</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 211 / LD / X /
+                        2023, tanggal 27 Oktober 2023, sepanjang pengetahuan kami memang benar orang tersebut di atas
+                        Kurang Mampu dan Memohon Bantuan Bedah Rumah.</p>
                 @elseif ($letter->sktm_type->value === 4)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod No : 153/ LJK /  III / 2019, tanggal 19 Maret 2019 menyatakan dengan sebenarnya bahwa memang benar orang tersebut diatas Tidak mampu/miskin dan Disabilitas</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod No : 153/ LJK /
+                        III / 2019, tanggal 19 Maret 2019 menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                        diatas Tidak mampu/miskin dan Disabilitas</p>
                 @elseif ($letter->sktm_type->value === 5)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 107/ LJK  /  IV / 2023,    tanggal 05 April 2023 menyatakan dengan sebenarnya bahwa memang benar orang tersebut diatas Tidak mampu / Miskin.</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 107/ LJK / IV /
+                        2023, tanggal 05 April 2023 menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                        diatas Tidak mampu / Miskin.</p>
                 @else
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No: 430 /LD / VIII / 2021  tanggal  19 Agustus 2021 ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu / miskin dan lansia .</p>
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No: 430 /LD / VIII
+                        / 2021 tanggal 19 Agustus 2021 ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
+                        / miskin dan lansia .</p>
                 @endif
                 {{-- @if (!$letter->sktm_type->value === 2) --}}
-                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
+                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan
+                    {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.</p>
                 {{-- @endif --}}
             </div>
             @if ($letter->sktm_type->value === 2)
@@ -411,7 +427,7 @@
                 <div class="input-group ten">
                     <label>Tempat Tanggal Lahir</label>
                     <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->birth_place . ", " . $letter->sktmSchool->citizent->birth_date->format("d-m-Y") }}</span>
+                    <span>{{ $letter->sktmSchool->citizent->birth_place . ', ' . $letter->sktmSchool->citizent->birth_date->format('d-m-Y') }}</span>
                 </div>
                 <div class="input-group eleven">
                     <label>Jenis Kelamin</label>
@@ -434,29 +450,39 @@
             @if ($letter->sktm_type->value === 2)
                 <div class="card-ttd">
                     <p>Mengetahui</p>
-                    <p>Camat Karangasem</p>                
+                    <p>Camat Karangasem</p>
                     <div class="card-canvas">
-                        {{-- <img src="{{ public_path('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
+                        @if (isset($subdistrictHead->signature_image))
+                            <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                                style="width: 100%; height: 100%;">
+                        @endif
                     </div>
                 </div>
             @endif
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->villageHead->name : ".........." }}</p>
+                <p>Subagan,
+                    {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->updated_at->format('d M Y') : '..........' }}
+                </p>
+                <p>A.n,
+                    {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->name : '..........' }}
+                </p>
                 <p class="other">Kasi Pem dan Kesos</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->villageHead))
-                        @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                    @if (isset($letter->sk->sectionHead))
+                        @if ($letter->sk->status_by_section_head === 1)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sktm/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
                         @endif
-                    @endif         
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

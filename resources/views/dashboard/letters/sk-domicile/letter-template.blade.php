@@ -278,7 +278,7 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $village_head->authenticatable->citizent->name }}</span>
+                <span>{{ $village_head->authenticatable->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Jabatan</label>
@@ -288,7 +288,7 @@
             <div class="input-group three">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>{{ $village_head->authenticatable->citizent->address }}.</span>
+                <span>{{ $village_head->authenticatable->address ?? "-" }}</span>
             </div>
 
             <div class="input-group four">

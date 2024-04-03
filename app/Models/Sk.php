@@ -25,7 +25,7 @@ class Sk extends Model
 
     public function environmentalHead(): BelongsTo
     {
-        return $this->belongsTo(environmentalHead::class);
+        return $this->belongsTo(EnvironmentalHead::class);
     }
 
     public function sectionHead(): BelongsTo

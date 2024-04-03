@@ -9,6 +9,7 @@ use App\Http\Requests\Letter\Sktm\StoreSktmRequest;
 use App\Http\Requests\Letter\Sktm\UpdateSktmRequest;
 use App\Models\Sk;
 use App\Models\SktmLetter;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SktmRepository;
 use App\Repositories\UserRepository;
@@ -24,6 +25,7 @@ class SktmController extends Controller
         protected readonly SktmRepository $sktm,
         protected readonly SktmLetter $letter,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -145,9 +147,10 @@ class SktmController extends Controller
     public function preview(SktmLetter $sktm)
     {
         $sktm = $this->sktm->findById($sktm);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sktm.letter-template', ['letter' => $sktm, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sktm.letter-template', ['letter' => $sktm, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         return $generated->stream("sktm-" . $sktm->sk->citizent->name . ".pdf");
     }

@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkParentIncome\StoreSkParentIncomeRequest;
 use App\Http\Requests\Letter\SkParentIncome\UpdateSkParentIncomeRequest;
 use App\Models\Sk;
 use App\Models\SkParentIncomeLetter;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkParentIncomeRepository;
 use App\Repositories\UserRepository;
@@ -22,6 +23,7 @@ class SkParentIncomeController extends Controller
     public function __construct(
         protected readonly SkParentIncomeRepository $skParentIncome,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -143,9 +145,10 @@ class SkParentIncomeController extends Controller
     public function preview(SkParentIncomeLetter $sk_parent_income)
     {
         $sk_parent_income = $this->skParentIncome->findById($sk_parent_income);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-parent-income.letter-template', ['letter' => $sk_parent_income, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-parent-income.letter-template', ['letter' => $sk_parent_income, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         return $generated->stream("sk-penghasilan-orang-tua-" . $sk_parent_income->sk->citizent->name . ".pdf");
     }
