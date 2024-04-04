@@ -8,7 +8,7 @@
 			@if (auth()->user()->isCitizent())
 				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			@else
-				<div class="col-span-12 flex flex-col">
+				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label for="sk_citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
 					<select name="sk[citizent_id]" id="sk_citizent_id" class="citizent-select2">
 						<option value="">Cari nama warga</option>
@@ -21,7 +21,7 @@
 					@enderror
 				</div>
 			@endif			
-			<div class="col-span-12 md:col-span-6 hidden flex-col reference-number-1">
+			<div class="col-span-12 {{ auth()->user()->isCitizent() ? "" : "md:col-span-6" }} hidden flex-col reference-number-1">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="" readonly value="{{ $reference_number_1 }}"
                     placeholder="Masukkan Nomor Surat..." required />
@@ -34,6 +34,14 @@
                 <input type="text" class="input-crud" name="sk[reference_number]" readonly value="{{ $reference_number_2 }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('reference_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" id="cover_letter_number" name="sk[cover_letter_number]" readonly value="{{ $cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required />
+                @error('sk.cover_letter_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

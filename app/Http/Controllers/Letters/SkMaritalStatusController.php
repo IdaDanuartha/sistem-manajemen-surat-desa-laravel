@@ -46,8 +46,9 @@ class SkMaritalStatusController extends Controller
 
     public function create()
     { 
-        $reference_number_1 = new GenerateReferenceNumber("", 3); // cerai
-        $reference_number_2 = new GenerateReferenceNumber("", 4, "", "S.ket"); // janda or duda
+        $reference_number_1 = new GenerateReferenceNumber("474.2", 4, "", "S.ket"); // cerai
+        $reference_number_2 = new GenerateReferenceNumber("474.2", 3, "", "S.ket"); // janda or duda
+        $cover_letter_number = new GenerateReferenceNumber("", 1, "", "", "", auth()->user()->authenticatable->environmental->code ?? "---");
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
@@ -55,6 +56,7 @@ class SkMaritalStatusController extends Controller
                 "citizents" => $this->citizent->findAll(),
                 "reference_number_1" => $reference_number_1->generate(),
                 "reference_number_2" => $reference_number_2->generate(),
+                "cover_letter_number" => $cover_letter_number->generateCoverLetter(),
                ]) : 
                abort(404);
     }

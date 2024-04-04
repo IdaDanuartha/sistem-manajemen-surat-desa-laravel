@@ -92,19 +92,6 @@ class GenerateReferenceNumber
     public function generateCoverLetter()
     { 
         
-        return match($this->mode) {
-            /**
-             * sk lahir - sk kawin - sk belum menikah - sk duda - sk cerai - sk tempat usaha
-             * sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
-             * sk beda nama - sk rumah subdisi - sk bepergian - sk tempat tinggal - sk harga tanah
-             * sk penghasilan ortu - sr pembelian bbm - sk domisili
-             */
-            1 => "$this->cover_letter_serial_number / $this->environmental_code / $this->month / $this->year",
-            /**
-             * sk janda, sktm bayar cerai, sk ahli waris, sk meninggal, sk izin orang tua
-             * sk penebangan pohon
-             */
-            2 => "$this->environmental_code / $this->month / $this->year",
-        };
+        return "$this->cover_letter_serial_number / $this->environmental_code / $this->month / $this->year";
     }
 }

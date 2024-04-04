@@ -19,6 +19,7 @@ class CitizentSeeder extends Seeder
     public function run(): void
     {
         Citizent::create([
+            "environmental_id" => 1,
             "name" => "Citizen 1",
             "national_identify_number" => "5205394853435",
             "phone_number" => "081234567890",
@@ -39,6 +40,7 @@ class CitizentSeeder extends Seeder
         ]);
         
         Citizent::create([
+            "environmental_id" => 2,
             "name" => "Citizen 2",
             "national_identify_number" => "5007456564456",
             "phone_number" => "081234567890",

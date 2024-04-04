@@ -359,11 +359,11 @@
             </div>
             <div class="description-other">
                 @if ($letter->status == 1)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : 278 / LJK / VII/ 2020, Tanggal 09 Juli 2020, memang benar yang bersangkutan adalah <strong>Duda dari Istri {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan adalah <strong>Duda dari Istri {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
                 @elseif($letter->status == 2)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : 05 / LD / I / 2023, Tanggal 09 Januari 2023, memang benar yang bersangkutan adalah <strong>Janda dari Suami {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, Nomor : {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan adalah <strong>Janda dari Suami {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
                 @else
-                    <p class="paragraph-one">Berdasarkan  dengan surat pengantar dari Kepala Lingkungan Jasri Kelod, tertanggal 19  Juli 2019, Nomor : / LJK / 2019, yang bersangkutan memang benar telah Cerai dengan <strong style="text-transform: uppercase;">{{ $letter->citizent->name }}</strong> pada tahun {{ $letter->date->format("Y") }} di Lingkungan Jasri Kelod, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem.</p>
+                    <p class="paragraph-one">Berdasarkan  dengan surat pengantar dari Kepala Lingkungan Jasri Kelod, tertanggal {{ $letter->sk->created_at->format("d M Y") }}, Nomor : {{ $letter->sk->cover_letter_number }}, yang bersangkutan memang benar telah Cerai dengan <strong style="text-transform: uppercase;">{{ $letter->citizent->name }}</strong> pada tahun {{ $letter->date->format("Y") }} di Lingkungan Jasri Kelod, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem.</p>
                     @endif
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan untuk melengkapi Administrasi Pensiunan.</p>
             </div>

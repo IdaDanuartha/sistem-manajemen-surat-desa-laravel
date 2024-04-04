@@ -44,7 +44,7 @@ class CitizentRepository
 
   public function findById(Citizent $citizent): Citizent
   {
-    return $this->citizent->with("user")->find($citizent->id);
+    return $this->citizent->with(["user", "environmental"])->find($citizent->id);
   }
 
   public function store($request): Citizent|Exception

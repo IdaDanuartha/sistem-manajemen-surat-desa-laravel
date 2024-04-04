@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function() {
     
     Route::middleware('is_admin')->group(function() {
         Route::resource('citizents', CitizentController::class);
+        Route::get('citizents/{citizent}/json', [CitizentController::class, 'showJSON']);
+
         Route::resource('environmental-heads', EnvironmentalHeadController::class);
         Route::resource('village-heads', VillageHeadController::class);
         Route::resource('section-heads', SectionHeadController::class);

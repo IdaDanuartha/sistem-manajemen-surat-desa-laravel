@@ -45,8 +45,8 @@ class SkMarryController extends Controller
 
     public function create()
     { 
-        $reference_number = new GenerateReferenceNumber("474.2", 2);
-        $cover_letter_number = new GenerateReferenceNumber();
+        $reference_number = new GenerateReferenceNumber("474.2", 2, "Kppdk", "Ket");
+        $cover_letter_number = new GenerateReferenceNumber("", 1, "", "", "", auth()->user()->authenticatable->environmental->code ?? "---");
         
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 

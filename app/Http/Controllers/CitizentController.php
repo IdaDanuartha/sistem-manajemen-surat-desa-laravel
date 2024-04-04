@@ -40,6 +40,13 @@ class CitizentController extends Controller
         return view('dashboard.users.citizents.detail', compact('citizent'));
     }
 
+    public function showJSON(Citizent $citizent)
+    {                         
+        return response()->json([
+            "citizent" => $this->citizentRepository->findById($citizent)
+        ]);
+    }
+
     public function edit(Citizent $citizent)
     {        
         $environmentals = $this->environmental->findAll();
