@@ -27,4 +27,12 @@ class UpdateSkBirthRequest extends FormRequest
             "sk.is_published" => "nullable",
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
+        ];
+    }
 }
