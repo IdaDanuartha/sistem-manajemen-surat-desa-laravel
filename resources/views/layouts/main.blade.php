@@ -203,6 +203,20 @@
                         }
                     })
                 })
+                $(".sk-citizent-select2").change(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: `/citizents/${$(".sk-citizent-select2").val()}/json`,
+                        dataType: "json",
+                        success: function({
+                            citizent
+                        }) {
+                            $("#cover_letter_number").val($("#cover_letter_number").val().replace($(
+                                    "#cover_letter_number").val().split(" / ")[1], citizent
+                                .environmental.code))
+                        }
+                    })
+                })
             </script>
         @endif
 

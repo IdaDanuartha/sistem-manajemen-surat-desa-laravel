@@ -89,6 +89,10 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Kepala Keluarga</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
             </div>
@@ -100,7 +104,7 @@
                 <label for="" class="text-second mb-1">Alasan Pindah</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->reason }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="" class="text-second mb-1">Alamat Pindah</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->moving_address }}" disabled />
             </div>

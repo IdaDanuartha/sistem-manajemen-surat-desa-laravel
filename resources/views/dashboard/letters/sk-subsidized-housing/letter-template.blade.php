@@ -297,7 +297,7 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No : 05 / LD / I / 2024, menerangkan bahwa memang benar orang tersebut diatas tidak Memiliki Tempat Tinggal/ Rumah, selama ini menumpang di Rumah Orang Tua.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No : {{ $letter->sk->cover_letter_number }}, menerangkan bahwa memang benar orang tersebut diatas tidak Memiliki Tempat Tinggal/ Rumah, selama ini menumpang di Rumah Orang Tua.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat untuk  dapat  dipergunakan sebagai Administrasi Permohonan Rumah Bersubsidi.</p>
             </div>
         </div>

@@ -19,7 +19,7 @@ class GenerateReferenceNumber
     protected $year; // tahun surat
     protected $environmental_code; // kode kaling
 
-    public function __construct($unique_code = "", $mode = 1, $letter = "Kppdk", $type = "Ket.", $location = "Kel. Sub", $environmental_code = "LJK")
+    public function __construct($unique_code = "", $mode = 1, $letter = "Kppdk", $type = "Ket", $location = "Kel. Sub", $environmental_code = "LJK")
     {
         $sk = Sk::latest()
                 ->where("reference_number", "!=", "-")
@@ -41,15 +41,10 @@ class GenerateReferenceNumber
         }
 
         if($sk_cover_letter) {
-            if($sk_cover_letter->mode == 1 || $sk_cover_letter->mode == 3 || $sk_cover_letter->mode == 4 || $sk_cover_letter->mode == 8 || $sk_cover_letter->mode == 9) {
-                $cover_letter_serial = (int) explode(" ", $sk_cover_letter->reference_number)[0] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
-            } else if($sk_cover_letter->mode == 2 || $sk_cover_letter->mode == 5 || $sk_cover_letter->mode == 6 || $sk_cover_letter->mode == 7) {
-                $cover_letter_serial = (int) explode(" ", $sk_cover_letter->reference_number)[2] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
-            }
+            $cover_letter_serial = (int) explode(" ", $sk_cover_letter->cover_letter_number)[0] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
         } else {
             $cover_letter_serial = str_pad("0", 2, '0', STR_PAD_LEFT); ;
         }
-
         
         $this->unique_code = $unique_code;
         $this->serial_number = str_pad(++$serial, 2, '0', STR_PAD_LEFT);
@@ -75,7 +70,7 @@ class GenerateReferenceNumber
             3 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->year",
             // sk cerai - 
             4 => "$this->unique_code / $this->serial_number / $this->type / $this->month / $this->year",
-            // sk tempat usaha - sktm bayar cerai - sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
+            // sktu - sktm bayar cerai - sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
             5 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->location / $this->year",
             // sk beda nama -  sk rumah subsidi - sk harga tanah - sk penghasilan ortu - sk izin orang tua - sr pembelian bbm - sk domisili - sk penebangan pohon
             6 => "$this->serial_number / $this->month / $this->type / $this->location / $this->year",

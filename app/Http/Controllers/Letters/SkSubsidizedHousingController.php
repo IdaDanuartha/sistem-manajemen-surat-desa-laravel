@@ -46,13 +46,15 @@ class SkSubsidizedHousingController extends Controller
 
     public function create()
     { 
-        $reference_number = new GenerateReferenceNumber("", 1, "Ket");
+        $reference_number = new GenerateReferenceNumber("", 6, "Ket");
+        $cover_letter_number = new GenerateReferenceNumber("", 1, "", "", "", auth()->user()->authenticatable->environmental->code ?? "---");
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-subsidized-housing.crud.create', [
                     "citizents" => $this->citizent->findAll(),
-                    "reference_number" => $reference_number->generate()
+                    "reference_number" => $reference_number->generate(),
+                    "cover_letter_number" => $cover_letter_number->generateCoverLetter(),
                ]) : 
                abort(404);
     }

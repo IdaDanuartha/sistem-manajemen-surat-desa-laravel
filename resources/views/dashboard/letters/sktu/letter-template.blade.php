@@ -299,7 +299,7 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No. {{ $letter->sk->reference_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, bahwa memang benar orang tersebut diatas memiliki Usaha <strong>"{{ $letter->business_name }}"</strong> yang berlokasi di Lingkungan Desa, Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No. {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, bahwa memang benar orang tersebut diatas memiliki Usaha <strong>"{{ $letter->business_name }}"</strong> yang berlokasi di Lingkungan Desa, Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>

@@ -23,6 +23,7 @@ class UpdateSktuRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "business_name" => "required",
         ];
@@ -32,6 +33,7 @@ class UpdateSktuRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "business_name" => "nama usaha",
         ];
     }

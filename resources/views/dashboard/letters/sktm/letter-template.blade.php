@@ -389,28 +389,37 @@
             @endif
             <div class="description-other">
                 @if ($letter->sktm_type->value === 1)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler, No: 92 / GLK /
-                        II / 2016, tanggal 15 Pebruari 2016, Sepanjang pengetahuan kami memang benar orang tersebut di
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
+                        {{ $letter->sk->cover_letter_number }}, tanggal
+                        {{ $letter->sk->created_at->format('d M Y') }}, Sepanjang pengetahuan kami memang benar orang
+                        tersebut di
                         atas tidak mampu untuk membayar proses sidang perceraian.</p>
                 @elseif ($letter->sktm_type->value === 2)
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No. 04 / LD / I /
-                        2023 tanggal 05 Januari 2024, memang benar orang tersebut diatas kurang mampu, untuk Membiayai
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No.
+                        {{ $letter->sk->cover_letter_number }}, tanggal
+                        {{ $letter->sk->created_at->format('d M Y') }}, memang benar orang tersebut diatas kurang
+                        mampu, untuk Membiayai
                         Sekolah Anaknya, Atas Nama: </p>
                 @elseif ($letter->sktm_type->value === 3)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 211 / LD / X /
-                        2023, tanggal 27 Oktober 2023, sepanjang pengetahuan kami memang benar orang tersebut di atas
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
+                        {{ $letter->sk->cover_letter_number }}, tanggal
+                        {{ $letter->sk->created_at->format('d M Y') }}, sepanjang pengetahuan kami memang benar orang
+                        tersebut di atas
                         Kurang Mampu dan Memohon Bantuan Bedah Rumah.</p>
                 @elseif ($letter->sktm_type->value === 4)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Jasri Kelod No : 153/ LJK /
-                        III / 2019, tanggal 19 Maret 2019 menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No :
+                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
+                        menyatakan dengan sebenarnya bahwa memang benar orang tersebut
                         diatas Tidak mampu/miskin dan Disabilitas</p>
                 @elseif ($letter->sktm_type->value === 5)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 107/ LJK / IV /
-                        2023, tanggal 05 April 2023 menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No :
+                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
+                        menyatakan dengan sebenarnya bahwa memang benar orang tersebut
                         diatas Tidak mampu / Miskin.</p>
                 @else
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa, No: 430 /LD / VIII
-                        / 2021 tanggal 19 Agustus 2021 ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
+                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
+                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
+                        ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
                         / miskin dan lansia .</p>
                 @endif
                 {{-- @if (!$letter->sktm_type->value === 2) --}}

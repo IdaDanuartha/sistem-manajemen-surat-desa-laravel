@@ -24,6 +24,7 @@ class StoreSktmRequest extends FormRequest
         return [
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "sktm_type" => "required",
             "citizent_id" => "nullable",
@@ -36,6 +37,7 @@ class StoreSktmRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "sktm_type" => "tipe sktm",
             "citizent_id" => "nama anak",
             "school_name" => "nama sekolah",

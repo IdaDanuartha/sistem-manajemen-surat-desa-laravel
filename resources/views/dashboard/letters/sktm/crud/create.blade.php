@@ -21,22 +21,30 @@
 					@enderror
 				</div>
 			@endif			
-			<div class="col-span-12 hidden flex-col reference-number-1">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
-                <input type="text" class="input-crud" name="" id="reference_number" readonly value="{{ $reference_number_1 }}"
+                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" readonly value="{{ $reference_number }}"
                     placeholder="Masukkan Nomor Surat..." required />
-                @error('reference_number')
+                @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 flex flex-col reference-number-2">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" readonly value="{{ $cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required />
+                @error('sk.cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			{{-- <div class="col-span-12 flex flex-col reference-number-2">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" readonly value="{{ $reference_number_2 }}"
                     placeholder="Masukkan Nomor Surat..." required />
                 @error('reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="sktm_type" class="text-second mb-2">Tipe Surat</label>
                 <select name="sktm_type" id="sktm_type" class="sktm-type-select2">
@@ -117,23 +125,23 @@
 				$(".input-citizent input").attr("required", false)
 			}
 
-			if($(this).val() == 3) {
-				$(".reference-number-1").addClass("flex")
-				$(".reference-number-1").removeClass("hidden")
-				$(".reference-number-1 input").attr("name", "sk[reference_number]")
+			// if($(this).val() == 3) {
+			// 	$(".reference-number-1").addClass("flex")
+			// 	$(".reference-number-1").removeClass("hidden")
+			// 	$(".reference-number-1 input").attr("name", "sk[reference_number]")
 
-				$(".reference-number-2").addClass("hidden")
-				$(".reference-number-2").removeClass("flex")
-				$(".reference-number-2 input").attr("name", "")
-			} else {
-				$(".reference-number-1").addClass("hidden")
-				$(".reference-number-1").removeClass("flex")
-				$(".reference-number-1 input").attr("name", "")
+			// 	$(".reference-number-2").addClass("hidden")
+			// 	$(".reference-number-2").removeClass("flex")
+			// 	$(".reference-number-2 input").attr("name", "")
+			// } else {
+			// 	$(".reference-number-1").addClass("hidden")
+			// 	$(".reference-number-1").removeClass("flex")
+			// 	$(".reference-number-1 input").attr("name", "")
 				
-				$(".reference-number-2").addClass("flex")
-				$(".reference-number-2").removeClass("hidden")
-				$(".reference-number-2 input").attr("name", "sk[reference_number]")
-			}
+			// 	$(".reference-number-2").addClass("flex")
+			// 	$(".reference-number-2").removeClass("hidden")
+			// 	$(".reference-number-2 input").attr("name", "sk[reference_number]")
+			// }
 		})
 	</script>
 @endpush

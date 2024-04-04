@@ -24,6 +24,7 @@ class StoreSkMoveRequest extends FormRequest
         return [
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "sk_move_type" => "required",
@@ -39,6 +40,7 @@ class StoreSkMoveRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "citizent_id" => "kepala keluarga",
             "sk_move_type" => "jenis",
             "reason" => "alasan",

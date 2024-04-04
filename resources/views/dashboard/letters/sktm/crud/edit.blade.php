@@ -14,7 +14,15 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-6 input-purpose flex-col flex">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" readonly id="cover_letter_number" value="{{ $get_letter->sk->cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required />
+                @error('sk.cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 input-purpose flex-col flex">
                 <label for="purpose" class="text-second mb-1">Tujuan Surat</label>
                 <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ $get_letter->purpose }}"
                     placeholder="Masukkan tujuan surat..." />

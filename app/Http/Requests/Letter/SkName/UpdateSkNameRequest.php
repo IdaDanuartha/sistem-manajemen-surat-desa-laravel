@@ -23,6 +23,7 @@ class UpdateSkNameRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "national_identify_number_other" => "required",
             "national_identify_number_listed" => "required",
@@ -33,6 +34,7 @@ class UpdateSkNameRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "national_identify_number_other" => "NIK yang berbeda",
             "national_identify_number_listed" => "NIK tercantum",
         ];
