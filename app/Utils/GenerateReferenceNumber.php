@@ -3,30 +3,29 @@
 namespace App\Utils;
 
 use App\Models\Sk;
+use Carbon\Carbon;
 
 class GenerateReferenceNumber 
 {
-    protected $unique_code;
-    protected $serial_number;
+    protected $unique_code; // kode tetap
+    protected $serial_number; // nomor regis
     protected $months = ["I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII"];
-    protected $month;
+    protected $month; // bulan
     protected $mode;
-    protected $type;
-    protected $letter;
-    protected $location;
-    protected $year;
+    protected $type; // tipe surat
+    protected $letter; // jenis surat
+    protected $location; // lokasi surat
+    protected $year; // tahun surat
+    protected $environmental_code; // kode kaling
 
-    public function __construct($unique_code = "", $mode = 1, $letter = "Kppdk", $type = "Ket.", $location = "Kel. Sub")
+    public function __construct($unique_code = "", $mode = 1, $letter = "Kppdk", $type = "Ket.", $location = "Kel. Sub", $environmental_code = "LJK")
     {
-        $sk = Sk::latest()->where("reference_number", "!=", "-")->where("mode", $mode)->first();
+        $sk = Sk::latest()
+                ->where("reference_number", "!=", "-")
+                ->whereYear('created_at', Carbon::now()->year)
+                ->where("mode", $mode)
+                ->first();
 
-        // if($sk && ($mode == 1 || $mode == 3 || $mode == 4 || $mode == 8 || $mode == 9)) {
-        //     $serial = (int) explode(" ", $sk->reference_number)[0] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
-        // } else if($sk && ($mode == 2 || $mode == 5 || $mode == 6 || $mode == 7)) {
-        //     $serial = (int) explode(" ", $sk->reference_number)[2] ?? str_pad("0", 2, '0', STR_PAD_LEFT); 
-        // } else {
-        //     $serial = str_pad("0", 2, '0', STR_PAD_LEFT); ;
-        // }
         if($sk) {
             if($sk->mode == 1 || $sk->mode == 3 || $sk->mode == 4 || $sk->mode == 8 || $sk->mode == 9) {
                 $serial = (int) explode(" ", $sk->reference_number)[0] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
@@ -46,21 +45,51 @@ class GenerateReferenceNumber
         $this->type = $type;
         $this->location = $location;
         $this->year = date("Y");
+        $this->environmental_code = $environmental_code;
     }
 
     public function generate()
     { 
         
         return match($this->mode) {
+            // sk lahir - sk meninggal
             1 => "$this->serial_number / $this->month / $this->letter / $this->location / $this->year",
+            // sk kawin - sk belum menikah - 
             2 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->letter / $this->year",
-            3 => "$this->serial_number / $this->letter / $this->month / $this->year",
-            4 => "$this->serial_number / $this->month / $this->type / $this->year",
+            // sk duda - sk janda - 
+            3 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->year",
+            // sk cerai - 
+            4 => "$this->unique_code / $this->serial_number / $this->type / $this->month / $this->year",
+            // sk tempat usaha - sktm bayar cerai - sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
             5 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->location / $this->year",
-            6 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->year",
+            // sk beda nama -  sk rumah subsidi - sk harga tanah - sk penghasilan ortu - sk izin orang tua - sr pembelian bbm - sk domisili - sk penebangan pohon
+            6 => "$this->serial_number / $this->month / $this->type / $this->location / $this->year",
+            // semua sk pindah (desa, lingkungan, kecamatan, provinsi)
             7 => "$this->unique_code / $this->serial_number / $this->month / $this->letter / $this->location / $this->year",
-            8 => "$this->serial_number / $this->month / $this->letter / $this->year",
-            9 => "$this->serial_number / $this->month / $this->type / $this->location / $this->year",
+            // sk bepergian - sk ahli waris
+            8 => "$this->serial_number / $this->month / $this->type / $this->year",
+            // sk tempat tinggal
+            9 => "$this->serial_number / $this->month / $this->letter / $this->year",
+        };
+    }
+
+    
+    public function generateCoverLetter()
+    { 
+        
+        return match($this->mode) {
+            /**
+             * sk lahir - sk kawin - sk belum menikah - sk duda - sk cerai - sk tempat usaha
+             * sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
+             * sk beda nama - sk rumah subdisi - sk bepergian - sk tempat tinggal - sk harga tanah
+             * sk penghasilan ortu - sr pembelian bbm - sk domisili
+             */
+            1 => "$this->serial_number / $this->environmental_code / $this->month / $this->year",
+            /**
+             * sk janda, sktm bayar cerai, sk ahli waris, sk meninggal, sk izin orang tua
+             * sk penebangan pohon
+             */
+            2 => "$this->environmental_code / $this->month / $this->year",
         };
     }
 }

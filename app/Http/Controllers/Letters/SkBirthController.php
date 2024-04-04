@@ -21,7 +21,8 @@ class SkBirthController extends Controller
     public function __construct(
         protected readonly SkBirthRepository $skBirth,
         protected readonly CitizentRepository $citizent,
-        protected readonly ResponseMessage $responseMessage
+        protected readonly GenerateReferenceNumber $generateReferenceNumber,
+        protected readonly ResponseMessage $responseMessage,
     ) {}
 
     public function index(Request $request)
@@ -44,12 +45,11 @@ class SkBirthController extends Controller
 
     public function create()
     { 
-        $reference_number = new GenerateReferenceNumber();
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.sk-birth.crud.create', [
                     "citizents" => $this->citizent->findAll(),
-                    "reference_number" => $reference_number->generate()
+                    "reference_number" => $this->generateReferenceNumber->generate()
                ]) : 
                abort(404);
     }
