@@ -9,6 +9,7 @@ class GenerateReferenceNumber
 {
     protected $unique_code; // kode tetap
     protected $serial_number; // nomor regis
+    protected $cover_letter_serial_number; // nomor regis
     protected $months = ["I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII"];
     protected $month; // bulan
     protected $mode;
@@ -25,6 +26,9 @@ class GenerateReferenceNumber
                 ->whereYear('created_at', Carbon::now()->year)
                 ->where("mode", $mode)
                 ->first();
+        $sk_cover_letter = Sk::latest()
+                ->where("reference_number", "!=", "-")
+                ->first();
 
         if($sk) {
             if($sk->mode == 1 || $sk->mode == 3 || $sk->mode == 4 || $sk->mode == 8 || $sk->mode == 9) {
@@ -36,9 +40,20 @@ class GenerateReferenceNumber
             $serial = str_pad("0", 2, '0', STR_PAD_LEFT); ;
         }
 
+        if($sk_cover_letter) {
+            if($sk_cover_letter->mode == 1 || $sk_cover_letter->mode == 3 || $sk_cover_letter->mode == 4 || $sk_cover_letter->mode == 8 || $sk_cover_letter->mode == 9) {
+                $cover_letter_serial = (int) explode(" ", $sk_cover_letter->reference_number)[0] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
+            } else if($sk_cover_letter->mode == 2 || $sk_cover_letter->mode == 5 || $sk_cover_letter->mode == 6 || $sk_cover_letter->mode == 7) {
+                $cover_letter_serial = (int) explode(" ", $sk_cover_letter->reference_number)[2] ?? str_pad("0", 2, '0', STR_PAD_LEFT);
+            }
+        } else {
+            $cover_letter_serial = str_pad("0", 2, '0', STR_PAD_LEFT); ;
+        }
+
         
         $this->unique_code = $unique_code;
         $this->serial_number = str_pad(++$serial, 2, '0', STR_PAD_LEFT);
+        $this->cover_letter_serial_number = str_pad(++$cover_letter_serial, 2, '0', STR_PAD_LEFT);
         $this->month = $this->months[date("n")-1];
         $this->letter = $letter;
         $this->mode = $mode;
@@ -84,7 +99,7 @@ class GenerateReferenceNumber
              * sk beda nama - sk rumah subdisi - sk bepergian - sk tempat tinggal - sk harga tanah
              * sk penghasilan ortu - sr pembelian bbm - sk domisili
              */
-            1 => "$this->serial_number / $this->environmental_code / $this->month / $this->year",
+            1 => "$this->cover_letter_serial_number / $this->environmental_code / $this->month / $this->year",
             /**
              * sk janda, sktm bayar cerai, sk ahli waris, sk meninggal, sk izin orang tua
              * sk penebangan pohon

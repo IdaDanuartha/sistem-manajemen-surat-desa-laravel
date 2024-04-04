@@ -297,7 +297,7 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 50 / LD / II /2023, Tanggal 22 Pebruari 2023, sepanjang pengetahuan kami bahwa memang benar orang tersebut <strong>Lahir seperti yang tersebut diatas.</strong></p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, sepanjang pengetahuan kami bahwa memang benar orang tersebut <strong>Lahir seperti yang tersebut diatas.</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>

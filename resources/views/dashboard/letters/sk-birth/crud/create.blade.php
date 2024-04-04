@@ -30,10 +30,10 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="reference_number" class="text-second mb-1">Nomor SP Kaling</label>
-                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $reference_number }}" readonly
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" value="{{ $cover_letter_number }}" readonly
                     placeholder="Masukkan Nomor SP Kaling..." required />
-                @error('reference_number')
+                @error('cover_letter_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
