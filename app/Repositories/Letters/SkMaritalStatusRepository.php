@@ -108,8 +108,8 @@ class SkMaritalStatusRepository
     try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
 
-      if ($request["status"] == 3) $request["sk"]["mode"] = 3;
-      else $request["sk"]["mode"] = 4;
+      if ($request["status"] == 3) $request["sk"]["mode"] = 4;
+      else $request["sk"]["mode"] = 3;
 
       if (isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));

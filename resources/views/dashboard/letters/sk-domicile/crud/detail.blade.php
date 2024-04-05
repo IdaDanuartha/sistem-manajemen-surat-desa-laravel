@@ -88,15 +88,19 @@
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nama</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Kelompok Masyarakat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->community_group }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Jabatan</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->position }}" disabled />
             </div>

@@ -6,15 +6,23 @@
 		<form action="{{ route('letters.parental-permission.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
-                    placeholder="Masukkan Nomor Surat..." required />
+                    placeholder="Masukkan Nomor Surat..." required readonly />
                 @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div> --}}
-			<div class="col-span-12 flex flex-col">
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" value="{{ $get_letter->sk->cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required readonly />
+                @error('sk.cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="citizent_id" class="text-second mb-2">Nama Keluarga</label>
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari Nama Keluarga</option>
@@ -38,7 +46,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="description" class="text-second mb-1">Tujuan Izin</label>
                 <input type="text" class="input-crud" name="description" id="description" value="{{ $get_letter->description }}"
                     placeholder="Masukkan Tujuan Izin..." required />

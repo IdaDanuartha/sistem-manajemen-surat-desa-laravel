@@ -40,7 +40,6 @@ return new class extends Migration
             $table->string('reference_number');
             $table->integer('mode')->nullable();
             $table->string('cover_letter_number')->nullable();
-            $table->integer('cover_letter_mode')->nullable();
             $table->boolean('is_published')->default(0);
             $table->timestamps();
         });

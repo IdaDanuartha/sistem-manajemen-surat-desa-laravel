@@ -425,7 +425,7 @@
             </div>
             <p class="description-caption">Selaku {{ $letter->relationship_status->label() }} dari yang dibawah ini :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan Jasri Kaler No: 489 / JSK / XII/2021, tanggal 22 Desember 2021 menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada @if($letter->relationship_status->value === 1 || $letter->relationship_status->value === 2) Anaknya @elseif($letter->relationship_status->value === 3) Istrinya @else Suaminya @endif  Atas Nama : {{ $letter->citizent->name }} untuk {{ $letter->description }}
+                <p class="paragraph-one">Berdasarkan Surat Pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }} menyatakan bahwa memang benar orang tersebut diatas memberikan Ijin Kepada @if($letter->relationship_status->value === 1 || $letter->relationship_status->value === 2) Anaknya @elseif($letter->relationship_status->value === 3) Istrinya @else Suaminya @endif  Atas Nama : {{ $letter->citizent->name }} untuk {{ $letter->description }}
                 <p class="paragraph-two">Demikian surat Pernyataan ini, saya buat dengan penuh tanggung jawab dan benar.</p>
             </div>
         </div>

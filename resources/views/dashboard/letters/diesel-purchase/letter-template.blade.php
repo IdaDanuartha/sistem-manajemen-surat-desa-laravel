@@ -339,7 +339,7 @@
                 <span>Menerangkan bahwa orang tersebut diatas memang benar beralamat di {{ $letter->sk->citizent->address }}, dan memiliki {{ $letter->purpose }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan Desa, Nomor: 07 / LD / I /2023, tanggal 17 Januari 2023, memang benar yang bersangkutan memiliki <strong>Usaha {{ $letter->purpose }}</strong></p>
+                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, Nomor: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan memiliki <strong>Usaha {{ $letter->purpose }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>

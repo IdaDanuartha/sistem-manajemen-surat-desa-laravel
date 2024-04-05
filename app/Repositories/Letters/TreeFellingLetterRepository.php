@@ -109,7 +109,7 @@ class TreeFellingLetterRepository
     DB::beginTransaction();
     try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
-      $request["sk"]["reference_number"] = "-";
+      $request["sk"]["mode"] = 6;
 
       if(isset($request["sk"]["is_published"])) $request["sk"]["is_published"] = true;
       $sk_letter = $this->sk->create(Arr::get($request, "sk"));

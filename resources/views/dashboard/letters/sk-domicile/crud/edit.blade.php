@@ -15,6 +15,14 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" readonly value="{{ $get_letter->sk->cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required />
+                @error('sk.cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="citizent_id" class="text-second mb-2">Nama</label>
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari nama</option>
@@ -34,7 +42,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="position" class="text-second mb-1">Jabatan</label>
                 <input type="text" class="input-crud" name="position" id="position" value="{{ $get_letter->position }}"
                     placeholder="Masukkan jabatan" required />

@@ -25,6 +25,7 @@ class StoreDieselPurchaseRequest extends FormRequest
         return [
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "business_address" => "required",
             "purpose" => "required",
@@ -40,6 +41,7 @@ class StoreDieselPurchaseRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "business_address" => "alamat usaha",
             "purpose" => "tujuan usaha",
             "requirement" => "kebutuhan",

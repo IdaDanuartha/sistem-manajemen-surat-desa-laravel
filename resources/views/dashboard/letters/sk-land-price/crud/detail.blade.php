@@ -89,6 +89,10 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Objek Pajak</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->nop }}" disabled />
             </div>
@@ -100,7 +104,7 @@
                 <label for="" class="text-second mb-1">Harga Tanah</label>
                 <input type="text" class="input-crud" value="Rp. @rupiah($get_letter->price)-/are" disabled />
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="" class="text-second mb-1">Keperluan Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
             </div>

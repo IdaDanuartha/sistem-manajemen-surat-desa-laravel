@@ -308,7 +308,7 @@
             </div>
             <p class="description-caption">Dengan ini menerangkan bahwa :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa, No: 167 / LD / VI / 2023, tanggal 21 Juni 2023 menyatakan bahwa  memang benar Banjar Adat Desa Subagan tersebut di atas beralamat/ berlokasi di {{ $letter->citizent->address }}.</p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }} menyatakan bahwa  memang benar Banjar Adat Desa Subagan tersebut di atas beralamat/ berlokasi di {{ $letter->citizent->address }}.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat untuk  dapat  dipergunakan sebagaimana mestinya</p>
             </div>
         </div>

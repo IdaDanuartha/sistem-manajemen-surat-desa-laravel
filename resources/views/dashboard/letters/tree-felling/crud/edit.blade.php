@@ -6,14 +6,22 @@
 		<form action="{{ route('letters.tree-felling.update', $get_letter->id) }}" method="post" enctype="multipart/form-data" class="grid grid-cols-12 gap-4">
 			@csrf
 			@method('PUT')			
-			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
-                    placeholder="Masukkan Nomor Surat..." required />
+                    placeholder="Masukkan Nomor Surat..." required readonly />
                 @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div> --}}
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" value="{{ $get_letter->sk->cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required readonly />
+                @error('sk.cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 			<div class="col-span-12 flex flex-col">
                 <label for="regarding" class="text-second mb-2">Perihal</label>
 				<input type="text" class="input-crud" name="regarding" id="regarding" value="{{ $get_letter->regarding }}"

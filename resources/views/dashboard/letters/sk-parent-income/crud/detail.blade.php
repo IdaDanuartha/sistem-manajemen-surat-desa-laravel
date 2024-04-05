@@ -89,10 +89,14 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nama Anak</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 flex flex-col">
                 <label for="" class="text-second mb-1">Penghasilan</label>
                 <input type="text" class="input-crud" value="Rp. @rupiah($get_letter->income)" disabled />
             </div>

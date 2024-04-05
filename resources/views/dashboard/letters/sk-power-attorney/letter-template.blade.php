@@ -175,7 +175,7 @@
                 </div> --}}
             </div>
             <p class="paragraph">
-                Berdasarkan surat pengantar Kepala Lingkungan Desa,  Nomor :  176 / LD / VII / 2023,  Tanggal 06 Juli 2023,  Bahwa memang benar yang bersangkutan adalah {{ $letter->families[0]->relationship_status->label() }} sekaligus Ahli Waris dari
+                Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }},  Nomor :  {{ $letter->sk->cover_letter_number }},  Tanggal {{ $letter->sk->created_at->format("d M Y") }},  Bahwa memang benar yang bersangkutan adalah {{ $letter->families[0]->relationship_status->label() }} sekaligus Ahli Waris dari
                 <strong>{{ $letter->citizent->name }} (Alm)</strong> yang meninggal dunia pada Tanggal {{ $letter->date_of_death->format("d-m-Y") }}.
             </p>
             <p class="paragraph last-paragraph">

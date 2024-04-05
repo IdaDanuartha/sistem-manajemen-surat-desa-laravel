@@ -22,7 +22,8 @@ class UpdateParentalPermissionLetterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "sk.reference_number" => "required",
+            "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "relationship_status" => "required",
@@ -34,6 +35,7 @@ class UpdateParentalPermissionLetterRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "citizent_id" => "nama yang izin",
             "relationship_status" => "status hubungan",
             "description" => "deskripsi",

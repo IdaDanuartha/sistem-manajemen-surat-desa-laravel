@@ -297,7 +297,7 @@
                 <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Desa No : 19 /LD / I /2021, Tanggal 27 Januari 2022, sepanjang pengetahuan kami bahwa memang benar orang tersebut diatas telah <strong style="font-style: italic;">Meninggal Dunia</strong> pada tahun <strong style="font-style: italic;">{{ $letter->year }}</strong></p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No : {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, sepanjang pengetahuan kami bahwa memang benar orang tersebut diatas telah <strong style="font-style: italic;">Meninggal Dunia</strong> pada tahun <strong style="font-style: italic;">{{ $letter->year }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya. </p>
             </div>
         </div>

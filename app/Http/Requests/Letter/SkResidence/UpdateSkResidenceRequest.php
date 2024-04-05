@@ -23,6 +23,7 @@ class UpdateSkResidenceRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "year" => "required",
         ];
@@ -32,6 +33,7 @@ class UpdateSkResidenceRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "year" => "tahun"
         ];
     }

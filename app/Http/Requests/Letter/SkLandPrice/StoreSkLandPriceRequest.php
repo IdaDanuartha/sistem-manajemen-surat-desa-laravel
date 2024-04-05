@@ -24,6 +24,7 @@ class StoreSkLandPriceRequest extends FormRequest
         return [
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "nop" => "required",
             "land_location" => "required",
@@ -36,6 +37,7 @@ class StoreSkLandPriceRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "nop" => "nomor objek pajak",
             "land_location" => "lokasi tanah",
             "price" => "harga",

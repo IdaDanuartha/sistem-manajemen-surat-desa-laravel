@@ -339,7 +339,7 @@
                 <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan Desa No: 84 /LD/ VI / 2022, tanggal 16 Juni 2022, memang benar orang tersebut bertempat tinggal di Lingkungan Desa Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali sejak tahun {{ $letter->year }}.</p>
+                <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar orang tersebut bertempat tinggal di Lingkungan Desa Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali sejak tahun {{ $letter->year }}.</p>
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan Sebagaimana mestinya.</p>
             </div>
         </div>

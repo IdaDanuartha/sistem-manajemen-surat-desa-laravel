@@ -8,7 +8,7 @@
 			@if (auth()->user()->isCitizent())
 				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			@else
-				<div class="col-span-12 flex flex-col">
+				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
 					<select name="sk[citizent_id]" id="citizent_id" class="citizent-select2">
 						<option value="">Cari nama warga</option>
@@ -21,15 +21,23 @@
 					@enderror
 				</div>
 			@endif
-			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
-                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ old('sk.reference_number') }}"
-                    placeholder="Masukkan Nomor Surat..." required />
+                <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $reference_number }}"
+                    placeholder="Masukkan Nomor Surat..." required readonly />
                 @error('reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
-            </div> --}}
-			<div class="col-span-12 flex flex-col">
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
+                <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" value="{{ $cover_letter_number }}"
+                    placeholder="Masukkan Nomor SP Kaling..." required readonly />
+                @error('cover_letter_number')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 {{ auth()->user()->isCitizent() ? "" : "md:col-span-6" }} flex flex-col">
                 <label for="regarding" class="text-second mb-2">Perihal</label>
 				<input type="text" class="input-crud" name="regarding" id="regarding" value="{{ old('regarding') }}"
 				placeholder="Masukkan Perihal Surat..." required />

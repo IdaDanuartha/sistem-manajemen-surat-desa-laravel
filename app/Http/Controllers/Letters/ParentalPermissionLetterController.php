@@ -11,6 +11,7 @@ use App\Models\Sk;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\ParentalPermissionLetterRepository;
 use App\Repositories\UserRepository;
+use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
@@ -44,10 +45,15 @@ class ParentalPermissionLetterController extends Controller
 
     public function create()
     { 
+        $reference_number = new GenerateReferenceNumber("", 6, "", "S.ket");
+        $cover_letter_number = new GenerateReferenceNumber("", 1, "", "", "", auth()->user()->authenticatable->environmental->code ?? "---");
+
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
         return auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN ? 
                view('dashboard.letters.parental-permission.crud.create', [
-                    "citizents" => $this->citizent->findAll()
+                    "citizents" => $this->citizent->findAll(),
+                    "reference_number" => $reference_number->generate(),
+                    "cover_letter_number" => $cover_letter_number->generateCoverLetter(),
                ]) : 
                abort(404);
     }

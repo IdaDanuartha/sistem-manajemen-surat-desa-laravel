@@ -106,7 +106,7 @@ class DieselPurchaseLetterRepository
     DB::beginTransaction();
     try {
       $request["sk"]["code"] = strtoupper(Str::random(8));
-      $request["sk"]["mode"] = 5;
+      $request["sk"]["mode"] = 6;
 
       $citizent = $this->citizent->find($request["sk"]["citizent_id"]);
 

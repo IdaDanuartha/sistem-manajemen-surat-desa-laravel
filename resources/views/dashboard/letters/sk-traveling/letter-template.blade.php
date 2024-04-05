@@ -367,7 +367,7 @@
             </div>
             <p class="description-caption">Menerangkan dengan sebenarnya bahwa :</p>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan Galiran Kaler Nomor: 285 / GLK / VII/ 2015, Tanggal 02 Juli 2015, memang benar yang bersangkutan melakukan perjalanan <strong>Wisata ke {{ $letter->travel_destination }}</strong></p>
+                <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} Nomor: {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan melakukan perjalanan <strong>Wisata ke {{ $letter->travel_destination }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan bepergian ini dikeluarkan untuk dapat dipergunakan sebagai {{ $letter->purpose }}.</p>
             </div>
         </div>

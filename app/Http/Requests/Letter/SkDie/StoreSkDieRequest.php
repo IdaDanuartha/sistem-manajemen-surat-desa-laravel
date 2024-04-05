@@ -24,6 +24,7 @@ class StoreSkDieRequest extends FormRequest
         return [
             "sk.citizent_id" => "required",
             "sk.reference_number" => "required",
+            "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "year" => "required",
@@ -34,6 +35,7 @@ class StoreSkDieRequest extends FormRequest
     {
         return [
             "sk.reference_number" => "nomor surat",
+            "sk.cover_letter_number" => "nomor SP kaling",
             "citizent_id" => "orang yang meninggal",
             "year" => "tahun meninggal",
         ];
