@@ -27,7 +27,8 @@ class StoreSkParentIncomeRequest extends FormRequest
             "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
-            "income" => "required",
+            "income" => "nullable|numeric",
+            "status" => "required",
         ];
     }
 
@@ -36,8 +37,8 @@ class StoreSkParentIncomeRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "sk.cover_letter_number" => "nomor SP kaling",
-            "citizent_id" => "required",
-            "income" => "required",
+            "citizent_id" => "nama anak",
+            "income" => "penghasilan",
         ];
     }
 }

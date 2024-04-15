@@ -34,10 +34,11 @@ return new class extends Migration
             $table->string("work");
             $table->text("address")->nullable();
             $table->string("position")->nullable();
-            $table->string("id_card")->nullable();
-            $table->string("family_card")->nullable();
-            $table->string("birth_certificate")->nullable();
-            $table->string("marriage_certificate")->nullable();
+            $table->string("id_card_file")->nullable();
+            $table->string("family_card_file")->nullable();
+            $table->string("birth_certificate_file")->nullable();
+            $table->string("marriage_certificate_file")->nullable();
+            $table->string("land_certificate_file")->nullable();
             $table->timestamps();
         });
     }

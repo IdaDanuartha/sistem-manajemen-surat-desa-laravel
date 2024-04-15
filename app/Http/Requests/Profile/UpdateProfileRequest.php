@@ -34,12 +34,17 @@ class UpdateProfileRequest extends FormRequest
 			'birth_date' => ['nullable'],
 			'blood_group' => ['nullable'],
 			'religion' => ['nullable'],			
-			'marital_status' => ['nullable'],			
+			'marital_status' => ['nullable'],
+			'id_card_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
+			'family_card_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
+			'birth_certificate_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
+			'marriage_certificate_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
+			'land_certificate_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
 			'user.username' => ['nullable', 'alpha_dash', Rule::unique('users', 'username')->ignore(auth()->id())],
 			'user.email' => ['nullable', 'email', Rule::unique('users', 'email')->ignore(auth()->id())],
 			'user.password' => ['nullable', 'min:6'],
-			'user.signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],
-			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,gif,svg,webp', 'max:2000'],			
+			'user.signature_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
+			'user.profile_image' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],			
         ];
     }
 

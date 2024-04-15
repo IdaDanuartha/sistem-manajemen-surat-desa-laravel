@@ -104,8 +104,8 @@
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
             <div class="description-other">
-                <p class="paragraph-one">Yang bertanda tangan di bawah ini, Lurah subagan, Kecamatan Karangasem, Kabupaten Karangasem. Berdasarkan Surat Pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, Nomor: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, dengan ini menerangkan dengan sebenarnya bahwa sepanjang pengetahuan kami harga tanah dengan Nomor Obyek Pajak (NOP) : {{ $letter->nop }} atas nama {{ $letter->sk->citizent->name }} yang berlokasi  di {{ $letter->land_location }}. Harga saat ini adalah berkisaran Rp @rupiah($letter->price)-/are.</p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagai Administrasi Kredit di bank.</p>
+                <p class="paragraph-one">Yang bertanda tangan di bawah ini, Lurah subagan, Kecamatan Karangasem, Kabupaten Karangasem. Berdasarkan Surat Pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, Nomor: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, dengan ini menerangkan dengan sebenarnya bahwa sepanjang pengetahuan kami harga tanah dengan Nomor Obyek Pajak (NOP) : {{ $letter->nop }} atas nama {{ $letter->sk->citizent->name }} yang berlokasi  di {{ $letter->land_location }}, Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem. Harga saat ini adalah berkisaran Rp @rupiah($letter->price)-/are.</p>
+                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagai {{ $letter->purpose }}.</p>
             </div>
         </div>
         <div class="content-ttd">

@@ -99,17 +99,17 @@
         }
 
         .input-group.four label {
-            top: 25%;
+            top: 23%;
             left: 17.5%;
         }
 
         .input-group.four div {
-            top: 25%;
+            top: 23%;
             left: 28%;
         }
 
         .input-group.four span {
-            top: 25%;
+            top: 23%;
             left: 61.3%;
         }
 
@@ -327,7 +327,7 @@
 
         .description-caption {
             position: relative;
-            top: 28%;
+            top: 35%;
             left: 56.5%;
             width: 100%;
             transform: translate(-50%);
@@ -370,7 +370,7 @@
     
     <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="container" style="position: relative">
-        <h3 class="title">Surat Keterangan Ijin Keluarga</h3>
+        <h3 class="title">Surat Pernyataan Ijin Keluarga</h3>
         <div class="content-form">
             <p class="description">Yang bertanda tangan di bawah ini,</p>
             <div class="input-group one">

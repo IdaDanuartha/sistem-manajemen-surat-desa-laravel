@@ -34,11 +34,21 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+            <div class="col-span-12 md:col-span-6 flex flex-col income-input">
                 <label for="income" class="text-second mb-1">Pendapatan (Rp)</label>
                 <input type="number" class="input-crud" name="income" id="income" value="{{ $get_letter->income }}"
                     placeholder="Masukkan Pendapatan..." required />
                 @error('income')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="status" class="text-second mb-1">Status</label>
+				<select name="status" id="status" class="status-select2">
+					<option value="1" @selected($get_letter->status == 1 ? true : false)>Sudah bekerja</option>
+					<option value="2" @selected($get_letter->status == 2 ? true : false)>Tidak/belum bekerja</option>
+				</select>
+                @error('status')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -60,5 +70,26 @@
 @push('js')
 <script>
 	let citizent = $(".citizent-select2").select2()
+    let status = $(".status-select2").select2()
+
+    if($(".status-select2").val() == 1) {
+        console.log("1")
+        $(".income-input").removeClass("hidden")
+        $(".income-input").addClass("flex")
+    } else {
+        console.log("2")
+        $(".income-input").addClass("hidden")
+        $(".income-input").removeClass("flex")
+    }
+
+    $(".status-select2").change(function() {
+        if($(this).val() == 1) {
+            $(".income-input").removeClass("hidden")
+            $(".income-input").addClass("flex")
+        } else {
+            $(".income-input").addClass("hidden")
+            $(".income-input").removeClass("flex")
+        }
+    })
 </script>
 @endpush

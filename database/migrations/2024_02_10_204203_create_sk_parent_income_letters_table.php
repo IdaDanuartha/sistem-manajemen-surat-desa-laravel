@@ -23,7 +23,10 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete(); // anak
-            $table->integer("income");
+            $table->integer("income")->nullable();
+            $table->smallInteger("status")
+                    ->comment("[1: Sudah Bekerja, 2: Belum Bekerja]")
+                    ->nullable();
             $table->timestamps();
         });
     }

@@ -88,18 +88,24 @@
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 {{ $get_letter->status == 1 ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
                 <label for="" class="text-second mb-1">Nomor SP Kaling</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			<div class="col-span-12 {{ $get_letter->status == 1 ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
                 <label for="" class="text-second mb-1">Nama Anak</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
             </div>
-			<div class="col-span-12 flex flex-col">
-                <label for="" class="text-second mb-1">Penghasilan</label>
-                <input type="text" class="input-crud" value="Rp. @rupiah($get_letter->income)" disabled />
-            </div>
+			@if ($get_letter->status == 1)
+				<div class="col-span-12 md:col-span-6 flex flex-col">
+					<label for="" class="text-second mb-1">Penghasilan</label>
+					<input type="text" class="input-crud" value="Rp. @rupiah($get_letter->income)" disabled />
+				</div>
+				@endif
+			<div class="col-span-12 {{ $get_letter->status == 1 ? "md:col-span-6" : "md:col-span-4" }} flex flex-col">
+				<label for="" class="text-second mb-1">Status</label>
+				<input type="text" class="input-crud" value="{{ $get_letter->status == 1 ? "Sudah bekerja" : "Tidak/belum bekerja" }}" disabled />
+			</div>
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
 				<div class="col-span-12 md:col-span-4 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>

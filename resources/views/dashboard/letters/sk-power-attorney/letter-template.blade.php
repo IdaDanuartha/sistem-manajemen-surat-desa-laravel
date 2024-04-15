@@ -66,7 +66,7 @@
         </div>
         <div class="content-surat">
             <p   class="paragraph">
-                Yang bertanda tangan di bawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :
+                Yang bertanda tangan di bawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali, menerangkan dengan sebenarnya bahwa :
             </p>
             <div class="table-wrapper">
                 @foreach ($letter->families as $key => $item)
@@ -179,7 +179,7 @@
                 <strong>{{ $letter->citizent->name }} (Alm)</strong> yang meninggal dunia pada Tanggal {{ $letter->date_of_death->format("d-m-Y") }}.
             </p>
             <p class="paragraph last-paragraph">
-                Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan Sebagaimana Mestinya.
+                Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagai {{ $letter->purpose }}.
             </p>
         </div>
         <div class="" style="margin-top: 30px;">

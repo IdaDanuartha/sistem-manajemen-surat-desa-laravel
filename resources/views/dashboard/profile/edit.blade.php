@@ -187,7 +187,6 @@
                             @enderror
                         </div>
                     @endif
-                    {{-- @if (!auth()->user()->isSuperAdmin() && !auth()->user()->isAdmin()) --}}
                     <div class="col-12 mt-4 flex flex-col">
                         <label class="text-second">TTE</label>
                         @if (auth()->user()->signature_image)
@@ -202,8 +201,79 @@
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    {{-- @endif --}}
-                    <div class="col-12 flex items-center gap-2 mt-3">
+                    @if (auth()->user()->isCitizent())
+                        <div class="col-12 mt-4 flex flex-col">
+                            <label class="text-second">Foto Kartu Tanda Penduduk</label>
+                            @if (auth()->user()->authenticatable->id_card_file)
+                                <img src="{{ asset('uploads/users/id_cards/' . auth()->user()->authenticatable->id_card_file) }}"
+                                    alt="Signature Image" class="w-[200px] edit-id-card-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="ID Card Image"
+                                    class="w-[200px] edit-id-card-preview-img" />
+                            @endif
+                            <input type="file" name="id_card_file" class="col-md-6 col-12 input-crud edit-id-card-input mt-4 p-0" />
+                            @error('id_card_file')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 mt-4 flex flex-col">
+                            <label class="text-second">Foto Kartu Keluarga</label>
+                            @if (auth()->user()->authenticatable->family_card_file)
+                                <img src="{{ asset('uploads/users/family_cards/' . auth()->user()->authenticatable->family_card_file) }}"
+                                    alt="Signature Image" class="w-[200px] edit-family-card-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Family Card Image"
+                                    class="w-[200px] edit-family-card-preview-img" />
+                            @endif
+                            <input type="file" name="family_card_file" class="col-md-6 col-12 input-crud edit-family-card-input mt-4 p-0" />
+                            @error('family_card_file')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 mt-4 flex flex-col">
+                            <label class="text-second">Foto Akta Kelahiran</label>
+                            @if (auth()->user()->authenticatable->birth_certificate_file)
+                                <img src="{{ asset('uploads/users/birth_certificates/' . auth()->user()->authenticatable->birth_certificate_file) }}"
+                                    alt="Signature Image" class="w-[200px] edit-birth-certificate-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Birth Certificate Image"
+                                    class="w-[200px] edit-birth-certificate-preview-img" />
+                            @endif
+                            <input type="file" name="birth_certificate_file" class="col-md-6 col-12 input-crud edit-birth-certificate-input mt-4 p-0" />
+                            @error('birth_certificate_file')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 mt-4 flex flex-col">
+                            <label class="text-second">Foto Kartu Nikah</label>
+                            @if (auth()->user()->authenticatable->marriage_certificate_file)
+                                <img src="{{ asset('uploads/users/marriage_certificates/' . auth()->user()->authenticatable->marriage_certificate_file) }}"
+                                    alt="Signature Image" class="w-[200px] edit-marriage-certificate-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Marriage Certificate Image"
+                                    class="w-[200px] edit-marriage-certificate-preview-img" />
+                            @endif
+                            <input type="file" name="marriage_certificate_file" class="col-md-6 col-12 input-crud edit-marriage-certificate-input mt-4 p-0" />
+                            @error('marriage_certificate_file')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-12 mt-4 flex flex-col">
+                            <label class="text-second">Foto Akta Tanah</label>
+                            @if (auth()->user()->authenticatable->land_certificate_file)
+                                <img src="{{ asset('uploads/users/land_certificates/' . auth()->user()->authenticatable->land_certificate_file) }}"
+                                    alt="Signature Image" class="w-[200px] edit-land-certificate-preview-img" />
+                            @else
+                                <img src="{{ asset('assets/img/upload-image.jpg') }}" alt="Land Certificate Image"
+                                    class="w-[200px] edit-land-certificate-preview-img" />
+                            @endif
+                            <input type="file" name="land_certificate_file" class="col-md-6 col-12 input-crud edit-land-certificate-input mt-4 p-0" />
+                            @error('land_certificate_file')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif
+                    <div class="col-12 flex items-center gap-2 mt-5">
                         <button class="button btn-main" type="submit">Edit Profile</button>
                         <a href="{{ route('profile.index') }}" class="button text-white btn-second" type="reset">Batal
                             Edit</a>
@@ -222,5 +292,10 @@
         $('.marital-status-select2').select2();
         previewImg("edit-profile-input", "edit-profile-preview-img")
         previewImg("edit-tte-input", "edit-tte-preview-img")
+        previewImg("edit-id-card-input", "edit-id-card-preview-img")
+        previewImg("edit-family-card-input", "edit-family-card-preview-img")
+        previewImg("edit-birth-certificate-input", "edit-birth-certificate-preview-img")
+        previewImg("edit-marriage-certificate-input", "edit-marriage-certificate-preview-img")
+        previewImg("edit-land-certificate-input", "edit-land-certificate-preview-img")
     </script>
 @endpush

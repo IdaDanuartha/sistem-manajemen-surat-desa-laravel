@@ -94,9 +94,7 @@
 				<select class="relationship-status-select2 relationship-status" name="family_relationship_status[]">
 					<option value="">Pilih status hubungan</option>
 					@foreach (\App\Enums\RelationshipStatus2::labels() as $key => $item)
-						@if ($key+1 !== 1)
-							<option value="{{ $key+1 }}">{{ $item }}</option>
-						@endif
+						<option value="{{ $key+1 }}">{{ $item }}</option>
 					@endforeach
 				</select>
             </div>

@@ -55,6 +55,31 @@ class CitizentRepository
       if (Arr::has($request, 'user.signature_image') && Arr::get($request, 'user.signature_image')) {         
         $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'user.signature_image'), "users/signatures");
         $request['user']['signature_image'] = $filename;
+      }
+        
+      if (Arr::has($request, 'id_card_file') && Arr::get($request, 'id_card_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'id_card_file'), "users/id_cards");
+        $request['id_card_file'] = $filename;
+      }  
+
+      if (Arr::has($request, 'family_card_file') && Arr::get($request, 'family_card_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'family_card_file'), "users/family_cards");
+        $request['family_card_file'] = $filename;
+      }  
+
+      if (Arr::has($request, 'birth_certificate_file') && Arr::get($request, 'birth_certificate_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'birth_certificate_file'), "users/birth_certificates");
+        $request['birth_certificate_file'] = $filename;
+      }  
+
+      if (Arr::has($request, 'marriage_certificate_file') && Arr::get($request, 'marriage_certificate_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'marriage_certificate_file'), "users/marriage_certificates");
+        $request['marriage_certificate_file'] = $filename;
+      }  
+
+      if (Arr::has($request, 'land_certificate_file') && Arr::get($request, 'land_certificate_file')) {         
+        $filename = $this->uploadFile->uploadSingleFile(Arr::get($request, 'land_certificate_file'), "users/land_certificates");
+        $request['land_certificate_file'] = $filename;
       }  
 
       $citizent = $this->citizent->create(Arr::except($request, ['user']));
@@ -89,6 +114,51 @@ class CitizentRepository
         $filename = $this->uploadFile->uploadSingleFile($image, "users/signatures");
         $request['user']['signature_image'] = $filename;
       }  
+
+      if (Arr::has($request, 'id_card_file') && Arr::get($request, 'id_card_file')) {
+        $this->uploadFile->deleteExistFile("users/id_cards/" . $citizent->id_card_file);
+
+        $image = Arr::get($request, 'id_card_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/id_cards");
+        $request['id_card_file'] = $filename;
+      }		
+
+      if (Arr::has($request, 'family_card_file') && Arr::get($request, 'family_card_file')) {
+        $this->uploadFile->deleteExistFile("users/family_cards/" . $citizent->family_card_file);
+
+        $image = Arr::get($request, 'family_card_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/family_cards");
+        $request['family_card_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'birth_certificate_file') && Arr::get($request, 'birth_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/birth_certificates/" . $citizent->birth_certificate_file);
+
+        $image = Arr::get($request, 'birth_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/birth_certificates");
+        $request['birth_certificate_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'marriage_certificate_file') && Arr::get($request, 'marriage_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/marriage_certificates/" . $citizent->marriage_certificate_file);
+
+        $image = Arr::get($request, 'marriage_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/marriage_certificates");
+        $request['marriage_certificate_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'land_certificate_file') && Arr::get($request, 'land_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/land_certificates/" . $citizent->land_certificate_file);
+
+        $image = Arr::get($request, 'land_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/land_certificates");
+        $request['land_certificate_file'] = $filename;
+      }	
       
       if(Arr::get($request, 'user.status')) $request['user']['status'] = UserStatus::ACTIVE;			
       else $request['user']['status'] = UserStatus::NONACTIVE;			

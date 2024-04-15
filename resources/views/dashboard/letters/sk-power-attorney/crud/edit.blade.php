@@ -42,6 +42,14 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+			<div class="col-span-12 flex flex-col">
+                <label for="purpose" class="text-second mb-1">Tujuan</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ $get_letter->purpose }}"
+                    placeholder="Masukkan Tujuan Pembuatan Surat..." required />
+                @error('purpose')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 			<div class="md:col-span-8 col-span-6 flex mt-5 flex-col heir-group">
 				<div class="flex items-center mb-2">
 					<label for="power_attorney_family" class="text-second">Ahli Waris</label>

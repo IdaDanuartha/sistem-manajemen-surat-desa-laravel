@@ -46,7 +46,52 @@ class ProfileRepository
         $filename = $this->uploadFile->uploadSingleFile($image, "users/signatures");
         $request['user']['signature_image'] = $filename;
       }		
-      
+
+      if (Arr::has($request, 'id_card_file') && Arr::get($request, 'id_card_file')) {
+        $this->uploadFile->deleteExistFile("users/id_cards/" . auth()->user()->authenticatable->id_card_file);
+
+        $image = Arr::get($request, 'id_card_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/id_cards");
+        $request['id_card_file'] = $filename;
+      }		
+
+      if (Arr::has($request, 'family_card_file') && Arr::get($request, 'family_card_file')) {
+        $this->uploadFile->deleteExistFile("users/family_cards/" . auth()->user()->authenticatable->family_card_file);
+
+        $image = Arr::get($request, 'family_card_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/family_cards");
+        $request['family_card_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'birth_certificate_file') && Arr::get($request, 'birth_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/birth_certificates/" . auth()->user()->authenticatable->birth_certificate_file);
+
+        $image = Arr::get($request, 'birth_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/birth_certificates");
+        $request['birth_certificate_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'marriage_certificate_file') && Arr::get($request, 'marriage_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/marriage_certificates/" . auth()->user()->authenticatable->marriage_certificate_file);
+
+        $image = Arr::get($request, 'marriage_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/marriage_certificates");
+        $request['marriage_certificate_file'] = $filename;
+      }	
+
+      if (Arr::has($request, 'land_certificate_file') && Arr::get($request, 'land_certificate_file')) {
+        $this->uploadFile->deleteExistFile("users/land_certificates/" . auth()->user()->authenticatable->land_certificate_file);
+
+        $image = Arr::get($request, 'land_certificate_file');
+
+        $filename = $this->uploadFile->uploadSingleFile($image, "users/land_certificates");
+        $request['land_certificate_file'] = $filename;
+      }	
+
       if(is_null(Arr::get($request, 'user.password'))) Arr::pull($request, 'user.password');			
 
       if(auth()->user()->role === Role::SUPER_ADMIN) {
@@ -59,19 +104,19 @@ class ProfileRepository
         $admin->user->updateOrFail(Arr::get($request, 'user'));
       } else if(auth()->user()->role === Role::CITIZENT) {
         $citizent = $this->citizent->find(auth()->user()->authenticatable->id);
-        $citizent->updateOrFail(Arr::except($request, 'user'));
+        $citizent->updateOrFail(Arr::except($request, ["name", "employee_number", "position", "environmental_id"]));
         $citizent->user->updateOrFail(Arr::get($request, 'user'));
       } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $environmentalHead = $this->environmentalHead->find(auth()->user()->authenticatable->id);
-        $environmentalHead->updateOrFail(Arr::except($request, 'user'));
+        $environmentalHead->updateOrFail(Arr::only($request, ["name", "environmental_id"]));
         $environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
       }	else if(auth()->user()->role === Role::SECTION_HEAD) {
         $sectionHead = $this->sectionHead->find(auth()->user()->authenticatable->id);
-        $sectionHead->updateOrFail(Arr::except($request, 'user'));
+        $sectionHead->updateOrFail(Arr::only($request, ["name", "employee_number", "position"]));
         $sectionHead->user->updateOrFail(Arr::get($request, 'user'));
       }	else if(auth()->user()->role === Role::VILLAGE_HEAD) {
         $villageHead = $this->villageHead->find(auth()->user()->authenticatable->id);
-        $villageHead->updateOrFail(Arr::except($request, 'user'));
+        $villageHead->updateOrFail(Arr::only($request, ["name", "employee_number"]));
         $villageHead->user->updateOrFail(Arr::get($request, 'user'));
       }			
 

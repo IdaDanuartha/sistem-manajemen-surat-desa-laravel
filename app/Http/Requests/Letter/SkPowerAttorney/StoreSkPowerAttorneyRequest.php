@@ -28,6 +28,7 @@ class StoreSkPowerAttorneyRequest extends FormRequest
             "sk.is_published" => "nullable",
             "citizent_id" => "required",
             "date_of_death" => "required",
+            "purpose" => "required",
             "power_attorney_family" => "required",
             "power_attorney_relationship_status" => "required"
         ];
@@ -40,6 +41,7 @@ class StoreSkPowerAttorneyRequest extends FormRequest
             "sk.cover_letter_number" => "nomor SP kaling",
             "citizent_id" => "pemberi warisan",
             "date_of_death" => "tanggal meninggal",
+            "purpose" => "tujuan",
             "power_attorney_family" => "ahli waris",
             "power_attorney_relationship_status" => "status hubungan"
         ];

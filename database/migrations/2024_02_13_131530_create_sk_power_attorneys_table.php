@@ -24,6 +24,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete(); // orang yang memberi warisan (alm)
             $table->date("date_of_death");
+            $table->string("purpose");
             $table->timestamps();
         });
     }

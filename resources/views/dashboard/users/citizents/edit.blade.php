@@ -188,6 +188,96 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="id_card_file" class="text-second mb-1">Foto Kartu Tanda Penduduk</label>
+                <label for="id_card_file" class="d-block mb-3">
+                    @if ($citizent->id_card_file)
+                        <img src="{{ asset('uploads/users/id_cards/' . $citizent->id_card_file) }}" class="edit-id-card-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-id-card-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="id_card_file" name="id_card_file"
+                    class="input-crud py-0 edit-id-card-input hidden" />
+                <label for="id_card_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('id_card_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="family_card_file" class="text-second mb-1">Foto Kartu Keluarga</label>
+                <label for="family_card_file" class="d-block mb-3">
+                    @if ($citizent->family_card_file)
+                        <img src="{{ asset('uploads/users/family_cards/' . $citizent->family_card_file) }}" class="edit-family-card-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-family-card-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="family_card_file" name="family_card_file"
+                    class="input-crud py-0 edit-family-card-input hidden" />
+                <label for="family_card_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('family_card_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="birth_certificate_file" class="text-second mb-1">Foto Akta Kelahiran</label>
+                <label for="birth_certificate_file" class="d-block mb-3">
+                    @if ($citizent->birth_certificate_file)
+                        <img src="{{ asset('uploads/users/birth_certificates/' . $citizent->birth_certificate_file) }}" class="edit-birth-certificate-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-birth-certificate-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="birth_certificate_file" name="birth_certificate_file"
+                    class="input-crud py-0 edit-birth-certificate-input hidden" />
+                <label for="birth_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('birth_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="marriage_certificate_file" class="text-second mb-1">Foto Kartu Nikah</label>
+                <label for="marriage_certificate_file" class="d-block mb-3">
+                    @if ($citizent->marriage_certificate_file)
+                        <img src="{{ asset('uploads/users/marriage_certificates/' . $citizent->marriage_certificate_file) }}" class="edit-marriage-certificate-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-marriage-certificate-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="marriage_certificate_file" name="marriage_certificate_file"
+                    class="input-crud py-0 edit-marriage-certificate-input hidden" />
+                <label for="marriage_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('marriage_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="land_certificate_file" class="text-second mb-1">Foto Akta Tanah</label>
+                <label for="land_certificate_file" class="d-block mb-3">
+                    @if ($citizent->land_certificate_file)
+                        <img src="{{ asset('uploads/users/land_certificates/' . $citizent->land_certificate_file) }}" class="edit-land-certificate-preview-img border"
+                            width="300" alt="">
+                    @else
+                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-land-certificate-preview-img border"
+                            width="300" alt="">
+                    @endif
+                </label>
+                <input type="file" id="land_certificate_file" name="land_certificate_file"
+                    class="input-crud py-0 edit-land-certificate-input hidden" />
+                <label for="land_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('land_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Edit Pengguna</button>
                 <a href="{{ route('citizents.index') }}"
@@ -205,5 +295,10 @@
         $('.religion-select2').select2();
         $('.marital-status-select2').select2();
         previewImg("edit-tte-input", "edit-tte-preview-img")
+        previewImg("edit-id-card-input", "edit-id-card-preview-img")
+        previewImg("edit-family-card-input", "edit-family-card-preview-img")
+        previewImg("edit-birth-certificate-input", "edit-birth-certificate-preview-img")
+        previewImg("edit-marriage-certificate-input", "edit-marriage-certificate-preview-img")
+        previewImg("edit-land-certificate-input", "edit-land-certificate-preview-img")
     </script>
 @endpush

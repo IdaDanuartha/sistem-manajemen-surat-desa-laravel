@@ -145,18 +145,60 @@
 					<span class="slider round"></span>
 				</label>
 			</div>
-            <div class="col-span-12 flex flex-col">
-                <label for="signature_image" class="text-second mb-1">Foto TTE</label>
-                <label for="signature_image" class="d-block mb-3">
-                    @if ($citizent->user->signature_image)
-                        <img src="{{ asset('uploads/users/signatures/' . $citizent->user->signature_image) }}" class="edit-tte-preview-img border"
-                            width="300" alt="">
-                    @else
-                        <img src="{{ asset('assets/img/upload-image.jpg') }}" class="edit-tte-preview-img border"
-                            width="300" alt="">
-                    @endif
-                </label>
-            </div>
+			@if ($citizent->user->signature_image)
+				<div class="col-span-12 flex flex-col">
+					<label for="signature_image" class="text-second mb-1">Foto TTE</label>
+					<label for="signature_image" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/signatures/' . $citizent->user->signature_image) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
+			@if ($citizent->id_card_file)
+				<div class="col-span-12 flex flex-col">
+					<label for="id_card_file" class="text-second mb-1">Foto Kartu Tanda Penduduk</label>
+					<label for="id_card_file" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/id_cards/' . $citizent->id_card_file) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
+			@if ($citizent->family_card_file)
+				<div class="col-span-12 flex flex-col">
+					<label for="family_card_file" class="text-second mb-1">Foto Kartu Keluarga</label>
+					<label for="family_card_file" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/family_cards/' . $citizent->family_card_file) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
+			@if ($citizent->birth_certificate_file)
+				<div class="col-span-12 flex flex-col">
+					<label for="birth_certificate_file" class="text-second mb-1">Foto Akta Kelahiran</label>
+					<label for="birth_certificate_file" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/birth_certificates/' . $citizent->birth_certificate_file) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
+			@if ($citizent->marriage_certificate_file)
+				<div class="col-span-12 flex flex-col">
+					<label for="marriage_certificate_file" class="text-second mb-1">Foto Kartu Nikah</label>
+					<label for="marriage_certificate_file" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/marriage_certificates/' . $citizent->marriage_certificate_file) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
+			@if ($citizent->land_certificate_file)
+				<div class="col-span-12 flex flex-col">
+					<label for="land_certificate_file" class="text-second mb-1">Foto Akta Tanah</label>
+					<label for="land_certificate_file" class="d-block mb-3">
+						<img src="{{ asset('uploads/users/land_certificates/' . $citizent->land_certificate_file) }}" class="border"
+							width="300" alt="">
+					</label>
+				</div>
+			@endif
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
 				<a href="{{ route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
 			</div>

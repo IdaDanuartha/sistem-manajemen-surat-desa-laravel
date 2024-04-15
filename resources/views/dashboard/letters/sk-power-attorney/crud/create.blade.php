@@ -8,7 +8,7 @@
 			@if (auth()->user()->isCitizent())
 				<input type="hidden" name="sk[citizent_id]" value="{{ auth()->user()->authenticatable->id }}">
 			@else
-				<div class="col-span-12 flex flex-col">
+				<div class="md:col-span-6 col-span-12 flex flex-col">
 					<label for="citizent_id" class="text-second mb-2">Nama Pembuat Surat</label>
 					<select name="sk[citizent_id]" id="sk_citizent_id" class="sk-citizent-select2">
 						<option value="">Cari nama warga</option>
@@ -54,6 +54,14 @@
                 <input type="date" class="input-crud" name="date_of_death" id="date_of_death" value="{{ old('date_of_death') }}"
                     placeholder="Masukkan Tanggal Meninggal..." required />
                 @error('date_of_death')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+			<div class="col-span-12 {{ auth()->user()->isCitizent() ? "" : "md:col-span-6" }} flex flex-col">
+                <label for="purpose" class="text-second mb-1">Tujuan</label>
+                <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ old('purpose') }}"
+                    placeholder="Masukkan Tujuan Pembuatan Surat..." required />
+                @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>

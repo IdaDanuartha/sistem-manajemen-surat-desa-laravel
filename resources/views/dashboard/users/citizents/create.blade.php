@@ -179,6 +179,71 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="id_card_file" class="text-second mb-1">Foto Kartu Tanda Penduduk</label>
+                <label for="id_card_file" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-id-card-preview-img border"
+                        width="300" alt="">
+                </label>
+                <input type="file" id="id_card_file" name="id_card_file"
+                    class="input-crud py-0 create-id-card-input hidden" />
+                <label for="id_card_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('id_card_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="family_card_file" class="text-second mb-1">Foto Kartu Keluarga</label>
+                <label for="family_card_file" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-family-card-preview-img border"
+                        width="300" alt="">
+                </label>
+                <input type="file" id="family_card_file" name="family_card_file"
+                    class="input-crud py-0 create-family-card-input hidden" />
+                <label for="family_card_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('family_card_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="birth_certificate_file" class="text-second mb-1">Foto Akta Kelahiran</label>
+                <label for="birth_certificate_file" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-birth-certificate-preview-img border"
+                        width="300" alt="">
+                </label>
+                <input type="file" id="birth_certificate_file" name="birth_certificate_file"
+                    class="input-crud py-0 create-birth-certificate-input hidden" />
+                <label for="birth_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('birth_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="marriage_certificate_file" class="text-second mb-1">Foto Kartu Nikah</label>
+                <label for="marriage_certificate_file" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-marriage-certificate-preview-img border"
+                        width="300" alt="">
+                </label>
+                <input type="file" id="marriage_certificate_file" name="marriage_certificate_file"
+                    class="input-crud py-0 create-marriage-certificate-input hidden" />
+                <label for="marriage_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('marriage_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-span-12 flex flex-col">
+                <label for="land_certificate_file" class="text-second mb-1">Foto Akta Tanah</label>
+                <label for="land_certificate_file" class="d-block mb-3">
+                    <img src="{{ asset('assets/img/upload-image.jpg') }}" class="create-land-certificate-preview-img border"
+                        width="300" alt="">
+                </label>
+                <input type="file" id="land_certificate_file" name="land_certificate_file"
+                    class="input-crud py-0 create-land-certificate-input hidden" />
+                <label for="land_certificate_file" class="button btn-second text-center w-[300px]">Upload File</label>
+                @error('land_certificate_file')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="col-span-12 flex items-center gap-3 mt-2">
                 <button class="button btn-main" type="submit">Tambah Pengguna</button>
                 <a href="{{ Request::is('staff*') ? route('staff.index') : route('citizents.index') }}"
@@ -199,5 +264,10 @@
         $('.role-select2').select2();
 
         previewImg('create-tte-input', 'create-tte-preview-img')
+        previewImg("create-id-card-input", "create-id-card-preview-img")
+        previewImg("create-family-card-input", "create-family-card-preview-img")
+        previewImg("create-birth-certificate-input", "create-birth-certificate-preview-img")
+        previewImg("create-marriage-certificate-input", "create-marriage-certificate-preview-img")
+        previewImg("create-land-certificate-input", "create-land-certificate-preview-img")
     </script>
 @endpush

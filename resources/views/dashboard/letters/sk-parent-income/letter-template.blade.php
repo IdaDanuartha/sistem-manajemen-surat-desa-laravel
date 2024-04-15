@@ -357,8 +357,8 @@
                     style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</span></p>
             <div class="description-other">
                 <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No: {{ $letter->sk->cover_letter_number }}
-                    tertanggal, {{ $letter->sk->created_at->format("d M Y") }}. Bahwa memang benar orang tersebut di atas memiliki penghasilan Rp.
-                    @rupiah($letter->income),-/ Bulan.</p>
+                    tertanggal, {{ $letter->sk->created_at->format("d M Y") }}. Bahwa memang benar orang tersebut di atas @if($letter->status == 1) memiliki penghasilan Rp.
+                    @rupiah($letter->income),-/ Bulan. @else tidak bekerja/tidak memiliki penghasilan @endif</p>
                 <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat
                     dipergunakan sebagaimana mestinya.</p>
             </div>

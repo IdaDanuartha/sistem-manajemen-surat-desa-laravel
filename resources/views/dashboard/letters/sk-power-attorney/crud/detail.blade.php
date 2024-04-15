@@ -80,15 +80,15 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->reference_number }}" disabled />
             </div>
-			<div class="col-span-12 md:col-span-4 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Nomor SP Kaling</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->sk->cover_letter_number }}" disabled />
             </div>
@@ -99,6 +99,10 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Tanggal Meninggal</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->date_of_death->format("d M Y") }}" disabled />
+            </div>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="" class="text-second mb-1">Tujuan</label>
+                <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
             </div>
 			<div class="md:col-span-8 col-span-6 flex flex-col heir-group">
 				<div class="flex items-center mb-2">
