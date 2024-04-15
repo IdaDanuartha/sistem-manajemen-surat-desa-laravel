@@ -29,14 +29,12 @@
                             readonly />
                     </div>
                 @endif
-                @if (auth()->user()->isEnvironmentalHead())
-                    <div class="col-md-6 col-12 mb-4 flex flex-col">
-                        <label class="text-second">Lingkungan</label>
-                        <input type="text" class="input-crud"
-                            value="{{ auth()->user()->authenticatable->environmental->name . ' (' . auth()->user()->authenticatable->environmental->code . ')' }}"
-                            readonly />
-                    </div>
-                @endif
+                <div class="col-md-6 col-12 mb-4 flex flex-col">
+                    <label class="text-second">Lingkungan</label>
+                    <input type="text" class="input-crud"
+                        value="{{ auth()->user()->authenticatable->environmental->name . ' (' . auth()->user()->authenticatable->environmental->code . ')' }}"
+                        readonly />
+                </div>
                 @if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label class="text-second">Username</label>
