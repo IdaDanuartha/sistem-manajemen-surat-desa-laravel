@@ -318,7 +318,7 @@
 <body>
 
     <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Tidak Mampu</h3>
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
@@ -462,7 +462,7 @@
                     <p>Camat Karangasem</p>
                     <div class="card-canvas">
                         @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100%; height: 100%;">
                         @endif
                     </div>
@@ -479,12 +479,12 @@
                 <div class="card-canvas">
                     @if (isset($letter->sk->sectionHead))
                         @if ($letter->sk->status_by_section_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sktm/$letter->id/preview*"))
                         @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
                         @endif
                     @endif

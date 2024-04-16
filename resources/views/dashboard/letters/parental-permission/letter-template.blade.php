@@ -368,7 +368,7 @@
 </head>
 <body>
     
-    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+    <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="container" style="position: relative">
         <h3 class="title">Surat Pernyataan Ijin Keluarga</h3>
         <div class="content-form">
@@ -435,7 +435,7 @@
                 <p> Calon PMI memohon Ijin</p>
                 <div class="card-canvas">
                     @if ($letter->citizent->user->signature_image)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        <img src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif
                 </div>
                 <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
@@ -446,11 +446,11 @@
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div>
@@ -464,10 +464,10 @@
                     memberikan Ijin</p>
                 <div class="card-canvas">
                     @if($letter->sk->citizent->user->signature_image)
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
                         @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent->user->signature_image)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div>

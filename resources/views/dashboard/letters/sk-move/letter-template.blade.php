@@ -334,7 +334,7 @@
     </style>
 </head>
 <body>
-    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+    <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
 
     <div class="container">
         <table class="first">
@@ -449,11 +449,11 @@
                 <div class="card-canvas">
                     @if(isset($letter->sk->sectionHead))
                         @if ($letter->sk->status_by_section_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sk-move/$letter->id/preview*"))
                         @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div>
@@ -463,10 +463,10 @@
                 <p>Pemohon,</p>
                 <div class="card-canvas">
                     @if(isset($letter->sk->citizent->user->signature_image))
-                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @elseif (Request::is("letters/parental-permission/$letter->id/preview*"))
                         @if (($user->isCitizent() && $user->signature_image) || $letter->sk->citizent)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div>

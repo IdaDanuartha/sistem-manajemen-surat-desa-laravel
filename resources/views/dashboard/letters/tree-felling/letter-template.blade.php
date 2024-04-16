@@ -64,7 +64,7 @@
     </style>
 </head>
 <body>
-<img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
+<img src="{{ url('assets/img/letter-header.png') }}" class="image-full" alt="">
 <div class="wrapper">
     <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
     <p style="margin-top: -10px;">Kepada,</p>
@@ -134,19 +134,19 @@
                 <td style="height: 60px;">
                     @if(isset($letter->sk->environmentalHead))
                         @if ($letter->sk->status_by_environmental_head === 1)
-                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                            <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
                         @endif
                     @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
                         @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                            <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                         @endif
                     @endif 
                 </td>
                 <td style="height: 60px;">
                     @if (($user->isCitizent() && $user->signature_image))
-                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                        <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                     @elseif(isset($letter->sk->citizent->user->signature_image))
-                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
+                        <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                     @endif
                 </td>
             </tr>

@@ -270,7 +270,7 @@
 <body>
     
     <div class="container">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
         <h3 class="title">Surat Keterangan Domisili</h3>
         <div class="content-form">
             <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
@@ -319,11 +319,11 @@
                 <div class="card-canvas">
                     @if(isset($letter->sk->environmentalHead))
                         @if ($letter->sk->status_by_environmental_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
                         @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif
                 </div>
@@ -337,11 +337,11 @@
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div> 
