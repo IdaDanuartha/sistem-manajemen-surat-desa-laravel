@@ -8,6 +8,7 @@ use App\Http\Requests\Letter\SkPowerAttorney\StoreSkPowerAttorneyRequest;
 use App\Http\Requests\Letter\SkPowerAttorney\UpdateSkPowerAttorneyRequest;
 use App\Models\Sk;
 use App\Models\SkPowerAttorney;
+use App\Models\SubdistrictHead;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkPowerAttorneyRepository;
 use App\Repositories\UserRepository;
@@ -23,6 +24,7 @@ class SkPowerAttorneyController extends Controller
         protected readonly SkPowerAttorneyRepository $skPowerAttorney,
         protected readonly SkPowerAttorney $letter,
         protected readonly CitizentRepository $citizent,
+        protected readonly SubdistrictHead $subdistrictHead,
         protected readonly ResponseMessage $responseMessage
     ) {}
 
@@ -144,9 +146,10 @@ class SkPowerAttorneyController extends Controller
     public function preview(SkPowerAttorney $skPowerAttorney)
     {
         $skPowerAttorney = $this->skPowerAttorney->findById($skPowerAttorney);
+        $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney, "user" => auth()->user()]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
 
         return $generated->stream("sk-ahli-waris-" . $skPowerAttorney->sk->citizent->name . ".pdf");
     }
