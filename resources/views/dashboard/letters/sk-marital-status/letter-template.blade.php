@@ -223,6 +223,16 @@
             transform: translate(-50%);
         }
 
+        .card-ttd:first-child p:nth-child(3) {
+            text-align: center;
+            font-size: 0.913rem;
+            width: 40%;
+            position: absolute;
+            bottom: 7.8%;
+            left: 20%;
+            transform: translate(-50%);
+        }
+
         .card-ttd:first-child p.other {
             text-align: center;
             font-size: 0.913rem;
@@ -363,21 +373,41 @@
                 @elseif($letter->status == 2)
                     <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, Nomor : {{ $letter->sk->cover_letter_number }}, Tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan adalah <strong>Janda dari Suami {{ $letter->citizent->name }}</strong> (Alm) Meninggal pada Tanggal {{ $letter->date->format("d M Y") }}</p>
                 @else
-                    <p class="paragraph-one">Berdasarkan  dengan surat pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, tertanggal {{ $letter->sk->created_at->format("d M Y") }}, Nomor : {{ $letter->sk->cover_letter_number }}, yang bersangkutan memang benar telah Cerai dengan <strong style="text-transform: uppercase;">{{ $letter->citizent->name }}</strong> pada tahun {{ $letter->date->format("Y") }} di Lingkungan Jasri Kelod, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem.</p>
+                    <p class="paragraph-one">Berdasarkan surat pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, tertanggal {{ $letter->sk->created_at->format("d M Y") }}, Nomor : {{ $letter->sk->cover_letter_number }}, yang bersangkutan memang benar telah Cerai dengan <strong style="text-transform: uppercase;">{{ $letter->citizent->name }}</strong> pada tahun {{ $letter->date->format("Y") }} di Lingkungan Jasri Kelod, Kelurahan Subagan Kecamatan Karangasem, Kabupaten Karangasem.</p>
                     @endif
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan untuk melengkapi Administrasi Pensiunan.</p>
             </div>
         </div>
         <div class="content-ttd">
-            <div class="card-ttd">
-                <p>Mengetahui</p>
-                <p>Camat Karangasem</p>                
-                <div class="card-canvas">
-                    @if (isset($subdistrictHead->signature_image))
-                        <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif
+            @if ($letter->status == 3)
+                <div class="card-ttd">
+                    <p>Mengetahui</p>
+                    <p>Kepala Lingkungan {{ $letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1 ? $letter->sk->citizent->environmental->name : ".........." }}</p>                
+                    <p>{{ $letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1 ? $letter->sk->environmentalHead->name : ".........." }}</p>                
+                    <div class="card-canvas">
+                        @if(isset($letter->sk->environmentalHead))
+                        @if ($letter->sk->status_by_environmental_head === 1)
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @elseif (Request::is("letters/sktu/$letter->id/preview*"))
+                        @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    @endif   
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="card-ttd">
+                    <p>Mengetahui</p>
+                    <p>Camat Karangasem</p>                
+                    <p>{{ $subdistrictHead->name }}</p>                
+                    <div class="card-canvas">
+                        @if (isset($subdistrictHead->signature_image))
+                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}" style="width: 100%; height: 100%;">
+                        @endif
+                    </div>
+                </div>
+            @endif
             <div class="card-ttd">
                 <p>Subagan, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->name : ".........." }}</p>

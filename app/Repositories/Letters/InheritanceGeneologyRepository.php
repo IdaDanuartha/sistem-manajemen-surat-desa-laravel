@@ -156,13 +156,14 @@ class InheritanceGeneologyRepository
         $this->uploadFile->deleteExistFile("letters/inheritance-geneologies/$letter->inheritance_image");
 
         $image = Arr::get($request, 'inheritance_image');
-
+        
         $filename = $this->uploadFile->uploadSingleFile($image, "letters/inheritance-geneologies");
         $request['inheritance_image'] = $filename;
+      } else {
+        $request['inheritance_image'] = $letter->inheritance_image;
       }
-
-      $letter->sk->updateOrFail(Arr::get($request, "sk"));
-      $letter->updateOrFail(Arr::except($request, "sk"));
+      
+      $letter->updateOrFail($request);
 
       DB::commit();
       return true;

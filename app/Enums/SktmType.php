@@ -18,7 +18,7 @@ enum SktmType: int
 			self::SEKOLAH => 'Sekolah',			
 			self::BEDAH_RUMAH => 'Bedah Rumah',			
 			self::DISABILITAS => 'Disabilitas',			
-			self::BPJS => 'BPJS',			
+			self::BPJS => 'JKN KIS BPJS',			
 			self::LANSIA => 'Lansia',		
 		};
 	}

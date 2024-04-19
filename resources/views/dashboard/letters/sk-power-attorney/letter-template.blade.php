@@ -186,10 +186,12 @@
             <table class="w-full">
                 <tr class="w-full">
                     <td class="ttd-text">Mengetahui</td>
+                    <td class="ttd-text">Mengetahui</td>
                     <td class="ttd-text">Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</td>
                 </tr>
                 <tr class="w-full">
-                    <td class="ttd-text">Kepala Lingkungan Desa</td>
+                    <td class="ttd-text">Camat Karangasem</td>
+                    <td class="ttd-text">Kepala Lingkungan {{ $letter->sk->environmentalHead ? $letter->sk->citizent->environmental->name : ".........." }}</td>
                     <td class="ttd-text">Lurah Subagan</td>
                 </tr>
                 <tr style="text-align: center">
@@ -201,6 +203,17 @@
                         @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
                                 <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
+                            @endif
+                        @endif 
+                    </td>
+                    <td style="height: 60px;">
+                        @if(isset($letter->sk->environmentalHead))
+                            @if ($letter->sk->status_by_village_head === 1)
+                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                            @endif
+                        @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
+                            @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
+                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif
                         @endif 
                     </td>
@@ -218,8 +231,16 @@
                 </tr>
                 <tr class="w-full">
                     <td class="ttd-text">
+                        <strong style="font-size: 14px;">{{ $subdistrictHead->name }}</strong>                    
+                    </td>
+                    <td class="ttd-text">
                         @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
                             <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>                    
+                        @endif
+                    </td>
+                    <td class="ttd-text">
+                        @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                            <strong style="font-size: 14px;">{{ $letter->sk->villageHead->name }}</strong>                    
                         @endif
                     </td>
                 </tr>

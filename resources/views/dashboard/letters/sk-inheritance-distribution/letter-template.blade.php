@@ -272,7 +272,7 @@
                             <strong>
                                 <span style="text-decoration: underline">{{ $letter->sk->villageHead->name }}</span>
                                 <br>
-                                NIP. 19880402 200701 1 002
+                                NIP. {{ $letter->sk->villageHead->employee_number }}
                             </strong>
                         @endif
                     </td>

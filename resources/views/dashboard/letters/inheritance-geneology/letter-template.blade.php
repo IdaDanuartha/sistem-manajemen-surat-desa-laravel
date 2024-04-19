@@ -197,7 +197,8 @@
                     </td>
                     <td class="ttd-text">
                         Mengetahui <br>
-                        Camat Karangasem
+                        Camat Karangasem <br>
+                        {{ $subdistrictHead->name }}
                     </td>
                 </tr>
                 <tr style="text-align: center">
