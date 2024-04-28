@@ -223,7 +223,7 @@
                                 <img width="100" height="auto"
                                     src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                                 <div class="name">
-                                    <p>{{ $letter->sk->villageHead->name }}</p>
+                                    <p style="text-decoration: underline;">{{ $letter->sk->villageHead->name }}</p>
                                     <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                                 </div>
                             @endif
@@ -232,7 +232,7 @@
                                 <img width="100" height="auto"
                                     src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                                 <div class="name">
-                                    <p>{{ $letter->sk->villageHead->name }}</p>
+                                    <p style="text-decoration: underline;">{{ $letter->sk->villageHead->name }}</p>
                                     <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                                 </div>
                             @endif
@@ -243,7 +243,7 @@
                             <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100; height: auto;">
                             <div class="name">
-                                <p>{{ $subdistrictHead->name }}</p>
+                                <p style="text-decoration: underline;">{{ $subdistrictHead->name }}</p>
                                 <p>NIP : {{ $subdistrictHead->employee_number }}</p>
                             </div>
                         @endif
