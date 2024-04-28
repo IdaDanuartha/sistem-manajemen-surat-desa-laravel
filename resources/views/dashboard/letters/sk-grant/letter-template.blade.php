@@ -400,7 +400,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 21.7%;
+            top: 22.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -420,7 +420,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 13.7%;
+            top: 16.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -441,7 +441,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 21.7%;
+            top: 22.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -461,7 +461,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 13.7%;
+            top: 16.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -492,7 +492,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 23.7%;
+            top: 22.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -512,7 +512,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 13.7%;
+            top: 16.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -584,7 +584,7 @@
 </head>
 <body>
     
-    <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+    <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
     <div class="container">
         <h3 class="title">Surat Keterangan Hibah</h3>
         <div class="content-form">
@@ -714,45 +714,49 @@
         <div class="content-ttd">
             <div class="card-ttd">
                 {{-- <p>Find out</p> --}}
-                <p>Yang menerima Hibah</p>
+                <p>{{ $letter->citizent->name }}</p>
                 <div class="card-canvas">
                     @if ($letter->citizent->user->signature_image)
-                        <img src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif                
                 </div>
-                <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
+                <p>Yang menerima Hibah</p>
             </div>
             <div class="card-ttd">
-                <p>Mengetahui</p>
-                <p>Lurah Subagan</p>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p>
+                        <span style="text-decoration: underline;">{{ $letter->sk->villageHead->name }} <br>
+                        </span>
+                        <span> NIP : {{ $letter->sk->villageHead->employee_number }}</span>         
+                    </p>   
+                @endif   
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif 
                 </div>
-                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>
-                @endif            
+                <p>Mengetahui, <br> 
+                    Lurah Subagan</p>       
             </div>
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
-                <p>Yang membuat pernyataan memberi hibah</p>
+                <p>{{ $letter->sk->citizent->name }}</p>
                 <div class="card-canvas">
                     @if(isset($letter->sk->citizent->user->signature_image))
-                        <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
+                        <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
                         @if (($user->isCitizent() && $user->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
                     @endif                 
                 </div>
-                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
+                <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }} <br>
+                    Yang membuat pernyataan memberi hibah</p>
             </div>
         </div>
     </div>
