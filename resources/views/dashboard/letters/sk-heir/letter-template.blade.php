@@ -236,11 +236,11 @@
                 </td>
                 @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
                 <td class="ttd-text" style="font-size: 14px">
-                    <span style="text-decoration: underline">
-                        <strong style="font-size: 14px;">{{ $letter->sk->villageHead->name }}</strong>                    
+                    <span>
+                        <strong style="font-size: 14px; text-decoration: underline;">{{ $letter->sk->villageHead->name }}</strong>                    
                     </span> 
                     <br>
-                    NIP {{ $letter->sk->villageHead->employee_number }}
+                    NIP : {{ $letter->sk->villageHead->employee_number }}
                 </td>
                 @endif
             </tr>

@@ -59,7 +59,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
+        <img src="{{ url('assets/img/letter-header.png') }}" class="image-full" alt="">
         <div class="title-surat-wrapper">
             <h1 class="title-surat">SURAT KETERANGAN AHLI WARIS</h1>
             <h5 class="subtitle-surat">Nomor : {{ $letter->sk->reference_number }}</h5>
@@ -197,28 +197,28 @@
                 <tr style="text-align: center">
                     <td style="height: 60px;">
                         @if (isset($subdistrictHead->signature_image))
-                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}">
+                            <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}">
                         @endif 
                     </td>
                     <td style="height: 60px;">
                         @if(isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_environmental_head === 1)
-                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                                <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
                             @endif
                         @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                                <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif
                         @endif 
                     </td>
                     <td style="height: 60px;">
                         @if(isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1)
-                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
+                                <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                             @endif
                         @elseif (Request::is("letters/sk-power-attorney/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                                <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif
                         @endif 
                     </td>
