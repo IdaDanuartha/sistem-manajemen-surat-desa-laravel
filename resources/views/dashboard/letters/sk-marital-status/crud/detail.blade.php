@@ -29,54 +29,51 @@
 						</button>
 					@endif
 				@endif
-				@if (auth()->user()->isSectionHead())
-					@if ($get_letter->sk->status_by_section_head !== 1)
-						<button data-bs-toggle="modal" data-bs-target="#rejectLetterModal" type="button"
-						class="flex button {{ $get_letter->sk->status_by_section_head === 0 ? 'btn-danger' : 'btn-second' }} mr-3 duration-200 capitalize w-max items-center gap-1" 
-							{{ $get_letter->sk->status_by_section_head === 2 ? 'disabled' : '' }}>
+				@if (auth()->user()->isSectionHead() || auth()->user()->isVillageHead())
+				@if ($get_letter->sk->status_by_village_head === 0 && $get_letter->sk->status_by_section_head !== 1)
+					<button data-bs-toggle="modal" data-bs-target="#rejectLetterModal" type="button"
+					class="flex button {{ $get_letter->sk->status_by_section_head === 0 || $get_letter->sk->status_by_section_head === 0 ? 'btn-danger' : 'btn-second' }} mr-3 duration-200 capitalize w-max items-center gap-1" 
+						{{ $get_letter->sk->status_by_section_head === 2 || $get_letter->sk->status_by_section_head === 2 ? 'disabled' : '' }}>
+							@if ($get_letter->sk->status_by_section_head || $get_letter->sk->status_by_section_head)
+								Surat Ditolak								
+							@else
+								Tolak Surat
+							@endif								
+					</button>
+				@elseif ($get_letter->sk->status_by_section_head === 0 && $get_letter->sk->status_by_village_head !== 1)
+					<button data-bs-toggle="modal" data-bs-target="#rejectLetterModal" type="button"
+					class="flex button {{ $get_letter->sk->status_by_village_head === 0 || $get_letter->sk->status_by_village_head === 0 ? 'btn-danger' : 'btn-second' }} mr-3 duration-200 capitalize w-max items-center gap-1" 
+						{{ $get_letter->sk->status_by_village_head === 2 || $get_letter->sk->status_by_village_head === 2 ? 'disabled' : '' }}>
+							@if ($get_letter->sk->status_by_village_head || $get_letter->sk->status_by_village_head)
+								Surat Ditolak								
+							@else
+								Tolak Surat
+							@endif								
+					</button>
+				@endif
+
+				@if($get_letter->sk->status_by_village_head === 0 && $get_letter->sk->status_by_section_head !== 2)
+					<button data-bs-toggle="modal" data-bs-target="#approveLetterModal" type="button"
+							class="flex button {{ $get_letter->sk->status_by_section_head ? 'btn-second' : 'btn-main' }} duration-200 capitalize w-max items-center gap-1" 
+							{{ $get_letter->sk->status_by_section_head === 1 ? 'disabled' : '' }}>
 								@if ($get_letter->sk->status_by_section_head)
-									Surat Ditolak								
+									Surat Disetujui								
 								@else
-									Tolak Surat
+									Setujui Surat
 								@endif								
-						</button>
-					@endif
-					@if($get_letter->sk->status_by_section_head !== 2)
-						<button data-bs-toggle="modal" data-bs-target="#approveLetterModal" type="button"
-								class="flex button {{ $get_letter->sk->status_by_section_head ? 'btn-second' : 'btn-main' }} duration-200 capitalize w-max items-center gap-1" 
-								{{ $get_letter->sk->status_by_section_head === 1 ? 'disabled' : '' }}>
-									@if ($get_letter->sk->status_by_section_head)
-										Surat Disetujui								
-									@else
-										Setujui Surat
-									@endif								
-						</button>
-					@endif
-				@endif
-				@if (auth()->user()->isVillageHead())
-					@if ($get_letter->sk->status_by_village_head !== 1)
-						<button data-bs-toggle="modal" data-bs-target="#rejectLetterModal" type="button"
-						class="flex button {{ $get_letter->sk->status_by_village_head === 0 ? 'btn-danger' : 'btn-second' }} mr-3 duration-200 capitalize w-max items-center gap-1" 
-							{{ $get_letter->sk->status_by_village_head === 2 ? 'disabled' : '' }}>
+					</button>
+				@elseif($get_letter->sk->status_by_section_head === 0 && $get_letter->sk->status_by_village_head !== 2)
+					<button data-bs-toggle="modal" data-bs-target="#approveLetterModal" type="button"
+							class="flex button {{ $get_letter->sk->status_by_village_head ? 'btn-second' : 'btn-main' }} duration-200 capitalize w-max items-center gap-1" 
+							{{ $get_letter->sk->status_by_village_head === 1? 'disabled' : '' }}>
 								@if ($get_letter->sk->status_by_village_head)
-									Surat Ditolak								
+									Surat Disetujui								
 								@else
-									Tolak Surat
+									Setujui Surat
 								@endif								
-						</button>
-					@endif
-					@if($get_letter->sk->status_by_village_head !== 2)
-						<button data-bs-toggle="modal" data-bs-target="#approveLetterModal" type="button"
-								class="flex button {{ $get_letter->sk->status_by_village_head ? 'btn-second' : 'btn-main' }} duration-200 capitalize w-max items-center gap-1" 
-								{{ $get_letter->sk->status_by_village_head === 1 ? 'disabled' : '' }}>
-									@if ($get_letter->sk->status_by_village_head)
-										Surat Disetujui								
-									@else
-										Setujui Surat
-									@endif								
-						</button>
-					@endif
+					</button>
 				@endif
+			@endif
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						

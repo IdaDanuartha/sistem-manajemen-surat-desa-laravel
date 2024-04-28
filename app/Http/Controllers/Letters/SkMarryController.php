@@ -10,7 +10,6 @@ use App\Models\Sk;
 use App\Models\SkMarryLetter;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkMarryRepository;
-use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -28,9 +27,7 @@ class SkMarryController extends Controller
     public function index(Request $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);     
-        if(auth()->user()->role === Role::VILLAGE_HEAD) {
-            $letters = $this->skMarry->findLetterByVillageHead();
-        } else if(auth()->user()->role === Role::SECTION_HEAD) {
+        if(auth()->user()->role === Role::VILLAGE_HEAD || auth()->user()->role === Role::SECTION_HEAD) {
             $letters = $this->skMarry->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skMarry->findLetterByCitizent();

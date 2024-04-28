@@ -9,7 +9,6 @@ use App\Mail\SendLetterToSectionHead;
 use App\Mail\SendLetterToVillageHead;
 use App\Models\Citizent;
 use App\Models\EnvironmentalHead;
-use App\Models\Letter;
 use App\Models\Sk;
 use App\Models\SkMarryLetter;
 use App\Models\User;
@@ -165,34 +164,34 @@ class SkMarryRepository
     try {  	
       $letter = $this->findById($letter);
 
-      if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+      if (auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $letter->sk->updateOrFail([
           "environmental_head_id" => auth()->user()->authenticatable->id,
           "status_by_environmental_head" => $status ? 1 : 2
-        ]);	
+        ]);
 
-        $user = $this->user->where('role', Role::SECTION_HEAD)->first();
-        if($status) {
-          Mail::to($user->email)->send(new SendLetterToSectionHead($user, $letter->sk->code));
+        $section_heads = $this->user->where('role', Role::SECTION_HEAD)->get();
+        $village_head = $this->user->where('role', Role::VILLAGE_HEAD)->first();
+        if ($status) {
+          foreach($section_heads as $section_head) {
+            Mail::to($section_head->email)->send(new SendLetterToSectionHead($section_head, $letter->sk->code));
+          }
+          Mail::to($village_head->email)->send(new SendLetterToSectionHead($village_head, $letter->sk->code));
         }
-      } else if(auth()->user()->role === Role::SECTION_HEAD) {
-        $letter->sk->updateOrFail([
-          "section_head_id" => auth()->user()->authenticatable->id,
-          "status_by_section_head" => $status ? 1 : 2
-        ]);	
-        
-        $user = $this->user->where('role', Role::VILLAGE_HEAD)->first();
+      } else if (auth()->user()->role === Role::SECTION_HEAD || auth()->user()->role === Role::VILLAGE_HEAD) {
+        if(auth()->user()->role === Role::SECTION_HEAD) {
+          $letter->sk->updateOrFail([
+            "section_head_id" => auth()->user()->authenticatable->id,
+            "status_by_section_head" => $status ? 1 : 2
+          ]);
+        } else {
+          $letter->sk->updateOrFail([
+            "village_head_id" => auth()->user()->authenticatable->id,
+            "status_by_village_head" => $status ? 1 : 2
+          ]);
+        }
 
-        if($status) {
-          Mail::to($user->email)->send(new SendLetterToVillageHead($user, $letter->sk->code));
-        }
-      } else if(auth()->user()->role === Role::VILLAGE_HEAD) {
-        $letter->sk->updateOrFail([
-          "village_head_id" => auth()->user()->authenticatable->id,
-          "status_by_village_head" => $status ? 1 : 2
-        ]); 
-        
-        if($status) {
+        if ($status) {
           Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "disetujui"));
         }
       }
