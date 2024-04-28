@@ -225,17 +225,17 @@
                 </tr>
                 <tr class="w-full">
                     <td class="ttd-text">
-                        <strong style="font-size: 14px; text-decoration: underline;">{{ $subdistrictHead->name }}</strong>                    
+                        <p style="font-size: 14px; text-decoration: underline;">{{ $subdistrictHead->name }}</p>                    
                         <p style="font-size: 14px;">NIP : {{ $subdistrictHead->employee_number }}</p>                    
                     </td>
                     <td class="ttd-text">
                         @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                            <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>                    
+                            <p style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</p>                    
                         @endif
                     </td>
                     <td class="ttd-text">
                         @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                            <strong style="font-size: 14px; text-decoration: underline;">{{ $letter->sk->villageHead->name }}</strong>                    
+                            <p style="font-size: 14px; text-decoration: underline;">{{ $letter->sk->villageHead->name }}</p>                    
                             <p style="font-size: 14px;">NIP : {{ $letter->sk->villageHead->employee_number }}</p>                    
                         @endif
                     </td>

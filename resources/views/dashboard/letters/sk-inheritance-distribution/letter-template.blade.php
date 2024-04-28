@@ -269,18 +269,18 @@
                 <tr class="w-full">
                     <td class="ttd-text">
                         @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                            <strong>
+                            <p>
                                 <span style="text-decoration: underline">{{ $letter->sk->villageHead->name }}</span>
                                 <br>
-                                NIP. {{ $letter->sk->villageHead->employee_number }}
-                            </strong>
+                                NIP : {{ $letter->sk->villageHead->employee_number }}
+                            </p>
                         @endif
                     </td>
                     <td class="ttd-text" style="font-size: 14px">
-                        <strong>
+                        <p>
                             <span style="text-decoration: underline">{{ $subdistrictHead->name }}</span> <br>
-                            NIP. {{ $subdistrictHead->employee_number }}
-                        </strong>
+                            NIP : {{ $subdistrictHead->employee_number }}
+                        </p>
                     </td>
                 </tr>
             </table>
