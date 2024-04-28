@@ -83,6 +83,23 @@
             left: 0;
             border-bottom: 3px solid black;
         }
+
+        /* .card-canvas .name {
+            position: absolute; 
+            width: 100%; 
+            top: 70%; 
+            right: 30%;
+        }
+
+        .card-canvas .name p:first-child {
+            width: 100%; 
+            text-decoration: underline;
+        }
+
+        .card-canvas .name p:last-child {
+            width: 100%; 
+            bottom: -15%;
+        } */
     </style>
 </head>
 
@@ -126,11 +143,9 @@
         </div>
         <div class="content-surat">
             <img width="40%" style="left: 30%; position: relative;" height="auto"
-                src="{{ url('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}"
-                alt="">
+                src="{{ url('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
             <div class="" style="margin-top: 10px;">
-                <img src="{{ url('assets/img/keterangan.png') }}" style="width: 330px" height="auto"
-                    alt="">
+                <img src="{{ url('assets/img/keterangan.png') }}" style="width: 330px" height="auto" alt="">
             </div>
             <p class="paragraph">
                 Demikianlah Silsilah Keturunan / waris ini saya buat dengan sebenarnya, saya menjamin tidak ada
@@ -144,7 +159,7 @@
             <table class="w-full">
                 <tr>
                     <td class="w-full" style="text-align: center"></td>
-                    <td class="w-full" style="text-align: center">Subagan, 26 Desember 2019</td>
+                    <td class="w-full" style="text-align: center">Subagan, {{ $letter->sk->created_at->format('d M Y') }}</td>
                 </tr>
             </table>
             <table class="w-full">
@@ -197,8 +212,8 @@
                     </td>
                     <td class="ttd-text">
                         Mengetahui <br>
-                        Camat Karangasem <br>
-                        {{ $subdistrictHead->name }}
+                        Camat Karangasem
+                        {{-- {{ $subdistrictHead->name }} --}}
                     </td>
                 </tr>
                 <tr style="text-align: center">
@@ -207,11 +222,19 @@
                             @if ($letter->sk->status_by_village_head === 1)
                                 <img width="100" height="auto"
                                     src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
+                                <div class="name">
+                                    <p>{{ $letter->sk->villageHead->name }}</p>
+                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
+                                </div>
                             @endif
                         @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                                 <img width="100" height="auto"
                                     src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
+                                <div class="name">
+                                    <p>{{ $letter->sk->villageHead->name }}</p>
+                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
+                                </div>
                             @endif
                         @endif
                     </td>
@@ -219,6 +242,10 @@
                         @if (isset($subdistrictHead->signature_image))
                             <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100; height: auto;">
+                            <div class="name">
+                                <p>{{ $subdistrictHead->name }}</p>
+                                <p>NIP : {{ $subdistrictHead->employee_number }}</p>
+                            </div>
                         @endif
                     </td>
                 </tr>
