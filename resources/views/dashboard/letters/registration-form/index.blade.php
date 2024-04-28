@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Halaman Surat Pendaftaran atau Pembatalan Penduduk Nonpermanen')
+@section('title', 'Halaman SK Penduduk Non-Permanen')
 
 @section('main')
     <div class="table-wrapper mt-[20px]">

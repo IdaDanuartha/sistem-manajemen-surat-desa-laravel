@@ -207,7 +207,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 11.7%;
+            top: 15.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -227,7 +227,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 3.7%;
+            top: 8.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -248,7 +248,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 11.7%;
+            top: 15.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -268,7 +268,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 3.7%;
+            top: 8.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -289,7 +289,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 13.7%;
+            top: 15.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -309,7 +309,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 3.7%;
+            top: 8.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -432,17 +432,23 @@
         <div class="page_break"></div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p> Calon PMI memohon Ijin</p>
+                <p>{{ $letter->citizent->name }}</p>
                 <div class="card-canvas">
                     @if ($letter->citizent->user->signature_image)
                         <img src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif
                 </div>
-                <p style="text-transform: uppercase;">{{ $letter->citizent->name }}</p>
+                <p>Calon PMI memohon Ijin</p>
             </div>
             <div class="card-ttd">
-                <p>Mengetahui</p>
-                <p>Lurah Subagan</p>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p>
+                        <span style="text-decoration: underline;">{{ $letter->sk->villageHead->name }} <br>
+                        </span>
+                        <span> NIP : {{ $letter->sk->villageHead->employee_number }}</span>         
+                    </p>               
+                @endif
+                
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
@@ -454,14 +460,11 @@
                         @endif
                     @endif 
                 </div>
-                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>                    
-                @endif
+                <p>Mengetahui, <br> 
+                    Lurah Subagan</p>
             </div>
             <div class="card-ttd">
-                <p>Denpasar, {{ $letter->sk->created_at->format("d M Y") }}</p>
-                <p>Yang Membuat Pernyataan /yang
-                    memberikan Ijin</p>
+                <p>{{ $letter->sk->citizent->name }}</p>
                 <div class="card-canvas">
                     @if($letter->sk->citizent->user->signature_image)
                         <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
@@ -471,7 +474,10 @@
                         @endif
                     @endif 
                 </div>
-                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
+                <p>Subagan, {{ $letter->sk->created_at->format("d M Y") }} <br>
+                    Yang Membuat Pernyataan /yang
+                    memberikan Ijin
+                </p>
             </div>
         </div>
     </div>

@@ -753,7 +753,7 @@
                             </svg>
 
                         </span>
-                        <span data-i18n="Letters" class="text-[#28242185]">Surat Pendaftaran</span>
+                        <span data-i18n="Letters" class="text-[#28242185]">Surat Penduduk Non-Permanen</span>
                     </a>
                 </li>
                 <li class="w-full">
