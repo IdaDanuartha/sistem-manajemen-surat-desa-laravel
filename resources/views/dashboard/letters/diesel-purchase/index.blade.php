@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Halaman Surat Rekomendasi Pembelian Solar')
+@section('title', 'Halaman Sk Pembelian BBM di SPBU')
 
 @section('main')
     <div class="table-wrapper mt-[20px]">

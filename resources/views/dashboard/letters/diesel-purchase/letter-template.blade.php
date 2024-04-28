@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
 
         .title {
             text-align: center;
-            width: 78.5%;
+            width: 65.5%;
             position: absolute;
             top: 24%;
             left: 50%;
@@ -278,16 +279,35 @@
             line-height: 150%;
             text-indent: 42px;
         }
+
+        .card-canvas .name {
+            position: absolute;
+            width: 100%;
+            top: 70%;
+            right: 30%;
+        }
+
+        .card-canvas .name p:first-child {
+            width: 100%;
+            text-decoration: underline;
+        }
+
+        .card-canvas .name p:last-child {
+            width: 100%;
+            bottom: -15%;
+        }
     </style>
 </head>
+
 <body>
-    
+
     <div class="container">
-        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan Rekomendasi Pembelian Solar</h3>
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+        <h3 class="title">Surat Keterangan Pembelian BBM di SPBU</h3>
         <div class="content-form">
             <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan dibawah ini  Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem dengan ini memberikan Rekomendasi Pembelian BBM di SPBU Kesesi kepada:</p>
+            <p class="description">Yang bertanda tangan dibawah ini Lurah Subagan, Kecamatan Karangasem, Kabupaten
+                Karangasem dengan ini memberikan Rekomendasi Pembelian BBM di SPBU Kesesi kepada:</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
@@ -296,7 +316,7 @@
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ", " . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
+                <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
             </div>
             <div class="input-group three">
                 <label>Agama</label>
@@ -331,38 +351,55 @@
             <div class="input-group nine">
                 <label>Masa Berlaku</label>
                 <div>:</div>
-                <span>{{ $letter->start_expired_date->format("d M Y") . " s/d " . $letter->end_expired_date->format("d M Y") }}</span>
+                <span>{{ $letter->start_expired_date->format('d M Y') . ' s/d ' . $letter->end_expired_date->format('d M Y') }}</span>
             </div>
             <div class="input-group ten">
                 <label>Keterangan</label>
                 <div>:</div>
-                <span>Menerangkan bahwa orang tersebut diatas memang benar beralamat di {{ $letter->sk->citizent->address }}, dan memiliki {{ $letter->purpose }}</span>
+                <span>Menerangkan bahwa orang tersebut diatas memang benar beralamat di
+                    {{ $letter->sk->citizent->address }}, dan memiliki {{ $letter->purpose }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, Nomor: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar yang bersangkutan memiliki <strong>Usaha {{ $letter->purpose }}</strong></p>
-                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+                <p class="paragraph-one">Berdasarkan Surat Pengatar Kepala Lingkungan
+                    {{ $letter->sk->citizent->environmental->name }}, Nomor: {{ $letter->sk->cover_letter_number }},
+                    tanggal {{ $letter->sk->created_at->format('d M Y') }}, memang benar yang bersangkutan memiliki
+                    <strong>Usaha {{ $letter->purpose }}</strong></p>
+                <p class="paragraph-two">Demikian surat keterangan ini kami buat dengan sebenarnya untuk dapat
+                    dipergunakan sebagaimana mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>Kepala Kelurahan</p>
+                <p>Subagan, {{ $letter->sk->villageHead ? $letter->sk->updated_at->format('d M Y') : '..........' }}
+                </p>
+                <p>Lurah Subagan</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->villageHead))
+                    @if (isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
+                            <div class="name">
+                                <p>{{ $letter->sk->villageHead->name }}</p>
+                                <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
+                            </div>
                         @endif
                     @elseif (Request::is("letters/diesel-purchase/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                style="width: 100%; height: 100%;">
+                            <div class="name">
+                                <p>{{ $letter->sk->villageHead->name }}</p>
+                                <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
+                            </div>
                         @endif
-                    @endif 
+                    @endif
                 </div>
                 @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>                    
+                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>
                 @endif
             </div>
         </div>
     </div>
 </body>
+
 </html>

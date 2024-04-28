@@ -699,7 +699,7 @@
                             </svg>
 
                         </span>
-                        <span data-i18n="Letters" class="text-[#28242185]">Surat Pembelian Solar</span>
+                        <span data-i18n="Letters" class="text-[#28242185]">SK Pembelian BBM</span>
                     </a>
                 </li>
                 <li class="w-full">
