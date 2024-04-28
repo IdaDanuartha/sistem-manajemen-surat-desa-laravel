@@ -403,7 +403,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 25.7%;
+            top: 26.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -423,7 +423,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 17.7%;
+            top: 20.7%;
             left: 18%;
             transform: translate(-50%);
             text-align: center;
@@ -444,7 +444,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 22.7%;
+            top: 26.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -464,7 +464,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 17.7%;
+            top: 20.7%;
             left: 49%;
             transform: translate(-50%);
             text-align: center;
@@ -495,7 +495,7 @@
             font-size: 0.913rem;
             width: 26%;
             position: absolute;
-            top: 17.7%;
+            top: 26.7%;
             left: 80%;
             transform: translate(-50%);
             text-align: center;
@@ -515,7 +515,7 @@
             width: 26%;
             height: 70px;
             position: absolute;
-            top: 17.7%;
+            top: 20.7%;
             left: 80%;
             transform: translate(-50%);
             border-bottom: 1px dashed black;
@@ -570,8 +570,8 @@
         }
 
         .content-other {
-            position: relative;
-            bottom: 0;
+            position: absolute;
+            top: 210px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
@@ -707,27 +707,27 @@
             </div>
         </div>
         <div class="page_break"></div>
-        <div class="content-ttd">
+        <div class="content-ttd" style="position: relative; top: -150px !important;">
             <div class="card-ttd">
-                {{-- <p>Find out</p> --}}
-                <p>Penduduk Nonpermanen</p>
+                <p>{{ $letter->sk->citizent->name }}</p>
                 <div class="card-canvas">
                     @if ($letter->sk->citizent->user->signature_image)
                         <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
                     @endif
                 </div>
-                <p style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</p>
+                <p>Penduduk Nonpermanen</p>
             </div>
             <div class="card-ttd">
-                <p>Mengetahui, <br>Kepala Dinas Kependudukan dan Pencatatan Sipil Kabupaten Karangasem</p>
+                <p><span style="text-transform: uppercase; text-decoration: underline;">DRs. MADE KUSUMA NEGARA</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP. 19750221 199311 1 001</span></p>
                 <div class="card-canvas">
                     {{-- <img src="{{ url('assets/banner-top.png') }}" style="width: 100%; height: 100%;"> --}}
                 </div>
-                <p><span style="text-transform: uppercase; text-decoration: underline;">DRs. MADE KUSUMA NEGARA</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP. 19750221 199311 1 001</span></p>
+                <p>Mengetahui, <br>Kepala Dinas Kependudukan dan Pencatatan Sipil Kabupaten Karangasem</p>
             </div>
             <div class="card-ttd">
-                <p></p>
-                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }} <br>Lurah Subagan</p>
+                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                    <p><span style="text-transform: uppercase; text-decoration: underline;">{{ $letter->sk->villageHead->name }}</span> <br> <span style="text-transform: none !important; text-decoration: none !important;">NIP : {{ $letter->sk->villageHead->employee_number }}</span></p>
+                @endif
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
                         @if ($letter->sk->status_by_village_head === 1)
@@ -739,14 +739,12 @@
                         @endif
                     @endif  
                 </div>
-                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p style="text-transform: uppercase;">{{ $letter->sk->villageHead->name }}</p>
-                @endif
+                <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }} <br>Lurah Subagan</p>
             </div>
         </div>
         <div class="content-other">
             <p style="margin: 0; font-size: 0.813rem;">Keterangan :</p>
-            <p style="margin: 0; font-size: 0.813rem;">*Diisi sesuai dengan keperluan sebagainonpermanen</p>
+            <p style="margin: 0; font-size: 0.813rem;">*Diisi sesuai dengan keperluan sebagai nonpermanen</p>
             <p style="margin: 0; font-size: 0.813rem;">**Jangka Waktu Sebagai Nonpermanen 1 Tahun</p>
             <div class="wrapper-kaling" style="display: flex; align-items: center; gap: 8px;">
                 <p style="margin: 0; font-size: 0.813rem;">No.Kaling <span>{{ $letter->kaling_number ?? "................. : ................." }}</span></p>
