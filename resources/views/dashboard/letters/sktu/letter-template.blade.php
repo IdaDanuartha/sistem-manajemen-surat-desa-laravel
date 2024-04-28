@@ -248,6 +248,23 @@
             line-height: 150%;
             text-indent: 42px;
         }
+
+        .card-canvas .name {
+            position: absolute; 
+            width: 100%; 
+            top: 70%; 
+            right: 30%;
+        }
+
+        .card-canvas .name p:first-child {
+            width: 100%; 
+            text-decoration: underline;
+        }
+
+        .card-canvas .name p:last-child {
+            width: 100%; 
+            bottom: -15%;
+        }
     </style>
 </head>
 <body>
@@ -305,19 +322,47 @@
         </div>
         <div class="content-ttd">
             <div class="card-ttd">
-                <p>Subagan, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, {{ $letter->sk->sectionHead && $letter->sk->status_by_section_head === 1 ? $letter->sk->sectionHead->name : ".........." }}</p>
-                <p class="other">Kasi Pem dan Kesos</p>
+                <p>Subagan, {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
+                <p>A.n, Lurah Subagan</p>
+                <p class="other">{{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : "" }}</p>
                 <div class="card-canvas">
-                    @if(isset($letter->sk->sectionHead))
-                        @if ($letter->sk->status_by_section_head === 1)
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif (Request::is("letters/sktu/$letter->id/preview*"))
-                        @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @endif         
+                    @if (isset($letter->sk->sectionHead))
+                        @if (Request::is("letters/sktu/$letter->id/preview*"))
+                            @if (($user->isSectionHead() && $user->signature_image) || $letter->sk->sectionHead)
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                                <div class="name">
+                                    <p>{{ $letter->sk->sectionHead->name }}</p>    
+                                    <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
+                                </div>  
+                            @endif
+                        @elseif(isset($letter->sk->sectionHead))
+                            @if ($letter->sk->status_by_section_head === 1)
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                                <div class="name">
+                                    <p>{{ $letter->sk->sectionHead->name }}</p>    
+                                    <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
+                                </div>  
+                            @endif
+                        @endif  
+                    @else
+                        @if(isset($letter->sk->villageHead))
+                            @if ($letter->sk->status_by_village_head === 1)
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                                <div class="name">
+                                    <p>{{ $letter->sk->villageHead->name }}</p>    
+                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
+                                </div>  
+                            @endif
+                        @elseif (Request::is("letters/sktu/$letter->id/preview*"))
+                            @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
+                                <div class="name">
+                                    <p>{{ $letter->sk->villageHead->name }}</p>    
+                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
+                                </div>  
+                            @endif
+                        @endif   
+                    @endif      
                 </div>
             </div>
         </div>

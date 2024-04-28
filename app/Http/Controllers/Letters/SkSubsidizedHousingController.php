@@ -10,7 +10,6 @@ use App\Models\Sk;
 use App\Models\SkSubsidizedHousingLetter;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\SkSubsidizedHousingRepository;
-use App\Repositories\UserRepository;
 use App\Utils\GenerateReferenceNumber;
 use App\Utils\ResponseMessage;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -29,9 +28,7 @@ class SkSubsidizedHousingController extends Controller
     public function index(Request $request)
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);     
-        if(auth()->user()->role === Role::VILLAGE_HEAD) {
-            $letters = $this->skSubsidizedHousing->findLetterByVillageHead();
-        } else if(auth()->user()->role === Role::SECTION_HEAD) {
+        if(auth()->user()->role === Role::VILLAGE_HEAD || auth()->user()->role === Role::SECTION_HEAD) {
             $letters = $this->skSubsidizedHousing->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skSubsidizedHousing->findLetterByCitizent();
