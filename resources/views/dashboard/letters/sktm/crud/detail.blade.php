@@ -149,7 +149,7 @@
 					</label>
 				</div>
 			@endif	
-			@if (auth()->user()->isVillageHead())
+			@if (auth()->user()->isSectionHead() || auth()->user()->isVillageHead())
 			<div class="col-span-12 flex flex-col">
 				<label for="signature_image" class="text-second mb-1">Tanda Tangan Elektronik</label>
 				@if (auth()->user()->signature_image)
