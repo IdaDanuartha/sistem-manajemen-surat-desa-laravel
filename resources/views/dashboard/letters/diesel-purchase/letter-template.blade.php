@@ -375,7 +375,7 @@
                 <p>Lurah Subagan</p>
                 <div class="card-canvas">
                     @if (isset($letter->sk->villageHead))
-                        @if ($letter->sk->status_by_village_head === 1)
+                        @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))
                             <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
                             <div class="name">
@@ -383,7 +383,7 @@
                                 <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                             </div>
                         @endif
-                    @elseif (Request::is("letters/diesel-purchase/$letter->id/preview*"))
+                    {{-- @elseif (Request::is("letters/diesel-purchase/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
@@ -391,7 +391,7 @@
                                 <p>{{ $letter->sk->villageHead->name }}</p>
                                 <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                             </div>
-                        @endif
+                        @endif --}}
                     @endif
                 </div>
                 @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)

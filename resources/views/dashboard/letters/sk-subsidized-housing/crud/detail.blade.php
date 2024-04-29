@@ -147,8 +147,9 @@
 			@endif
 			<div class="col-span-12  flex justify-between">
 				<div class="flex items-center gap-3">				
-					<a href="{{ route('letters.sk-subsidized-housing.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
 					<a href="{{ route('letters.sk-subsidized-housing.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+					<a href="{{ route('citizents.show', $get_letter->sk->citizent_id) }}" target="_blank" class="button bg-gray-500 text-white">Profile Warga</a>
+					<a href="{{ route('letters.sk-subsidized-housing.preview', $get_letter->id) }}" target="_blank" class="button btn-main text-white">Preview Surat</a>
 				</div>
 				<div class="flex items-center">
 					<a href="{{ route('letters.sk-subsidized-housing.download', $get_letter->id) }}" target="_blank" class="button btn-second mr-2 text-white">Download PDF</a>

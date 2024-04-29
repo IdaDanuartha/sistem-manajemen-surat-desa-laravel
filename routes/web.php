@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', DashboardController::class)->name("dashboard");        
     
     Route::middleware('is_admin')->group(function() {
-        Route::resource('citizents', CitizentController::class);
+        Route::resource('citizents', CitizentController::class)->except("show");
         Route::get('citizents/{citizent}/json', [CitizentController::class, 'showJSON']);
 
         Route::resource('environmental-heads', EnvironmentalHeadController::class);
@@ -85,7 +85,8 @@ Route::middleware(['auth'])->group(function() {
         Route::resource('admins', AdminController::class);   
         Route::resource('environmentals', EnvironmentalController::class);   
     });
-
+    Route::get("citizents/{citizent}", [CitizentController::class, 'show'])->name("citizents.show");
+    
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

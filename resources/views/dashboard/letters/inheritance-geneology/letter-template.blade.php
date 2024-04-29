@@ -142,7 +142,7 @@
             </table>
         </div>
         <div class="content-surat">
-            <img width="40%" style="left: 30%; position: relative;" height="auto"
+            <img width="30%" style="left: 30%; position: relative;" height="auto"
                 src="{{ url('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
             <div class="" style="margin-top: 10px;">
                 <img src="{{ url('assets/img/keterangan.png') }}" style="width: 330px" height="auto" alt="">
