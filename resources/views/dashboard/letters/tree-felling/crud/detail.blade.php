@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Detail Surat')
-@section('main')
+@section('main') 
 
 	<div class="table-wrapper mt-[20px] input-teacher">
 		@if (!auth()->user()->isCitizent())
