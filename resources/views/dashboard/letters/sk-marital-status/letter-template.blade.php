@@ -338,7 +338,7 @@
         <h3 class="title">Surat Keterangan @if($letter->status == 1) Duda @elseif($letter->status == 2) Janda @else Cerai @endif</h3>
         <div class="content-form">
             <p class="subtitle">Nomor : {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
+            <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
