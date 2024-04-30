@@ -9,7 +9,7 @@
             </div>
             <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="environmental_id" class="text-second mb-2">Lingkungan</label>
-                <input type="text" disabled class="input-crud" id="name" value="{{ $citizent->environmental ? ($environmentalHead->environmental->name . " (" . $citizent->environmental->code . ")") : "-" }}">
+                <input type="text" disabled class="input-crud" id="name" value="{{ $environmentalHead->environmental->name }}">
             </div>
             <div class="col-span-12 flex flex-col">
                 <label for="email" class="text-second mb-1">Email</label>

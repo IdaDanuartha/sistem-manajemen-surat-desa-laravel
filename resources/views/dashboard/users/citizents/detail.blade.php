@@ -200,7 +200,9 @@
 				</div>
 			@endif
 			<div class="col-span-12 flex items-center gap-3 mt-2">				
-				<a href="{{ route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+				@if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin())
+					<a href="{{ route('citizents.index') }}" class="button btn-second text-white" type="reset">Kembali</a>
+				@endif
 			</div>
 		</form>
 	</div>

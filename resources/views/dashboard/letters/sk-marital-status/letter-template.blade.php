@@ -413,7 +413,6 @@
                     @endif   
                     </div>
                 </div>
-            @else
                 <div class="card-ttd">
                     <p>Mengetahui</p>
                     <p>Camat Karangasem</p>                
