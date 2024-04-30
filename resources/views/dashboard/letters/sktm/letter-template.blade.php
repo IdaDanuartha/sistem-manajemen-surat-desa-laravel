@@ -146,62 +146,62 @@
         }
 
         .input-group.nine label {
-            top: 68%;
+            top: 65%;
             left: 17.5%;
         }
 
         .input-group.nine div {
-            top: 68%;
+            top: 65%;
             left: 28%;
         }
 
         .input-group.nine span {
-            top: 68%;
+            top: 65%;
             left: 61.3%;
         }
 
         .input-group.ten label {
-            top: 71%;
+            top: 68%;
             left: 17.5%;
         }
 
         .input-group.ten div {
-            top: 71%;
+            top: 68%;
             left: 28%;
         }
 
         .input-group.ten span {
-            top: 71%;
+            top: 68%;
             left: 61.3%;
         }
 
         .input-group.eleven label {
-            top: 74%;
+            top: 71%;
             left: 17.5%;
         }
 
         .input-group.eleven div {
-            top: 74%;
+            top: 71%;
             left: 28%;
         }
 
         .input-group.eleven span {
-            top: 74%;
+            top: 71%;
             left: 61.3%;
         }
 
         .input-group.twelve label {
-            top: 77%;
+            top: 74%;
             left: 17.5%;
         }
 
         .input-group.twelve div {
-            top: 77%;
+            top: 74%;
             left: 28%;
         }
 
         .input-group.twelve span {
-            top: 77%;
+            top: 74%;
             left: 61.3%;
         }
 
@@ -321,6 +321,8 @@
             font-size: 0.913rem;
             line-height: 150%;
             text-indent: 42px;
+            position: absolute;
+            top: 18%;
         }
 
         .card-canvas .name {
@@ -414,6 +416,28 @@
                     <span>{{ $letter->sk->citizent->address }}</span>
                 </div>
             @endif
+            @if ($letter->sktm_type->value === 2)
+                <div class="input-group nine">
+                    <label>Nama</label>
+                    <div>:</div>
+                    <span>{{ $letter->sktmSchool->citizent->name }}</span>
+                </div>
+                <div class="input-group ten">
+                    <label>Tempat Tanggal Lahir</label>
+                    <div>:</div>
+                    <span>{{ $letter->sktmSchool->citizent->birth_place . ', ' . $letter->sktmSchool->citizent->birth_date->format('d-m-Y') }}</span>
+                </div>
+                <div class="input-group eleven">
+                    <label>Jenis Kelamin</label>
+                    <div>:</div>
+                    <span>{{ $letter->sktmSchool->citizent->gender->label() }}</span>
+                </div>
+                <div class="input-group twelve">
+                    <label>Sekolah</label>
+                    <div>:</div>
+                    <span>{{ $letter->sktmSchool->school_name }}</span>
+                </div>
+            @endif
             <div class="description-other">
                 @if ($letter->sktm_type->value === 1)
                     <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
@@ -449,41 +473,12 @@
                         ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
                         / miskin dan lansia .</p>
                 @endif
-                {{-- @if (!$letter->sktm_type->value === 2) --}}
                 <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan
                     {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.</p>
-                {{-- @endif --}}
             </div>
-            @if ($letter->sktm_type->value === 2)
-                <div class="input-group nine">
-                    <label>Nama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->name }}</span>
-                </div>
-                <div class="input-group ten">
-                    <label>Tempat Tanggal Lahir</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->birth_place . ', ' . $letter->sktmSchool->citizent->birth_date->format('d-m-Y') }}</span>
-                </div>
-                <div class="input-group eleven">
-                    <label>Jenis Kelamin</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->gender->label() }}</span>
-                </div>
-                <div class="input-group twelve">
-                    <label>Sekolah</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->school_name }}</span>
-                </div>
-            @endif
-            {{-- @if ($letter->sktm_type->value === 2)
-                <div class="description-other-bottom">
-                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
-                </div>
-            @endif --}}
         </div>
         <div class="content-ttd">
-            @if ($letter->sktm_type->value === 2 || $letter->sktm_type->value === 5)
+            {{-- @if ($letter->sktm_type->value === 2 || $letter->sktm_type->value === 5)
                 <div class="card-ttd">
                     <p>Mengetahui</p>
                     <p>Camat Karangasem</p>                
@@ -495,7 +490,7 @@
                         @endif
                     </div>
                 </div>
-            @endif
+            @endif --}}
             <div class="card-ttd">
                 <p>Subagan, {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, Lurah Subagan</p>
