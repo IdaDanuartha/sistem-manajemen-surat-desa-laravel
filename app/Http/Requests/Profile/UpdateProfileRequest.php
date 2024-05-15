@@ -29,6 +29,7 @@ class UpdateProfileRequest extends FormRequest
 			'position' => ['nullable'],			
 			'family_card_number' => ['nullable'],			
 			'phone_number' => ['nullable', 'min:10', 'max:13'],			
+			'phone_number' => ['nullable', 'min:10', 'max:13'],			
 			'gender' => ['nullable'],
 			'birth_place' => ['nullable'],
 			'birth_date' => ['nullable'],

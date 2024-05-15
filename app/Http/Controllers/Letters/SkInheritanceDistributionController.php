@@ -142,7 +142,12 @@ class SkInheritanceDistributionController extends Controller
         $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', 
+        [
+            'letter' => $skInheritanceDistribution, 
+            "user" => auth()->user(), 
+            'subdistrictHead' => $subdistrictHead
+        ]);        
 
         return $generated->stream("surat-pernyataan-pembagian-waris-" . $skInheritanceDistribution->sk->citizent->name . ".pdf");
     }
@@ -150,7 +155,12 @@ class SkInheritanceDistributionController extends Controller
     public function download(SkInheritanceDistribution $skInheritanceDistribution, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', ['letter' => $skInheritanceDistribution]);        
+        $subdistrictHead = $this->subdistrictHead->find(1);
+        $generated = Pdf::loadView('dashboard.letters.sk-inheritance-distribution.letter-template', [
+            'letter' => $skInheritanceDistribution, 
+            "user" => auth()->user(), 
+            'subdistrictHead' => $subdistrictHead
+        ]);        
 
         return $generated->download("surat-pernyataan-pembagian-waris-" . $skInheritanceDistribution->sk->citizent->name . ".$type");
     }

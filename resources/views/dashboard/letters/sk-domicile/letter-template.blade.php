@@ -354,15 +354,13 @@
                 <p class="other">{{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : "" }}</p>
                 <div class="card-canvas">
                     @if (isset($letter->sk->sectionHead))
-                       @if(isset($letter->sk->sectionHead))
-                            @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
-                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                                <div class="name">
-                                    <p>{{ $letter->sk->sectionHead->name }}</p>    
-                                    <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
-                                </div>  
-                            @endif
-                        @endif  
+                        @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <div class="name">
+                                <p>{{ $letter->sk->sectionHead->name }}</p>    
+                                <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
+                            </div>  
+                        @endif
                     @else
                         @if(isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))

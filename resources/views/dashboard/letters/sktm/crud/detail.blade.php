@@ -94,7 +94,7 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->sktm_type->label() }}" disabled />
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="" class="text-second mb-1">Tujuan</label>
+                <label for="" class="text-second mb-1">Keperluan Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
             </div>
 			@if ($get_letter->sktm_type == \App\Enums\SktmType::SEKOLAH)

@@ -159,7 +159,11 @@ class SkTravellingController extends Controller
     public function download(SkTravelingLetter $sk_travelling, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-traveling.letter-template', ['letter' => $sk_travelling]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-traveling.letter-template', [
+            'letter' => $sk_travelling, 
+            'user' => auth()->user(), 
+            'village_head' => $this->villageHead->find(1)
+        ]);        
 
         return $generated->download("sk-bepergian-" . $sk_travelling->sk->citizent->name . ".$type");
     }

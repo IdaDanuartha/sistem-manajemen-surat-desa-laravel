@@ -97,7 +97,7 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->travel_destination }}" disabled />
             </div>
 			<div class="col-span-12 flex flex-col">
-                <label for="" class="text-second mb-1">Tujuan Pembuatan Surat</label>
+                <label for="" class="text-second mb-1">Keperluan Surat</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
             </div>
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())

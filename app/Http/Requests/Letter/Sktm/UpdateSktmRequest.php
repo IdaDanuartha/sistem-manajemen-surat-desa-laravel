@@ -27,7 +27,7 @@ class UpdateSktmRequest extends FormRequest
             "sk.is_published" => "nullable",
             "citizent_id" => "nullable",
             "school_name" => "nullable",
-            "purpose" => "required"
+            "purpose" => "nullable"
         ];
     }
 
@@ -39,7 +39,7 @@ class UpdateSktmRequest extends FormRequest
             "sktm_type" => "tipe sktm",
             "citizent_id" => "nama anak",
             "school_name" => "nama sekolah",
-            "purpose" => "tujuan"
+            "purpose" => "keperluan surat"
         ];
     }
 }

@@ -51,6 +51,12 @@
                     <label class="text-second">Role</label>
                     <input type="text" class="input-crud" value="{{ auth()->user()->role->label() }}" readonly />
                 </div>
+                @if (auth()->user()->isEnvironmentalHead())
+                    <div class="col-md-6 col-12 mb-4 flex flex-col">
+                        <label class="text-second">Nomor Telepon</label>
+                        <input type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number ?? "-" }}" readonly />
+                    </div>
+                @endif
                 @if (auth()->user()->isCitizent())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label class="text-second">NIK</label>

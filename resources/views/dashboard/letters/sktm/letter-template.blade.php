@@ -146,62 +146,110 @@
         }
 
         .input-group.nine label {
+<<<<<<< HEAD
             top: 65%;
+=======
+            top: 66%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 17.5%;
         }
 
         .input-group.nine div {
+<<<<<<< HEAD
             top: 65%;
+=======
+            top: 66%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 28%;
         }
 
         .input-group.nine span {
+<<<<<<< HEAD
             top: 65%;
+=======
+            top: 66%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 61.3%;
         }
 
         .input-group.ten label {
+<<<<<<< HEAD
             top: 68%;
+=======
+            top: 69%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 17.5%;
         }
 
         .input-group.ten div {
+<<<<<<< HEAD
             top: 68%;
+=======
+            top: 69%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 28%;
         }
 
         .input-group.ten span {
+<<<<<<< HEAD
             top: 68%;
+=======
+            top: 69%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 61.3%;
         }
 
         .input-group.eleven label {
+<<<<<<< HEAD
             top: 71%;
+=======
+            top: 72%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 17.5%;
         }
 
         .input-group.eleven div {
+<<<<<<< HEAD
             top: 71%;
+=======
+            top: 72%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 28%;
         }
 
         .input-group.eleven span {
+<<<<<<< HEAD
             top: 71%;
+=======
+            top: 72%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 61.3%;
         }
 
         .input-group.twelve label {
+<<<<<<< HEAD
             top: 74%;
+=======
+            top: 75%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 17.5%;
         }
 
         .input-group.twelve div {
+<<<<<<< HEAD
             top: 74%;
+=======
+            top: 75%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 28%;
         }
 
         .input-group.twelve span {
+<<<<<<< HEAD
             top: 74%;
+=======
+            top: 75%;
+>>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
             left: 61.3%;
         }
 
@@ -311,7 +359,7 @@
 
         .description-other-bottom {
             position: relative;
-            top: 70.5%;
+            top: 67.5%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -497,15 +545,13 @@
                 <p class="other">{{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : "" }}</p>
                 <div class="card-canvas">
                     @if (isset($letter->sk->sectionHead))
-                       @if(isset($letter->sk->sectionHead))
-                            @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
-                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                                <div class="name">
-                                    <p>{{ $letter->sk->sectionHead->name }}</p>    
-                                    <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
-                                </div>  
-                            @endif
-                        @endif  
+                        @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <div class="name">
+                                <p>{{ $letter->sk->sectionHead->name }}</p>    
+                                <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
+                            </div>  
+                        @endif
                     @else
                         @if(isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))

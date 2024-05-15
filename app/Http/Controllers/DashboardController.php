@@ -33,7 +33,7 @@ class DashboardController extends Controller
                     ->whereYear("created_at", date('Y'))
                     ->where('is_published', 1)				
                     ->groupBy(DB::raw("Month(created_at)"))
-                    ->pluck("count");
+                    ->pluck("count"); 
 
             $months = Sk::select(DB::raw("Month(created_at) as month"))
                 ->whereYear('created_at', date('Y'))
@@ -41,7 +41,7 @@ class DashboardController extends Controller
                 ->groupBy(DB::raw("Month(created_at)"))
                 ->pluck("month");
 
-            $letter_yearly = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,);
+            $letter_yearly = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             foreach ($months as $index => $month) {
                 $letter_yearly[$month - 1] = $letterData[$index];
             }

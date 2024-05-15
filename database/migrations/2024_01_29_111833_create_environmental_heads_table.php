@@ -20,6 +20,7 @@ return new class extends Migration
                   ->cascadeOnUpdate()
                   ->nullOnDelete();
             $table->string("name");
+            $table->string("phone", 20)->nullable();
             $table->timestamps();
         });
     }
