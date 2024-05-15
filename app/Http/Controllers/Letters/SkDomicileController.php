@@ -155,7 +155,11 @@ class SkDomicileController extends Controller
     public function download(SkDomicileLetter $skDomicile, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-domicile.letter-template', ['letter' => $skDomicile]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-domicile.letter-template', [
+            'letter' => $skDomicile,
+            "user" => auth()->user(),
+            "village_head" => $this->user->where("role", Role::VILLAGE_HEAD)->first()
+        ]);        
 
         return $generated->download("sk-domisili-" . $skDomicile->sk->citizent->name . ".$type");
     }

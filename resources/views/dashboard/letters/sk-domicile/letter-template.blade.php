@@ -338,10 +338,10 @@
                         @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))
                             <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
+                    {{-- @elseif (Request::is("letters/sk-domicile/$letter->id/preview*"))
                         @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
                             <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
+                        @endif --}}
                     @endif
                 </div>
                 @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)

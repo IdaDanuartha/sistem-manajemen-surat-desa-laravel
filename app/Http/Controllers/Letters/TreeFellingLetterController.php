@@ -153,7 +153,7 @@ class TreeFellingLetterController extends Controller
     public function download(TreeFellingLetter $treeFelling, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.tree-felling.letter-template', ['letter' => $treeFelling]);        
+        $generated = Pdf::loadView('dashboard.letters.tree-felling.letter-template', ['letter' => $treeFelling, "user" => auth()->user()]);        
 
         return $generated->download("surat-penebangan-pohon-" . $treeFelling->sk->citizent->name . ".$type");
     }
