@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,758 +8,239 @@
     <title>Document</title>
 
     <style>
-        .title {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            border-bottom: 2px solid black;
-        }
-
-        .description {
-            position: relative;
-            top: 6%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 15px;
-        }
-
-        .input-group label {
-            width: 22% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group div {
-            width: 5% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group span {
-            width: 67% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group.one label {
-            top: 11%;
-            left: 17.5%;
-        }
-
-        .input-group.one div {
-            top: 11%;
-            left: 28%;
-        }
-
-        .input-group.one span {
-            top: 11%;
-            left: 61.3%;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .input-group.two label {
-            top: 13.5%;
-            left: 17.5%;
-        }
-
-        .input-group.two div {
-            top: 13.5%;
-            left: 28%;
-        }
-
-        .input-group.two span {
-            top: 13.5%;
-            left: 61.3%;
-        }
-
-        .input-group.three label {
-            top: 16%;
-            left: 17.5%;
-        }
-
-        .input-group.three div {
-            top: 16%;
-            left: 28%;
-        }
-
-        .input-group.three span {
-            top: 16%;
-            left: 61.3%;
-        }
-
-        .input-group.four label {
-            top: 22.5%;
-            left: 17.5%;
-        }
-
-        .input-group.four div {
-            top: 22.5%;
-            left: 28%;
-        }
-
-        .input-group.four span {
-            top: 22.5%;
-            left: 61.3%;
-        }
-
-        .input-group.six label {
-            top: 25%;
-            left: 17.5%;
-        }
-
-        .input-group.six div {
-            top: 25%;
-            left: 28%;
-        }
-
-        .input-group.six span {
-            top: 25%;
-            left: 61.3%;
-        }
-
-        .input-group.seven label {
-            top: 31%;
-            left: 17.5%;
-        }
-
-        .input-group.seven div {
-            top: 31%;
-            left: 28%;
-        }
-
-        .input-group.seven span {
-            top: 31%;
-            left: 61.3%;
-        }
-
-        .input-group.eight label {
-            top: 33.5%;
-            left: 17.5%;
-        }
-
-        .input-group.eight div {
-            top: 33.5%;
-            left: 28%;
-        }
-
-        .input-group.eight span {
-            top: 33.5%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-            top: 36%;
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-            top: 36%;
-            left: 28%;
-        }
-
-        .input-group.nine span {
-            top: 36%;
-            left: 61.3%;
-        }
-
-        .input-group.ten label {
-            top: 40%;
-            left: 17.5%;
-        }
-
-        .input-group.ten div {
-            top: 40%;
-            left: 28%;
-        }
-
-        .input-group.ten span {
-            top: 40%;
-            left: 61.3%;
-        }
-
-        .input-group.eleven label {
-            top: 42.5%;
-            left: 17.5%;
-        }
-
-        .input-group.eleven div {
-            top: 42.5%;
-            left: 28%;
-        }
-
-        .input-group.eleven span {
-            top: 42.5%;
-            left: 61.3%;
-        }
-
-        .input-group.twelve label {
-            top: 45%;
-            left: 17.5%;
-        }
-
-        .input-group.twelve div {
-            top: 45%;
-            left: 28%;
-        }
-
-        .input-group.twelve span {
-            top: 45%;
-            left: 61.3%;
-        }
-
-        .input-group.thirteen label {
-            top: 47.5%;
-            left: 17.5%;
-        }
-
-        .input-group.thirteen div {
-            top: 47.5%;
-            left: 28%;
-        }
-
-        .input-group.thirteen span {
-            top: 47.5%;
-            left: 61.3%;
-        }
-
-        .input-group.fourteen label {
-            top: 50%;
-            left: 17.5%;
-        }
-
-        .input-group.fourteen div {
-            top: 50%;
-            left: 28%;
-        }
-
-        .input-group.fourteen span {
-            top: 50%;
-            left: 61.3%;
-        }
-
-        .input-group.fifteen label {
-            top: 52.5%;
-            left: 17.5%;
-        }
-
-        .input-group.fifteen div {
-            top: 52.5%;
-            left: 28%;
-        }
-
-        .input-group.fifteen span {
-            top: 52.5%;
-            left: 61.3%;
-        }
-
-        .input-group.sixteen label {
-            top: 55%;
-            left: 17.5%;
-        }
-
-        .input-group.sixteen div {
-            top: 55%;
-            left: 28%;
-        }
-
-        .input-group.sixteen span {
-            top: 55%;
-            left: 61.3%;
-        }
-
-        .input-group.seventeen label {
-            top: 57.5%;
-            left: 17.5%;
-        }
-
-        .input-group.seventeen div {
-            top: 57.5%;
-            left: 28%;
-        }
-
-        .input-group.seventeen span {
-            top: 57.5%;
-            left: 61.3%;
-        }
-
-        .input-group.eightteen label {
-            top: 63%;
-            left: 17.5%;
-        }
-
-        .input-group.eightteen div {
-            top: 63%;
-            left: 28%;
-        }
-
-        .input-group.eightteen span {
-            top: 63%;
-            left: 61.3%;
-        }
-
-        .input-group.nineteen label {
-            top: 65.5%;
-            left: 17.5%;
-        }
-
-        .input-group.nineteen div {
-            top: 65.5%;
-            left: 28%;
-        }
-
-        .input-group.nineteen span {
-            top: 65.5%;
-            left: 61.3%;
-        }
-
-        .input-group.twenty label {
-            top: 68%;
-            left: 17.5%;
-        }
-
-        .input-group.twenty div {
-            top: 68%;
-            left: 28%;
-        }
-
-        .input-group.twenty span {
-            top: 68%;
-            left: 61.3%;
-        }
-
-        .input-group.twentyone label {
-            top: 70.5%;
-            left: 17.5%;
-        }
-
-        .input-group.twentyone div {
-            top: 70.5%;
-            left: 28%;
-        }
-
-        .input-group.twentyone span {
-            top: 70.5%;
-            left: 61.3%;
-        }
-
-        .input-group.twentytwo label {
-            top: 73%;
-            left: 17.5%;
-        }
-
-        .input-group.twentytwo div {
-            top: 73%;
-            left: 28%;
-        }
-
-        .input-group.twentytwo span {
-            top: 73%;
-            left: 61.3%;
-        }
-
-        .input-group.twentythree label {
-            top: 76.5%;
-            left: 17.5%;
-        }
-
-        .input-group.twentythree div {
-            top: 76.5%;
-            left: 28%;
-        }
-
-        .input-group.twentythree span {
-            top: 76.5%;
-            left: 61.3%;
-        }
-
-        .input-group.five label {
-            top: 18.5%;
-            left: 17.5%;
-        }
-
-        .input-group.five div {
-            top: 18.5%;
-            left: 28%;
-        }
-
-        .input-group.five span {
-            top: 18.5%;
-            left: 61.3%;
-        }
-
-        .card-ttd:first-child p:first-child {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 22.7%;
-            left: 18%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:first-child p:nth-child(2) {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 19.8%;
-            left: 18%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:first-child .card-canvas {
-            width: 26%;
-            height: 70px;
-            position: absolute;
-            top: 16.7%;
-            left: 18%;
-            transform: translate(-50%);
-            text-align: center;
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:first-child p:last-child {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            top: 10.3%;
-            left: 18%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:nth-child(2) p:first-child {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 22.7%;
-            left: 49%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:nth-child(2) p:nth-child(2) {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 19.8%;
-            left: 49%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:nth-child(2) .card-canvas {
-            width: 26%;
-            height: 70px;
-            position: absolute;
-            top: 16.7%;
-            left: 49%;
-            transform: translate(-50%);
-            text-align: center;
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:nth-child(2) p:last-child {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            top: 10.3%;
-            left: 49%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        /* .card-ttd:nth-child(2) span.other {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            top: -1%;
-            left: 49%;
-            transform: translate(-50%);
-            text-align: center;
-        } */
-
-        .card-ttd:last-child p:first-child {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 22.7%;
-            left: 80%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:last-child p:nth-child(2) {
-            font-size: 0.913rem;
-            width: 26%;
-            position: absolute;
-            top: 19.8%;
-            left: 80%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .card-ttd:last-child .card-canvas {
-            width: 26%;
-            height: 70px;
-            position: absolute;
-            top: 16.7%;
-            left: 80%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:last-child p:last-child {
-            font-size: 0.875rem;
-            width: 26%;
-            position: absolute;
-            top: 10.3%;
-            left: 80%;
-            transform: translate(-50%);
-            text-align: center;
-        }
-
-        .description-caption {
-            position: relative;
-            top: 29%;
-            left: 56.5%;
-            width: 100%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
-        .description-caption-two {
-            position: relative;
-            top: 69%;
-            left: 56.5%;
-            width: 100%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
-        .description-other {
+        .center-text {
             position: relative;
             top: 0;
             left: 50%;
-            width: 92%;
-            transform: translate(-50%);
+            transform: translateX(-50%);
         }
 
-        .paragraph-one {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .paragraph-two {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .image-full {
+        table td {
             width: 100%;
-            position: relative;
-            top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
-        }
-        
-        .container {
-            position: relative;
+            font-size: 0.913rem !important;
+            line-height: 130%;
         }
 
-        .page_break { page-break-before: always; }
-
+        p {
+            font-size: 0.913rem !important;
+            line-height: 130%;
+        }
     </style>
 </head>
+
 <body>
-    
-    <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-    <div class="container">
-        <h3 class="title">Surat Keterangan Hibah</h3>
-        <div class="content-form">
-            <p class="description">Yang bertanda tangan di bawah ini:</p>
-            <div class="input-group one">
-                <label>Nama</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->name }}</span>
-            </div>
-            <div class="input-group two">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format("d-m-Y") }}</span>
-            </div>
-            <div class="input-group three">
-                <label>Jenis Kelamin</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->gender->label() }}</span>
-            </div>
-            <div class="input-group four">
-                <label>Pekerjaan</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->work }}</span>
-            </div>
-            <div class="input-group six">
-                <label>No.KTP</label>
-                <div>:</div>
-                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
-            </div>
-            <div class="input-group seven">
-                <label>No. polisi</label>
-                <div>:</div>
-                <span>{{ $letter->police_number }}</span>
-            </div>
-            <div class="input-group eight">
-                <label>Nama Pemilik</label>
-                <div>:</div>
-                <span>{{ $letter->owner_name }}</span>
-            </div>
-            <div class="input-group nine">
-                <label>Alamat</label>
-                <div>:</div>
-                <span>{{ $letter->address }}</span>
-            </div>
-            <div class="input-group ten">
-                <label>Merk/Type</label>
-                <div>:</div>
-                <span>{{ $letter->brand }}</span>
-            </div>
-            <div class="input-group eleven">
-                <label>Jenis</label>
-                <div>:</div>
-                <span>{{ $letter->type }}</span>
-            </div>
-            <div class="input-group twelve">
-                <label>Model</label>
-                <div>:</div>
-                <span>{{ $letter->model }}</span>
-            </div>
-            <div class="input-group thirteen">
-                <label>Tahun Pembuatan</label>
-                <div>:</div>
-                <span>{{ $letter->production_year }}</span>
-            </div>
-            <div class="input-group fourteen">
-                <label>Isi Selinder</label>
-                <div>:</div>
-                <span>{{ $letter->cylinder_filling }}</span>
-            </div>
-            <div class="input-group fifteen">
-                <label>No. Rangka</label>
-                <div>:</div>
-                <span>{{ $letter->frame_number }}</span>
-            </div>
-            <div class="input-group sixteen">
-                <label>No. Mesin</label>
-                <div>:</div>
-                <span>{{ $letter->machine_number }}</span>
-            </div>
-            <div class="input-group seventeen">
-                <label>No. BPKB</label>
-                <div>:</div>
-                <span>{{ $letter->bpkb_number }}</span>
-            </div>
-            <div class="input-group five">
-                <label>Alamat</label>
-                <div>:</div>
-                <span>{{ $letter->address }}</span>
-            </div>
-            <div class="input-group eightteen">
-                <label>Nama</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->name }}</span>
-            </div>
-            <div class="input-group nineteen">
-                <label>Tempat Tanggal Lahir</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->birth_place . ", " . $letter->citizent->birth_date->format("d-m-Y") }}</span>
-            </div>
-            <div class="input-group twenty">
-                <label>Jenis Kelamin</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->gender->label() }}</span>
-            </div>
-            <div class="input-group twentyone">
-                <label>Pekerjaan</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->work }}</span>
-            </div>
-            <div class="input-group twentytwo">
-                <label>Alamat</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->address }}</span>
-            </div>
-            <div class="input-group twentythree">
-                <label>No. KTP</label>
-                <div>:</div>
-                <span>{{ $letter->citizent->national_identify_number }}</span>
-            </div>
-            <p class="description-caption">Dengan ini saya mengibahkan kendaraan dengan data sebagai berikut :</p>
-            <p class="description-caption-two">Dihibahkan kepada Anak Saya dengan Identitas sebagai berikut :</p>
+    <main style="width: 100%; height: 100%; position: relative;">
+        <div class="wrapper-header" style="width: 100%; position: relative;">
+            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+                style="border-bottom: 3px solid black; width: 100%;">
+            <h1 class="center-text"
+                style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 39.5%; margin-top: 24px;">
+                Surat Keterangan Hibah</h1>
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td colspan="3" style="padding-bottom: 8px !important;">Yang bertanda tangan di bawah ini,</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Nama</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->name }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Tempat Tanggal Lahir</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Jenis Kelamin</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->gender->label() }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Pekerjaan</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->work }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. KTP</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->national_identify_number }}</td>
+                </tr>
+            </table>
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td colspan="3" style="padding-bottom: 8px !important;">Dengan ini saya mengibahkan kendaraan
+                        dengan data sebagai berikut :</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. Polisi</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->police_number }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Nama Pemilik</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->owner_name }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Alamat</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->address }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Merk/Type</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->brand }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Jenis</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->type }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Model</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->model }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Tahun Pembuatan</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->production_year }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Isi Selinder</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->cylinder_filling }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. Rangka</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->frame_number }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. Mesin</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->machine_number }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. BPKB</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->bpkb_number }}</td>
+                </tr>
+            </table>
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td colspan="3" style="padding-bottom: 8px !important;">Yang bertanda tangan di bawah ini,</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Nama</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->name }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Tempat Tanggal Lahir</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->birth_place . ', ' . $letter->citizent->birth_date->format('d-m-Y') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Jenis Kelamin</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->gender->label() }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Pekerjaan</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->work }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Alamat</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->address }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. KTP</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->citizent->national_identify_number }}</td>
+                </tr>
+            </table>
+            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+                style="border-bottom: 3px solid black; width: 100%;">
+            <p style="margin-top: 62px; text-indent: 42px;">Demikian surat pernyataan ini saya buat dengan sebenarnya
+                untuk dapat dipergunakan sebagai mana
+                mestinya.
+            </p>
         </div>
-        <div class="page_break"></div>
-        <div class="description-other">
-            <p class="paragraph-one">Demikian surat pernyataan ini saya buat dengan sebenarnya untuk dapat dipergunakan sebagai mana mestinya.</p>
+        <div class="wrapper-footer" style="margin-top: 62px;">
+            <table>
+                <tr>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Yang menerima Hibah
+                        </p>
+                        @if ($letter->citizent->user->signature_image)
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                        @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->citizent->name }}</p>
+                    </td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui, <br> Lurah
+                            Subagan
+                        </p>
+                        @if (isset($letter->sk->villageHead))
+                            @if ($letter->sk->status_by_village_head === 1)
+                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @endif
+                        @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
+                            @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
+                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            @endif
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                        @endif
+                        @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                {{ $letter->sk->villageHead->name }} <br> NIP :
+                                {{ $letter->sk->villageHead->employee_number }}</p>
+                        @else
+                            <p style="opacity: 0;">Lorem ipsum dolor sit amet consectetur consectetur</p>
+                        @endif
+                    </td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
+                            {{ $letter->sk->created_at->format('d M Y') }} <br>
+                            Yang membuat pernyataan memberi hibah</p>
+                        @if (isset($letter->sk->citizent->user->signature_image))
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
+                            @if ($user->isCitizent() && $user->signature_image)
+                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;">
+                                </div>
+                            @endif
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;">
+                            </div>
+                        @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->sk->citizent->name }}</p>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="content-ttd">
-            <div class="card-ttd">
-                {{-- <p>Find out</p> --}}
-                <p>{{ $letter->citizent->name }}</p>
-                <div class="card-canvas">
-                    @if ($letter->citizent->user->signature_image)
-                        <img src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @endif                
-                </div>
-                <p>Yang menerima Hibah</p>
-            </div>
-            <div class="card-ttd">
-                @if ($letter->sk->villageHead && $letter->sk->status_by_village_head === 1)
-                    <p>
-                        <span style="text-decoration: underline;">{{ $letter->sk->villageHead->name }} <br>
-                        </span>
-                        <span> NIP : {{ $letter->sk->villageHead->employee_number }}</span>         
-                    </p>   
-                @endif   
-                <div class="card-canvas">
-                    @if(isset($letter->sk->villageHead))
-                        @if ($letter->sk->status_by_village_head === 1)
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
-                        @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @endif 
-                </div>
-                <p>Mengetahui, <br> 
-                    Lurah Subagan</p>       
-            </div>
-            <div class="card-ttd">
-                <p>{{ $letter->sk->citizent->name }}</p>
-                <div class="card-canvas">
-                    @if(isset($letter->sk->citizent->user->signature_image))
-                        <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}" style="width: 100%; height: 100%;">
-                    @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
-                        @if (($user->isCitizent() && $user->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
-                    @endif                 
-                </div>
-                <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }} <br>
-                    Yang membuat pernyataan memberi hibah</p>
-            </div>
-        </div>
-    </div>
+    </main>
 </body>
+
 </html>
