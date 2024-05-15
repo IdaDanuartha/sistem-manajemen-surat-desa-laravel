@@ -100,7 +100,7 @@
 
 <body>
     <div class="wrapper">
-        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
 
         <div class="title-surat-wrapper">
             <h1 class="title-surat">SURAT PERNYATAAN PEMBAGIAN WARIS</h1>
@@ -181,7 +181,7 @@
                     <td class="w-full">
                         @if ($item->citizent->user->signature_image)
                             <img width="100px" height="auto"
-                                src="{{ public_path('uploads/users/signatures/' . $item->citizent->user->signature_image) }}"
+                                src="{{ url('uploads/users/signatures/' . $item->citizent->user->signature_image) }}"
                                 alt="">
                         @endif
                         <div style="border-bottom: 1px dashed black; width: 120px; margin-bottom: 8px;"></div>
@@ -191,12 +191,12 @@
             {{-- <tr class="ahli-waris-name-wrapper">
             <td style="width: 30px">10.</td>
             <td style="width: 200px">Sapiah</td>
-            <td class="w-full"> <img width="100px" height="auto" src="{{public_path('assets/ttd.png')}}" alt=""></td>
+            <td class="w-full"> <img width="100px" height="auto" src="{{url('assets/ttd.png')}}" alt=""></td>
         </tr>
         <tr class="ahli-waris-name-wrapper">
             <td style="width: 30px">100.</td>
             <td style="width: 200px">Sapiah</td>
-            <td class="w-full"> <img width="100px" height="auto" src="{{public_path('assets/ttd.png')}}" alt=""></td>
+            <td class="w-full"> <img width="100px" height="auto" src="{{url('assets/ttd.png')}}" alt=""></td>
         </tr> --}}
         </table>
         <div class="" style="margin-top: 150px;">
@@ -214,13 +214,13 @@
                     <td style="height: 60px;">
                         @if ($letter->sk->citizent->user->signature_image)
                             <img width="100" height="auto"
-                                src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
+                                src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                         @endif
                     </td>
                     <td style="height: 60px;">
                         @if(isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))
-                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}"> 
+                                <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"> 
                             @endif
                         @endif
                     </td>
@@ -261,18 +261,18 @@
                         @if (isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1)
                                 <img width="100" height="auto"
-                                    src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
+                                    src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                             @endif
                         {{-- @elseif (Request::is("letters/sk-inheritance-distribution/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                                 <img width="100" height="auto"
-                                    src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                                    src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
                             @endif --}}
                         @endif
                     </td>
                     <td style="height: 60px;">
                         @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100; height: auto;">
                         @endif
                     </td>

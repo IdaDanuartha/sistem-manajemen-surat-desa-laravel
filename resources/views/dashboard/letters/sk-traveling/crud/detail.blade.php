@@ -101,7 +101,16 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->purpose }}" disabled />
             </div>
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
-				<div class="col-span-12 md:col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-6 flex flex-col">
+					<label class="text-second mb-1">Nomor Telepon Kepala Lingkungan</label>
+					<input
+						type="text"
+						class="input-crud"
+						value="{{ $get_letter->sk->environmentalHead->phone ?? "-" }}"
+						disabled
+					>
+				</div>
+				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label class="text-second mb-1">Kepala Lingkungan</label>
 					<input
 						type="text"
@@ -112,7 +121,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-12 md:col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label class="text-second mb-1">Kepala Seksi</label>
 					<input
 						type="text"
@@ -123,7 +132,7 @@
 						disabled
 					>
 				</div>
-				<div class="col-span-12 md:col-span-4 flex flex-col">
+				<div class="col-span-12 md:col-span-6 flex flex-col">
 					<label class="text-second mb-1">Kepala Kelurahan</label>
 					<input
 						type="text"
