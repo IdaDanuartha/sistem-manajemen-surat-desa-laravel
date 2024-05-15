@@ -100,7 +100,7 @@
 
 <body>
     <div class="wrapper">
-        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
+        <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
 
         <div class="title-surat-wrapper">
             <h1 class="title-surat">SURAT PERNYATAAN PEMBAGIAN WARIS</h1>
@@ -139,10 +139,16 @@
             </div>
             <div class="paragraph-content-wrapper">
                 <p class="paragraph">Dengan ini menerangkan:</p>
-                <p class="paragraph">
+                {{-- <p class="paragraph">
                     Bahwa kami selaku ahli waris dari almarhum {{ $letter->citizent->name }} telah sepakat untuk membagi
                     bidang tanah warisan seluas {{ $letter->surface_area }} M2 sesuai dengan data luas tanah yang
                     tercantum dalam Sertifikat Hak Milik no {{ $letter->certificate_number }} / Kel Subagan dengan
+                    pembagian sebagai berikut :
+                </p> --}}
+                <p class="paragraph">
+                    Bahwa kami selaku ahli waris telah sepakat untuk membagi
+                    bidang tanah warisan seluas {{ $letter->surface_area }} M2 sesuai dengan data luas tanah yang
+                    tercantum dalam Sertifikat Hak Milik No {{ $letter->certificate_number }} / Kel Subagan dengan
                     pembagian sebagai berikut :
                 </p>
                 <ul class="list-warisan">
@@ -175,7 +181,7 @@
                     <td class="w-full">
                         @if ($item->citizent->user->signature_image)
                             <img width="100px" height="auto"
-                                src="{{ url('uploads/users/signatures/' . $item->citizent->user->signature_image) }}"
+                                src="{{ public_path('uploads/users/signatures/' . $item->citizent->user->signature_image) }}"
                                 alt="">
                         @endif
                         <div style="border-bottom: 1px dashed black; width: 120px; margin-bottom: 8px;"></div>
@@ -185,15 +191,15 @@
             {{-- <tr class="ahli-waris-name-wrapper">
             <td style="width: 30px">10.</td>
             <td style="width: 200px">Sapiah</td>
-            <td class="w-full"> <img width="100px" height="auto" src="{{url('assets/ttd.png')}}" alt=""></td>
+            <td class="w-full"> <img width="100px" height="auto" src="{{public_path('assets/ttd.png')}}" alt=""></td>
         </tr>
         <tr class="ahli-waris-name-wrapper">
             <td style="width: 30px">100.</td>
             <td style="width: 200px">Sapiah</td>
-            <td class="w-full"> <img width="100px" height="auto" src="{{url('assets/ttd.png')}}" alt=""></td>
+            <td class="w-full"> <img width="100px" height="auto" src="{{public_path('assets/ttd.png')}}" alt=""></td>
         </tr> --}}
         </table>
-        <div class="" style="margin-top: 30px;">
+        <div class="" style="margin-top: 150px;">
             <table class="w-full">
                 <tr>
                     <td class="w-full" style="text-align: center">Saksi - Saksi</td>
@@ -202,19 +208,20 @@
             <table class="w-full">
                 <tr class="w-full">
                     <td class="ttd-text">Pemberi Kuasa</td>
-                    <td class="ttd-text">Penerima Kuasa,</td>
+                    <td class="ttd-text">Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }},</td>
                 </tr>
                 <tr style="text-align: center">
                     <td style="height: 60px;">
                         @if ($letter->sk->citizent->user->signature_image)
                             <img width="100" height="auto"
-                                src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
+                                src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                         @endif
                     </td>
                     <td style="height: 60px;">
-                        @if ($letter->citizent->user->signature_image)
-                            <img width="100" height="auto"
-                                src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}">
+                        @if(isset($letter->sk->environmentalHead))
+                            @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))
+                                <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}"> 
+                            @endif
                         @endif
                     </td>
                 </tr>
@@ -223,9 +230,13 @@
                         <strong style="font-size: 14px">{{ $letter->sk->citizent->name }}</strong>
                     </td>
                     <td class="ttd-text">
-                        <strong style="font-size: 14px">
-                            {{ $letter->citizent->name }}
-                        </strong>
+                        @if(isset($letter->sk->environmentalHead))
+                            @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))
+                                <strong style="font-size: 14px">
+                                    {{ $letter->sk->environmentalHead->name }}
+                                </strong>
+                            @endif
+                        @endif
                     </td>
                 </tr>
             </table>
@@ -250,18 +261,18 @@
                         @if (isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1)
                                 <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
+                                    src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
                             @endif
-                        @elseif (Request::is("letters/sk-inheritance-distribution/$letter->id/preview*"))
+                        {{-- @elseif (Request::is("letters/sk-inheritance-distribution/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                                 <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
-                            @endif
+                                    src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                            @endif --}}
                         @endif
                     </td>
                     <td style="height: 60px;">
                         @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                            <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100; height: auto;">
                         @endif
                     </td>

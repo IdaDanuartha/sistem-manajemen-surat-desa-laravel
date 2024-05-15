@@ -14,7 +14,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div> --}}
-			<div class="col-span-12 flex flex-col">
+			{{-- <div class="col-span-12 flex flex-col">
                 <label for="citizent_id" class="text-second mb-2">Penerima Kuasa</label>
                 <select name="citizent_id" id="citizent_id" class="citizent-select2">
 					<option value="">Cari nama penerima kuasa</option>
@@ -25,7 +25,7 @@
 				@error('citizent_id')
 					<div class="text-danger mt-1">{{ $message }}</div>
 				@enderror
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="certificate_number" class="text-second mb-2">Nomor Sertifikat Hak Milik</label>
                 <input type="number" class="input-crud" name="certificate_number" id="certificate_number" value="{{ $get_letter->certificate_number }}"

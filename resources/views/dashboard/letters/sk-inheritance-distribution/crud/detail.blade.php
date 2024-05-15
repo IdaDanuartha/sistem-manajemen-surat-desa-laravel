@@ -80,7 +80,7 @@
 			</div>
 		@endif
 		<form class="grid grid-cols-12 gap-4">						
-			<div class="col-span-12 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Kode Surat</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->code }}" disabled />
 			</div>
@@ -92,10 +92,10 @@
 				<label for="" class="text-second mb-1">Pemberi Kuasa</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->sk->citizent->name }}" disabled />
 			</div>
-			<div class="col-span-12 md:col-span-6 flex flex-col">
+			{{-- <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="" class="text-second mb-1">Penerima Kuasa</label>
                 <input type="text" class="input-crud" value="{{ $get_letter->citizent->name }}" disabled />
-            </div>
+            </div> --}}
 			<div class="col-span-12 md:col-span-6 flex flex-col">
 				<label for="" class="text-second mb-1">Nomor Sertifikat Hak Milik</label>
 				<input type="text" class="input-crud" value="{{ $get_letter->certificate_number }}" disabled />

@@ -19,10 +19,10 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignIdFor(Citizent::class)
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            // $table->foreignIdFor(Citizent::class)
+            //     ->constrained()
+            //     ->cascadeOnUpdate()
+            //     ->cascadeOnDelete();
             $table->integer("surface_area"); // luas tanah (meter)
             $table->string("certificate_number"); // nomor sertifikat hak milik
             $table->timestamps();

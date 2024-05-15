@@ -166,7 +166,7 @@
                 <tr class="w-full">
                     <td class="ttd-text">
                         Mengetahui <br>
-                        Kepala Lingkungan Desa
+                        Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}
                     </td>
                     <td class="ttd-text">Saya yang membuat Silsilah Keluarga</td>
                 </tr>
