@@ -24,6 +24,7 @@ class StoreEnvironmentalHeadRequest extends FormRequest
     {
         return [
             'name' => "required|unique:environmental_heads,name",
+            'phone_number' => "nullable|min:10|max:13",
             'environmental_id' => "required",
             'user.email' => 'required|email|unique:users,email',
 			'user.password' => 'required|min:6',
@@ -36,6 +37,7 @@ class StoreEnvironmentalHeadRequest extends FormRequest
     {
         return [
             'name' => 'nama',
+            'phone_number' => 'nomor telepon',
             'environmental_id' => 'lingkungan',
             'user.email' => 'email',
             'user.password' => 'password',

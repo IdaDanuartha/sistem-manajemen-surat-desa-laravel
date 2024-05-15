@@ -36,6 +36,15 @@
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
+                    @if (auth()->user()->isEnvironmentalHead())
+                        <div class="col-md-6 col-12 mb-4 flex flex-col">
+                            <label class="text-second">Nomor Telepon</label>
+                            <input name="phone_number" type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number }}" />
+                            @error('phone_number')
+                                <div class="text-danger mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif
                     @if (auth()->user()->isSectionHead() || auth()->user()->isVillageHead())
                     <div class="col-md-6 col-12 mb-4 flex flex-col">
                         <label for="employee_number" class="text-second">NIP</label>

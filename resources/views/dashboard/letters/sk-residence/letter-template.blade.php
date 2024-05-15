@@ -356,8 +356,8 @@
                 <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="description-other">
-                <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar orang tersebut bertempat tinggal di Lingkungan Desa Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali sejak tahun {{ $letter->year }}.</p>
-                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan Sebagaimana mestinya.</p>
+                <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No: {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format("d M Y") }}, memang benar orang tersebut bertempat tinggal di Lingkungan {{ $letter->sk->citizent->environmental->name }} Kelurahan Subagan, Kecamatan Karangasem, Kabupaten Karangasem, Provinsi Bali sejak tahun {{ $letter->year }}.</p>
+                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagai mana mestinya.</p>
             </div>
         </div>
         <div class="content-ttd">

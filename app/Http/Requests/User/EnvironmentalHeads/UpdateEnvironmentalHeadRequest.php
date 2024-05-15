@@ -23,6 +23,7 @@ class UpdateEnvironmentalHeadRequest extends FormRequest
     {
         return [
             'name' => "required",
+            'phone_number' => "nullable|min:10|max:13",
             'environmental_id' => "required",
             'user.email' => 'required|email',
 			'user.password' => 'nullable|min:6',
@@ -35,6 +36,7 @@ class UpdateEnvironmentalHeadRequest extends FormRequest
     {
         return [
             'name' => 'nama',
+            'phone_number' => 'nomor telepon',
             'environmental_id' => 'lingkungan',
             'user.email' => 'email',
             'user.password' => 'password',

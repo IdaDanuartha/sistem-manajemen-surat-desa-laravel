@@ -417,7 +417,7 @@
                                 <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
                             </div>  
                         @endif
-                    @elseif (Request::is("letters/sk-parent-income/$letter->id/preview*"))
+                    {{-- @elseif (Request::is("letters/sk-parent-income/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
@@ -425,7 +425,7 @@
                                 <p>{{ $letter->sk->villageHead->name }}</p>    
                                 <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
                             </div>  
-                        @endif
+                        @endif --}}
                     @endif
                 </div>
             </div>

@@ -26,7 +26,7 @@ class UpdateSkTravelingRequest extends FormRequest
             "sk.cover_letter_number" => "required",
             "sk.is_published" => "nullable",  
             "travel_destination" => "required",            
-            "purpose" => "required",            
+            "purpose" => "nullable",            
         ];
     }
 
@@ -36,7 +36,7 @@ class UpdateSkTravelingRequest extends FormRequest
             "sk.reference_number" => "nomor surat",
             "sk.cover_letter_number" => "nomor SP kaling",
             "travel_destination" => "tempat dituju",
-            "purpose" => "tujuan penggunaan",
+            "purpose" => "keperluan surat",
         ];
     }
 }

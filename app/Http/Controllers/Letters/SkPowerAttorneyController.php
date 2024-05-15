@@ -149,7 +149,12 @@ class SkPowerAttorneyController extends Controller
         $subdistrictHead = $this->subdistrictHead->find(1);
 
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney, "user" => auth()->user(), 'subdistrictHead' => $subdistrictHead]);        
+        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', 
+        [
+            'letter' => $skPowerAttorney, 
+            "user" => auth()->user(), 
+            'subdistrictHead' => $subdistrictHead
+        ]);        
 
         return $generated->stream("sk-ahli-waris-" . $skPowerAttorney->sk->citizent->name . ".pdf");
     }
@@ -157,7 +162,13 @@ class SkPowerAttorneyController extends Controller
     public function download(SkPowerAttorney $skPowerAttorney, $type = "pdf")
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
-        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', ['letter' => $skPowerAttorney]);        
+
+        $subdistrictHead = $this->subdistrictHead->find(1);
+        $generated = Pdf::loadView('dashboard.letters.sk-power-attorney.letter-template', [
+            'letter' => $skPowerAttorney, 
+            "user" => auth()->user(), 
+            'subdistrictHead' => $subdistrictHead
+        ]);        
 
         return $generated->download("sk-ahli-waris-" . $skPowerAttorney->sk->citizent->name . ".$type");
     }

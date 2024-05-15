@@ -29,7 +29,7 @@ class StoreSktmRequest extends FormRequest
             "sktm_type" => "required",
             "citizent_id" => "nullable",
             "school_name" => "nullable",
-            "purpose" => "required"
+            "purpose" => "nullable"
         ];
     }
 
@@ -41,7 +41,7 @@ class StoreSktmRequest extends FormRequest
             "sktm_type" => "tipe sktm",
             "citizent_id" => "nama anak",
             "school_name" => "nama sekolah",
-            "purpose" => "tujuan"
+            "purpose" => "keperluan surat"
         ];
     }
 }

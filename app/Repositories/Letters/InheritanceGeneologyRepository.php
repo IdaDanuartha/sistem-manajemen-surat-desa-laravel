@@ -148,7 +148,7 @@ class InheritanceGeneologyRepository
       if (isset($request["sk"]["is_published"])) {
         $environmentalHead = $this->environmentalHead->where("environmental_id", $letter->sk->citizent->environmental_id)->first();
         Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $letter->sk->code));
-
+        
         $request["sk"]["is_published"] = true;
       }
 
@@ -163,7 +163,8 @@ class InheritanceGeneologyRepository
         $request['inheritance_image'] = $letter->inheritance_image;
       }
       
-      $letter->updateOrFail($request);
+      $letter->sk->updateOrFail(Arr::get($request, "sk"));
+      $letter->updateOrFail(Arr::except($request, "sk"));
 
       DB::commit();
       return true;

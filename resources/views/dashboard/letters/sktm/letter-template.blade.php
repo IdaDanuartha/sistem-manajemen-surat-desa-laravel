@@ -146,62 +146,62 @@
         }
 
         .input-group.nine label {
-            top: 68%;
+            top: 66%;
             left: 17.5%;
         }
 
         .input-group.nine div {
-            top: 68%;
+            top: 66%;
             left: 28%;
         }
 
         .input-group.nine span {
-            top: 68%;
+            top: 66%;
             left: 61.3%;
         }
 
         .input-group.ten label {
-            top: 71%;
+            top: 69%;
             left: 17.5%;
         }
 
         .input-group.ten div {
-            top: 71%;
+            top: 69%;
             left: 28%;
         }
 
         .input-group.ten span {
-            top: 71%;
+            top: 69%;
             left: 61.3%;
         }
 
         .input-group.eleven label {
-            top: 74%;
+            top: 72%;
             left: 17.5%;
         }
 
         .input-group.eleven div {
-            top: 74%;
+            top: 72%;
             left: 28%;
         }
 
         .input-group.eleven span {
-            top: 74%;
+            top: 72%;
             left: 61.3%;
         }
 
         .input-group.twelve label {
-            top: 77%;
+            top: 75%;
             left: 17.5%;
         }
 
         .input-group.twelve div {
-            top: 77%;
+            top: 75%;
             left: 28%;
         }
 
         .input-group.twelve span {
-            top: 77%;
+            top: 75%;
             left: 61.3%;
         }
 
@@ -311,7 +311,7 @@
 
         .description-other-bottom {
             position: relative;
-            top: 70.5%;
+            top: 67.5%;
             left: 50%;
             width: 92%;
             transform: translate(-50%);
@@ -449,10 +449,10 @@
                         ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
                         / miskin dan lansia .</p>
                 @endif
-                {{-- @if (!$letter->sktm_type->value === 2) --}}
-                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan
-                    {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.</p>
-                {{-- @endif --}}
+                @if (!$letter->sktm_type->value === 2)
+                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan
+                    {{ $letter->purpose === null ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.</p>
+                @endif
             </div>
             @if ($letter->sktm_type->value === 2)
                 <div class="input-group nine">
@@ -476,14 +476,14 @@
                     <span>{{ $letter->sktmSchool->school_name }}</span>
                 </div>
             @endif
-            {{-- @if ($letter->sktm_type->value === 2)
+            @if ($letter->sktm_type->value === 2)
                 <div class="description-other-bottom">
-                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === "-" ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
+                    <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan {{ $letter->purpose === null ? "sebagai mana mestinya" : "sebagai " .$letter->purpose }}.</p>
                 </div>
-            @endif --}}
+            @endif
         </div>
         <div class="content-ttd">
-            @if ($letter->sktm_type->value === 2 || $letter->sktm_type->value === 5)
+            {{-- @if ($letter->sktm_type->value === 2 || $letter->sktm_type->value === 5)
                 <div class="card-ttd">
                     <p>Mengetahui</p>
                     <p>Camat Karangasem</p>                
@@ -495,7 +495,7 @@
                         @endif
                     </div>
                 </div>
-            @endif
+            @endif --}}
             <div class="card-ttd">
                 <p>Subagan, {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
                 <p>A.n, Lurah Subagan</p>

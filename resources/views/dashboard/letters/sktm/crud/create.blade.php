@@ -60,7 +60,7 @@
 			<div class="col-span-12 md:col-span-6 input-purpose flex-col flex">
                 <label for="purpose" class="text-second mb-1">Keperluan Surat</label>
                 <input type="text" class="input-crud" name="purpose" id="purpose" value="{{ old('purpose') }}"
-                    placeholder="Masukkan nama sekolah..." />
+                    placeholder="Masukkan keperluan surat..." />
                 @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror

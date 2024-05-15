@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->smallInteger("sktm_type")->comment("[1: BAYAR_CERAI, 2: SEKOLAH, 3: BEDAH_RUMAH, 4: DISABILITAS, 5: JKN_KIS, 6: LANSIA]");
-            $table->string("purpose");
+            $table->string("purpose")->nullable();
             $table->timestamps();
         });
     }

@@ -785,16 +785,14 @@
                 </li>
             @endif
 
-            @if (!auth()->user()->isAdmin())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
                 <!-- Dashboards -->
                 <li class="px-4 w-full">
                     <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">
                         Riwayat
                     </div>
                 </li>
-            @endif
 
-            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
                 <!-- Letter History -->
                 <li class="w-full">
                     <a href="{{ route('histories.index') }}"

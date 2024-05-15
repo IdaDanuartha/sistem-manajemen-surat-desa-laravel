@@ -45,8 +45,8 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="purpose" class="text-second mb-2">Tujuan Pembuatan Surat</label>
-                <input type="text" class="input-crud" name="purpose" placeholder="Masukkan Tujuan Pembuatan Surat..." required id="purpose" value="{{ old('purpose') }}" />
+                <label for="purpose" class="text-second mb-2">Keperluan Surat</label>
+                <input type="text" class="input-crud" name="purpose" placeholder="Masukkan Keperluan Surat..." required id="purpose" value="{{ old('purpose') }}" />
                 @error('purpose')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror

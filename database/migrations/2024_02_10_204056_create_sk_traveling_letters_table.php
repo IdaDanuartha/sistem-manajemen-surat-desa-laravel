@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->string("travel_destination");
-            $table->string("purpose");
+            $table->string("purpose")->nullable();
             $table->timestamps();
         });
     }

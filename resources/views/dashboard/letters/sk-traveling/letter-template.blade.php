@@ -391,7 +391,7 @@
                     Tanggal {{ $letter->sk->created_at->format('d M Y') }}, memang benar yang bersangkutan melakukan
                     perjalanan <strong>Wisata ke {{ $letter->travel_destination }}</strong></p>
                 <p class="paragraph-two">Demikian surat keterangan bepergian ini dikeluarkan untuk dapat dipergunakan
-                    sebagai {{ $letter->purpose }}.</p>
+                    sebagai {{ $letter->purpose === null ? "mana mestinya" : $letter->purpose }}.</p>
             </div>
         </div>
         <div class="content-ttd">

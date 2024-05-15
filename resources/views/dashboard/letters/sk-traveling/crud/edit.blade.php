@@ -31,9 +31,9 @@
                 @enderror
             </div>
 			<div class="col-span-12 md:col-span-6 flex flex-col">
-                <label for="travel_destination" class="text-second mb-2">Tujuan Pembuatan Surat</label>
+                <label for="travel_destination" class="text-second mb-2">Keperluan Surat</label>
 				<input type="text" class="input-crud" name="travel_destination" id="travel_destination" value="{{ $get_letter->travel_destination }}"
-				placeholder="Masukkan Tujuan Pembuatan Surat..." required />
+				placeholder="Masukkan Keperluan Surat..." required />
                 @error('travel_destination')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror

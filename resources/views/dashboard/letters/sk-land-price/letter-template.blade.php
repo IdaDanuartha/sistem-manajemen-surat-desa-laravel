@@ -141,7 +141,7 @@
                 <p>Lurah Subagan</p>
                 {{-- <p class="other">Kepala Kelurahan</p> --}}
                 <div class="card-canvas">
-                    @if (Request::is("letters/sk-land-price/$letter->id/preview*"))
+                    {{-- @if (Request::is("letters/sk-land-price/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image ?? $user->signature_image) }}"
                                 style="width: 100%; height: 100%;">
@@ -157,7 +157,16 @@
                             <p>{{ $letter->sk->villageHead->name }}</p>
                             <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                         </div>
-                    @endif
+                    @endif --}}
+                    @if(isset($letter->sk->villageHead))
+                        @if ($letter->sk->status_by_village_head === 1)
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
+                            <div class="name">
+                                <p>{{ $letter->sk->villageHead->name }}</p>    
+                                <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
+                            </div>   
+                        @endif
+                    @endif 
                 </div>
             </div>
         </div>
