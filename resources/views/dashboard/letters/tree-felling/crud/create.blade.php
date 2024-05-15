@@ -46,9 +46,9 @@
                 @enderror
             </div>
 			<div class="col-span-12 flex flex-col">
-                <label for="description" class="text-second mb-2">Keterangan</label>
+                <label for="description" class="text-second mb-2">Lokasi</label>
 				<input type="text" class="input-crud" name="description" id="description" value="{{ old('description') }}"
-				placeholder="Masukkan Keterangan Surat..." required />
+				placeholder="Masukkan Lokasi..." required />
                 @error('description')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
@@ -73,6 +73,6 @@
 @push('js')
 	<script>
 		let citizent = $(".citizent-select2").select2()
-		let description = new RichTextEditor("#description");
+		// let description = new RichTextEditor("#description");
 	</script>
 @endpush

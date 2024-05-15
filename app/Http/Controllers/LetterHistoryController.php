@@ -17,8 +17,8 @@ class LetterHistoryController extends Controller
 
     public function index(Request $request)
     {     
-        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN) {
-            $letters = $this->sk->where("status_by_village_head", 1)->latest()->get();
+        if(auth()->user()->role === Role::CITIZENT || auth()->user()->role === Role::SUPER_ADMIN || auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+            $letters = $this->sk->where("status_by_village_head", 1)->where("status_by_section_head", 1)->latest()->get();
             return view('dashboard.letters.history', compact('letters'));
         } else {
             abort(404);

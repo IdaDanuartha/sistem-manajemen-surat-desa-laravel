@@ -295,12 +295,12 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $village_head->authenticatable->name }}</span>
+                <span>{{ $letter->sk->environmentalHead->name ?? "-" }}</span>
             </div>
             <div class="input-group two">
                 <label>Jabatan</label>
                 <div>:</div>
-                <span>Lurah Subagan</span>
+                <span>Kepala Lingkugan {{ $letter->sk->environmentalHead->environmental->name ?? "-" }}</span>
             </div>
             <div class="input-group three">
                 <label>Alamat</label>

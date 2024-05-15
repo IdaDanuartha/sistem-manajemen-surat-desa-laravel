@@ -97,7 +97,7 @@
                 <input type="text" class="input-crud" value="{{ $get_letter->regarding }}" disabled />
             </div>
 			<div class="col-span-12 flex flex-col">
-                <label for="" class="text-second mb-1">Keterangan</label>
+                <label for="" class="text-second mb-1">Lokasi</label>
                 <input type="text" class="input-crud" id="description" value="{{ $get_letter->description }}" disabled />
             </div>
             @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
@@ -188,7 +188,7 @@
 
 @push('js')
 	<script>
-		let description = new RichTextEditor("#description");
-		description.setReadOnly(true)
+		// let description = new RichTextEditor("#description");
+		// description.setReadOnly(true)
 	</script>
 @endpush

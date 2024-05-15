@@ -34,7 +34,7 @@ class UpdateTreeFellingRequest extends FormRequest
         return [
             "sk.reference_number" => "nomor surat",
             "regarding" => "perihal",
-            "description" => "deskripsi",
+            "description" => "lokasi",
         ];
     }
 }

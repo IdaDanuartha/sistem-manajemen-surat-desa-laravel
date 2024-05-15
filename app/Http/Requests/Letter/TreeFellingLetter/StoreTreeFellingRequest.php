@@ -37,7 +37,7 @@ class StoreTreeFellingRequest extends FormRequest
             "sk.reference_number" => "nomor surat",
             "sk.cover_letter_number" => "nomor SP kaling",
             "regarding" => "perihal",
-            "description" => "deskripsi",
+            "description" => "lokasi",
         ];
     }
 }

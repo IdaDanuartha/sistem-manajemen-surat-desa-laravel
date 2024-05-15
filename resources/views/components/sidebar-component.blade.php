@@ -785,7 +785,7 @@
                 </li>
             @endif
 
-            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin())
+            @if (auth()->user()->isCitizent() || auth()->user()->isSuperAdmin() || auth()->user()->isEnvironmentalHead())
                 <!-- Dashboards -->
                 <li class="px-4 w-full">
                     <div class="text-sm pb-2 border-b border-b-[#1414141F] text-[#14141485] w-full">

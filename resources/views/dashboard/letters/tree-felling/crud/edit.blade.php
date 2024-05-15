@@ -22,7 +22,7 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 flex flex-col">
+			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="regarding" class="text-second mb-2">Perihal</label>
 				<input type="text" class="input-crud" name="regarding" id="regarding" value="{{ $get_letter->regarding }}"
 				placeholder="Masukkan Perihal Surat..." required />
@@ -30,10 +30,10 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-			<div class="col-span-12 flex flex-col">
-                <label for="description" class="text-second mb-2">Keterangan</label>
+			<div class="col-span-12 md:col-span-6 flex flex-col">
+                <label for="description" class="text-second mb-2">Lokasi</label>
 				<input type="text" class="input-crud" name="description" id="description" value="{{ $get_letter->description }}"
-				placeholder="Masukkan Keterangan Surat..." required />
+				placeholder="Masukkan Lokasi..." required />
                 @error('description')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
@@ -55,6 +55,6 @@
 
 @push('js')
 	<script>
-		let description = new RichTextEditor("#description");
+		// let description = new RichTextEditor("#description");
 	</script>
 @endpush
