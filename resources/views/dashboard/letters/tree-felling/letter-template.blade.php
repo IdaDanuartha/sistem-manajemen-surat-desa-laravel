@@ -64,11 +64,11 @@
     </style>
 </head>
 <body>
-<img src="{{ url('assets/img/letter-header.png') }}" class="image-full" alt="">
+<img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
 <div class="wrapper">
     <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
     <p style="margin-top: -10px;">Kepada,</p>
-    <p style="margin-top: -10px;">Yth. <br>Kepala Dinas Lingkungan Hidup Kabupaten Karangasem di <u>Amlapura</u></p>
+    <p style="margin-top: -10px;">Yth. <br>Kepala Dinas Lingkungan {{ $letter->sk->citizent->environmental->name }} Kabupaten Karangasem di <u>Amlapura</u></p>
     <table class="table-hal" style="margin-top: -10px; text-align: left">
         <tr>
             <td>Hal</td>
@@ -116,7 +116,7 @@
         </div>
         <p class="paragraph">
             {{-- {!! $letter->description !!} --}}
-            Dalam rangka mengantisipasi dan meminimalisasi terjadinya bencana dan musibah yang diakibatkan oleh pohon perindang serta pohon lainnya, maka dengan ini kami mohon bantuan Bapak untuk menata pohon perindang yang ada di depan SDN 2 Subagan, Pura Bale Agung, dan Pura Puseh Desa Adat Subagan.
+            Dalam rangka mengantisipasi dan meminimalisasi terjadinya bencana dan musibah yang diakibatkan oleh pohon perindang serta pohon lainnya, maka dengan ini kami mohon bantuan Bapak untuk menata pohon perindang yang ada di {{ $letter->description }}.
         </p>
         <p class="paragraph last-paragraph">
             Demikian kami sampaikan atas bantuan dan kerjasamanya kami ucapkan banyak terimakasih.
@@ -135,19 +135,19 @@
                 <td style="height: 60px;">
                     @if(isset($letter->sk->environmentalHead))
                         @if ($letter->sk->status_by_environmental_head === 1)
-                            <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
                         @endif
                     @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
                         @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                            <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
+                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                         @endif
                     @endif 
                 </td>
                 <td style="height: 60px;">
                     @if (($user->isCitizent() && $user->signature_image))
-                        <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
+                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
                     @elseif(isset($letter->sk->citizent->user->signature_image))
-                        <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
+                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                     @endif
                 </td>
             </tr>
