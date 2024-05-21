@@ -126,7 +126,7 @@ class SkInheritanceDistributionController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skInheritanceDistribution->confirmationLetter($skInheritanceDistribution, false);
+            $update = $this->skInheritanceDistribution->confirmationLetter($skInheritanceDistribution, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-inheritance-distribution.show', $skInheritanceDistribution->id))
                                 ->with('success', "Surat berhasil ditolak");            

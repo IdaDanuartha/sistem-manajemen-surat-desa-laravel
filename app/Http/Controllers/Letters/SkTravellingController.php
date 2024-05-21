@@ -133,7 +133,7 @@ class SkTravellingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skTravelling->confirmationLetter($sk_travelling, false);
+            $update = $this->skTravelling->confirmationLetter($sk_travelling, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-travelling.show', $sk_travelling->id))
                                 ->with('success', "Surat berhasil ditolak");            

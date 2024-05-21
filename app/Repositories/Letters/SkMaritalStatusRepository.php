@@ -12,6 +12,7 @@ use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
 use App\Models\User;
+use App\Utils\UpdateSkLetter;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -145,6 +146,13 @@ class SkMaritalStatusRepository
         Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $letter->sk->code));
 
         $request["sk"]["is_published"] = true;
+        $request["sk"]["environmental_head_id"] = null;
+        $request["sk"]["section_head_id"] = null;
+        $request["sk"]["village_head_id"] = null;
+        $request["sk"]["status_by_environmental_head"] = 0;
+        $request["sk"]["status_by_section_head"] = 0;
+        $request["sk"]["status_by_village_head"] = 0;
+        $request["sk"]["reject_reason"] = null;
       }
 
       $letter->sk->updateOrFail(Arr::get($request, "sk"));
@@ -164,7 +172,7 @@ class SkMaritalStatusRepository
     }
   }
 
-  public function confirmationLetter(SkMaritalStatusLetter $letter, $status): bool|Exception
+  public function confirmationLetter(SkMaritalStatusLetter $letter, $status, $reject_reason = null): bool|Exception
   {
     DB::beginTransaction();
     try {
@@ -173,7 +181,8 @@ class SkMaritalStatusRepository
       if (auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $letter->sk->updateOrFail([
           "environmental_head_id" => auth()->user()->authenticatable->id,
-          "status_by_environmental_head" => $status ? 1 : 2
+          "status_by_environmental_head" => $status ? 1 : 2,
+          "reject_reason" => $status ? null : $reject_reason
         ]);
 
         $section_heads = $this->user->where('role', Role::SECTION_HEAD)->get();

@@ -128,7 +128,7 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skMaritalStatus->confirmationLetter($sk_marital_status, false);
+            $update = $this->skMaritalStatus->confirmationLetter($sk_marital_status, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-marital-status.show', $sk_marital_status->id))
                                 ->with('success', "Surat berhasil ditolak");            

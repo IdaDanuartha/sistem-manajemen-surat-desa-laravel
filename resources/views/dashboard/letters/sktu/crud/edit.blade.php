@@ -23,7 +23,7 @@
                 @enderror
             </div>
 			<div class="col-span-12 flex flex-col">
-                <label for="business_name" class="text-second mb-2">Status</label>
+                <label for="business_name" class="text-second mb-2">Nama Usaha</label>
                 <input type="text" class="input-crud" name="business_name" id="business_name" value="{{ $get_letter->business_name }}"
                     placeholder="Masukkan Nama Usaha..." required />
 				@error('business_name')

@@ -124,7 +124,7 @@ class SkGrantController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skGrant->confirmationLetter($skGrant, false);
+            $update = $this->skGrant->confirmationLetter($skGrant, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-grant.show', $skGrant->id))
                                 ->with('success', "Surat berhasil ditolak");            

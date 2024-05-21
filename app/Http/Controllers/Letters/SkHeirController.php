@@ -124,7 +124,7 @@ class SkHeirController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skHeir->confirmationLetter($skHeir, false);
+            $update = $this->skHeir->confirmationLetter($skHeir, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-heir.show', $skHeir->id))
                                 ->with('success', "Surat berhasil ditolak");            

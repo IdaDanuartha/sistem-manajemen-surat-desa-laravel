@@ -41,6 +41,7 @@ return new class extends Migration
             $table->integer('mode')->nullable();
             $table->string('cover_letter_number')->nullable();
             $table->boolean('is_published')->default(0);
+            $table->text('reject_reason')->nullable();
             $table->timestamps();
         });
     }

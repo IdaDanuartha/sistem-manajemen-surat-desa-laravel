@@ -130,7 +130,7 @@ class ParentalPermissionLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->parentalPermissionLetter->confirmationLetter($parentalPermission, false);
+            $update = $this->parentalPermissionLetter->confirmationLetter($parentalPermission, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.parental-permission.show', $parentalPermission->id))
                                 ->with('success', "Surat berhasil ditolak");            

@@ -134,7 +134,7 @@ class SkParentIncomeController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skParentIncome->confirmationLetter($sk_parent_income, false);
+            $update = $this->skParentIncome->confirmationLetter($sk_parent_income, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-parent-income.show', $sk_parent_income->id))
                                 ->with('success', "Surat berhasil ditolak");            

@@ -143,6 +143,12 @@
 						disabled
 					>
 				</div>
+				@if ($get_letter->sk->reject_reason)
+					<div class="col-span-12 flex flex-col">
+						<label for="" class="text-second mb-1">Alasan Menolak Surat</label>
+						<input type="text" class="input-crud" value="{{ $get_letter->sk->reject_reason }}" disabled />
+					</div>
+				@endif
 				<div class="col-span-12 flex flex-col">
 					<p class="text-second mb-1">Kirim Surat</p>
 					<label class="switch">

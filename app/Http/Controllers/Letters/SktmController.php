@@ -131,7 +131,7 @@ class SktmController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->sktm->confirmationLetter($sktm, false);
+            $update = $this->sktm->confirmationLetter($sktm, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sktm.show', $sktm->id))
                                 ->with('success', "Surat berhasil ditolak");            

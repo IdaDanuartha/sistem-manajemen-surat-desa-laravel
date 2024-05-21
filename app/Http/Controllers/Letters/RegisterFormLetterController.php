@@ -123,7 +123,7 @@ class RegisterFormLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->registrationForm->confirmationLetter($registrationForm, false);
+            $update = $this->registrationForm->confirmationLetter($registrationForm, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.registration-form.show', $registrationForm->id))
                                 ->with('success', "Surat berhasil ditolak");            

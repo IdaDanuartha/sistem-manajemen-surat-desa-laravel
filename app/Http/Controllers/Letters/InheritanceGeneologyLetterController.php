@@ -126,7 +126,7 @@ class InheritanceGeneologyLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->inheritanceGeneology->confirmationLetter($inheritanceGeneology, false);
+            $update = $this->inheritanceGeneology->confirmationLetter($inheritanceGeneology, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.inheritance-geneology.show', $inheritanceGeneology->id))
                                 ->with('success', "Surat berhasil ditolak");            

@@ -130,7 +130,7 @@ class TreeFellingLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->treeFelling->confirmationLetter($treeFelling, false);
+            $update = $this->treeFelling->confirmationLetter($treeFelling, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.tree-felling.show', $treeFelling->id))
                                 ->with('success', "Surat berhasil ditolak");            

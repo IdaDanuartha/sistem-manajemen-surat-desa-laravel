@@ -126,7 +126,7 @@ class SkBirthController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skBirth->confirmationLetter($sk_birth, false);
+            $update = $this->skBirth->confirmationLetter($sk_birth, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-birth.show', $sk_birth->id))
                                 ->with('success', "Surat berhasil ditolak");            

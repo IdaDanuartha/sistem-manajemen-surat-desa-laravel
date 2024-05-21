@@ -150,6 +150,13 @@ class InheritanceGeneologyRepository
         Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $letter->sk->code));
         
         $request["sk"]["is_published"] = true;
+        $request["sk"]["environmental_head_id"] = null;
+        $request["sk"]["section_head_id"] = null;
+        $request["sk"]["village_head_id"] = null;
+        $request["sk"]["status_by_environmental_head"] = 0;
+        $request["sk"]["status_by_section_head"] = 0;
+        $request["sk"]["status_by_village_head"] = 0;
+        $request["sk"]["reject_reason"] = null;
       }
 
       if (Arr::has($request, 'inheritance_image') && Arr::get($request, 'inheritance_image')) {
@@ -176,7 +183,7 @@ class InheritanceGeneologyRepository
     }
   }
 
-  public function confirmationLetter(InheritanceGeneology $letter, $status): bool|Exception
+  public function confirmationLetter(InheritanceGeneology $letter, $status, $reject_reason = null): bool|Exception
   {
     DB::beginTransaction();
     try {
@@ -185,7 +192,8 @@ class InheritanceGeneologyRepository
       if (auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $letter->sk->updateOrFail([
           "environmental_head_id" => auth()->user()->authenticatable->id,
-          "status_by_environmental_head" => $status ? 1 : 2
+          "status_by_environmental_head" => $status ? 1 : 2,
+          "reject_reason" => $status ? null : $reject_reason
         ]);
 
         $user = $this->user->where('role', Role::SECTION_HEAD)->first();

@@ -127,7 +127,7 @@ class SkDieController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skDie->confirmationLetter($skDie, false);
+            $update = $this->skDie->confirmationLetter($skDie, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-die.show', $skDie->id))
                                 ->with('success', "Surat berhasil ditolak");            

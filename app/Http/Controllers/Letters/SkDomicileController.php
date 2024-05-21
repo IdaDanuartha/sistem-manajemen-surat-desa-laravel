@@ -128,7 +128,7 @@ class SkDomicileController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skDomicile->confirmationLetter($skDomicile, false);
+            $update = $this->skDomicile->confirmationLetter($skDomicile, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-domicile.show', $skDomicile->id))
                                 ->with('success', "Surat berhasil ditolak");            

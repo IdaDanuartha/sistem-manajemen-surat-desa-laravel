@@ -127,7 +127,7 @@ class SktuController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->sktu->confirmationLetter($sktu, false);
+            $update = $this->sktu->confirmationLetter($sktu, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sktu.show', $sktu->id))
                                 ->with('success', "Surat berhasil ditolak");            

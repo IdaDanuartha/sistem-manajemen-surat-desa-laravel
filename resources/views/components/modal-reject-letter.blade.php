@@ -20,10 +20,20 @@
           anda akan langsung dikirimkan.
           </p>
         </div>
-        <form action="{{ $route }}" method="POST" class="d-flex justify-content-center" enctype="multipart/form-data">
+        <form action="{{ $route }}" method="POST" class="px-4 gap-3" enctype="multipart/form-data">
           @csrf
           @method("PUT")
-          <div class="flex justify-content-center gap-3 mb-4 w-100 px-4">
+          <div class="grid grid-cols-1">
+            <div class="col-span-12 md:col-span-6 flex flex-col">
+              <label for="reject_reason" class="text-second mb-1">Alasan Menolak Surat</label>
+              <input type="text" class="input-crud" name="reject_reason" id="reject_reason" value="{{ old('reject_reason') }}"
+                  placeholder="Masukkan Alasan Menolak Surat..." required />
+              @error('reject_reason')
+                  <div class="text-danger mt-1">{{ $message }}</div>
+              @enderror
+          </div>
+          </div>
+          <div class="flex justify-content-center mb-4 w-100 gap-3 mt-3">
               <button type="submit" class="button btn-danger w-100">Tolak Surat</button>
               <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
                   Batal Tolak

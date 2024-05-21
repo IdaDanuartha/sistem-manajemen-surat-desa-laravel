@@ -125,7 +125,7 @@ class SkMoveController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skMove->confirmationLetter($skMove, false);
+            $update = $this->skMove->confirmationLetter($skMove, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-move.show', $skMove->id))
                                 ->with('success', "Surat berhasil ditolak");            

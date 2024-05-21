@@ -128,7 +128,7 @@ class SkSubsidizedHousingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skSubsidizedHousing->confirmationLetter($skSubsidizedHousing, false);
+            $update = $this->skSubsidizedHousing->confirmationLetter($skSubsidizedHousing, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-subsidized-housing.show', $skSubsidizedHousing->id))
                                 ->with('success', "Surat berhasil ditolak");            

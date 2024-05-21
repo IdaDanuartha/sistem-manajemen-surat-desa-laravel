@@ -130,7 +130,7 @@ class SkLandPriceController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->skLandPrice->confirmationLetter($sk_land_price, false);
+            $update = $this->skLandPrice->confirmationLetter($sk_land_price, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.sk-land-price.show', $sk_land_price->id))
                                 ->with('success', "Surat berhasil ditolak");            

@@ -129,7 +129,7 @@ class DieselPurchaseLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);
         try {                     
-            $update = $this->dieselPurchaseLetter->confirmationLetter($dieselPurchase, false);
+            $update = $this->dieselPurchaseLetter->confirmationLetter($dieselPurchase, false, $request->reject_reason);
 
             if($update) return redirect(route('letters.diesel-purchase.show', $dieselPurchase->id))
                                 ->with('success', "Surat berhasil ditolak");            
