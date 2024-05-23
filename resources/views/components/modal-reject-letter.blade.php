@@ -33,7 +33,7 @@
               @enderror
           </div>
           </div> --}}
-          <div class="flex justify-content-center mb-4 w-100 gap-3 mt-3">
+          <div class="flex justify-content-center mb-4 w-100 gap-3">
               <button type="submit" class="button btn-danger w-100">Tolak Surat</button>
               <button type="button" class="button btn-second w-100" data-bs-dismiss="modal">
                   Batal Tolak
