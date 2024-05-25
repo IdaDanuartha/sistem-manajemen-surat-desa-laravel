@@ -1,170 +1,163 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .wrapper{
-            /*margin: 2cm;*/
-        }
-        .title-surat{
-            font-size: 18px;
-            text-decoration: underline;
-        }
-        .subtitle-surat{
-            font-size: 14px;
-            margin-top: 0;
-        }
-        .title-surat-wrapper{
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 30px;
-        }
-        .content-surat{
-            margin-top: -14px;
-            font-size: 14px;
-        }
-        table{
-            font-size: 14px;
-        }
-        .paragraph{
-            text-indent: 20px;
-        }
-        .table-mt{
-            margin-top: 30px;
-        }
-        .last-paragraph{
-            margin-top: -10px;
-        }
-        .ttd-text{
-            width: 100%;
-            text-align: center;
-        }
-        .w-full{
-            width: 100%;
-        }
-        p{
-            font-size: 14px;
-        }
-        .table-content tr td:first-child{
-            width: 60px;
-        }
 
-        .image-full {
-            width: 100%;
+    <style>
+        .center-text {
             position: relative;
             top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        table td {
+            width: 100%;
+            font-size: 0.913rem !important;
+            line-height: 130%;
+        }
+
+        p {
+            font-size: 0.913rem !important;
+            line-height: 130%;
         }
     </style>
 </head>
-<body>
-<img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
-<div class="wrapper">
-    <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
-    <p style="margin-top: -10px;">Kepada,</p>
-    <p style="margin-top: -10px;">Yth. <br>Kepala Dinas Lingkungan {{ $letter->sk->citizent->environmental->name }} Kabupaten Karangasem di <u>Amlapura</u></p>
-    <table class="table-hal" style="margin-top: -10px; text-align: left">
-        <tr>
-            <td>Hal</td>
-            <td>:</td>
-            <td>
-                {{ $letter->regarding }}
-            </td>
-        </tr>
-    </table>
-    <div class="content-surat" style="margin-top: 4px;">
-        <p   class="">
-            Dengan hormat, <br>
-            Yang bertanda tangan dibawah ini :
 
-        </p>
-        <div class="table-wrapper" style="margin-top: -10px;">
-            <div class="table-1">
-                <table class="table-content">
-                    <tr>
-                        <td>Nama</td>
-                        <td>:</td>
-                        <td>{{ $letter->sk->citizent->name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Pekerjaan</td>
-                        <td>:</td>
-                        <td>{{ $letter->sk->citizent->work }}</td>
-                    </tr>
-                    <tr>
-                        <td>Alamat</td>
-                        <td>:</td>
-                        <td>
-                            {{ $letter->sk->citizent->address }}.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>No. HP</td>
-                        <td>:</td>
-                        <td>
-                            {{ $letter->sk->citizent->phone_number }}
-                        </td>
-                    </tr>
-                </table>
-            </div>
+<body>
+    <main style="width: 100%; height: 100%; position: relative;">
+        <div class="wrapper-header" style="width: 100%; position: relative;">
+            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+                style="border-bottom: 3px solid black; width: 100%;">
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td style="width: 100%;">Hal:
+                        {{ $letter->regarding }}</td>
+                    <td style="width: 100%;">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 30%;">Yth,</td>
+                                <td>Subagan, {{ $letter->sk->created_at->format('d M Y') }} <br> Kepada, <br> Kepala
+                                    Dinas Lingkungan {{ $letter->sk->citizent->environmental->name }}
+                                    Kabupaten Karangasem di <u>Amlapura</u></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td colspan="3" style="padding-bottom: 8px !important;">Dengan hormat, <br>
+                        Yang bertanda tangan dibawah ini :</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Nama</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->name }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Pekerjaan</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->work }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Alamat</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->address }}.</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">No. HP</td>
+                    <td style="width: 12px;">:</td>
+                    <td>{{ $letter->sk->citizent->phone_number }}</td>
+                </tr>
+            </table>
+            <p style="margin-top: 32px; text-indent: 42px;">Dalam rangka mengantisipasi dan meminimalisasi terjadinya
+                bencana dan musibah yang diakibatkan oleh
+                pohon perindang serta pohon lainnya, maka dengan ini kami mohon bantuan Bapak untuk menata pohon
+                perindang yang ada di {{ $letter->description }}.
+            </p>
+            <p style="margin-top: 12px; text-indent: 42px;">Demikian kami sampaikan atas bantuan dan kerjasamanya kami
+                ucapkan banyak terimakasih.
+            </p>
         </div>
-        <p class="paragraph">
-            {{-- {!! $letter->description !!} --}}
-            Dalam rangka mengantisipasi dan meminimalisasi terjadinya bencana dan musibah yang diakibatkan oleh pohon perindang serta pohon lainnya, maka dengan ini kami mohon bantuan Bapak untuk menata pohon perindang yang ada di {{ $letter->description }}.
-        </p>
-        <p class="paragraph last-paragraph">
-            Demikian kami sampaikan atas bantuan dan kerjasamanya kami ucapkan banyak terimakasih.
-        </p>
-    </div>
-    <div class="" style="margin-top: 30px;">
-        <table class="w-full">
-            <tr class="w-full">
-                <td class="ttd-text">Mengetahui</td>
-            </tr>
-            <tr class="w-full">
-                <td class="ttd-text">Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}</td>
-                <td class="ttd-text">Pemohon</td>
-            </tr>
-            <tr style="text-align: center">
-                <td style="height: 60px;">
-                    @if(isset($letter->sk->environmentalHead))
-                        @if ($letter->sk->status_by_environmental_head === 1)
-                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+        <div class="wrapper-footer" style="position: absolute; width: 100%; bottom: 0; left: 0; right: 0;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui <br>
+                            Kepala Lingkungan Jasri Kelod
+                        </p>
+                        @if (isset($letter->sk->environmentalHead))
+                            @if ($letter->sk->status_by_environmental_head === 1)
+                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            @endif
+                        @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
+                            @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
+                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            @endif
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                         @endif
-                    @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
-                        @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                            <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
+                        @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                {{ $letter->sk->environmentalHead->name }}</p>
+                        @else
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                ..................</p>
                         @endif
-                    @endif 
-                </td>
-                <td style="height: 60px;">
-                    @if (($user->isCitizent() && $user->signature_image))
-                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}">
-                    @elseif(isset($letter->sk->citizent->user->signature_image))
-                        <img width="100" height="auto" src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
-                    @endif
-                </td>
-            </tr>
-            <tr class="w-full">
-                <td class="ttd-text">
-                    @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                        <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>                    
-                    @endif
-                </td>
-                <td class="ttd-text">
-                    @if ($letter->sk->citizent->name)
-                        <strong style="font-size: 14px;">{{ $letter->sk->citizent->name }}</strong>                    
-                    @endif
+                    </td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Pemohon</p>
+                        @if ($user->isCitizent() && $user->signature_image)
+                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        @elseif(isset($letter->sk->citizent->user->signature_image))
+                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;">
+                            </div>
+                        @endif
+                        @if ($letter->sk->citizent->name)
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                {{ $letter->sk->citizent->name }}</p>
+                        @else
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                ..................</p>
+                        @endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    {{-- <img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
+    <div class="wrapper">
+        <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
+        <p style="margin-top: -10px;">Kepada,</p>
+        <p style="margin-top: -10px;">Yth. <br>Kepala Dinas Lingkungan {{ $letter->sk->citizent->environmental->name }}
+            Kabupaten Karangasem di <u>Amlapura</u></p>
+        <table class="table-hal" style="margin-top: -10px; text-align: left">
+            <tr>
+                <td>Hal</td>
+                <td>:</td>
+                <td>
+                    {{ $letter->regarding }}
                 </td>
             </tr>
         </table>
-    </div>
-</div>
+    </div> --}}
 </body>
+
 </html>
