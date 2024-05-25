@@ -8,565 +8,244 @@
     <title>Document</title>
 
     <style>
-        .image-full {
-            width: 100%;
-            position: absolute;
+        .center-text {
+            position: relative;
             top: 0;
-            left: 0;
-            border-bottom: 3px solid black;
-        }
-
-        .title {
-            width: 51%;
-            text-align: center;
-            position: absolute;
-            top: 24%;
             left: 50%;
-            transform: translate(-50%);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            border-bottom: 2px solid black;
+            transform: translateX(-50%);
         }
 
-        .subtitle {
-            position: absolute;
-            top: 28.5%;
-            left: 50%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-        }
-
-        .description {
-            position: absolute;
-            top: 31.5%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .input-group label {
-            width: 22% !important;
-            position: absolute;
-            transform: translate(-50%);
+        table td {
+            width: 100%;
             font-size: 0.913rem !important;
+            line-height: 130%;
         }
 
-        .input-group div {
-            width: 5% !important;
-            position: absolute;
-            transform: translate(-50%);
+        p {
             font-size: 0.913rem !important;
-        }
-
-        .input-group span {
-            width: 67% !important;
-            position: absolute;
-            transform: translate(-50%);
-            font-size: 0.913rem !important;
-        }
-
-        .input-group.one label {
-            top: 40%;
-            left: 17.5%;
-        }
-
-        .input-group.one div {
-            top: 40%;
-            left: 28%;
-        }
-
-        .input-group.one span {
-            top: 40%;
-            left: 61.3%;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .input-group.two label {
-            top: 43%;
-            left: 17.5%;
-        }
-
-        .input-group.two div {
-            top: 43%;
-            left: 28%;
-        }
-
-        .input-group.two span {
-            top: 43%;
-            left: 61.3%;
-        }
-
-        .input-group.seven label {
-            top: 46%;
-            left: 17.5%;
-        }
-
-        .input-group.seven div {
-            top: 46%;
-            left: 28%;
-        }
-
-        .input-group.seven span {
-            top: 46%;
-            left: 61.3%;
-        }
-
-        .input-group.eight label {
-            top: 49%;
-            left: 17.5%;
-        }
-
-        .input-group.eight div {
-            top: 49%;
-            left: 28%;
-        }
-
-        .input-group.eight span {
-            top: 49%;
-            left: 61.3%;
-        }
-
-        .input-group.five label {
-            top: 52%;
-            left: 17.5%;
-        }
-
-        .input-group.five div {
-            top: 52%;
-            left: 28%;
-        }
-
-        .input-group.five span {
-            top: 52%;
-            left: 61.3%;
-        }
-
-        .input-group.nine label {
-<<<<<<< HEAD
-            top: 65%;
-=======
-            top: 66%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 17.5%;
-        }
-
-        .input-group.nine div {
-<<<<<<< HEAD
-            top: 65%;
-=======
-            top: 66%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 28%;
-        }
-
-        .input-group.nine span {
-<<<<<<< HEAD
-            top: 65%;
-=======
-            top: 66%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 61.3%;
-        }
-
-        .input-group.ten label {
-<<<<<<< HEAD
-            top: 68%;
-=======
-            top: 69%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 17.5%;
-        }
-
-        .input-group.ten div {
-<<<<<<< HEAD
-            top: 68%;
-=======
-            top: 69%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 28%;
-        }
-
-        .input-group.ten span {
-<<<<<<< HEAD
-            top: 68%;
-=======
-            top: 69%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 61.3%;
-        }
-
-        .input-group.eleven label {
-<<<<<<< HEAD
-            top: 71%;
-=======
-            top: 72%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 17.5%;
-        }
-
-        .input-group.eleven div {
-<<<<<<< HEAD
-            top: 71%;
-=======
-            top: 72%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 28%;
-        }
-
-        .input-group.eleven span {
-<<<<<<< HEAD
-            top: 71%;
-=======
-            top: 72%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 61.3%;
-        }
-
-        .input-group.twelve label {
-<<<<<<< HEAD
-            top: 74%;
-=======
-            top: 75%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 17.5%;
-        }
-
-        .input-group.twelve div {
-<<<<<<< HEAD
-            top: 74%;
-=======
-            top: 75%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 28%;
-        }
-
-        .input-group.twelve span {
-<<<<<<< HEAD
-            top: 74%;
-=======
-            top: 75%;
->>>>>>> f74c0dea92a79599c0f04c4601b42f6c13ccb898
-            left: 61.3%;
-        }
-
-        .card-ttd:first-child p:first-child {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 11.7%;
-            left: 20%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:first-child p:nth-child(2) {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 9.8%;
-            left: 20%;
-            transform: translate(-50%);
-        }
-        
-        .card-ttd:first-child p:nth-child(3) {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.8%;
-            left: 20%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:first-child p.other {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.9%;
-            left: 20%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:first-child .card-canvas {
-            width: 30%;
-            height: 70px;
-            position: absolute;
-            bottom: 1%;
-            left: 20%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .card-ttd:last-child p:first-child {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 11.7%;
-            left: 80%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:last-child p:nth-child(2) {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 9.8%;
-            left: 80%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:last-child p.other {
-            text-align: center;
-            font-size: 0.913rem;
-            width: 40%;
-            position: absolute;
-            bottom: 7.9%;
-            left: 80%;
-            transform: translate(-50%);
-        }
-
-        .card-ttd:last-child .card-canvas {
-            width: 30%;
-            height: 70px;
-            position: absolute;
-            bottom: 1%;
-            left: 80%;
-            transform: translate(-50%);
-            border-bottom: 1px dashed black;
-        }
-
-        .description-other {
-            position: relative;
-            top: 56%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-        }
-
-        .paragraph-one {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-        }
-
-        .description-other-bottom {
-            position: relative;
-            top: 67.5%;
-            left: 50%;
-            width: 92%;
-            transform: translate(-50%);
-        }
-
-        .paragraph-two {
-            font-size: 0.913rem;
-            line-height: 150%;
-            text-indent: 42px;
-            position: absolute;
-            top: 18%;
-        }
-
-        .card-canvas .name {
-            position: absolute; 
-            width: 100%; 
-            top: 70%; 
-            right: 30%;
-        }
-
-        .card-canvas .name p:first-child {
-            width: 100%; 
-            text-decoration: underline;
-        }
-
-        .card-canvas .name p:last-child {
-            width: 100%; 
-            bottom: -15%;
+            line-height: 130%;
         }
     </style>
 </head>
 
 <body>
-
-    <div class="container">
-        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <h3 class="title">Surat Keterangan Tidak Mampu</h3>
-        <div class="content-form">
-            <p class="subtitle">Nomor: {{ $letter->sk->reference_number }}</p>
-            <p class="description">Yang bertanda tangan di bawah ini, Lurah Subagan, Kecamatan Karangasem, Kabupaten
-                Karangasem, Propinsi Bali, menerangkan dengan sebenarnya bahwa :</p>
-            @if ($letter->sktm_type->value == 4 || $letter->sktm_type->value == 5)
-                <div class="input-group one">
-                    <label>Nama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->name }}</span>
-                </div>
-                <div class="input-group two">
-                    <label>Tempat Tanggal Lahir</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
-                </div>
-                <div class="input-group seven">
-                    <label>Pekerjaan</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->work }}</span>
-                </div>
-                <div class="input-group eight">
-                    <label>Agama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->religion->label() }}</span>
-                </div>
-                <div class="input-group five">
-                    <label>Alamat</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->address }}.</span>
-                </div>
-            @else
-                <div class="input-group one">
-                    <label>Nama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->name }}</span>
-                </div>
-                <div class="input-group two">
-                    <label>Tempat Tanggal Lahir</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
-                </div>
-                {{-- <div class="input-group four">
-                    <label>Jenis Kelamin</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->gender->label() }}</span>
-                </div>
-                <div class="input-group four">
-                    <label>Agama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->religion->label() }}</span>
-                </div> --}}
-                <div class="input-group seven">
-                    <label>Pekerjaan</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->work }}</span>
-                </div>
-                <div class="input-group eight">
-                    <label>No KK/ KTP</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->national_identify_number }}</span>
-                </div>
-                <div class="input-group five">
-                    <label>Alamat</label>
-                    <div>:</div>
-                    <span>{{ $letter->sk->citizent->address }}</span>
-                </div>
-            @endif
-            @if ($letter->sktm_type->value === 2)
-                <div class="input-group nine">
-                    <label>Nama</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->name }}</span>
-                </div>
-                <div class="input-group ten">
-                    <label>Tempat Tanggal Lahir</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->birth_place . ', ' . $letter->sktmSchool->citizent->birth_date->format('d-m-Y') }}</span>
-                </div>
-                <div class="input-group eleven">
-                    <label>Jenis Kelamin</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->citizent->gender->label() }}</span>
-                </div>
-                <div class="input-group twelve">
-                    <label>Sekolah</label>
-                    <div>:</div>
-                    <span>{{ $letter->sktmSchool->school_name }}</span>
-                </div>
-            @endif
-            <div class="description-other">
-                @if ($letter->sktm_type->value === 1)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
-                        {{ $letter->sk->cover_letter_number }}, tanggal
-                        {{ $letter->sk->created_at->format('d M Y') }}, Sepanjang pengetahuan kami memang benar orang
-                        tersebut di
-                        atas tidak mampu untuk membayar proses sidang perceraian.</p>
-                @elseif ($letter->sktm_type->value === 2)
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No.
-                        {{ $letter->sk->cover_letter_number }}, tanggal
-                        {{ $letter->sk->created_at->format('d M Y') }}, memang benar orang tersebut diatas kurang
-                        mampu, untuk Membiayai
-                        Sekolah Anaknya, Atas Nama: </p>
-                @elseif ($letter->sktm_type->value === 3)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
-                        {{ $letter->sk->cover_letter_number }}, tanggal
-                        {{ $letter->sk->created_at->format('d M Y') }}, sepanjang pengetahuan kami memang benar orang
-                        tersebut di atas
-                        Kurang Mampu dan Memohon Bantuan Bedah Rumah.</p>
-                @elseif ($letter->sktm_type->value === 4)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No :
-                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
-                        menyatakan dengan sebenarnya bahwa memang benar orang tersebut
-                        diatas Tidak mampu/miskin dan Disabilitas</p>
-                @elseif ($letter->sktm_type->value === 5)
-                    <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }} No :
-                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
-                        menyatakan dengan sebenarnya bahwa memang benar orang tersebut
-                        diatas Tidak mampu / Miskin.</p>
+    <main style="width: 100%; height: 100%; position: relative;">
+        <div class="wrapper-header" style="width: 100%; position: relative;">
+            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+                style="border-bottom: 3px solid black; width: 100%;">
+            <h1 class="center-text"
+                style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 51%; margin-top: 24px;">
+                Surat Keterangan Tidak Mampu</h1>
+            <p style="text-align: center !important; margin-top: 16px;">Nomor: {{ $letter->sk->reference_number }}</p>
+            <table style="width: 100%; margin-top: 20px;">
+                <tr>
+                    <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Yang bertanda tangan
+                        di bawah ini,
+                        Lurah
+                        Subagan, Kecamatan Karangasem, Kabupaten Karangasem,
+                        Propinsi Bali, menerangkan dengan sebenarnya bahwa :</td>
+                </tr>
+                @if ($letter->sktm_type->value == 4 || $letter->sktm_type->value == 5)
+                    <tr>
+                        <td style="width: 140px;">Nama</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Tempat Tanggal Lahir</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Pekerjaan</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->work }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Agama</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->religion->label() }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Alamat</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->address }}.</td>
+                    </tr>
                 @else
-                    <p class="paragraph-one">Berdasarkan Surat Pengantar dari Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No:
-                        {{ $letter->sk->cover_letter_number }}, tanggal {{ $letter->sk->created_at->format('d M Y') }}
-                        ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
-                        / miskin dan lansia .</p>
+                    <tr>
+                        <td style="width: 140px;">Nama</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Tempat Tanggal Lahir</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Jenis Kelamin</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->gender->label() }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Agama</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->religion->label() }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Pekerjaan</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->work }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">No. KK/ KTP</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->national_identify_number }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Alamat</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sk->citizent->address }}</td>
+                    </tr>
                 @endif
-                <p class="paragraph-two">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan
-                    {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.</p>
-            </div>
-        </div>
-        <div class="content-ttd">
-            {{-- @if ($letter->sktm_type->value === 2 || $letter->sktm_type->value === 5)
-                <div class="card-ttd">
-                    <p>Mengetahui</p>
-                    <p>Camat Karangasem</p>                
-                    <p>{{ $subdistrictHead->name }}</p>                
-                    <div class="card-canvas">
-                        @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
-                                style="width: 100%; height: 100%;">
-                        @endif
-                    </div>
-                </div>
-            @endif --}}
-            <div class="card-ttd">
-                <p>Subagan, {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format("d M Y") : ".........." }}</p>
-                <p>A.n, Lurah Subagan</p>
-                <p class="other">{{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : "" }}</p>
-                <div class="card-canvas">
-                    @if (isset($letter->sk->sectionHead))
-                        @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                            <div class="name">
-                                <p>{{ $letter->sk->sectionHead->name }}</p>    
-                                <p>NIP : {{ $letter->sk->sectionHead->employee_number }}</p>    
-                            </div>  
-                        @endif
+            </table>
+            <table style="width: 100%; margin-top: 32px;">
+                <tr>
+                    @if ($letter->sktm_type->value === 1)
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan surat
+                            pengantar Kepala
+                            Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }}, No:
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}, Sepanjang pengetahuan kami memang benar
+                            orang
+                            tersebut di
+                            atas tidak mampu untuk membayar proses sidang perceraian.</td>
+                    @elseif ($letter->sktm_type->value === 2)
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan Surat
+                            Pengantar dari
+                            Kepala Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }}, No.
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}, memang benar orang tersebut diatas kurang
+                            mampu, untuk Membiayai
+                            Sekolah Anaknya, Atas Nama: </td>
+                    @elseif ($letter->sktm_type->value === 3)
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan surat
+                            pengantar Kepala
+                            Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }}, No:
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}, sepanjang pengetahuan kami memang benar
+                            orang
+                            tersebut di atas
+                            Kurang Mampu dan Memohon Bantuan Bedah Rumah.</td>
+                    @elseif ($letter->sktm_type->value === 4)
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan surat
+                            pengantar Kepala
+                            Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }} No :
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}
+                            menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                            diatas Tidak mampu/miskin dan Disabilitas</td>
+                    @elseif ($letter->sktm_type->value === 5)
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan surat
+                            pengantar Kepala
+                            Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }} No :
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}
+                            menyatakan dengan sebenarnya bahwa memang benar orang tersebut
+                            diatas Tidak mampu / Miskin.</td>
                     @else
-                        @if(isset($letter->sk->villageHead))
-                            @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))
-                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
-                                <div class="name">
-                                    <p>{{ $letter->sk->villageHead->name }}</p>    
-                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>    
-                                </div>  
-                            @endif
-                        @endif   
-                    @endif      
-                </div>
-            </div>
+                        <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan Surat
+                            Pengantar dari
+                            Kepala Lingkungan
+                            {{ $letter->sk->citizent->environmental->name }}, No:
+                            {{ $letter->sk->cover_letter_number }}, tanggal
+                            {{ $letter->sk->created_at->format('d M Y') }}
+                            ,menyatakan bahwa memang benar orang tersebut diatas kurang mampu
+                            / miskin dan lansia .</td>
+                    @endif
+                </tr>
+                @if ($letter->sktm_type->value === 2)
+                    <tr>
+                        <td style="width: 140px;">Nama</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sktmSchool->citizent->name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Tempat Tanggal Lahir</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sktmSchool->citizent->birth_place . ', ' . $letter->sktmSchool->citizent->birth_date->format('d-m-Y') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Jenis Kelamin</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sktmSchool->citizent->gender->label() }}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px;">Sekolah</td>
+                        <td style="width: 12px;">:</td>
+                        <td>{{ $letter->sktmSchool->school_name }}</td>
+                    </tr>
+                @endif
+            </table>
+            <p style="margin-top: 24px; text-indent: 42px;">Demikian surat keterangan ini dibuat dengan sebenarnya untuk
+                dapat
+                dipergunakan
+                {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.
+            </p>
         </div>
-    </div>
+        <div class="wrapper-footer" style="margin-top: 14px;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 100%;"></td>
+                    <td style="width: 100%;"></td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
+                            {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format('d M Y') : '..........' }}
+                            <br> A.n, Lurah Subagan
+                        </p>
+                        @if (isset($letter->sk->sectionHead))
+                            @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
+                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                                <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                    {{ $letter->sk->sectionHead->name }} <br> NIP :
+                                    {{ $letter->sk->sectionHead->employee_number }}
+                                </p>
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            @endif
+                        @else
+                            @if (isset($letter->sk->villageHead))
+                                @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))
+                                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                        style="width: 100%; height: 100px; object-fit: cover;">
+                                    <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                        {{ $letter->sk->villageHead->name }} <br> NIP :
+                                        {{ $letter->sk->villageHead->employee_number }}
+                                    </p>
+                                @else
+                                    <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                                @endif
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            @endif
+                        @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : '' }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
 </body>
 
 </html>
