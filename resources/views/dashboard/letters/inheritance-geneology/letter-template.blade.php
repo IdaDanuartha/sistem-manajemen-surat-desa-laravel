@@ -7,11 +7,27 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <style>
-        .wrapper {
-            /*margin: 2cm;*/
+        .center-text {
+            position: relative;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
+        table td {
+            width: 100%;
+            font-size: 0.913rem !important;
+            line-height: 130%;
+        }
+
+        p {
+            font-size: 0.913rem !important;
+            line-height: 130%;
+        }
+    </style>
+    {{-- <style>
         .title-surat {
             font-size: 18px;
             text-decoration: underline;
@@ -83,169 +99,158 @@
             left: 0;
             border-bottom: 3px solid black;
         }
-
-        /* .card-canvas .name {
-            position: absolute; 
-            width: 100%; 
-            top: 70%; 
-            right: 30%;
-        }
-
-        .card-canvas .name p:first-child {
-            width: 100%; 
-            text-decoration: underline;
-        }
-
-        .card-canvas .name p:last-child {
-            width: 100%; 
-            bottom: -15%;
-        } */
-    </style>
+    </style> --}}
 </head>
 
 <body>
-    <div class="wrapper">
-        <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full">
-        <div class="title-surat-wrapper">
-            <h1 class="title-surat">“SILSILAH WARIS”</h1>
-            <table class="table-mt w-full table-title">
+    <main style="width: 100%; height: 100%; position: relative;">
+        <div class="wrapper-header" style="width: 100%; position: relative;">
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+                style="border-bottom: 3px solid black; width: 100%;">
+            <h1 class="center-text"
+                style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 23%; margin-top: 24px;">
+                Silsilah Waris</h1>
+            <table style="width: 100%; margin-top: 32px; padding-bottom: 12px; border-bottom: 1px solid black;">
                 <tr>
-                    <td class="title-list">Nama</td>
-                    <td>:</td>
+                    <td style="width: 140px;">Nama</td>
+                    <td style="width: 12px;">:</td>
                     <td>{{ $letter->citizent->name }} (ALM)</td>
                 </tr>
                 <tr>
-                    <td class="title-list">Dusun / Lingkungan/Br </td>
-                    <td>:</td>
-                    <td>DESA</td>
+                    <td style="width: 140px;">Dusun/ Lingkungan/ Br</td>
+                    <td style="width: 12px;">:</td>
+                    <td>Desa</td>
                 </tr>
                 <tr>
-                    <td class="title-list">Desa / Kelurahan </td>
-                    <td>:</td>
+                    <td style="width: 140px;">Desa/ Kelurahan</td>
+                    <td style="width: 12px;">:</td>
                     <td>Subagan</td>
                 </tr>
                 <tr>
-                    <td class="title-list">Kecamatan</td>
-                    <td>:</td>
-                    <td>karangasem</td>
-                </tr>
-                <tr>
-                    <td class="title-list">Kabupaten</td>
-                    <td>:</td>
+                    <td style="width: 140px;">Kecamatan</td>
+                    <td style="width: 12px;">:</td>
                     <td>Karangasem</td>
                 </tr>
                 <tr>
-                    <td class="title-list">Provinsi</td>
-                    <td>:</td>
+                    <td style="width: 140px;">Kabupaten</td>
+                    <td style="width: 12px;">:</td>
+                    <td>Karangasem</td>
+                </tr>
+                <tr>
+                    <td style="width: 140px;">Provinsi</td>
+                    <td style="width: 12px;">:</td>
                     <td>Bali</td>
                 </tr>
             </table>
-        </div>
-        <div class="content-surat">
-            <img width="30%" style="left: 30%; position: relative;" height="auto"
+            <img style="left: 50%; transform: translateX(-50%); position: relative; margin-top: 24px; width: 140px; height: 140px;"
                 src="{{ url('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
-            <div class="" style="margin-top: 10px;">
+            <div class="" style="margin-top: 16px;">
                 <img src="{{ url('assets/img/keterangan.png') }}" style="width: 330px" height="auto" alt="">
             </div>
-            <p class="paragraph">
-                Demikianlah Silsilah Keturunan / waris ini saya buat dengan sebenarnya, saya menjamin tidak ada
+            <p style="margin-top: 24px; text-indent: 42px;">Demikianlah Silsilah Keturunan / waris ini saya buat dengan
+                sebenarnya, saya menjamin tidak ada
                 keturunan/ahli waris lain selain yang saya sebutkan diatas dan saya bersedia menanggung akibat hukum
                 apabila dikemudian hari terjadi silsilah yang saya buat salah/tidak benar serta tanpa melibatkan para
                 pejabat yang melegalisir/mengetahui dibawah ini, dipergunakan sebagaimana mestinya.
             </p>
         </div>
-
-        <div class="" style="margin-top: 200px;">
-            <table class="w-full">
+        <div class="wrapper-footer" style="margin-top: 12px;">
+            <table style="width: 100%;">
                 <tr>
-                    <td class="w-full" style="text-align: center"></td>
-                    <td class="w-full" style="text-align: center">Subagan, {{ $letter->sk->created_at->format('d M Y') }}</td>
-                </tr>
-            </table>
-            <table class="w-full">
-                <tr class="w-full">
-                    <td class="ttd-text">
-                        Mengetahui <br>
-                        Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}
-                    </td>
-                    <td class="ttd-text">Saya yang membuat Silsilah Keluarga</td>
-                </tr>
-                <tr style="text-align: center">
-                    <td style="height: 60px;">
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui <br>
+                            Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}
+                        </p>
                         @if (isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_village_head === 1)
-                                <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}">
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;">
+                                </div>
                             @endif
                         @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                                <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
-                            @endif
-                        @endif
-                    </td>
-                    <td style="height: 60px;">
-                        @if ($letter->sk->citizent->user->signature_image)
-                            <img width="100" height="auto"
-                                src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
-                        @endif
-                    </td>
-                </tr>
-                <tr class="w-full">
-                    <td class="ttd-text" style="text-transform: uppercase">
-                        @if ($letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1)
-                            <strong style="font-size: 14px;">{{ $letter->sk->environmentalHead->name }}</strong>
-                        @endif
-                    </td>
-                    <td class="ttd-text" style="text-transform: uppercase">
-                        @if ($letter->sk->citizent->name)
-                            <strong style="font-size: 14px;">{{ $letter->sk->citizent->name }}</strong>
-                        @endif
-                    </td>
-                </tr>
-            </table>
-            <table class="w-full table-mt">
-                <tr class="w-full">
-                    <td class="ttd-text">
-                        Mengetahui <br>
-                        Lurah Subagan
-                    </td>
-                    <td class="ttd-text">
-                        Mengetahui <br>
-                        Camat Karangasem
-                        {{-- {{ $subdistrictHead->name }} --}}
-                    </td>
-                </tr>
-                <tr style="text-align: center">
-                    <td style="height: 60px;">
-                        @if (isset($letter->sk->villageHead))
-                            @if ($letter->sk->status_by_village_head === 1)
-                                <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
-                                <div class="name">
-                                    <p style="text-decoration: underline;">{{ $letter->sk->villageHead->name }}</p>
-                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;">
                                 </div>
                             @endif
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                         @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->sk->environmentalHead && $letter->sk->status_by_environmental_head === 1 ? $letter->sk->environmentalHead->name : '..............' }}
+                        </p>
                     </td>
-                    <td style="height: 60px;">
-                        <div style="margin-bottom: 50px;">
-                            @if (isset($subdistrictHead->signature_image))
-                                <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
-                                    style="width: 100; margin-bottom: -50px; margin-top: 10px; height: auto;">
-                            @endif
-                        </div>
-                        <div class="name">
-                            <p style="text-decoration: underline;">{{ $subdistrictHead->name }}</p>
-                            <p>NIP : {{ $subdistrictHead->employee_number }}</p>
-                        </div>
+                    <td style="width: 100%;"></td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
+                            {{ $letter->sk->created_at->format('d M Y') }} <br> Saya yang membuat
+                            Silsilah Keluarga
+                        </p>
+                        @if ($letter->sk->citizent->user->signature_image)
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                        @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->sk->citizent->name ? $letter->sk->citizent->name : '..............' }}</p>
                     </td>
                 </tr>
-
+            </table>
+            <table style="width: 100%; margin-top: 24px;">
+                <tr>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui <br>
+                            Lurah Subagan
+                        </p>
+                        @if (isset($letter->sk->villageHead))
+                            @if ($letter->sk->status_by_village_head === 1)
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                                <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                    {{ $letter->sk->villageHead->name }} <br> NIP:
+                                    {{ $letter->sk->villageHead->employee_number }}
+                                </p>
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                                <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                    ..............
+                                </p>
+                            @endif
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                ..............
+                            </p>
+                        @endif
+                    </td>
+                    <td style="width: 100%;"></td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui <br>
+                            Camat Karangasem
+                        </p>
+                        @if (isset($subdistrictHead->signature_image))
+                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                {{ $subdistrictHead->name }} <br>
+                                NIP: {{ $subdistrictHead->employee_number }}
+                            </p>
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
+                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                                ..............
+                            </p>
+                        @endif
+                    </td>
+                </tr>
             </table>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
