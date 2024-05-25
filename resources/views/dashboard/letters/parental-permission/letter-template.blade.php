@@ -29,7 +29,6 @@
 </head>
 
 <body>
-
     <main style="width: 100%; height: 100%; position: relative;">
         <div class="wrapper-header" style="width: 100%; position: relative;">
             <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
