@@ -88,6 +88,16 @@ class DieselPurchaseLetterRepository
                 ->get();
   }
 
+  public function findAllEnvironmentalLetter(): Collection
+  {
+    return $this->letter
+                ->latest()
+                ->with(['sk.villageHead', 'sk.environmentalHead', 'sk.sectionHead', 'sk.citizent'])
+                ->whereRelation('sk', 'is_published', 1)
+                ->whereRelation('sk.citizent', 'environmental_id', auth()->user()->authenticatable->environmental_id)
+                ->get();
+  }
+
   public function findAllPaginate(): LengthAwarePaginator
   {
     return $this->letter->latest()->paginate(10);

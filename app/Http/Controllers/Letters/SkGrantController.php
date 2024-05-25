@@ -29,12 +29,12 @@ class SkGrantController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);     
         if(auth()->user()->role === Role::VILLAGE_HEAD) {
             $letters = $this->skGrant->findLetterByVillageHead();
-        } else if(auth()->user()->role === Role::SECTION_HEAD || auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+        } else if(auth()->user()->role === Role::SECTION_HEAD) {
             $letters = $this->skGrant->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->skGrant->findLetterByCitizent();
-        // } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
-        //     $letters = $this->skGrant->findLetterByStatus(0);
+        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+            $letters = $this->skGrant->findAllEnvironmentalLetter();
         } else {
             $letters = $this->skGrant->findAll();
         }
