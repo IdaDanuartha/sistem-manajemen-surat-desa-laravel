@@ -207,22 +207,26 @@
             </table>
             <table class="w-full">
                 <tr class="w-full">
-                    <td class="ttd-text">Pemberi Kuasa</td>
+                    {{-- <td class="ttd-text">Pemberi Kuasa</td> --}}
                     <td class="ttd-text">Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }},</td>
+                    <td class="ttd-text">Klian Adat {{ $letter->sk->citizent->environmental->name }},</td>
                 </tr>
                 <tr style="text-align: center">
-                    <td style="height: 60px;">
+                    {{-- <td style="height: 60px;">
                         @if ($letter->sk->citizent->user->signature_image)
                             <img width="100" height="auto"
                                 src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}">
                         @endif
-                    </td>
+                    </td> --}}
                     <td style="height: 60px;">
                         @if(isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))
                                 <img width="100" height="auto" src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"> 
                             @endif
                         @endif
+                    </td>
+                    <td style="height: 60px;">
+                        
                     </td>
                 </tr>
                 <tr class="w-full">

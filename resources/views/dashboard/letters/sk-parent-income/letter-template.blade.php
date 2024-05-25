@@ -343,45 +343,45 @@
             <div class="input-group one">
                 <label>Nama</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->name }}</span>
+                <span>{{ $letter->sk->citizent->name }}</span>
             </div>
             <div class="input-group two">
                 <label>Tempat Tanggal Lahir</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->birth_place . ', ' . $letter->citizent->birth_date->format('d-m-Y') }}</span>
+                <span>{{ $letter->sk->citizent->birth_place . ', ' . $letter->sk->citizent->birth_date->format('d-m-Y') }}</span>
             </div>
             <div class="input-group three">
                 <label>Jenis Kelamin</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->gender->label() }}</span>
+                <span>{{ $letter->sk->citizent->gender->label() }}</span>
             </div>
             <div class="input-group four">
                 <label>Agama</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->religion->label() }}</span>
+                <span>{{ $letter->sk->citizent->religion->label() }}</span>
             </div>
             <div class="input-group six">
                 <label>Kewarganegaraan</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->citizenship }}</span>
+                <span>{{ $letter->sk->citizent->citizenship }}</span>
             </div>
             <div class="input-group seven">
                 <label>Pekerjaan</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->work }}</span>
+                <span>{{ $letter->sk->citizent->work }}</span>
             </div>
             <div class="input-group eight">
                 <label>No KK/ KTP</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->national_identify_number }}</span>
+                <span>{{ $letter->sk->citizent->national_identify_number }}</span>
             </div>
             <div class="input-group five">
                 <label>Alamat</label>
                 <div>:</div>
-                <span>{{ $letter->citizent->address }}</span>
+                <span>{{ $letter->sk->citizent->address }}</span>
             </div>
             <p class="description-caption">Yang Merupakan orang Tua/Wali dari : <span
-                    style="text-transform: uppercase;">{{ $letter->sk->citizent->name }}</span></p>
+                    style="text-transform: uppercase;">{{ $letter->citizent->name }}</span></p>
             <div class="description-other">
                 <p class="paragraph-one">Berdasarkan surat pengantar Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}, No: {{ $letter->sk->cover_letter_number }}
                     tertanggal, {{ $letter->sk->created_at->format("d M Y") }}. Bahwa memang benar orang tersebut di atas @if($letter->status == 1) memiliki penghasilan Rp.

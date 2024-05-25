@@ -227,26 +227,19 @@
                                     <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
                                 </div>
                             @endif
-                        @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
-                            @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                                <img width="100" height="auto"
-                                    src="{{ url('uploads/users/signatures/' . $user->signature_image) }}">
-                                <div class="name">
-                                    <p style="text-decoration: underline;">{{ $letter->sk->villageHead->name }}</p>
-                                    <p>NIP : {{ $letter->sk->villageHead->employee_number }}</p>
-                                </div>
-                            @endif
                         @endif
                     </td>
                     <td style="height: 60px;">
-                        @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
-                                style="width: 100; height: auto;">
-                            <div class="name">
-                                <p style="text-decoration: underline;">{{ $subdistrictHead->name }}</p>
-                                <p>NIP : {{ $subdistrictHead->employee_number }}</p>
-                            </div>
-                        @endif
+                        <div style="margin-bottom: 50px;">
+                            @if (isset($subdistrictHead->signature_image))
+                                <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                                    style="width: 100; margin-bottom: -50px; margin-top: 10px; height: auto;">
+                            @endif
+                        </div>
+                        <div class="name">
+                            <p style="text-decoration: underline;">{{ $subdistrictHead->name }}</p>
+                            <p>NIP : {{ $subdistrictHead->employee_number }}</p>
+                        </div>
                     </td>
                 </tr>
 

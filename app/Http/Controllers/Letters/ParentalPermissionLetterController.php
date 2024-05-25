@@ -30,12 +30,12 @@ class ParentalPermissionLetterController extends Controller
         if(auth()->user()->role === Role::ADMIN) abort(404);     
         if(auth()->user()->role === Role::VILLAGE_HEAD) {
             $letters = $this->parentalPermissionLetter->findLetterByVillageHead();
-        } else if(auth()->user()->role === Role::SECTION_HEAD) {
+        } else if(auth()->user()->role === Role::SECTION_HEAD || auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
             $letters = $this->parentalPermissionLetter->findLetterBySectionHead();
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->parentalPermissionLetter->findLetterByCitizent();
-        } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
-            $letters = $this->parentalPermissionLetter->findLetterByStatus(0);
+        // } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
+        //     $letters = $this->parentalPermissionLetter->findLetterByStatus(0);
         } else {
             $letters = $this->parentalPermissionLetter->findAll();
         }

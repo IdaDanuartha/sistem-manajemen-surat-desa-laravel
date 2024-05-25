@@ -39,8 +39,8 @@
                     @if (auth()->user()->isEnvironmentalHead())
                         <div class="col-md-6 col-12 mb-4 flex flex-col">
                             <label class="text-second">Nomor Telepon</label>
-                            <input name="phone_number" type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone_number }}" />
-                            @error('phone_number')
+                            <input name="phone" type="text" class="input-crud" value="{{ auth()->user()->authenticatable->phone }}" />
+                            @error('phone')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>

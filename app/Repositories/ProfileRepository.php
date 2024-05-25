@@ -108,7 +108,7 @@ class ProfileRepository
         $citizent->user->updateOrFail(Arr::get($request, 'user'));
       } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
         $environmentalHead = $this->environmentalHead->find(auth()->user()->authenticatable->id);
-        $environmentalHead->updateOrFail(Arr::only($request, ["name", "phone_number", "environmental_id"]));
+        $environmentalHead->updateOrFail(Arr::only($request, ["name", "phone", "environmental_id"]));
         $environmentalHead->user->updateOrFail(Arr::get($request, 'user'));
       }	else if(auth()->user()->role === Role::SECTION_HEAD) {
         $sectionHead = $this->sectionHead->find(auth()->user()->authenticatable->id);

@@ -162,6 +162,7 @@ class SkInheritanceDistributionRepository
         $request["sk"]["reject_reason"] = null;
       }
 
+      $letter->sk->updateOrFail(Arr::get($request, "sk"));
       $letter->updateOrFail(Arr::except($request, "sk"));
 
       $sk_inheritance_distribution_families = $this->skInheritanceDistributionFamily->where("sk_inheritance_distribution_id", $letter->id)->get();
