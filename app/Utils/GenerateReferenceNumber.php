@@ -71,9 +71,9 @@ class GenerateReferenceNumber
             3 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->year",
             // sk cerai 
             4 => "$this->unique_code / $this->serial_number / $this->type / $this->month / $this->year",
-            // sktu - sktm bayar cerai - sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah
+            // sktu - sktm bayar cerai - sktm bedah rumah - sktm disabilitas - sktm bpjs - sktm lansia - sktm sekolah - sr pembelian bbm
             5 => "$this->unique_code / $this->serial_number / $this->month / $this->type / $this->location / $this->year",
-            // sk beda nama -  sk rumah subsidi - sk harga tanah - sk penghasilan ortu - sk izin orang tua - sr pembelian bbm - sk domisili - sk penebangan pohon
+            // sk beda nama -  sk rumah subsidi - sk harga tanah - sk penghasilan ortu - sk izin orang tua - sk domisili - sk penebangan pohon
             6 => "$this->serial_number / $this->month / $this->type / $this->location / $this->year",
             // semua sk pindah (desa, lingkungan, kecamatan, provinsi)
             7 => "$this->unique_code / $this->serial_number / $this->month / $this->letter / $this->location / $this->year",

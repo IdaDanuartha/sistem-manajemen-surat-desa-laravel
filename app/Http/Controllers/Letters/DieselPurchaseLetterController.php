@@ -34,7 +34,7 @@ class DieselPurchaseLetterController extends Controller
         } else if(auth()->user()->role === Role::CITIZENT) {
             $letters = $this->dieselPurchaseLetter->findLetterByCitizent();
         } else if(auth()->user()->role === Role::ENVIRONMENTAL_HEAD) {
-            $letters = $this->dieselPurchaseLetter->findLetterByStatus(0);
+            $letters = $this->dieselPurchaseLetter->findAllEnvironmentalLetter();
         } else {
             $letters = $this->dieselPurchaseLetter->findAll();
         }
@@ -44,7 +44,7 @@ class DieselPurchaseLetterController extends Controller
 
     public function create()
     { 
-        $reference_number = new GenerateReferenceNumber("", 6, "", "", "Kel. Subagan");
+        $reference_number = new GenerateReferenceNumber("517", 5, "", "Ket", "Kel. Subagan");
         $cover_letter_number = new GenerateReferenceNumber("", 1, "", "", "", auth()->user()->authenticatable->environmental->code ?? "---");
 
         if(auth()->user()->role === Role::ADMIN) abort(404);                                          
