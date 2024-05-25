@@ -31,7 +31,7 @@
 <body>
     <main style="width: 100%; height: 100%; position: relative;">
         <div class="wrapper-header" style="width: 100%; position: relative;">
-            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
                 style="border-bottom: 3px solid black; width: 100%;">
             <h1 class="center-text"
                 style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 39.5%; margin-top: 24px;">
@@ -166,7 +166,7 @@
                     <td>{{ $letter->citizent->national_identify_number }}</td>
                 </tr>
             </table>
-            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
                 style="border-bottom: 3px solid black; width: 100%;">
             <p style="margin-top: 62px; text-indent: 42px;">Demikian surat pernyataan ini saya buat dengan sebenarnya
                 untuk dapat dipergunakan sebagai mana
@@ -180,7 +180,7 @@
                         <p style="font-size: 0.875rem !important; text-align: center !important;">Yang menerima Hibah
                         </p>
                         @if ($letter->citizent->user->signature_image)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $letter->citizent->user->signature_image) }}"
                                 style="width: 100%; height: 100px; object-fit: cover;">
                         @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
@@ -194,14 +194,14 @@
                         </p>
                         @if (isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1 && $letter->sk->villageHead->user->signature_image)
-                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                             @endif
                         {{-- @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
-                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
@@ -222,11 +222,11 @@
                             {{ $letter->sk->created_at->format('d M Y') }} <br>
                             Yang membuat pernyataan memberi hibah</p>
                         @if (isset($letter->sk->citizent->user->signature_image))
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
                                 style="width: 100%; height: 100px; object-fit: cover;">
                         {{-- @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
                             @if ($user->isCitizent() && $user->signature_image)
-                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;">
