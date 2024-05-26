@@ -26,6 +26,12 @@
             font-size: 0.913rem !important;
             line-height: 130%;
         }
+
+        .cap-kelurahan {
+            position: absolute;
+            top: -40px;
+            right: 15px;
+        }
     </style>
     {{-- <style>
         .title-surat {
@@ -162,21 +168,21 @@
                             Kepala Lingkungan {{ $letter->sk->citizent->environmental->name }}
                         </p>
                         @if (isset($letter->sk->environmentalHead))
-                            @if ($letter->sk->status_by_village_head === 1)
+                            @if ($letter->sk->status_by_village_head === 1 && $letter->sk->environmentalHead->user->signature_image)
                                 <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;">
                                 </div>
                             @endif
-                        @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
+                        {{-- @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
                                 <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;">
                                 </div>
-                            @endif
+                            @endif --}}
                         @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                         @endif
@@ -208,9 +214,12 @@
                             Lurah Subagan
                         </p>
                         @if (isset($letter->sk->villageHead))
-                            @if ($letter->sk->status_by_village_head === 1)
-                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                            @if ($letter->sk->status_by_village_head === 1 && $letter->sk->villageHead->user->signature_image)
+                                <div style="position: relative">
+                                    <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
+                                    <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
+                                </div>
                                 <p style="font-size: 0.875rem !important; text-align: center !important;">
                                     {{ $letter->sk->villageHead->name }} <br> NIP:
                                     {{ $letter->sk->villageHead->employee_number }}

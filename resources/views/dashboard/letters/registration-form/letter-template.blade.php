@@ -590,6 +590,12 @@
         }
 
         .page_break { page-break-before: always; }
+
+        .cap-kelurahan {
+            position: absolute;
+            top: -40px;
+            right: 15px;
+        }
     </style>
 </head>
 <body>
@@ -730,13 +736,14 @@
                 @endif
                 <div class="card-canvas">
                     @if(isset($letter->sk->villageHead))
-                        @if ($letter->sk->status_by_village_head === 1)
+                        @if ($letter->sk->status_by_village_head === 1 && $letter->sk->villageHead->user->signature_image)
+                            <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
                             <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                         @endif
-                    @elseif (Request::is("letters/registration-form/$letter->id/preview*"))
+                    {{-- @elseif (Request::is("letters/registration-form/$letter->id/preview*"))
                         @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
                             <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}" style="width: 100%; height: 100%;">
-                        @endif
+                        @endif --}}
                     @endif  
                 </div>
                 <p>Subagan, {{ $letter->sk->villageHead && $letter->sk->status_by_village_head === 1 ? $letter->sk->updated_at->format("d M Y") : ".........." }} <br>Lurah Subagan</p>

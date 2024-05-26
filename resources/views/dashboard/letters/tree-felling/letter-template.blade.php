@@ -32,7 +32,7 @@
 <body>
     <main style="width: 100%; height: 100%; position: relative;">
         <div class="wrapper-header" style="width: 100%; position: relative;">
-            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
                 style="border-bottom: 3px solid black; width: 100%;">
             <table style="width: 100%; margin-top: 24px;">
                 <tr>
@@ -93,19 +93,19 @@
                             Kepala Lingkungan Jasri Kelod
                         </p>
                         @if (isset($letter->sk->environmentalHead))
-                            @if ($letter->sk->status_by_environmental_head === 1)
-                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
-                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @if ($letter->sk->status_by_environmental_head === 1 && $letter->sk->environmentalHead->user->signature_image)
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
+                                    style="width: 120px; position: relative; left: 120px; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                             @endif
-                        @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
+                        {{-- @elseif (Request::is("letters/tree-felling/$letter->id/preview*"))
                             @if (($user->isenvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
-                            @endif
+                            @endif --}}
                         @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                         @endif
@@ -120,11 +120,11 @@
                     <td style="width: 100%;">
                         <p style="font-size: 0.875rem !important; text-align: center !important;">Pemohon</p>
                         @if ($user->isCitizent() && $user->signature_image)
-                            <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
-                                style="width: 100%; height: 100px; object-fit: cover;">
+                            <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
+                                style="width: 120px; height: auto; object-fit: cover; position: relative; right: -120px;">
                         @elseif(isset($letter->sk->citizent->user->signature_image))
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
-                                style="width: 100%; height: 100px; object-fit: cover;">
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                                style="width: 120px; height: auto; object-fit: cover;">
                         @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;">
                             </div>
@@ -142,7 +142,7 @@
         </div>
     </main>
 
-    {{-- <img src="{{ public_path('assets/img/letter-header.png') }}" class="image-full" alt="">
+    {{-- <img src="{{ url('assets/img/letter-header.png') }}" class="image-full" alt="">
     <div class="wrapper">
         <p>Subagan, {{ $letter->sk->created_at->format('d M Y') }}</p>
         <p style="margin-top: -10px;">Kepada,</p>

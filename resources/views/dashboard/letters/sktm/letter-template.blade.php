@@ -25,13 +25,19 @@
             font-size: 0.913rem !important;
             line-height: 130%;
         }
+
+        .cap-kelurahan {
+            position: absolute;
+            top: -30px;
+            right: 15px;
+        }
     </style>
 </head>
 
 <body>
     <main style="width: 100%; height: 100%; position: relative;">
         <div class="wrapper-header" style="width: 100%; position: relative;">
-            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
                 style="border-bottom: 3px solid black; width: 100%;">
             <h1 class="center-text"
                 style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 51%; margin-top: 24px;">
@@ -213,8 +219,11 @@
                         </p>
                         @if (isset($letter->sk->sectionHead))
                             @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
-                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
+                                <div style="position: relative">
+                                    <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
+                                    <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
+                                </div>
                                 <p style="font-size: 0.875rem !important; text-align: center !important;">
                                     {{ $letter->sk->sectionHead->name }} <br> NIP :
                                     {{ $letter->sk->sectionHead->employee_number }}
@@ -225,8 +234,11 @@
                         @else
                             @if (isset($letter->sk->villageHead))
                                 @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))
-                                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                    <div style="position: relative">
+                                        <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
+                                        <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
                                         style="width: 100%; height: 100px; object-fit: cover;">
+                                    </div>
                                     <p style="font-size: 0.875rem !important; text-align: center !important;">
                                         {{ $letter->sk->villageHead->name }} <br> NIP :
                                         {{ $letter->sk->villageHead->employee_number }}

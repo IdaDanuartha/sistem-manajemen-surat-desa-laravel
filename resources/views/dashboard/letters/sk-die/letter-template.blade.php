@@ -263,6 +263,12 @@
             width: 100%; 
             bottom: -15%;
         }
+        
+        .cap-kelurahan {
+            position: absolute;
+            top: -50px;
+            right: 15px;
+        }
     </style>
 </head>
 <body>
@@ -326,6 +332,7 @@
                 <div class="card-canvas">
                     @if (isset($letter->sk->sectionHead))
                         @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
+                            <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
                             <img src="{{ url('uploads/users/signatures/' . $letter->sk->sectionHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                             <div class="name">
                                 <p>{{ $letter->sk->sectionHead->name }}</p>    
@@ -335,6 +342,7 @@
                     @else
                         @if(isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1 && isset($letter->sk->villageHead->user->signature_image))
+                                <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
                                 <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}" style="width: 100%; height: 100%;">
                                 <div class="name">
                                     <p>{{ $letter->sk->villageHead->name }}</p>    

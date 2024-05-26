@@ -95,6 +95,12 @@
             left: 0;
             border-bottom: 3px solid black;
         }
+
+        .cap-kelurahan {
+            position: absolute;
+            top: -30px;
+            right: 60px;
+        }
     </style>
 </head>
 
@@ -263,9 +269,12 @@
                 <tr style="text-align: center">
                     <td style="height: 60px;">
                         @if (isset($letter->sk->villageHead))
-                            @if ($letter->sk->status_by_village_head === 1)
-                                <img width="100" height="auto"
+                            @if ($letter->sk->status_by_village_head === 1 && $letter->sk->villageHead->user->signature_image)
+                                <div style="position: relative">
+                                    <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 60%; height: auto;" alt="">
+                                    <img width="100" height="auto"
                                     src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}">
+                                </div>
                             @endif
                         {{-- @elseif (Request::is("letters/sk-inheritance-distribution/$letter->id/preview*"))
                             @if (($user->isVillageHead() && $user->signature_image) || $letter->sk->villageHead)
