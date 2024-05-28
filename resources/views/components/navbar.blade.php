@@ -120,6 +120,15 @@ id="layout-navbar">
                         </button>
                     </a>
                 </li>
+                <li>
+                    <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">
+                            <i class="bx bx-log-out me-2"></i>
+                            Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
             </li>
         </ul>
