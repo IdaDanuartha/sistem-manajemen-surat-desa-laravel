@@ -236,9 +236,9 @@
                     </td>
                 </tr>
                 <tr class="w-full">
-                    <td class="ttd-text">
+                    {{-- <td class="ttd-text">
                         <strong style="font-size: 14px">{{ $letter->sk->citizent->name }}</strong>
-                    </td>
+                    </td> --}}
                     <td class="ttd-text">
                         @if(isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_environmental_head === 1 && isset($letter->sk->environmentalHead->user->signature_image))

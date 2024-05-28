@@ -174,7 +174,7 @@
             </p>
         </div>
         <div class="wrapper-footer" style="margin-top: 62px;">
-            <table>
+            <table style="width: 100%">
                 <tr>
                     <td style="width: 100%;">
                         <p style="font-size: 0.875rem !important; text-align: center !important;">Yang menerima Hibah
@@ -188,6 +188,32 @@
                         <p style="font-size: 0.875rem !important; text-align: center !important;">
                             {{ $letter->citizent->name }}</p>
                     </td>
+                    <td style="width: 100%;"></td>
+                    <td style="width: 100%;">
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
+                            {{ $letter->sk->created_at->format('d M Y') }} <br>
+                            Yang membuat pernyataan memberi hibah</p>
+                        @if (isset($letter->sk->citizent->user->signature_image))
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                                style="width: 100%; height: 100px; object-fit: cover;">
+                        {{-- @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
+                            @if ($user->isCitizent() && $user->signature_image)
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
+                                    style="width: 100%; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="wrapper-image" style="width: 100%; height: 100px;">
+                                </div>
+                            @endif --}}
+                        @else
+                            <div class="wrapper-image" style="width: 100%; height: 100px;">
+                            </div>
+                        @endif
+                        <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{ $letter->sk->citizent->name }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%;"></td>
                     <td style="width: 100%;">
                         <p style="font-size: 0.875rem !important; text-align: center !important;">Mengetahui, <br> Lurah
                             Subagan
@@ -217,28 +243,7 @@
                             <p style="opacity: 0;">Lorem ipsum dolor sit amet consectetur consectetur</p>
                         @endif
                     </td>
-                    <td style="width: 100%;">
-                        <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
-                            {{ $letter->sk->created_at->format('d M Y') }} <br>
-                            Yang membuat pernyataan memberi hibah</p>
-                        @if (isset($letter->sk->citizent->user->signature_image))
-                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
-                                style="width: 100%; height: 100px; object-fit: cover;">
-                        {{-- @elseif (Request::is("letters/sk-grant/$letter->id/preview*"))
-                            @if ($user->isCitizent() && $user->signature_image)
-                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
-                                    style="width: 100%; height: 100px; object-fit: cover;">
-                            @else
-                                <div class="wrapper-image" style="width: 100%; height: 100px;">
-                                </div>
-                            @endif --}}
-                        @else
-                            <div class="wrapper-image" style="width: 100%; height: 100px;">
-                            </div>
-                        @endif
-                        <p style="font-size: 0.875rem !important; text-align: center !important;">
-                            {{ $letter->sk->citizent->name }}</p>
-                    </td>
+                    <td style="width: 100%;"></td>
                 </tr>
             </table>
         </div>

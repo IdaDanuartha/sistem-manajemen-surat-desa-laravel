@@ -111,7 +111,7 @@
 <body>
     <main style="width: 100%; height: 100%; position: relative;">
         <div class="wrapper-header" style="width: 100%; position: relative;">
-            <img src="{{ public_path('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
+            <img src="{{ url('assets/img/letter-header.png') }}" alt="Banner Top" class="image-full"
                 style="border-bottom: 3px solid black; width: 100%;">
             <h1 class="center-text"
                 style="text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid black; width: 23%; margin-top: 24px;">
@@ -149,9 +149,9 @@
                 </tr>
             </table>
             <img style="left: 50%; transform: translateX(-50%); position: relative; margin-top: 24px; height: 140px;"
-                src="{{ public_path('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
+                src="{{ url('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
             <div class="" style="margin-top: 16px;">
-                <img src="{{ public_path('assets/img/keterangan.png') }}" style="width: 330px;" height="auto" alt="">
+                <img src="{{ url('assets/img/keterangan.png') }}" style="width: 330px;" height="auto" alt="">
             </div>
             <p style="margin-top: 24px; text-indent: 42px;">Demikianlah Silsilah Keturunan / waris ini saya buat dengan
                 sebenarnya, saya menjamin tidak ada
@@ -169,7 +169,7 @@
                         </p>
                         @if (isset($letter->sk->environmentalHead))
                             @if ($letter->sk->status_by_village_head === 1 && $letter->sk->environmentalHead->user->signature_image)
-                                <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $letter->sk->environmentalHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;">
@@ -177,7 +177,7 @@
                             @endif
                         {{-- @elseif (Request::is("letters/inheritance-geneology/$letter->id/preview*"))
                             @if (($user->isEnvironmentalHead() && $user->signature_image) || $letter->sk->environmentalHead)
-                                <img src="{{ public_path('uploads/users/signatures/' . $user->signature_image) }}"
+                                <img src="{{ url('uploads/users/signatures/' . $user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                             @else
                                 <div class="wrapper-image" style="width: 100%; height: 100px;">
@@ -197,7 +197,7 @@
                             Silsilah Keluarga
                         </p>
                         @if ($letter->sk->citizent->user->signature_image)
-                            <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $letter->sk->citizent->user->signature_image) }}"
                                 style="width: 100%; height: 100px; object-fit: cover;">
                         @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
@@ -216,8 +216,8 @@
                         @if (isset($letter->sk->villageHead))
                             @if ($letter->sk->status_by_village_head === 1 && $letter->sk->villageHead->user->signature_image)
                                 <div style="position: relative">
-                                    <img class="cap-kelurahan" src="{{ public_path("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
-                                    <img src="{{ public_path('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
+                                    <img class="cap-kelurahan" src="{{ url("assets/img/cap_kelurahan.png") }}" style="width: 85%; height: auto;" alt="">
+                                    <img src="{{ url('uploads/users/signatures/' . $letter->sk->villageHead->user->signature_image) }}"
                                     style="width: 100%; height: 100px; object-fit: cover;">
                                 </div>
                                 <p style="font-size: 0.875rem !important; text-align: center !important;">
@@ -243,7 +243,7 @@
                             Camat Karangasem
                         </p>
                         @if (isset($subdistrictHead->signature_image))
-                            <img src="{{ public_path('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
+                            <img src="{{ url('uploads/users/signatures/' . $subdistrictHead->signature_image) }}"
                                 style="width: 100%; height: 100px; object-fit: cover;">
                             <p style="font-size: 0.875rem !important; text-align: center !important;">
                                 {{ $subdistrictHead->name }} <br>

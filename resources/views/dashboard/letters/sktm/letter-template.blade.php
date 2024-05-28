@@ -117,7 +117,7 @@
                     </tr>
                 @endif
             </table>
-            <table style="width: 100%; margin-top: 32px;">
+            <table style="width: 100%; margin-top: 10px;">
                 <tr>
                     @if ($letter->sktm_type->value === 1)
                         <td colspan="3" style="padding-bottom: 8px !important; text-indent: 42px;">Berdasarkan surat
@@ -207,7 +207,7 @@
                 {{ $letter->purpose === '-' ? 'sebagai mana mestinya' : 'sebagai ' . $letter->purpose }}.
             </p>
         </div>
-        <div class="wrapper-footer" style="margin-top: 14px;">
+        <div class="wrapper-footer" style="margin-top: -10px;">
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 100%;"></td>
@@ -216,6 +216,9 @@
                         <p style="font-size: 0.875rem !important; text-align: center !important;">Subagan,
                             {{ ($letter->sk->sectionHead || $letter->sk->villageHead) && ($letter->sk->status_by_section_head === 1 || $letter->sk->status_by_village_head === 1) ? $letter->sk->updated_at->format('d M Y') : '..........' }}
                             <br> A.n, Lurah Subagan
+                        </p>
+                        <p style="font-size: 0.875rem !important; text-align: center !important; position: relative; top: -10px;">
+                            {{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : '' }}
                         </p>
                         @if (isset($letter->sk->sectionHead))
                             @if ($letter->sk->status_by_section_head === 1 && isset($letter->sk->sectionHead->user->signature_image))
@@ -250,9 +253,6 @@
                                 <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
                             @endif
                         @endif
-                        <p style="font-size: 0.875rem !important; text-align: center !important;">
-                            {{ $letter->sk->sectionHead ? $letter->sk->sectionHead->position : '' }}
-                        </p>
                     </td>
                 </tr>
             </table>
