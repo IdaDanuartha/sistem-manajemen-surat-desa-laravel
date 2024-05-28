@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkSubsidizedHousing\StoreSkSubsidizedHousingRequest;
 use App\Http\Requests\Letter\SkSubsidizedHousing\UpdateSkSubsidizedHousingRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkSubsidizedHousingLetter;
 use App\Repositories\CitizentRepository;
@@ -60,7 +61,8 @@ class SkSubsidizedHousingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skSubsidizedHousing->findById($skSubsidizedHousing);
-        return view('dashboard.letters.sk-subsidized-housing.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-subsidized-housing.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkSubsidizedHousingLetter $skSubsidizedHousing)

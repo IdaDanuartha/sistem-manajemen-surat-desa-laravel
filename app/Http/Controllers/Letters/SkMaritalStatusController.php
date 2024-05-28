@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkMaritalStatus\StoreSkMaritalStatusRequest;
 use App\Http\Requests\Letter\SkMaritalStatus\UpdateSkMaritalStatusRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkMaritalStatusLetter;
 use App\Models\SubdistrictHead;
@@ -63,7 +64,8 @@ class SkMaritalStatusController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skMaritalStatus->findById($sk_marital_status);
-        return view('dashboard.letters.sk-marital-status.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-marital-status.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkMaritalStatusLetter $sk_marital_status)

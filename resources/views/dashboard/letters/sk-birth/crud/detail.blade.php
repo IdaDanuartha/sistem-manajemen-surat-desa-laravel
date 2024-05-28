@@ -119,7 +119,7 @@
 					<input
 						type="text"
 						class="input-crud"
-						value="{{ $get_letter->sk->environmentalHead->phone ?? "-" }}"
+						value="{{ $environmentalHead->phone ?? "-" }}"
 						disabled
 					>
 				</div>

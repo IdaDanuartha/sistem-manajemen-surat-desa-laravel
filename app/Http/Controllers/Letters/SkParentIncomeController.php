@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkParentIncome\StoreSkParentIncomeRequest;
 use App\Http\Requests\Letter\SkParentIncome\UpdateSkParentIncomeRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkParentIncomeLetter;
 use App\Models\SubdistrictHead;
@@ -65,7 +66,8 @@ class SkParentIncomeController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skParentIncome->findById($sk_parent_income);
-        return view('dashboard.letters.sk-parent-income.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-parent-income.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkParentIncomeLetter $sk_parent_income)

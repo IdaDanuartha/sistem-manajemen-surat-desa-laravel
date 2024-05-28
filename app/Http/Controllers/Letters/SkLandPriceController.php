@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkLandPrice\StoreSkLandPriceRequest;
 use App\Http\Requests\Letter\SkLandPrice\UpdateSkLandPriceRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkLandPriceLetter;
 use App\Repositories\CitizentRepository;
@@ -62,7 +63,8 @@ class SkLandPriceController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skLandPrice->findById($sk_land_price);
-        return view('dashboard.letters.sk-land-price.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-land-price.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkLandPriceLetter $sk_land_price)

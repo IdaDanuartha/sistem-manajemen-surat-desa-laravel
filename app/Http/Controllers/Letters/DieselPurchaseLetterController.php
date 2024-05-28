@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\DieselPurchaseLetter\UpdateDieselPurchaseRequest;
 use App\Http\Requests\Letter\DieselPurchaseLetter\StoreDieselPurchaseRequest;
 use App\Models\DieselPurchaseLetter;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Repositories\CitizentRepository;
 use App\Repositories\Letters\DieselPurchaseLetterRepository;
@@ -61,7 +62,8 @@ class DieselPurchaseLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->dieselPurchaseLetter->findById($dieselPurchase);
-        return view('dashboard.letters.diesel-purchase.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.diesel-purchase.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(DieselPurchaseLetter $dieselPurchase)

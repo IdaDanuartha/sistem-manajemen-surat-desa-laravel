@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkMarry\StoreSkMarryRequest;
 use App\Http\Requests\Letter\SkMarry\UpdateSkMarryRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkMarryLetter;
 use App\Repositories\CitizentRepository;
@@ -59,7 +60,8 @@ class SkMarryController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skMarry->findById($sk_marry);
-        return view('dashboard.letters.sk-marry.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-marry.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkMarryLetter $sk_marry)

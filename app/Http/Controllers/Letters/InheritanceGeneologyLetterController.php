@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\InheritanceGeneology\StoreInheritanceGeneologyRequest;
 use App\Http\Requests\Letter\InheritanceGeneology\UpdateInheritanceGeneologyRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\InheritanceGeneology;
 use App\Models\Sk;
 use App\Models\SubdistrictHead;
@@ -58,7 +59,8 @@ class InheritanceGeneologyLetterController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->inheritanceGeneology->findById($inheritanceGeneology);
-        return view('dashboard.letters.inheritance-geneology.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.inheritance-geneology.crud.detail', compact('get_letter', "environmentalHead"));
     }
 
     public function edit(InheritanceGeneology $inheritanceGeneology)

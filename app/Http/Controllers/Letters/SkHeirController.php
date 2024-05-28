@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkHeir\StoreSkHeirRequest;
 use App\Http\Requests\Letter\SkHeir\UpdateSkHeirRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkHeir;
 use App\Repositories\CitizentRepository;
@@ -56,7 +57,8 @@ class SkHeirController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skHeir->findById($skHeir);
-        return view('dashboard.letters.sk-heir.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-heir.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkHeir $skHeir)

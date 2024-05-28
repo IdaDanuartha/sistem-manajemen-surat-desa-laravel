@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkDomicile\StoreSkDomicileRequest;
 use App\Http\Requests\Letter\SkDomicile\UpdateSkDomicileRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkDomicileLetter;
 use App\Models\User;
@@ -60,7 +61,8 @@ class SkDomicileController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skDomicile->findById($skDomicile);
-        return view('dashboard.letters.sk-domicile.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-domicile.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkDomicileLetter $skDomicile)

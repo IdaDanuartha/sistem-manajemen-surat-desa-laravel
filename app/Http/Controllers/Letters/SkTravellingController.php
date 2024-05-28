@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Letter\SkTraveling\StoreSkTravelingRequest;
 use App\Http\Requests\Letter\SkTraveling\UpdateSkTravelingRequest;
+use App\Models\EnvironmentalHead;
 use App\Models\Sk;
 use App\Models\SkTravelingLetter;
 use App\Models\VillageHead;
@@ -65,7 +66,8 @@ class SkTravellingController extends Controller
     {
         if(auth()->user()->role === Role::ADMIN) abort(404);                                                   
         $get_letter = $this->skTravelling->findById($sk_travelling);
-        return view('dashboard.letters.sk-traveling.crud.detail', compact('get_letter'));
+        $environmentalHead = EnvironmentalHead::with("environmental")->whereRelation("environmental", "code", "=", $get_letter->sk->citizent->environmental->code)->first();
+        return view('dashboard.letters.sk-traveling.crud.detail', compact('get_letter', 'environmentalHead'));
     }
 
     public function edit(SkTravelingLetter $sk_travelling)
