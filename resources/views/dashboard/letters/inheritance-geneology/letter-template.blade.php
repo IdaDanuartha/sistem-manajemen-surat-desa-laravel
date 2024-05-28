@@ -148,10 +148,10 @@
                     <td>Bali</td>
                 </tr>
             </table>
-            <img style="left: 50%; transform: translateX(-50%); position: relative; margin-top: 24px; width: 140px; height: 140px;"
+            <img style="left: 50%; transform: translateX(-50%); position: relative; margin-top: 24px; height: 140px;"
                 src="{{ public_path('uploads/letters/inheritance-geneologies/' . $letter->inheritance_image) }}" alt="">
             <div class="" style="margin-top: 16px;">
-                <img src="{{ public_path('assets/img/keterangan.png') }}" style="width: 330px" height="auto" alt="">
+                <img src="{{ public_path('assets/img/keterangan.png') }}" style="width: 330px;" height="auto" alt="">
             </div>
             <p style="margin-top: 24px; text-indent: 42px;">Demikianlah Silsilah Keturunan / waris ini saya buat dengan
                 sebenarnya, saya menjamin tidak ada
@@ -249,9 +249,9 @@
                                 {{ $subdistrictHead->name }} <br>
                                 NIP: {{ $subdistrictHead->employee_number }}
                             </p>
-                        {{-- @else
+                        @else
                             <div class="wrapper-image" style="width: 100%; height: 100px;"></div>
-                            <p style="font-size: 0.875rem !important; text-align: center !important;">
+                            {{-- <p style="font-size: 0.875rem !important; text-align: center !important;">
                                 ..............
                             </p> --}}
                         @endif
