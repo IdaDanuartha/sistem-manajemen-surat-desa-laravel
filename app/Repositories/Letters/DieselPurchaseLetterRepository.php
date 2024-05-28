@@ -234,6 +234,7 @@ class DieselPurchaseLetterRepository
     try {           
       if(!$dieselPurchase->status_by_environmental_head) {    
         $delete_letter = $dieselPurchase->sk->deleteOrFail();
+        $dieselPurchase->deleteOrFail();
         
         DB::commit();
         return $delete_letter;

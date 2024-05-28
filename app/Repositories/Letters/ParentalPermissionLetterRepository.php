@@ -234,6 +234,7 @@ class ParentalPermissionLetterRepository
     try {
       if (!$parentalPermission->status_by_environmental_head) {
         $delete_letter = $parentalPermission->sk->deleteOrFail();
+        $parentalPermission->deleteOrFail();
 
         DB::commit();
         return $delete_letter;

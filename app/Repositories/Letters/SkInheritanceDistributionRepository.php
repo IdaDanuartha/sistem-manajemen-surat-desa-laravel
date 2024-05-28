@@ -254,6 +254,7 @@ class SkInheritanceDistributionRepository
         }
 
         $delete_letter = $letter->sk->deleteOrFail();
+$letter->deleteOrFail();
 
         DB::commit();
         return $delete_letter;

@@ -231,6 +231,8 @@ class SkMaritalStatusRepository
     try {
       if (!$letter->status_by_environmental_head) {
         $delete_letter = $letter->sk->deleteOrFail();
+$letter->deleteOrFail();
+        $letter->deleteOrFail();
 
         DB::commit();
         return $delete_letter;
