@@ -160,9 +160,9 @@ class SkInheritanceDistributionRepository
         $request["sk"]["status_by_section_head"] = 0;
         $request["sk"]["status_by_village_head"] = 0;
         $request["sk"]["reject_reason"] = null;
+        $letter->sk->updateOrFail(Arr::get($request, "sk"));
       }
 
-      $letter->sk->updateOrFail(Arr::get($request, "sk"));
       $letter->updateOrFail(Arr::except($request, "sk"));
 
       $sk_inheritance_distribution_families = $this->skInheritanceDistributionFamily->where("sk_inheritance_distribution_id", $letter->id)->get();

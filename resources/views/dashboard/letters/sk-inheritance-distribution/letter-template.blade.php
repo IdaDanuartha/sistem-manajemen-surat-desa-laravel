@@ -205,7 +205,7 @@
             <td class="w-full"> <img width="100px" height="auto" src="{{url('assets/ttd.png')}}" alt=""></td>
         </tr> --}}
         </table>
-        <div class="" style="margin-top: 150px;">
+        <div class="" style="margin-top: 250px;">
             <table class="w-full">
                 <tr>
                     <td class="w-full" style="text-align: center">Saksi - Saksi</td>
