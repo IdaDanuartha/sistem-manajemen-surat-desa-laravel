@@ -120,7 +120,7 @@ class SkParentIncomeRepository
       if ($sk_letter->is_published) {
         $environmentalHead = $this->environmentalHead->where("environmental_id", $citizent->environmental_id)->first();
 
-        Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $sk_letter->code));
+        // Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $sk_letter->code));
         // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
     } catch (\Exception $e) {
@@ -140,7 +140,7 @@ class SkParentIncomeRepository
     try {
       if (isset($request["sk"]["is_published"])) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+        // Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
         $request["sk"]["is_published"] = true;
         $request["sk"]["environmental_head_id"] = null;
@@ -180,7 +180,7 @@ class SkParentIncomeRepository
 
         $user = $this->user->where('role', Role::SECTION_HEAD)->first();
         if ($status) {
-          Mail::to($user->email)->send(new SendLetterToSectionHead($user, $letter->sk->code));
+          // Mail::to($user->email)->send(new SendLetterToSectionHead($user, $letter->sk->code));
         }
       } else if (auth()->user()->role === Role::SECTION_HEAD) {
         $letter->sk->updateOrFail([
@@ -191,7 +191,7 @@ class SkParentIncomeRepository
         $user = $this->user->where('role', Role::VILLAGE_HEAD)->first();
 
         if ($status) {
-          Mail::to($user->email)->send(new SendLetterToVillageHead($user, $letter->sk->code));
+          // Mail::to($user->email)->send(new SendLetterToVillageHead($user, $letter->sk->code));
         }
       } else if (auth()->user()->role === Role::VILLAGE_HEAD) {
         $letter->sk->updateOrFail([
@@ -200,12 +200,12 @@ class SkParentIncomeRepository
         ]);
 
         if ($status) {
-          Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "disetujui"));
+          // Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "disetujui"));
         }
       }
 
       if (!$status) {
-        Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "ditolak"));
+        // Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "ditolak"));
       }
 
       DB::commit();

@@ -117,7 +117,7 @@ class SkSubsidizedHousingRepository
       if ($sk_letter->is_published) {
         $environmentalHead = $this->environmentalHead->where("environmental_id", $citizent->environmental_id)->first();
 
-        Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $sk_letter->code));
+        // Mail::to($environmentalHead->user->email)->send(new SendLetterToEnvironmentalHead($environmentalHead->user, $sk_letter->code));
         // dispatch(new SendEmailToEnvironmentalHeadQueueJob($user->email, $user, $letter->code));
       }
       
@@ -138,7 +138,7 @@ class SkSubsidizedHousingRepository
     try {
       if (isset($request["sk"]["is_published"])) {
         $user = $this->user->where('role', Role::ENVIRONMENTAL_HEAD)->first();
-        Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
+        // Mail::to($user->email)->send(new SendLetterToEnvironmentalHead($user, $letter->sk->code));
 
         $request["sk"]["is_published"] = true;
         $request["sk"]["environmental_head_id"] = null;
@@ -179,9 +179,9 @@ class SkSubsidizedHousingRepository
         $village_head = $this->user->where('role', Role::VILLAGE_HEAD)->first();
         if ($status) {
           foreach($section_heads as $section_head) {
-            Mail::to($section_head->email)->send(new SendLetterToSectionHead($section_head, $letter->sk->code));
+            // Mail::to($section_head->email)->send(new SendLetterToSectionHead($section_head, $letter->sk->code));
           }
-          Mail::to($village_head->email)->send(new SendLetterToSectionHead($village_head, $letter->sk->code));
+          // Mail::to($village_head->email)->send(new SendLetterToSectionHead($village_head, $letter->sk->code));
         }
       } else if (auth()->user()->role === Role::SECTION_HEAD || auth()->user()->role === Role::VILLAGE_HEAD) {
         if(auth()->user()->role === Role::SECTION_HEAD) {
@@ -197,12 +197,12 @@ class SkSubsidizedHousingRepository
         }
 
         if ($status) {
-          Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "disetujui"));
+          // Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "disetujui"));
         }
       }
       
       if(!$status) {
-        Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "ditolak"));
+        // Mail::to($letter->sk->citizent->user->email)->send(new SendLetterToCitizent($letter->sk->citizent->user, $letter->sk->code, "ditolak"));
       } 
   
       DB::commit();
