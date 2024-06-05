@@ -7,7 +7,7 @@
             @csrf
             <div class="col-span-12 sm:col-span-4 flex flex-col">
                 <label for="file" class="text-second">Import Data (.csv)</label>
-                <a href="{{ asset('assets/citizent_examples.xlsx') }}" download="examples" class="mb-3">Download Contoh Format</a>
+                <a href="{{ asset('assets/citizent_examples_csv.csv') }}" download="examples" class="mb-3">Download Contoh Format</a>
                 <input type="file" id="file" name="file"
                     class="input-crud py-2" />
                 @error('file')
