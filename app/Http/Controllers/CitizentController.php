@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\Citizents\StoreCitizentRequest;
 use App\Http\Requests\User\Citizents\UpdateCitizentRequest;
+use App\Imports\CitizentsImport;
 use App\Models\Citizent;
 use App\Models\User;
 use App\Repositories\CitizentRepository;
@@ -26,6 +27,11 @@ class CitizentController extends Controller
         $users = $this->citizentRepository->findAll();
         
         return view('dashboard.users.citizents.index', compact('users'));
+    }
+
+    public function importView()
+    {                                           
+        return view('dashboard.users.citizents.import');
     }
 
     public function create()
@@ -68,6 +74,19 @@ class CitizentController extends Controller
             logger($e->getMessage());
 
             return redirect(route("citizents.create"))->with("error", $this->responseMessage->response('pengguna', false));
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            (new CitizentsImport)->import($request->file, null, \Maatwebsite\Excel\Excel::CSV);
+
+            return redirect(route("citizents.index"))->with("success", $this->responseMessage->response("Pengguna"));
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+
+            return redirect(route("citizents.import"))->with("error", "Gagal menambahkan warga! Cek kembali format file (.csv) atau data yang anda kirimkan");
         }
     }
 

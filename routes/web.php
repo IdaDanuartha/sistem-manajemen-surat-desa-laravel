@@ -76,6 +76,9 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware('is_admin')->group(function() {
         Route::resource('citizents', CitizentController::class)->except("show");
         Route::get('citizents/{citizent}/json', [CitizentController::class, 'showJSON']);
+        Route::get("/citizent/import", [CitizentController::class, 'importView'])->name('citizents.importView');
+        Route::post("/citizent/import", [CitizentController::class, 'import'])->name('citizents.import');
+
 
         Route::resource('environmental-heads', EnvironmentalHeadController::class);
         Route::resource('village-heads', VillageHeadController::class);

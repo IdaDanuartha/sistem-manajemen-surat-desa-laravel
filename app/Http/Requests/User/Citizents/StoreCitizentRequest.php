@@ -36,7 +36,7 @@ class StoreCitizentRequest extends FormRequest
 			'marital_status' => ['required'],			
 			'citizenship' => ['nullable'],			
 			'work' => ['nullable'],			
-			'address' => ['nullable'],			
+			'address' => ['nullable'],
             'id_card_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
 			'family_card_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],
 			'birth_certificate_file' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2000'],

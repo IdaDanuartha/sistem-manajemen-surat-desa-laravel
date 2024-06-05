@@ -1,0 +1,3 @@
+nama,kode_lingkungan,nik,no_kk,nomor_telepon,jenis_kelamin,tempat_lahir,tanggal_lahir,golongan_darah,agama,status_nikah,kewarganegaraan,pekerjaan,alamat,email,password
+Citizent 1,LJK,5105847457348442,5105847457343243,812345678890,Laki-Laki,Denpasar,2004-10-04,O,Islam,Cerai Hidup,Indonesia,Dosen,"Jln. Mawar, No. 34",citizen.example@gmail.com,123456
+Citizent 2,GLR,5105847457340919,5105847457343244,812345467849,Perempuan,Denpasar,2004-08-05,AB,Hindu,Belum Kawin,Indonesia,Mahasiswa,"Jln. Mawar, No. 40",citizen.example2@gmail.com,123456
