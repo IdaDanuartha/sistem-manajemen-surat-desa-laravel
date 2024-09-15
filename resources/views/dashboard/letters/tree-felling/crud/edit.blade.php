@@ -9,7 +9,7 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="reference_number" class="text-second mb-1">Nomor Surat</label>
                 <input type="text" class="input-crud" name="sk[reference_number]" id="reference_number" value="{{ $get_letter->sk->reference_number }}"
-                    placeholder="Masukkan Nomor Surat..." required readonly />
+                    placeholder="Masukkan Nomor Surat..." required />
                 @error('sk.reference_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
@@ -17,7 +17,7 @@
 			<div class="col-span-12 md:col-span-6 flex flex-col">
                 <label for="cover_letter_number" class="text-second mb-1">Nomor SP Kaling</label>
                 <input type="text" class="input-crud" name="sk[cover_letter_number]" id="cover_letter_number" value="{{ $get_letter->sk->cover_letter_number }}"
-                    placeholder="Masukkan Nomor SP Kaling..." required readonly />
+                    placeholder="Masukkan Nomor SP Kaling..." required />
                 @error('sk.cover_letter_number')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
